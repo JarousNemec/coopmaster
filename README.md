@@ -5,6 +5,7 @@ CoopMaster je chytrá aplikace pro správu kurníku, která automatizuje klíčo
 ## Důležité odkazy
 
 ### Architektura mikroservis
+- “Microservices are small, autonomous services that work together.”
 - https://www.revolgy.com/cs/znalosti-zkusenosti/blog/vyzkousejte-mikroservisy
 - https://medium.com/openwise-tech-blog/mikroservisy-kam-se-podivas-6d81f6fb1f66
 - https://www.youtube.com/watch?v=lL_j7ilk7rc
