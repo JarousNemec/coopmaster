@@ -4,8 +4,8 @@ CoopMaster je chytrá aplikace pro správu kurníku, která automatizuje klíčo
 
 ## Obrázky
 
-!["předběžná analýza projektu"](doc/pictures/AnalyzaProjektu_č2.jpg)
-
+[//]: # (!["předběžná analýza projektu"]&#40;Doc/Pictures/AnalyzaProjektu_č2.jpg&#41;)
+!["Základní podoba projektu"](Doc/Pictures/ProjectsAnalysis_FinalStateBeta10.jpg)
 
 ## Důležité odkazy
 
