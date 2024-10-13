@@ -1,1 +1,0 @@
-# Chicken watch guard
