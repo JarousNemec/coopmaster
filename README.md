@@ -8,6 +8,8 @@ CoopMaster je chytrá aplikace pro správu kurníku, která automatizuje klíčo
 ### Pravidla pojmenování pro python
 - https://visualgit.readthedocs.io/en/latest/pages/naming_convention.html
 
+### Kontejneryzace a CI/CD
+
 ## Produktový Backlog
  - https://docs.google.com/document/d/1aPqurcaADt5CdIsI3ue-6VVS-13A8hmTuslFvSt8Ch0/edit?usp=sharing
 
