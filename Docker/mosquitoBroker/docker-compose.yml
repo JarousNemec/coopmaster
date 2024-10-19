@@ -1,0 +1,24 @@
+# https://www.youtube.com/watch?v=U8f95agyUJg
+# https://medium.com/@tomer.klein/docker-compose-and-mosquitto-mqtt-simplifying-broker-deployment-7aaf469c07ee
+# https://cedalo.com/blog/mosquitto-docker-configuration-ultimate-guide/#Mosquitto_MQTT_Docker_authentication_settings
+# https://hub.docker.com/_/eclipse-mosquitto
+# https://github.com/mmikhan/mosquitto-docker/blob/main/docker-compose.yml
+
+version: '3.9'
+
+services:
+  mosquitto:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./config:/mosquitto/config
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    ports:
+      - 1883:1883
+#      - 9001:9001
+#volumes:
+#  config:
+#  data:
+#  log:

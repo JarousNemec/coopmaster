@@ -1,44 +1,53 @@
 services:
+
   coopmaster_camera_driver:
     image: jardathedev/coopmaster-camera-driver:latest
     restart: always
     ports:
       - "9001:9001"
+
   coopmaster_neural_driver:
     image: jardathedev/coopmaster-neural-driver:latest
     restart: always
     ports:
       - "9002:9002"
+
   coopmaster_scale_driver:
     image: jardathedev/coopmaster-scale-driver:latest
     restart: always
     ports:
       - "9004:9004"
+
   coopmaster_door_driver:
     image: jardathedev/coopmaster-door-driver:latest
     restart: always
     ports:
       - "9005:9005"
+
   coopmaster_nest_watcher:
     image: jardathedev/coopmaster-nest-watcher:latest
     restart: always
     ports:
       - "9007:9007"
+
   coopmaster_dog_alarm:
     image: jardathedev/coopmaster-dog-alarm:latest
     restart: always
     ports:
       - "9008:9008"
+
   coopmaster_door_assistant:
     image: jardathedev/coopmaster-door-assistant:latest
     restart: always
     ports:
       - "9006:9006"
+
   coopmaster_chicken_watch_guard:
     image: jardathedev/coopmaster-chicken-watch-guard:latest
     restart: always
     ports:
       - "9003:9003"
+
   coopmaster_health_checker:
     image: jardathedev/coopmaster-health-checker:latest
     restart: always
