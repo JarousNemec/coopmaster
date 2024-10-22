@@ -3,6 +3,7 @@
 # https://cedalo.com/blog/mosquitto-docker-configuration-ultimate-guide/#Mosquitto_MQTT_Docker_authentication_settings
 # https://hub.docker.com/_/eclipse-mosquitto
 # https://github.com/mmikhan/mosquitto-docker/blob/main/docker-compose.yml
+# testing credentials: admin:password
 
 version: '3.9'
 
