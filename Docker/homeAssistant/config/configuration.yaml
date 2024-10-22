@@ -1,0 +1,22 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+mqtt:
+  - image:
+      image_topic: "/chicken_watch_guard/image"
+      content_type: "image/png"
+  - sensor:
+    - name: "Počet slepic v kurníku"
+      state_topic: "/chicken_watch_guard/count"
+      unit_of_measurement: "Kusů"
+      value_template: "{{ value_json.count }}"
+
+

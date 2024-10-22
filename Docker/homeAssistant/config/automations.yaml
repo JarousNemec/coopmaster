@@ -1,0 +1,12 @@
+#automation:
+#  alias: Load chicken count
+#  triggers:
+#    - trigger: time_pattern
+#      # Matches every 1 minute
+#      minutes: "/1"
+#  action:
+#    - service: mqtt.publish
+#      data:
+#        topic: '/chicken_watch_guard/req/count'
+#        payload: ''
+#        retain: False
