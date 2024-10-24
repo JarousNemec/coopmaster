@@ -1,12 +1,16 @@
-#automation:
-#  alias: Load chicken count
-#  triggers:
-#    - trigger: time_pattern
-#      # Matches every 1 minute
-#      minutes: "/1"
-#  action:
-#    - service: mqtt.publish
-#      data:
-#        topic: '/chicken_watch_guard/req/count'
-#        payload: ''
-#        retain: False
+- id: '1729801157428'
+  alias: Dog alert notify
+  description: ''
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.pocet_psu_ve_vybehu
+    above: 0
+  conditions: []
+  actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      message: Průšvih - pes ve výběhu
+      title: Pes!!!!!
+  mode: single

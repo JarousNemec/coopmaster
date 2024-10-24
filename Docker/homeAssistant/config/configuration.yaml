@@ -11,6 +11,7 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 mqtt:
   - image:
+      name: "Kamera v kurníku"
       image_topic: "/chicken_watch_guard/image"
       content_type: "image/png"
   - sensor:
@@ -18,5 +19,18 @@ mqtt:
       state_topic: "/chicken_watch_guard/count"
       unit_of_measurement: "Kusů"
       value_template: "{{ value_json.count }}"
+  - image:
+    - name: "Kamera venku"
+      image_topic: "/dog_alarm/image"
+      content_type: "image/png"
+  - image:
+      - name: "Alert na psy foto"
+        image_topic: "/dog_alarm/alert_image"
+        content_type: "image/png"
+  - sensor:
+      - name: "Počet psů ve výběhu"
+        state_topic: "/dog_alarm/alarm"
+        unit_of_measurement: "Kusů"
+        value_template: "{{ value_json.dog_count }}"
 
 
