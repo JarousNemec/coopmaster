@@ -1,7 +1,3 @@
-# https://gist.github.com/Hariharnath-Paduchuru/1c476387fbdb7cad80c4207e5791147e
-# https://www.youtube.com/watch?v=j3GEcFy5gso
-# testing credentials: admin:password
-
 services:
   homeassistant:
     container_name: homeassistant
