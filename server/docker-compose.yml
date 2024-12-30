@@ -1,0 +1,17 @@
+# https://gist.github.com/Hariharnath-Paduchuru/1c476387fbdb7cad80c4207e5791147e
+# https://www.youtube.com/watch?v=j3GEcFy5gso
+# testing credentials: admin:password
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - './config:/config'
+    environment:
+      - TZ=Europe/Bratislava # get your Time Zone from - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - '8123:8123'
+    restart: always

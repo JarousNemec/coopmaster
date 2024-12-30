@@ -32,5 +32,10 @@ mqtt:
         state_topic: "/dog_alarm/alarm"
         unit_of_measurement: "Kusů"
         value_template: "{{ value_json.dog_count }}"
+  - sensor:
+      - name: "Počet měření"
+        state_topic: "/nest_watcher/count"
+        unit_of_measurement: "X"
+        value_template: "{{ value_json.count }}"
 
 
