@@ -11,3 +11,5 @@
 /Docker/home_assistant/config/home-assistant.log
 /Docker/home_assistant/config/home-assistant.log.1
 /Docker/home_assistant/config/home-assistant.log.fault
+/modules/home_assistant/config/.storage/
+/modules/home_assistant/config/.cloud/

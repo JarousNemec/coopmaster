@@ -1,0 +1,16 @@
+- id: '1729801157428'
+  alias: Dog alert notify
+  description: ''
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.pocet_psu_ve_vybehu
+    above: 0
+  conditions: []
+  actions:
+  - action: notify.notify
+    metadata: {}
+    data:
+      message: Průšvih - pes ve výběhu
+      title: Pes!!!!!
+  mode: single

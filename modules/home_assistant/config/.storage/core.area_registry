@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "minor_version": 7,
+  "key": "core.area_registry",
+  "data": {
+    "areas": [
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "obyvak",
+        "labels": [],
+        "name": "Obývák",
+        "picture": null,
+        "created_at": "2024-12-31T08:01:59.646580+00:00",
+        "modified_at": "2024-12-31T08:01:59.646582+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "kuchyne",
+        "labels": [],
+        "name": "Kuchyně",
+        "picture": null,
+        "created_at": "2024-12-31T08:01:59.646650+00:00",
+        "modified_at": "2024-12-31T08:01:59.646650+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "loznice",
+        "labels": [],
+        "name": "Ložnice",
+        "picture": null,
+        "created_at": "2024-12-31T08:01:59.646671+00:00",
+        "modified_at": "2024-12-31T08:01:59.646671+00:00"
+      }
+    ]
+  }
+}

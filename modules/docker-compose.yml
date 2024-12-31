@@ -45,6 +45,9 @@ services:
     environment:
       - HOST=localhost
       - PORT=9007
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - MQTT_TOPIC=/nest_watcher/count
     networks:
       - coopmaster
 
@@ -95,6 +98,36 @@ services:
     volumes:
       - ./postgres_backup:/storage/backup
       - ./postgres_data:/storage/data
+
+
+  mosquitto:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+    networks:
+      - coopmaster
+
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    volumes:
+      - './home_assistant/config:/config'
+    environment:
+      - TZ=Europe/Bratislava # get your Time Zone from - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - '8123:8123'
+    restart: always
+    networks:
+      - coopmaster
+
 
 networks:
   coopmaster:
