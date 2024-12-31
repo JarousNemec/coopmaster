@@ -7,19 +7,14 @@ services:
       - "9001:9001"
     environment:
       - PORT=9001
-      - CAM1_CAMERA_IP=192.168.1.64
-      - CAM1_CAMERA_USERNAME=admin
-      - CAM1_CAMERA_PASSWORD=Heslo123456*
-      - CAM2_CAMERA_IP=192.168.1.64
-      - CAM2_CAMERA_USERNAME=admin
-      - CAM2_CAMERA_PASSWORD=Heslo123456*
-
-
-#  coopmaster_neural_driver:
-#    image: jardathedev/coopmaster-neural-driver:latest
-#    restart: always
-#    ports:
-#      - "9002:9002"
+      - CHICKEN_CAMERA_IP=192.168.1.64
+      - CHICKEN_CAMERA_USERNAME=admin
+      - CHICKEN_CAMERA_PASSWORD=Heslo123456*
+      - DOG_CAMERA_IP=192.168.1.64
+      - DOG_CAMERA_USERNAME=admin
+      - DOG_CAMERA_PASSWORD=Heslo123456*
+    networks:
+      - coopmaster
 
   coopmaster_scale_driver:
     image: jardathedev/coopmaster-scale-driver:latest
@@ -60,11 +55,23 @@ services:
     networks:
       - coopmaster
 
-#  coopmaster_dog_alarm:
-#    image: jardathedev/coopmaster-dog-alarm:latest
-#    restart: always
-#    ports:
-#      - "9008:9008"
+  coopmaster_dog_alarm:
+    image: jardathedev/coopmaster-dog-alarm:latest
+    restart: always
+    ports:
+      - 9008:9008
+    env_file:
+      - .env
+    environment:
+      - HOST=localhost
+      - PORT=9008
+      - DOG_CAMERA_PORT=9001
+      - DOG_CAMERA_HOST=localhost
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - MQTT_TOPIC=dog/detected
+    networks:
+      - coopmaster
 
 #  coopmaster_door_assistant:
 #    image: jardathedev/coopmaster-door-assistant:latest
@@ -72,19 +79,24 @@ services:
 #    ports:
 #      - "9006:9006"
 #
-#  coopmaster_chicken_watch_guard:
-#    image: jardathedev/coopmaster-chicken-watch-guard:latest
-#    restart: always
-#    ports:
-#      - "9003:9003"
+  coopmaster_chicken_watch_guard:
+    image: jardathedev/coopmaster-chicken-watch-guard:latest
+    restart: always
+    ports:
+      - 9003:9003
+    env_file:
+      - .env
+    environment:
+      - HOST=localhost
+      - PORT=9003
+      - CHICKEN_CAMERA_PORT=9001
+      - CHICKEN_CAMERA_HOST=localhost
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - MQTT_TOPIC=chicken/count
+    networks:
+      - coopmaster
 
-#  coopmaster_health_checker:
-#    image: jardathedev/coopmaster-health-checker:latest
-#    restart: always
-#    ports:
-#      - "9000:9000"
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
 
   coop-solution-db:
     image: postgres:15
