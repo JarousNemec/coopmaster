@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "image",
+  "data": {
+    "items": [
+      {
+        "id": "5b3a615cf7e73de79b02a2f1da0607cb",
+        "filesize": 428,
+        "content_type": "image/png",
+        "name": "nest.png",
+        "uploaded_at": "2024-12-31T08:28:42.387627+00:00"
+      },
+      {
+        "id": "f64cb74398e60b5981cf5ddd05772184",
+        "filesize": 428,
+        "content_type": "image/png",
+        "name": "nest.png",
+        "uploaded_at": "2024-12-31T08:45:16.319859+00:00"
+      }
+    ]
+  }
+}

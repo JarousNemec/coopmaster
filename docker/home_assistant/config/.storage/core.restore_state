@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"person.coopmaster","state":"unknown","attributes":{"editable":true,"id":"coopmaster","device_trackers":[],"user_id":"c18ded99ea454fd8a336d5c2696a6428","friendly_name":"CoopMaster"},"last_changed":"2024-12-31T08:16:58.506505+00:00","last_reported":"2024-12-31T08:17:00.623011+00:00","last_updated":"2024-12-31T08:17:00.623011+00:00","context":{"id":"01JGDWM9PFK3WCDRZQADJVMDRH","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2024-12-31T08:16:59.663781+00:00","last_reported":"2024-12-31T08:16:59.663781+00:00","last_updated":"2024-12-31T08:16:59.663781+00:00","context":{"id":"01JGDWM8RFEYBFEFMK3B6R6Z5D","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2024-12-31T08:16:59.897639+00:00","last_reported":"2024-12-31T08:16:59.897639+00:00","last_updated":"2024-12-31T08:16:59.897639+00:00","context":{"id":"01JGDWM8ZSQETRSJW1FN47845V","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.dog_alert_notify","state":"on","attributes":{"id":"1729801157428","last_triggered":null,"mode":"single","current":0,"friendly_name":"Dog alert notify"},"last_changed":"2024-12-31T08:16:59.903647+00:00","last_reported":"2024-12-31T08:16:59.903647+00:00","last_updated":"2024-12-31T08:16:59.903647+00:00","context":{"id":"01JGDWM8ZZD1MKFXJZTTKZ8CRX","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.pocet_slepic_v_kurniku","state":"unknown","attributes":{"unit_of_measurement":"Kusů","friendly_name":"Počet slepic v kurníku"},"last_changed":"2024-12-31T08:17:00.623439+00:00","last_reported":"2024-12-31T08:17:00.623439+00:00","last_updated":"2024-12-31T08:17:00.623439+00:00","context":{"id":"01JGDWM9PF8DTYRM3NJ9RA8MWG","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "Kusů"
+      },
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.pocet_psu_ve_vybehu","state":"unknown","attributes":{"unit_of_measurement":"Kusů","friendly_name":"Počet psů ve výběhu"},"last_changed":"2024-12-31T08:17:00.623473+00:00","last_reported":"2024-12-31T08:17:00.623473+00:00","last_updated":"2024-12-31T08:17:00.623473+00:00","context":{"id":"01JGDWM9PF4834FD6F7MYG56BG","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "Kusů"
+      },
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.pocet_mereni","state":"300","attributes":{"unit_of_measurement":"X","friendly_name":"Počet měření"},"last_changed":"2024-12-31T08:26:55.463592+00:00","last_reported":"2024-12-31T08:26:55.463592+00:00","last_updated":"2024-12-31T08:26:55.463592+00:00","context":{"id":"01JGDX6EK7JNEQBV0F7AQJH3HE","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Could not get records count",
+        "native_unit_of_measurement": "X"
+      },
+      "last_seen": "2024-12-31T09:02:00.499629+00:00"
+    }
+  ]
+}

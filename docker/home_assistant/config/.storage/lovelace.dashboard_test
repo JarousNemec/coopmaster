@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_test",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "path": "default_view",
+          "title": "Home",
+          "cards": [
+            {
+              "type": "entities",
+              "entities": [
+                "person.coopmaster"
+              ]
+            },
+            {
+              "type": "grid",
+              "square": false,
+              "columns": 1,
+              "cards": [
+                {
+                  "type": "picture",
+                  "image_entity": "image.alert_na_psy_foto"
+                },
+                {
+                  "type": "picture",
+                  "image_entity": "image.kamera_v_kurniku"
+                },
+                {
+                  "type": "picture",
+                  "image_entity": "image.kamera_venku"
+                }
+              ]
+            },
+            {
+              "type": "weather-forecast",
+              "entity": "weather.forecast_domov",
+              "show_forecast": false
+            },
+            {
+              "type": "entities",
+              "entities": [
+                "sensor.pocet_mereni",
+                "sensor.pocet_psu_ve_vybehu",
+                "sensor.pocet_slepic_v_kurniku"
+              ],
+              "title": "Senzor"
+            },
+            {
+              "type": "calendar",
+              "entities": []
+            }
+          ],
+          "badges": []
+        },
+        {
+          "title": "fdsafsa",
+          "path": "fdsafsa",
+          "cards": [
+            {
+              "type": "entity",
+              "entity": "sensor.sun_next_dawn"
+            },
+            {
+              "type": "entity",
+              "entity": "sensor.sun_next_dusk"
+            },
+            {
+              "type": "entity",
+              "entity": "sensor.sun_next_midnight"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
