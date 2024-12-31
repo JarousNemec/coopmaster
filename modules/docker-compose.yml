@@ -1,11 +1,20 @@
 services:
 
-#  coopmaster_camera_driver:
-#    image: jardathedev/coopmaster-camera-driver:latest
-#    restart: always
-#    ports:
-#      - "9001:9001"
-#
+  coopmaster_camera_driver:
+    image: jardathedev/coopmaster-camera-driver:latest
+    restart: always
+    ports:
+      - "9001:9001"
+    environment:
+      - PORT=9001
+      - CAM1_CAMERA_IP=192.168.1.64
+      - CAM1_CAMERA_USERNAME=admin
+      - CAM1_CAMERA_PASSWORD=Heslo123456*
+      - CAM2_CAMERA_IP=192.168.1.64
+      - CAM2_CAMERA_USERNAME=admin
+      - CAM2_CAMERA_PASSWORD=Heslo123456*
+
+
 #  coopmaster_neural_driver:
 #    image: jardathedev/coopmaster-neural-driver:latest
 #    restart: always
