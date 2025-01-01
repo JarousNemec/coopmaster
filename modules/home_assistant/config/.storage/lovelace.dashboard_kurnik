@@ -6,27 +6,30 @@
     "config": {
       "views": [
         {
-          "title": "Home",
-          "cards": [
+          "type": "sections",
+          "sections": [
             {
-              "type": "picture-elements",
-              "elements": [],
-              "image": "https://demo.home-assistant.io/stub_config/floorplan.png",
-              "dark_mode_image": "/api/image/serve/5b3a615cf7e73de79b02a2f1da0607cb/512x512",
-              "camera_view": "auto"
-            },
-            {
-              "type": "area",
-              "area": "kuchyne"
-            },
-            {
-              "type": "picture-elements",
-              "elements": [],
-              "image": "https://demo.home-assistant.io/stub_config/floorplan.png",
-              "dark_mode_image": "/api/image/serve/5b3a615cf7e73de79b02a2f1da0607cb/512x512",
-              "camera_view": "auto"
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Kurník",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "custom:nest-card",
+                  "nests_in_row": 3,
+                  "nests_in_column": 2,
+                  "entity": "sensor.nests_status",
+                  "logging": true
+                }
+              ],
+              "column_span": 1
             }
-          ]
+          ],
+          "max_columns": 4,
+          "title": "Home",
+          "cards": []
         }
       ]
     }

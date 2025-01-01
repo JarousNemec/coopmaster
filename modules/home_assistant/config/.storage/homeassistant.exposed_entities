@@ -67,6 +67,13 @@
             "should_expose": false
           }
         }
+      },
+      "sensor.nests_status": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
       }
     }
   }
