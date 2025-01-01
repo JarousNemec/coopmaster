@@ -13,18 +13,279 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Kurník",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.dog_detected",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## <font color=red>Pes ve výběhu</font>"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.dog_detected",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "picture",
+                    "image_entity": "image.dog_alarm_image",
+                    "alt_text": "Fotografie na které byl detekován pes"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
                   "heading_style": "title"
                 },
                 {
                   "type": "custom:nest-card",
                   "nests_in_row": 3,
                   "nests_in_column": 2,
-                  "entity": "sensor.nests_status",
-                  "logging": true
+                  "entity_nests": "sensor.nests_status",
+                  "entity_eggs": "sensor.eggs_count",
+                  "logging": false
+                },
+                {
+                  "type": "entities",
+                  "entities": [
+                    {
+                      "entity": "sensor.temperature",
+                      "icon": "mdi:coolant-temperature",
+                      "name": "Teplota v kurníku",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "entity": "sensor.humidity",
+                      "icon": "mdi:water",
+                      "name": "Vlhkost",
+                      "secondary_info": "none"
+                    },
+                    {
+                      "entity": "sensor.chicken_count",
+                      "name": "Počet slepic v kurníku"
+                    }
+                  ],
+                  "state_color": false,
+                  "show_header_toggle": false
                 }
               ],
               "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_lamp_state",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## Světlo svítí <ha-icon icon=\"mdi:lightbulb-on\"></ha-icon>"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_lamp_state",
+                      "state": "off"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## Světlo nesvítí <ha-icon icon=\"mdi:lightbulb-off\"></ha-icon>"
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "mqtt.publish",
+                    "target": {},
+                    "data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "off"
+                    }
+                  },
+                  "entity": "",
+                  "name": "Zhasnout",
+                  "icon": "mdi:card"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "mqtt.publish",
+                    "target": {},
+                    "data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "on"
+                    }
+                  },
+                  "entity": "",
+                  "name": "Rozsvítit",
+                  "icon": "mdi:card"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_door_state",
+                      "state": "on"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "\n## Dvířka otevřena <ha-icon icon=\"mdi:door-open\"></ha-icon> \n"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_door_state",
+                      "state": "off"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## Dvířka zavřena <ha-icon icon=\"mdi:door-closed\"></ha-icon> "
+                  }
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "mqtt.publish",
+                    "target": {},
+                    "data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/door/cmnd",
+                      "payload": "open"
+                    }
+                  },
+                  "entity": "",
+                  "name": "Otevřít dvířka",
+                  "icon": "mdi:card"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "perform-action",
+                    "perform_action": "mqtt.publish",
+                    "target": {},
+                    "data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/door/cmnd",
+                      "payload": "close"
+                    }
+                  },
+                  "entity": "",
+                  "name": "Zavřít dvířka",
+                  "icon": "mdi:card"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "image.room_image",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "picture",
+                    "image_entity": "image.room_image"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title"
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "image.outside_image",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "picture",
+                    "image_entity": "image.outside_image"
+                  }
+                }
+              ]
             }
           ],
           "max_columns": 4,

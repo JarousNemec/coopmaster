@@ -8,7 +8,9 @@
         "id": "coopmaster",
         "name": "CoopMaster",
         "user_id": "c18ded99ea454fd8a336d5c2696a6428",
-        "device_trackers": []
+        "device_trackers": [
+          "device_tracker.sm_m215f"
+        ]
       }
     ]
   }

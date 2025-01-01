@@ -4,32 +4,149 @@
   "key": "core.restore_state",
   "data": [
     {
-      "state": {"entity_id":"person.coopmaster","state":"unknown","attributes":{"editable":true,"id":"coopmaster","device_trackers":[],"source":"person.coopmaster","user_id":"c18ded99ea454fd8a336d5c2696a6428","friendly_name":"CoopMaster"},"last_changed":"2025-01-01T11:15:33.243255+00:00","last_reported":"2025-01-01T11:15:33.243255+00:00","last_updated":"2025-01-01T11:15:33.243255+00:00","context":{"id":"01JGGS7Y7V24W265Y0S1AWZ1Y5","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"person.coopmaster","state":"unknown","attributes":{"editable":true,"id":"coopmaster","device_trackers":["device_tracker.sm_m215f"],"user_id":"c18ded99ea454fd8a336d5c2696a6428","friendly_name":"CoopMaster"},"last_changed":"2025-01-01T19:32:25.151721+00:00","last_reported":"2025-01-01T19:38:18.148015+00:00","last_updated":"2025-01-01T19:32:27.060927+00:00","context":{"id":"01JGHNNS9MV2A6B8VCZ2GES24R","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2025-01-01T11:15:34.650050+00:00"
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
     },
     {
-      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2025-01-01T11:15:34.211505+00:00","last_reported":"2025-01-01T11:15:34.211505+00:00","last_updated":"2025-01-01T11:15:34.211505+00:00","context":{"id":"01JGGS7Z63NC5Z7R2M7P9YWJEE","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2025-01-01T19:32:26.489455+00:00","last_reported":"2025-01-01T19:32:26.489455+00:00","last_updated":"2025-01-01T19:32:26.489455+00:00","context":{"id":"01JGHNNRQS5QHGN1AANA5P25PS","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2025-01-01T11:15:34.650050+00:00"
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
     },
     {
-      "state": {"entity_id":"automation.dog_alert_notify","state":"on","attributes":{"id":"1729801157428","last_triggered":null,"mode":"single","current":0,"friendly_name":"Dog alert notify"},"last_changed":"2025-01-01T11:15:34.382268+00:00","last_reported":"2025-01-01T11:15:34.382268+00:00","last_updated":"2025-01-01T11:15:34.382268+00:00","context":{"id":"01JGGS7ZBE52WVZM1YXDG68H81","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2025-01-01T19:32:26.693678+00:00","last_reported":"2025-01-01T19:32:26.693678+00:00","last_updated":"2025-01-01T19:32:26.693678+00:00","context":{"id":"01JGHNNRY5EY56ASGXA8PCE2S1","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2025-01-01T11:15:34.650050+00:00"
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
     },
     {
-      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2025-01-01T11:15:34.394380+00:00","last_reported":"2025-01-01T11:15:34.394380+00:00","last_updated":"2025-01-01T11:15:34.394380+00:00","context":{"id":"01JGGS7ZBTT1FNGKQR8H087PYQ","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"automation.dog_alert_notify","state":"on","attributes":{"id":"1729801157428","last_triggered":null,"mode":"single","current":0,"friendly_name":"Dog alert notify"},"last_changed":"2025-01-01T19:32:26.725706+00:00","last_reported":"2025-01-01T19:32:26.725706+00:00","last_updated":"2025-01-01T19:32:26.725706+00:00","context":{"id":"01JGHNNRZ5MFVN2K47D9ASA32P","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2025-01-01T11:15:34.650050+00:00"
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
     },
     {
-      "state": {"entity_id":"sensor.nests_status","state":"unavailable","attributes":{"friendly_name":"Nests status"},"last_changed":"2025-01-01T11:15:34.648857+00:00","last_reported":"2025-01-01T11:15:34.648857+00:00","last_updated":"2025-01-01T11:15:34.648857+00:00","context":{"id":"01JGGS7ZKRPQ236CDJ6X7C6E60","parent_id":null,"user_id":null}},
+      "state": {"entity_id":"binary_sensor.coop_door_state","state":"off","attributes":{"friendly_name":"Coop door state"},"last_changed":"2025-01-01T19:40:17.037753+00:00","last_reported":"2025-01-01T19:40:17.037753+00:00","last_updated":"2025-01-01T19:40:17.037753+00:00","context":{"id":"01JGHP448DCB2WXKENFDP440MC","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.coop_lamp_state","state":"on","attributes":{"friendly_name":"Coop lamp state"},"last_changed":"2025-01-01T19:40:04.500366+00:00","last_reported":"2025-01-01T19:40:04.500366+00:00","last_updated":"2025-01-01T19:40:04.500366+00:00","context":{"id":"01JGHP3R0M6V3M332H0DEGQ31S","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.dog_detected","state":"unknown","attributes":{"friendly_name":"Dog detected"},"last_changed":"2025-01-01T19:32:27.059764+00:00","last_reported":"2025-01-01T19:32:27.059764+00:00","last_updated":"2025-01-01T19:32:27.059764+00:00","context":{"id":"01JGHNNS9KN01XESP3SFVXM1KW","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.nests_status","state":"f;f;o;o;f;f","attributes":{"friendly_name":"Nests status"},"last_changed":"2025-01-01T20:00:10.490536+00:00","last_reported":"2025-01-01T20:00:10.490536+00:00","last_updated":"2025-01-01T20:00:10.490536+00:00","context":{"id":"01JGHQ8HQTP6J8TGWJE5JX9WQW","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "f;f;o;o;f;f",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.eggs_count","state":"5;5;4;4;4;3","attributes":{"friendly_name":"Eggs count"},"last_changed":"2025-01-01T20:00:10.490942+00:00","last_reported":"2025-01-01T20:00:10.490942+00:00","last_updated":"2025-01-01T20:00:10.490942+00:00","context":{"id":"01JGHQ8HQTVKDVN2815VH3MBR7","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "5;5;4;4;4;3",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.temperature","state":"17.0 C","attributes":{"friendly_name":"Temperature"},"last_changed":"2025-01-01T19:32:31.359294+00:00","last_reported":"2025-01-01T19:32:31.359294+00:00","last_updated":"2025-01-01T19:32:31.359294+00:00","context":{"id":"01JGHNNXFZEDQA03WAFHZXNDP0","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "17.0 C",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.humidity","state":"86.0 %","attributes":{"friendly_name":"Humidity"},"last_changed":"2025-01-01T19:32:31.360588+00:00","last_reported":"2025-01-01T19:32:31.360588+00:00","last_updated":"2025-01-01T19:32:31.360588+00:00","context":{"id":"01JGHNNXG0NHQECQKWJBT6S75P","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "86.0 %",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.chicken_count","state":"unknown","attributes":{"friendly_name":"Chicken count"},"last_changed":"2025-01-01T19:32:27.059867+00:00","last_reported":"2025-01-01T19:32:27.059867+00:00","last_updated":"2025-01-01T19:32:27.059867+00:00","context":{"id":"01JGHNNS9K7D14QE96K8JP81YB","parent_id":null,"user_id":null}},
       "extra_data": {
         "native_value": null,
         "native_unit_of_measurement": null
       },
-      "last_seen": "2025-01-01T11:15:34.650050+00:00"
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"device_tracker.sm_m215f","state":"unknown","attributes":{"source_type":"gps","friendly_name":"SM-M215F"},"last_changed":"2025-01-01T19:38:18.147638+00:00","last_reported":"2025-01-01T19:38:18.147638+00:00","last_updated":"2025-01-01T19:38:18.147638+00:00","context":{"id":"01JGHP0G53A28PW4QPJZGF2M41","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sm_m215f_battery_level","state":"74","attributes":{"state_class":"measurement","unit_of_measurement":"%","device_class":"battery","icon":"mdi:battery-70","friendly_name":"SM-M215F Battery level"},"last_changed":"2025-01-01T19:38:22.511268+00:00","last_reported":"2025-01-01T19:38:22.511268+00:00","last_updated":"2025-01-01T19:38:22.511268+00:00","context":{"id":"01JGHP0MDFD56PEA0ZY3M0YMFE","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 74,
+        "native_unit_of_measurement": "%"
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sm_m215f_battery_state","state":"discharging","attributes":{"options":["charging","discharging","full","not_charging"],"device_class":"enum","icon":"mdi:battery-minus","friendly_name":"SM-M215F Battery state"},"last_changed":"2025-01-01T19:38:20.295537+00:00","last_reported":"2025-01-01T19:38:22.511733+00:00","last_updated":"2025-01-01T19:38:20.295537+00:00","context":{"id":"01JGHP0J87Q8SS658A1EZ4TBCC","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "discharging",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sm_m215f_charger_type","state":"none","attributes":{"options":["ac","usb","wireless","dock","none"],"device_class":"enum","icon":"mdi:battery","friendly_name":"SM-M215F Charger type"},"last_changed":"2025-01-01T19:38:20.334100+00:00","last_reported":"2025-01-01T19:38:22.511916+00:00","last_updated":"2025-01-01T19:38:20.334100+00:00","context":{"id":"01JGHP0J9ED1941MHC6M2GVK95","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "none",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T20:02:26.967678+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.json_test","state":"86 %","attributes":{"friendly_name":"JSON test"},"last_changed":"2025-01-01T19:17:02.329950+00:00","last_reported":"2025-01-01T19:17:02.329950+00:00","last_updated":"2025-01-01T19:17:02.329950+00:00","context":{"id":"01JGHMSJ7SKEXVH3YHF9BAQ6MR","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "86 %",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T19:18:40.455932+00:00"
+    },
+    {
+      "state": {"entity_id":"input_boolean.mqtt_publish_button","state":"off","attributes":{"editable":false,"icon":"mdi:cloud-upload","friendly_name":"Publish to MQTT"},"last_changed":"2025-01-01T17:18:38.268003+00:00","last_reported":"2025-01-01T17:18:38.268003+00:00","last_updated":"2025-01-01T17:18:38.268003+00:00","context":{"id":"01JGHE0RNWBTQPBXAJ7P2MSVH6","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T19:10:53.686317+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.mqtt_publish_on_button_click","state":"off","attributes":{"last_triggered":"2025-01-01T17:02:11.640632+00:00","mode":"single","current":0,"friendly_name":"MQTT Publish on Button Click"},"last_changed":"2025-01-01T17:18:38.794449+00:00","last_reported":"2025-01-01T17:18:38.794449+00:00","last_updated":"2025-01-01T17:18:38.794449+00:00","context":{"id":"01JGHE0S6A20DA0PE9VCFJRE14","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T18:45:18.830429+00:00"
+    },
+    {
+      "state": {"entity_id":"switch.led_switch_1","state":"unknown","attributes":{"friendly_name":"LED Switch 1"},"last_changed":"2025-01-01T17:18:38.908503+00:00","last_reported":"2025-01-01T17:18:38.908503+00:00","last_updated":"2025-01-01T17:18:38.908503+00:00","context":{"id":"01JGHE0S9W0CZJDADQ6D6K07DB","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T17:25:59.698223+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.led_switch_1","state":"unknown","attributes":{"friendly_name":"LED Switch 1"},"last_changed":"2025-01-01T17:18:38.908652+00:00","last_reported":"2025-01-01T17:18:38.908652+00:00","last_updated":"2025-01-01T17:18:38.908652+00:00","context":{"id":"01JGHE0S9W76D0PA0G28CXS7G5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-01-01T17:25:59.699003+00:00"
+    },
+    {
+      "state": {"entity_id":"button.door_open","state":"2025-01-01T16:49:57.300081+00:00","attributes":{"friendly_name":"Door open"},"last_changed":"2025-01-01T17:18:38.908669+00:00","last_reported":"2025-01-01T17:18:38.908669+00:00","last_updated":"2025-01-01T17:18:38.908669+00:00","context":{"id":"01JGHE0S9WR3H3Y6D9BC60JEJX","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T17:25:59.699117+00:00"
+    },
+    {
+      "state": {"entity_id":"button.door_close","state":"2025-01-01T16:56:53.369942+00:00","attributes":{"friendly_name":"Door close"},"last_changed":"2025-01-01T17:18:38.908684+00:00","last_reported":"2025-01-01T17:18:38.908684+00:00","last_updated":"2025-01-01T17:18:38.908684+00:00","context":{"id":"01JGHE0S9WKJXG1JETDP9QA7P4","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T17:25:59.699209+00:00"
     },
     {
       "state": {"entity_id":"sensor.pocet_slepic_v_kurniku","state":"unavailable","attributes":{"unit_of_measurement":"Kusů","friendly_name":"Počet slepic v kurníku"},"last_changed":"2025-01-01T01:07:00.703837+00:00","last_reported":"2025-01-01T01:07:00.703837+00:00","last_updated":"2025-01-01T01:07:00.703837+00:00","context":{"id":"01JGFPDNEZJC17N1C0FW2738EX","parent_id":null,"user_id":null}},
@@ -54,6 +171,16 @@
         "native_unit_of_measurement": "X"
       },
       "last_seen": "2025-01-01T01:07:00.723914+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.coop_doors","state":"unknown","attributes":{"friendly_name":"Coop doors"},"last_changed":"2025-01-01T16:38:03.171465+00:00","last_reported":"2025-01-01T16:38:03.171465+00:00","last_updated":"2025-01-01T16:38:03.171465+00:00","context":{"id":"01JGHBPEN3ST9RNBTKH4NDCMQJ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T16:40:28.140871+00:00"
+    },
+    {
+      "state": {"entity_id":"switch.bedroom_switch","state":"unavailable","attributes":{"friendly_name":"Bedroom Switch"},"last_changed":"2025-01-01T16:38:03.172192+00:00","last_reported":"2025-01-01T16:38:03.172495+00:00","last_updated":"2025-01-01T16:38:03.172192+00:00","context":{"id":"01JGHBPEN4XGDDY547AHBRF42R","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-01T16:40:28.140942+00:00"
     }
   ]
 }

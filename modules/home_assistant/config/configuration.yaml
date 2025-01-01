@@ -10,7 +10,54 @@ scene: !include scenes.yaml
 mqtt:
   - sensor:
       name: "Nests status"
-      state_topic: "nests/status"
+      state_topic: "coopmaster/nests/status"
+      value_template: "{{ value }}"
+  - sensor:
+      name: "Eggs count"
+      state_topic: "coopmaster/eggs/count"
+      value_template: "{{ value }}"
+  - sensor:
+      name: "Temperature"
+      state_topic: "coopmaster/room/temperature"
+      value_template: "{{ value_json.value }} {{ value_json.unit }}"
+  - sensor:
+      name: "Humidity"
+      state_topic: "coopmaster/room/humidity"
+      value_template: "{{ value_json.value }} {{ value_json.unit }}"
+  - sensor:
+      name: "Chicken count"
+      state_topic: "coopmaster/chicken/count"
+      value_template: "{{ value_json.count }} ks"
+  - image:
+      name: "Room image"
+      image_topic: "coopmaster/chicken/image/actual"
+      content_type: "image/png"
+  - image:
+      name: "Outside image"
+      image_topic: "coopmaster/dog/image/actual"
+      content_type: "image/png"
+  - image:
+      name: "Dog alarm image"
+      image_topic: "coopmaster/dog/image/alarm"
+      content_type: "image/png"
+
+  - binary_sensor:
+      name: "Coop door state"
+      state_topic: "coopmaster/room/door/state"
+      payload_on: "open"
+      payload_off: "close"
+      value_template: "{{ value }}"
+  - binary_sensor:
+      name: "Coop lamp state"
+      state_topic: "coopmaster/room/lamp/state"
+      payload_on: "on"
+      payload_off: "off"
+      value_template: "{{ value }}"
+  - binary_sensor:
+      name: "Dog detected"
+      state_topic: "coopmaster/dog/detected"
+      payload_on: "yes"
+      payload_off: "no"
       value_template: "{{ value }}"
 
 

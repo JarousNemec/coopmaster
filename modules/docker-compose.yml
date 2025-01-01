@@ -133,7 +133,6 @@ services:
     container_name: mqtt
     image: eclipse-mosquitto
     restart: always
-    pull_policy: always
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
@@ -146,7 +145,6 @@ services:
   homeassistant:
     container_name: homeassistant
     image: ghcr.io/home-assistant/home-assistant:stable
-    pull_policy: always
     volumes:
       - './home_assistant/config:/config'
     environment:
