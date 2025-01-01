@@ -20,7 +20,8 @@
                   "type": "custom:nest-card",
                   "nests_in_row": 3,
                   "nests_in_column": 2,
-                  "entity": "sensor.nests_status"
+                  "entity": "sensor.nests_status",
+                  "logging": true
                 }
               ],
               "column_span": 1

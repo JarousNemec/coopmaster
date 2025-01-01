@@ -16,7 +16,7 @@ class NestCard extends HTMLElement {
         const logging = this.config.logging || false;
         const nests_in_row = this.config.nests_in_row || 0;
         const nests_in_column = this.config.nests_in_column || 0;
-
+        const separator = ";"
         const entityId = this.config.entity;
         const entity = hass.states[entityId];
 
@@ -30,49 +30,48 @@ class NestCard extends HTMLElement {
         if (logging)
             console.log(data)
 
-        if (!data.includes('o') && !data.includes('f')) {
-            this.content.innerHTML = 'no data';
-            return;
-        }
+        if ((!data.includes('o') && !data.includes('f')) || (data.length > 1 && !data.includes(separator))) {
+            this.content.innerHTML = `Entity id: ${entityId} - Waiting for data...`;
+        } else {
+            let states = data.split(separator);
 
-        let states = data.split(';');
+            let container = document.createElement("div");
+            container.id = "nest-container";
+            for (let i = 0; i < nests_in_column; i++) {
+                let row = document.createElement("div");
+                row.style.display = "flex";
+                for (let j = 0; j < nests_in_row; j++) {
+                    let id = j + i * nests_in_row;
+                    console.log("nest - "+id)
+                    const nest = document.createElement('div');
+                    nest.style.width = "100px";
+                    nest.style.height = "100px";
+                    nest.style.position = "relative";
+                    nest.style.margin = "5px";
 
-        let container = document.createElement("div");
-        container.id = "nest-container";
-        for (let i = 0; i < nests_in_column; i++) {
-            let row = document.createElement("div");
-            row.style.display = "flex";
-            for (let j = 0; j < nests_in_row; j++) {
-                let id = j + i * nests_in_row;
+                    const img = document.createElement('img');
+                    img.src = "/local/nest-card/res/nest.png";
+                    img.alt = "Nest" + id;
+                    nest.appendChild(img);
 
-                const nest = document.createElement('div');
-                nest.style.width = "100px";
-                nest.style.height = "100px";
-                nest.style.position = "relative";
-                nest.style.margin = "5px";
-
-                const img = document.createElement('img');
-                img.src = "/local/nest.png";
-                img.alt = "Nest" + id;
-                nest.appendChild(img);
-
-                if (id < states.length) {
-                    if (states[id] === "o") {
-                        const chicken = document.createElement('img');
-                        chicken.src = "/local/chicken.png";
-                        chicken.alt = "Nest" + id;
-                        chicken.style.width = "100px";
-                        chicken.style.height = "100px";
-                        chicken.style.position = "absolute";
-                        chicken.style.left = "0";
-                        nest.appendChild(chicken);
+                    if (id < states.length) {
+                        if (states[id] === "o") {
+                            const chicken = document.createElement('img');
+                            chicken.src = "/local/nest-card/res/chicken.png";
+                            chicken.alt = "Nest" + id;
+                            chicken.style.width = "100px";
+                            chicken.style.height = "100px";
+                            chicken.style.position = "absolute";
+                            chicken.style.left = "0";
+                            nest.appendChild(chicken);
+                        }
                     }
+                    row.appendChild(nest);
                 }
-                row.appendChild(nest);
+                container.appendChild(row);
             }
-            container.appendChild(row);
+            this.content.innerHTML = container.innerHTML;
         }
-        this.content.innerHTML = container.innerHTML;
     }
 
     setConfig(config) {
