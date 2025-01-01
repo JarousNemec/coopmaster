@@ -3,6 +3,8 @@ services:
   coopmaster_camera_driver:
     image: jardathedev/coopmaster-camera-driver:latest
     restart: always
+    pull_policy: always
+    container_name: coopmaster_camera_driver
     ports:
       - "9001:9001"
     environment:
@@ -16,32 +18,34 @@ services:
     networks:
       - coopmaster
 
-#  coopmaster_scale_driver:
-#    image: jardathedev/coopmaster-scale-driver:latest
-#    restart: always
-#    devices:
-#      # Map the USB device from the host to the container
-#      # Example for a common USB serial device
-#      - /dev/ttyUSB0:/dev/ttyUSB0
-#    ports:
-#      - "9004:9004"
-#    environment:
-#      - HOST=localhost
-#      - PORT=9004
-#      - WEIGHT_COM_PORT=/dev/ttyUSB0
-#      - WEIGHT_INTERVAL_SEC=2
-#    networks:
-#      - coopmaster
+  coopmaster_scale_driver:
+    image: jardathedev/coopmaster-scale-driver:latest
+    restart: always
+    pull_policy: always
+    devices:
+      # Map the USB device from the host to the container
+      # Example for a common USB serial device
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    ports:
+      - "9004:9004"
+    environment:
+      - HOST=localhost
+      - PORT=9004
+      - WEIGHT_COM_PORT=/dev/ttyUSB0
+      - WEIGHT_INTERVAL_SEC=2
+    networks:
+      - coopmaster
 
-#  coopmaster_door_driver:
-#    image: jardathedev/coopmaster-door-driver:latest
-#    restart: always
-#    ports:
-#      - "9005:9005"
+  coopmaster_room_driver:
+    image: jardathedev/coopmaster-room-driver:latest
+    restart: always
+    ports:
+      - "9005:9005"
 
   coopmaster_nest_watcher:
     image: jardathedev/coopmaster-nest-watcher:latest
     restart: always
+    pull_policy: always
     ports:
       - 9007:9007
     env_file:
@@ -58,6 +62,7 @@ services:
   coopmaster_dog_alarm:
     image: jardathedev/coopmaster-dog-alarm:latest
     restart: always
+    pull_policy: always
     ports:
       - 9008:9008
     env_file:
@@ -66,22 +71,24 @@ services:
       - HOST=localhost
       - PORT=9008
       - DOG_CAMERA_PORT=9001
-      - DOG_CAMERA_HOST=localhost
+      - DOG_CAMERA_HOST=coopmaster_camera_driver
       - MQTT_BROKER=mqtt
       - MQTT_PORT=1883
       - MQTT_TOPIC=dog/detected
     networks:
       - coopmaster
 
-#  coopmaster_door_assistant:
-#    image: jardathedev/coopmaster-door-assistant:latest
-#    restart: always
-#    ports:
-#      - "9006:9006"
-#
+  coopmaster_room_assistant:
+    image: jardathedev/coopmaster-room-assistant:latest
+    restart: always
+    pull_policy: always
+    ports:
+      - "9006:9006"
+
   coopmaster_chicken_watch_guard:
     image: jardathedev/coopmaster-chicken-watch-guard:latest
     restart: always
+    pull_policy: always
     ports:
       - 9003:9003
     env_file:
@@ -90,7 +97,7 @@ services:
       - HOST=localhost
       - PORT=9003
       - CHICKEN_CAMERA_PORT=9001
-      - CHICKEN_CAMERA_HOST=localhost
+      - CHICKEN_CAMERA_HOST=coopmaster_camera_driver
       - MQTT_BROKER=mqtt
       - MQTT_PORT=1883
       - MQTT_TOPIC=chicken/count
@@ -101,6 +108,7 @@ services:
   coop-solution-db:
     image: postgres:15
     container_name:  coop-solution-db
+    pull_policy: always
     healthcheck:
       test: ["CMD-SHELL", "/usr/bin/pg_isready -h localhost"]
       interval: 10s
@@ -125,6 +133,7 @@ services:
     container_name: mqtt
     image: eclipse-mosquitto
     restart: always
+    pull_policy: always
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
@@ -137,6 +146,7 @@ services:
   homeassistant:
     container_name: homeassistant
     image: ghcr.io/home-assistant/home-assistant:stable
+    pull_policy: always
     volumes:
       - './home_assistant/config:/config'
     environment:
