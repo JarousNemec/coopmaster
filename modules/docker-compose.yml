@@ -1,5 +1,14 @@
 services:
 
+  coopmaster-health-checker:
+    image: jardathedev/coopmaster-health-checker:latest
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      - PORT=9000
+
+
   coopmaster_camera_driver:
     image: jardathedev/coopmaster-camera-driver:latest
     restart: always
