@@ -3,10 +3,14 @@ services:
   coopmaster-health-checker:
     image: jardathedev/coopmaster-health-checker:latest
     restart: always
+    pull_policy: always
     ports:
       - "9000:9000"
     environment:
       - PORT=9000
+      - DOCKER_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 
   coopmaster_camera_driver:
