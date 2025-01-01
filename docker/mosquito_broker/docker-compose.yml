@@ -9,7 +9,7 @@ version: '3.9'
 
 services:
   mosquitto:
-    container_name: mqtt
+    container_name: mqtt-dev
     image: eclipse-mosquitto
     restart: always
     volumes:

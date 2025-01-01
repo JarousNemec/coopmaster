@@ -16,22 +16,22 @@ services:
     networks:
       - coopmaster
 
-  coopmaster_scale_driver:
-    image: jardathedev/coopmaster-scale-driver:latest
-    restart: always
-    devices:
-      # Map the USB device from the host to the container
-      # Example for a common USB serial device
-      - /dev/ttyUSB0:/dev/ttyUSB0
-    ports:
-      - "9004:9004"
-    environment:
-      - HOST=localhost
-      - PORT=9004
-      - WEIGHT_COM_PORT=/dev/ttyUSB0
-      - WEIGHT_INTERVAL_SEC=2
-    networks:
-      - coopmaster
+#  coopmaster_scale_driver:
+#    image: jardathedev/coopmaster-scale-driver:latest
+#    restart: always
+#    devices:
+#      # Map the USB device from the host to the container
+#      # Example for a common USB serial device
+#      - /dev/ttyUSB0:/dev/ttyUSB0
+#    ports:
+#      - "9004:9004"
+#    environment:
+#      - HOST=localhost
+#      - PORT=9004
+#      - WEIGHT_COM_PORT=/dev/ttyUSB0
+#      - WEIGHT_INTERVAL_SEC=2
+#    networks:
+#      - coopmaster
 
 #  coopmaster_door_driver:
 #    image: jardathedev/coopmaster-door-driver:latest

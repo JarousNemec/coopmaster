@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_resources",
+  "data": {
+    "items": [
+      {
+        "id": "e821c358746b4f1a96d702d873f59a38",
+        "url": "/local/nest-card/nest-card.js",
+        "type": "module"
+      }
+    ]
+  }
+}

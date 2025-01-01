@@ -1,4 +1,4 @@
-// class SimpleClockCard extends HTMLElement {
+// class NestCard extends HTMLElement {
 //
 // 	set hass(hass) {
 //
@@ -58,7 +58,7 @@
 //         return 1;
 //     }
 // }
-// customElements.define('simple-clock-scard', SimpleClockCard);
+// customElements.define('simple-clock-scard', NestCard);
 
 
 function hass() {
