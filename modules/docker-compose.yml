@@ -11,6 +11,8 @@ services:
       - DOCKER_HOST=host.docker.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - coopmaster
 
 
   coopmaster_camera_driver:
@@ -54,6 +56,9 @@ services:
     restart: always
     ports:
       - "9005:9005"
+    networks:
+      - coopmaster
+
 
   coopmaster_nest_watcher:
     image: jardathedev/coopmaster-nest-watcher:latest
@@ -97,6 +102,19 @@ services:
     pull_policy: always
     ports:
       - "9006:9006"
+    environment:
+      - HOST=localhost
+      - PORT=9006
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - MQTT_TOPIC_LAMP=coopmaster/room/lamp
+      - MQTT_TOPIC_TEMPERATURE=coopmaster/room/temperature
+      - MQTT_TOPIC_HUMIDITY=coopmaster/room/humidity
+      - MQTT_TOPIC_DOOR=coopmaster/room/door
+    networks:
+       - coopmaster
+
+
 
   coopmaster_chicken_watch_guard:
     image: jardathedev/coopmaster-chicken-watch-guard:latest
