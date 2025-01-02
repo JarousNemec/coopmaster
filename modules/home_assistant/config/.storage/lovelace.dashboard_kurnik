@@ -104,44 +104,64 @@
                   }
                 },
                 {
-                  "show_name": true,
-                  "show_icon": true,
-                  "type": "button",
-                  "tap_action": {
-                    "action": "perform-action",
-                    "perform_action": "mqtt.publish",
-                    "target": {},
-                    "data": {
-                      "evaluate_payload": false,
-                      "qos": 0,
-                      "retain": false,
-                      "topic": "room/lamp/cmnd",
-                      "payload": "on"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_lamp_state",
+                      "state": "on"
                     }
-                  },
-                  "entity": "",
-                  "name": "Rozsvítit",
-                  "icon": "mdi:card"
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "type": "button",
+                    "tap_action": {
+                      "action": "perform-action",
+                      "perform_action": "mqtt.publish",
+                      "target": {},
+                      "data": {
+                        "evaluate_payload": false,
+                        "qos": 0,
+                        "retain": false,
+                        "topic": "coopmaster/room/lamp/cmnd",
+                        "payload": "off"
+                      }
+                    },
+                    "entity": "",
+                    "icon": "mdi:toggle-switch-variant",
+                    "name": "Klikni pro zhasnutí světla"
+                  }
                 },
                 {
-                  "show_name": true,
-                  "show_icon": true,
-                  "type": "button",
-                  "tap_action": {
-                    "action": "perform-action",
-                    "perform_action": "mqtt.publish",
-                    "target": {},
-                    "data": {
-                      "evaluate_payload": false,
-                      "qos": 0,
-                      "retain": false,
-                      "topic": "room/lamp/cmnd",
-                      "payload": "off"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_lamp_state",
+                      "state": "off"
                     }
-                  },
-                  "entity": "",
-                  "name": "Zhasnout",
-                  "icon": "mdi:card"
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "type": "button",
+                    "tap_action": {
+                      "action": "perform-action",
+                      "perform_action": "mqtt.publish",
+                      "target": {},
+                      "data": {
+                        "evaluate_payload": false,
+                        "qos": 0,
+                        "retain": false,
+                        "topic": "coopmaster/room/lamp/cmnd",
+                        "payload": "on"
+                      }
+                    },
+                    "entity": "",
+                    "name": "Klikni pro rozsvícení světla",
+                    "icon": "mdi:toggle-switch-variant-off"
+                  }
                 },
                 {
                   "type": "conditional",
@@ -172,44 +192,93 @@
                   }
                 },
                 {
-                  "show_name": true,
-                  "show_icon": true,
-                  "type": "button",
-                  "tap_action": {
-                    "action": "perform-action",
-                    "perform_action": "mqtt.publish",
-                    "target": {},
-                    "data": {
-                      "evaluate_payload": false,
-                      "qos": 0,
-                      "retain": false,
-                      "topic": "room/door/cmnd",
-                      "payload": "open"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_door_state",
+                      "state": "on"
                     }
-                  },
-                  "entity": "",
-                  "name": "Otevřít dvířka",
-                  "icon": "mdi:card"
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "type": "button",
+                    "tap_action": {
+                      "action": "perform-action",
+                      "perform_action": "mqtt.publish",
+                      "target": {},
+                      "data": {
+                        "evaluate_payload": false,
+                        "qos": 0,
+                        "retain": false,
+                        "topic": "coopmaster/room/door/cmnd",
+                        "payload": "close"
+                      }
+                    },
+                    "entity": "",
+                    "icon": "mdi:toggle-switch-variant",
+                    "show_state": false,
+                    "name": "Klikni pro zavření dveří"
+                  }
                 },
                 {
-                  "show_name": true,
-                  "show_icon": true,
-                  "type": "button",
-                  "tap_action": {
-                    "action": "perform-action",
-                    "perform_action": "mqtt.publish",
-                    "target": {},
-                    "data": {
-                      "evaluate_payload": false,
-                      "qos": 0,
-                      "retain": false,
-                      "topic": "room/door/cmnd",
-                      "payload": "close"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_door_state",
+                      "state": "off"
                     }
-                  },
-                  "entity": "",
-                  "name": "Zavřít dvířka",
-                  "icon": "mdi:card"
+                  ],
+                  "card": {
+                    "show_name": true,
+                    "show_icon": true,
+                    "type": "button",
+                    "tap_action": {
+                      "action": "perform-action",
+                      "perform_action": "mqtt.publish",
+                      "target": {},
+                      "data": {
+                        "evaluate_payload": false,
+                        "qos": 0,
+                        "retain": false,
+                        "topic": "coopmaster/room/door/cmnd",
+                        "payload": "open"
+                      }
+                    },
+                    "entity": "",
+                    "icon": "mdi:toggle-switch-variant-off",
+                    "name": "Klikni pro otevření dveří"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_lamp_state",
+                      "state": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "#### <font color=red>Nelze se připojit ke světlu !!!</font>"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "binary_sensor.coop_door_state",
+                      "state": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "#### <font color=\"red\">Nelze se připojit ke dvířkům !!!</font>"
+                  }
                 }
               ],
               "column_span": 1
@@ -276,15 +345,6 @@
                     "type": "picture",
                     "image_entity": "image.outside_image"
                   }
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading_style": "title"
                 }
               ]
             }
