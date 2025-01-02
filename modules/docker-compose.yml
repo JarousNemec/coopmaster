@@ -92,7 +92,8 @@ services:
       - DOG_CAMERA_HOST=coopmaster_camera_driver
       - MQTT_BROKER=mqtt
       - MQTT_PORT=1883
-      - MQTT_TOPIC=dog/detected
+      - MQTT_DOG_DETECTED_TOPIC=coopmaster/dog/detected
+      - MQTT_DOG_ACTUAL_IMAGE=coopmaster/dog/image/actual
     networks:
       - coopmaster
 
@@ -131,7 +132,8 @@ services:
       - CHICKEN_CAMERA_HOST=coopmaster_camera_driver
       - MQTT_BROKER=mqtt
       - MQTT_PORT=1883
-      - MQTT_TOPIC=chicken/count
+      - MQTT_CHICKEN_COUNT_TOPIC=coopmaster/chicken/count
+      - MQTT_CHICKEN_ACTUAL_IMAGE=coopmaster/chicken/image/actual
     networks:
       - coopmaster
 
