@@ -83,7 +83,7 @@ class NestCard extends HTMLElement {
                         }
                     }
 
-                    if (id < counts.length) {
+                    if (id < counts.length && counts[id] !== "0") {
                         const count = document.createElement('div');
                         count.style.position = "absolute";
                         count.style.left = "-10px";

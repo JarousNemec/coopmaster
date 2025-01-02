@@ -98,28 +98,11 @@
         "access_token_expiration": 1800.0,
         "token": "ec2de9a555140937f722b0531bc16f0f16c001f2734fff952fb95e01e04b544af1ed916ae0028e28871f3db0ec166ed04450594f8d31b903dc8617c2581cc2fb",
         "jwt_key": "eed06caaed3a86e04a4ceab67406bcc95e08d5edfe72ddee3dd5f1b3b70bf477a70defa604beb756822a955350da660c03934392f1f362c9b7ca0e856c3109a8",
-        "last_used_at": "2025-01-02T08:28:50.452948+00:00",
+        "last_used_at": "2025-01-02T09:13:55.466036+00:00",
         "last_used_ip": "172.31.0.1",
-        "expire_at": 1743582530.452948,
+        "expire_at": 1743585235.466036,
         "credential_id": "696cb1d5d7574ff69f5903d74f767c5b",
         "version": "2024.10.3"
-      },
-      {
-        "id": "0c85b48c5019442491c9801a1af86874",
-        "user_id": "c18ded99ea454fd8a336d5c2696a6428",
-        "client_id": "https://home-assistant.io/android",
-        "client_name": null,
-        "client_icon": null,
-        "token_type": "normal",
-        "created_at": "2025-01-01T19:38:17.735436+00:00",
-        "access_token_expiration": 1800.0,
-        "token": "dcd46fb2a28b15e4f7e96a350797ca760b01257b4e9abffd7044a54af8edce0289039a8473dbf233a65d210038dd947e6ecf1b817431c2e86b175cf6d6986ddb",
-        "jwt_key": "590b887456c2e8f2d5107bbd5664d66049a749b76fd2fb7ad41e42afde2414a9497b0095d23821b497d72f8747b60aeaf58c9811fe6ba4956e8b830d0c8b3700",
-        "last_used_at": "2025-01-01T19:38:17.735730+00:00",
-        "last_used_ip": "172.31.0.1",
-        "expire_at": 1743536297.73573,
-        "credential_id": "696cb1d5d7574ff69f5903d74f767c5b",
-        "version": "2024.12.5"
       }
     ]
   }
