@@ -43,15 +43,6 @@
                     "image_entity": "image.dog_alarm_image",
                     "alt_text": "Fotografie na které byl detekován pes"
                   }
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading_style": "title"
                 },
                 {
                   "type": "custom:nest-card",
@@ -83,16 +74,6 @@
                   ],
                   "state_color": false,
                   "show_header_toggle": false
-                }
-              ],
-              "column_span": 1
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading_style": "title"
                 },
                 {
                   "type": "conditional",
@@ -135,11 +116,11 @@
                       "qos": 0,
                       "retain": false,
                       "topic": "room/lamp/cmnd",
-                      "payload": "off"
+                      "payload": "on"
                     }
                   },
                   "entity": "",
-                  "name": "Zhasnout",
+                  "name": "Rozsvítit",
                   "icon": "mdi:card"
                 },
                 {
@@ -155,21 +136,12 @@
                       "qos": 0,
                       "retain": false,
                       "topic": "room/lamp/cmnd",
-                      "payload": "on"
+                      "payload": "off"
                     }
                   },
                   "entity": "",
-                  "name": "Rozsvítit",
+                  "name": "Zhasnout",
                   "icon": "mdi:card"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading_style": "title"
                 },
                 {
                   "type": "conditional",
@@ -239,7 +211,8 @@
                   "name": "Zavřít dvířka",
                   "icon": "mdi:card"
                 }
-              ]
+              ],
+              "column_span": 1
             },
             {
               "type": "grid",
@@ -258,18 +231,37 @@
                     }
                   ],
                   "card": {
+                    "type": "markdown",
+                    "content": "## <font color=orange>Fotografie z kurníku</font>"
+                  }
+                },
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "image.room_image",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
                     "type": "picture",
                     "image_entity": "image.room_image"
                   }
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
+                },
                 {
-                  "type": "heading",
-                  "heading_style": "title"
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "state",
+                      "entity": "image.outside_image",
+                      "state_not": "unknown"
+                    }
+                  ],
+                  "card": {
+                    "type": "markdown",
+                    "content": "## <font color=orange>Fotografie z výběhu</font>"
+                  }
                 },
                 {
                   "type": "conditional",
@@ -284,6 +276,15 @@
                     "type": "picture",
                     "image_entity": "image.outside_image"
                   }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title"
                 }
               ]
             }

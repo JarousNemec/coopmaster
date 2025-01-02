@@ -1,17 +1,89 @@
-- id: '1729801157428'
-  alias: Dog alert notify
+- id: '1735807419732'
+  alias: Notifikace na detekci psa ve výběhu
   description: ''
   triggers:
-  - trigger: numeric_state
+  - trigger: state
     entity_id:
-    - sensor.pocet_psu_ve_vybehu
-    above: 0
+    - binary_sensor.dog_detected
+    from: 'off'
+    to: 'on'
   conditions: []
   actions:
   - action: notify.notify
     metadata: {}
     data:
-      message: Průšvih - pes ve výběhu
-      title: Pes!!!!!
+      title: Detekován nepřítel
+      message: Ve venkovním výběhu byl detekován pes!
   mode: single
-
+- id: '1735807626827'
+  alias: Zavření dvířek večer
+  description: ''
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.chicken_count
+    above: 13
+  conditions:
+  - condition: time
+    after: '18:00:00'
+  actions:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: room/door/cmnd
+      payload: close
+  mode: single
+- id: '1735807771911'
+  alias: Otevření dvířek ráno
+  description: ''
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  conditions: []
+  actions:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: room/door/cmnd
+      payload: open
+  mode: single
+- id: '1735807831255'
+  alias: Rozsvícení světla večer
+  description: ''
+  triggers:
+  - trigger: time
+    at: '16:00:00'
+  conditions: []
+  actions:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: room/lamp/cmnd
+      payload: 'on'
+  mode: single
+- id: '1735807908926'
+  alias: Zhasnutí světla ráno
+  description: ''
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  conditions: []
+  actions:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: room/lamp/cmnd
+      payload: 'off'
+  mode: single
