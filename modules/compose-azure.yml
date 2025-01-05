@@ -1,0 +1,97 @@
+services:
+
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--accesslog=true" # Enable Access log to STDOUT
+      - "--api.dashboard=true" # Enable Traefik Dashboard
+      - "--api.insecure=true" # Enable Dashboard without TLS for demonstration purposes
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      #- "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=jarous.nemec@gmail.com"
+      #- "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--metrics.prometheus=true" # Enable Prometheus metrics at port 8082
+      - "--entryPoints.metrics.address=:8082"
+      - "--metrics.prometheus.entryPoint=metrics"
+      - "--metrics.prometheus.addrouterslabels=true"
+    networks:
+      - coopmaster
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080" # Port for accessing the dashboard
+      - "8082:8082" # Port for accessing Prometheus metrics
+    volumes:
+      - ./data/letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+    restart: always
+
+  bizerba-dashboard:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bizerba-dashboard-service.entrypoints=websecure"
+      - "traefik.http.routers.bizerba-dashboard-service.rule=Host(`bizerbadashboard.uksouth.cloudapp.azure.com`)"
+      - "traefik.http.routers.bizerba-dashboard-service.service=bizerba-dashboard-service"
+      - "traefik.http.routers.bizerba-dashboard-service.tls.certresolver=letsencrypt"
+      - "traefik.http.services.bizerba-dashboard-service.loadbalancer.server.port=9001"
+    image: bizerbacz.azurecr.io/bizerba-dashboard:latest
+    container_name: bizerba-dashboard
+#    depends_on:
+#      - bizerba-database
+    restart: always
+    networks:
+      - coopmaster
+    volumes:
+      - /bizerba/statistics:/bizerba/statistics
+    environment:
+      - BIZERBA_SELL_DB_HOST=127.0.0.1
+      - BIZERBA_SELL_DB_PORT=5432
+      - BIZERBA_SELL_DB_DATABASE=tesco
+      - BIZERBA_SELL_DB_USER=tesco
+      - BIZERBA_SELL_DB_PASSWORD=${DB_PASSWORD_TESCO}
+      - BIZERBA_SELL_DB_ADMIN_USER=rds
+      - BIZERBA_SELL_DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}
+
+
+  mosquitto:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - coopmaster
+
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: always
+    volumes:
+      - './home_assistant/config:/config'
+    environment:
+      - TZ=Europe/Bratislava # get your Time Zone from - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - '8123:8123'
+    networks:
+      - coopmaster
+
+networks:
+  coopmaster:
+    name: coopmaster
