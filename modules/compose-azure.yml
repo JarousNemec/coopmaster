@@ -35,31 +35,31 @@ services:
       - "traefik.enable=true"
     restart: always
 
-  bizerba-dashboard:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.bizerba-dashboard-service.entrypoints=websecure"
-      - "traefik.http.routers.bizerba-dashboard-service.rule=Host(`bizerbadashboard.uksouth.cloudapp.azure.com`)"
-      - "traefik.http.routers.bizerba-dashboard-service.service=bizerba-dashboard-service"
-      - "traefik.http.routers.bizerba-dashboard-service.tls.certresolver=letsencrypt"
-      - "traefik.http.services.bizerba-dashboard-service.loadbalancer.server.port=9001"
-    image: bizerbacz.azurecr.io/bizerba-dashboard:latest
-    container_name: bizerba-dashboard
-#    depends_on:
-#      - bizerba-database
-    restart: always
-    networks:
-      - coopmaster
-    volumes:
-      - /bizerba/statistics:/bizerba/statistics
-    environment:
-      - BIZERBA_SELL_DB_HOST=127.0.0.1
-      - BIZERBA_SELL_DB_PORT=5432
-      - BIZERBA_SELL_DB_DATABASE=tesco
-      - BIZERBA_SELL_DB_USER=tesco
-      - BIZERBA_SELL_DB_PASSWORD=${DB_PASSWORD_TESCO}
-      - BIZERBA_SELL_DB_ADMIN_USER=rds
-      - BIZERBA_SELL_DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}
+#  bizerba-dashboard:
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.bizerba-dashboard-service.entrypoints=websecure"
+#      - "traefik.http.routers.bizerba-dashboard-service.rule=Host(`bizerbadashboard.uksouth.cloudapp.azure.com`)"
+#      - "traefik.http.routers.bizerba-dashboard-service.service=bizerba-dashboard-service"
+#      - "traefik.http.routers.bizerba-dashboard-service.tls.certresolver=letsencrypt"
+#      - "traefik.http.services.bizerba-dashboard-service.loadbalancer.server.port=9001"
+#    image: bizerbacz.azurecr.io/bizerba-dashboard:latest
+#    container_name: bizerba-dashboard
+##    depends_on:
+##      - bizerba-database
+#    restart: always
+#    networks:
+#      - coopmaster
+#    volumes:
+#      - /bizerba/statistics:/bizerba/statistics
+#    environment:
+#      - BIZERBA_SELL_DB_HOST=127.0.0.1
+#      - BIZERBA_SELL_DB_PORT=5432
+#      - BIZERBA_SELL_DB_DATABASE=tesco
+#      - BIZERBA_SELL_DB_USER=tesco
+#      - BIZERBA_SELL_DB_PASSWORD=${DB_PASSWORD_TESCO}
+#      - BIZERBA_SELL_DB_ADMIN_USER=rds
+#      - BIZERBA_SELL_DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}
 
 
   mosquitto:
