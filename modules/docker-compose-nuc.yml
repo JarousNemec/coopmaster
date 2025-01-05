@@ -34,6 +34,8 @@ services:
       - MQTT_TOPIC_LAMP_STATE=coopmaster/room/lamp/state
       - MQTT_TOPIC_LAMP_CMND=coopmaster/room/lamp/cmnd
       - REPORT_INTERVAL=2
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -51,6 +53,8 @@ services:
       - MQTT_BROKER=${MQTT_BROKER}
       - MQTT_PORT=1883
       - MQTT_TOPIC=/nest_watcher/count
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -72,6 +76,8 @@ services:
       - MQTT_DOG_DETECTED_TOPIC=coopmaster/dog/detected
       - MQTT_DOG_ACTUAL_IMAGE=coopmaster/dog/image/actual
       - MQTT_DOG_ALARM_IMAGE=coopmaster/dog/image/alarm
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -92,6 +98,8 @@ services:
       - MQTT_PORT=1883
       - MQTT_CHICKEN_COUNT_TOPIC=coopmaster/chicken/count
       - MQTT_CHICKEN_ACTUAL_IMAGE=coopmaster/chicken/image/actual
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -105,7 +113,9 @@ services:
     environment:
       - DB_POSTGRES_EXTRA_CONFIG=shared_preload_libraries=pg_stat_statements
     ports:
-      - "${DB_PORT}:5432" # Port for remote accessing the database
+      - 5432:5432
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
     volumes:
@@ -122,12 +132,15 @@ services:
       - ./mosquitto/log:/mosquitto/log
     ports:
       - 1883:1883
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
   homeassistant:
     container_name: homeassistant
     image: ghcr.io/home-assistant/home-assistant:stable
+    restart: always
     volumes:
       - './home_assistant/config:/config'
     environment:
@@ -136,7 +149,6 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - '8123:8123'
-    restart: always
     networks:
       - coopmaster
 
