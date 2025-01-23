@@ -26,7 +26,8 @@ services:
     devices:
       # Map the USB device from the host to the container
       # Example for a common USB serial device
-      - /dev/ttyUSB0:/dev/ttyUSB0
+#      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/arduinoScale0:/dev/arduinoScale0
       # - /dev/ttyUSB1:/dev/ttyUSB1
       # - /dev/ttyUSB2:/dev/ttyUSB2
     ports:
@@ -34,7 +35,7 @@ services:
     environment:
       - HOST=localhost
       - PORT=9004
-      - WEIGHT_COM_PORT=/dev/ttyUSB0
+      - WEIGHT_COM_PORT=/dev/arduinoScale0
       - WEIGHT_INTERVAL_SEC=2
     networks:
       - coopmaster
@@ -48,14 +49,15 @@ services:
       # Map the USB device from the host to the container
       # Example for a common USB serial device
       # - /dev/ttyUSB0:/dev/ttyUSB0
-      - /dev/ttyUSB1:/dev/ttyUSB1
+#      - /dev/ttyUSB1:/dev/ttyUSB1
+      - /dev/arduinoRoomController:/dev/arduinoRoomController
       # - /dev/ttyUSB2:/dev/ttyUSB2
     ports:
       - 9005:9005
     environment:
       - HOST=localhost
       - PORT=9005
-      - ROOM_COM_PORT=/dev/ttyUSB1
+      - ROOM_COM_PORT=/dev/arduinoRoomController
     networks:
       - coopmaster
 

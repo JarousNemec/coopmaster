@@ -27,3 +27,4 @@
 ## Health checker
 - https://github.com/JarousNemec/coopmaster-health-checker
 - Container port: 9000
+

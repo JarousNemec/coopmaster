@@ -31,3 +31,20 @@ CoopMaster je chytrá aplikace pro správu kurníku, která automatizuje klíčo
 
 ### Messaging system - kafka
 - https://www.youtube.com/watch?v=uvb00oaa3k8
+
+### Jak nasetupovat SYMLINK na USB port ubuntu rpi5
+
+- ve složce `/etc/udev/rules.d/` vyzvoříme soubor například `11-arduino.rules`
+- číslo na začátku je důležité a nesmí být stejné s žádným rules souborem jinak ho systémové rules přemlasknou a nebude to fungovat
+- do něj se v píší co řádek co symlink
+- zadávají se parametry s názvy stejnými jak při výpisu příkazu `sudo udevadm info --name=/dev/ttyUSB1 --attribute-walk`
+- na závěr se přidá samotný název symlinku SYMLINK+="arduinoSymlink"
+- příklad pravidla:
+- `# Arduino Scale 0`
+- `SUBSYSTEM=="tty", KERNELS=="1-1.3", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="arduinoScale0"`
+- následně uložit soubor 
+- znovu načtení a aktivace pravidel se provede příkazy
+- `sudo udevadm control --reload-rules`
+- a následně
+- `sudo udevadm trigger`
+
