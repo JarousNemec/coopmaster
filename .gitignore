@@ -11,5 +11,12 @@
 /Docker/home_assistant/config/home-assistant.log
 /Docker/home_assistant/config/home-assistant.log.1
 /Docker/home_assistant/config/home-assistant.log.fault
+/modules/home_assistant/config/home-assistant_v2.db
+/modules/home_assistant/config/home-assistant_v2.db-shm
+/modules/home_assistant/config/home-assistant_v2.db-wal
+/modules/home_assistant/config/
 /modules/home_assistant/config/.storage/
 /modules/home_assistant/config/.cloud/
+/modules/mosquitto/log/mosquitto.log
+/modules/mosquitto/data/mosquitto.db
+/.idea/

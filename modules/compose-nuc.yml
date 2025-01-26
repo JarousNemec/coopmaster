@@ -34,8 +34,6 @@ services:
       - MQTT_TOPIC_LAMP_STATE=coopmaster/room/lamp/state
       - MQTT_TOPIC_LAMP_CMND=coopmaster/room/lamp/cmnd
       - REPORT_INTERVAL=2
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -53,8 +51,6 @@ services:
       - MQTT_BROKER=${MQTT_BROKER}
       - MQTT_PORT=1883
       - MQTT_TOPIC=/nest_watcher/count
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -76,8 +72,6 @@ services:
       - MQTT_DOG_DETECTED_TOPIC=coopmaster/dog/detected
       - MQTT_DOG_ACTUAL_IMAGE=coopmaster/dog/image/actual
       - MQTT_DOG_ALARM_IMAGE=coopmaster/dog/image/alarm
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -98,8 +92,6 @@ services:
       - MQTT_PORT=1883
       - MQTT_CHICKEN_COUNT_TOPIC=coopmaster/chicken/count
       - MQTT_CHICKEN_ACTUAL_IMAGE=coopmaster/chicken/image/actual
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -114,8 +106,6 @@ services:
       - DB_POSTGRES_EXTRA_CONFIG=shared_preload_libraries=pg_stat_statements
     ports:
       - 5432:5432
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
     volumes:
@@ -132,8 +122,6 @@ services:
       - ./mosquitto/log:/mosquitto/log
     ports:
       - 1883:1883
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - coopmaster
 
@@ -151,7 +139,19 @@ services:
       - '8123:8123'
     networks:
       - coopmaster
+      - tunnel
 
+#  cloudflared:
+#    image: cloudflare/cloudflared:latest
+#    restart: unless-stopped
+#    command: tunnel --no-autoupdate run
+#    environment:
+#      - TUNNEL_TOKEN=eyJhIjoiZWRjZTc4MmYzN2UyYzgwN2NiNzY0M2FmNTkwYjBlNGMiLCJ0IjoiNTE4NmRjZjEtMmYyZi00ZWYwLTkzYzQtYWNlZDYwMmY4MjBiIiwicyI6IlpqaGpZbUk0TkdVdFkyWTRNaTAwTURVekxUbGtZMkl0WVRCbE56YzJOakk1TVRGaSJ9
+#    networks:
+#      - tunnel
 networks:
   coopmaster:
     name: coopmaster
+  tunnel:
+    name: tunnel
+    external: true
