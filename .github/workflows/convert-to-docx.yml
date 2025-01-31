@@ -1,36 +1,30 @@
-name: Convert LaTeX to DOCX
+name: Convert LaTeX to docx
 
 on:
   push:
     branches:
-      - main  # Adjust as needed
+      - main
+      - master
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
-  build:
+  convert:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Set up dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-full pandoc
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
 
-    - name: Convert LaTeX to PDF
-      run: |
-        pdflatex -interaction=nonstopmode -halt-on-error doc-example-latex/thesis.tex
-        bibtex doc-example-latex/thesis
-        pdflatex -interaction=nonstopmode -halt-on-error doc-example-latex/thesis.tex
-        pdflatex -interaction=nonstopmode -halt-on-error doc-example-latex/thesis.tex
+      - name: Convert LaTeX to docx
+        run: pandoc doc-example-latex/thesis.tex -s -o doc-example-latex/output.docx
 
-    - name: Convert PDF to DOCX
-      # Convert using Pandoc from PDF to DOCX for better compatibility
-      run: pandoc doc-example-latex/thesis.pdf -o thesis.docx
-
-    - name: Upload DOCX
-      uses: actions/upload-artifact@v2
-      with:
-        name: Converted DOCX
-        path: thesis.docx
+      - name: Upload Converted docx
+        uses: actions/upload-artifact@v3
+        with:
+          name: Converted_Document
+          path: doc-example-latex/output.docx
