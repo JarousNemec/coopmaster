@@ -30,7 +30,7 @@ jobs:
 
       - name: Convert LaTeX to docx
         working-directory: doc-document-example
-        run: pandoc -s text.tex --pdf-engine=pdflatex -o document.pdf
+        run: pdflatex main.tex -jobname=document
 
       - name: Upload Converted docx
         uses: actions/upload-artifact@v4
