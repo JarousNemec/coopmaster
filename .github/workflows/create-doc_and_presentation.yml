@@ -35,3 +35,13 @@ jobs:
         with:
           name: Presentation
           path: doc-presentation-example/presentation.pdf
+
+      - name: Convert LaTeX to docx
+        working-directory: doc-document-example
+        run: pdflatex document.tex
+
+      - name: Upload Converted docx
+        uses: actions/upload-artifact@v4
+        with:
+          name: Document
+          path: doc-document-example/document.pdf
