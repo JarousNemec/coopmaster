@@ -10,62 +10,71 @@
 \begin{document}
 
 % Title Page
-\title{Your Thesis Title}
-\author{Your Name}
-\date{\today}
-\maketitle
+    \title{Your Thesis Title}
+    \author{Your Name}
+    \date{\today}
+    \maketitle
 
 % Abstract
-\begin{abstract}
-  This is the abstract of your thesis. Write a brief summary of the content here.
-\end{abstract}
+    \begin{abstract}
+        This is the abstract of your thesis. Write a brief summary of the content here.
+    \end{abstract}
 
 % Table of Contents
-\tableofcontents
+    \tableofcontents
 
 % Index Page
-\printindex
+    \printindex
 
-\chapter{Introduction}
-\label{chap:introduction}
-This is the introduction chapter.\index{Introduction}
 
-% Adding a figure
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.8\textwidth]{./images/coopmaster}
-  \caption{An example image.}
-  \label{fig:example}
-\end{figure}
-
+    \chapter{Introduction}
+    \label{chap:introduction}
+    This is the introduction chapter.\index{Introduction}
 
 % Adding a figure
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.8\textwidth]{coopmaster}
-  \caption{An example image2.}
-  \label{fig:example2}
-\end{figure}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{./images/coopmaster}
+        \caption{An example image.}
+        \label{fig:example}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/coopmaster}
+        \caption{An example image.}
+        \label{fig:example3}
+
+    \end{figure}
+
+% Adding a figure
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{coopmaster.png}
+        \caption{An example image2.}
+        \label{fig:example2}
+    \end{figure}
 
 
-
-\chapter{Literature Review}
-\label{chap:literature}
-This chapter covers the literature review.\index{Literature}
+    \chapter{Literature Review}
+    \label{chap:literature}
+    This chapter covers the literature review.\index{Literature}
 
 % Mermaid Charts
 % You cannot natively include Mermaid diagrams directly in LaTeX without converting them first.
 
-\chapter{Methodology}
-\label{chap:methodology}
-Description of the methodology used.\index{Methodology}
 
-\chapter{Results}
-\label{chap:results}
-Presentation of results.\index{Results}
+    \chapter{Methodology}
+    \label{chap:methodology}
+    Description of the methodology used.\index{Methodology}
+
+
+    \chapter{Results}
+    \label{chap:results}
+    Presentation of results.\index{Results}
 
 % References
-\bibliographystyle{plain}
-\bibliography{references} % references.bib should contain your bibliography
+    \bibliographystyle{plain}
+    \bibliography{references} % references.bib should contain your bibliography
 
 \end{document}
