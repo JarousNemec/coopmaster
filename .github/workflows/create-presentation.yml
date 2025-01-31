@@ -22,7 +22,7 @@ jobs:
 
       - name: Convert LaTeX to docx
         working-directory: doc-presentation-example
-        run: pandoc -s main.tex -o presentation.pdf
+        run: pandoc -s main.tex --pdf-engine=lualatex -o presentation.pdf
 
       - name: Upload Converted docx
         uses: actions/upload-artifact@v4
