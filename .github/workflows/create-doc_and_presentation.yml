@@ -17,30 +17,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc
-
       - name: Install TexLive (with LuaLaTeX)
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
-          sudo apt-get install texlive-full
+          sudo apt-get install -y texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-full
 
-      - name: Convert LaTeX to docx
+      - name: Generate presentation
         working-directory: doc-presentation-example
         run: pdflatex presentation
 
-      - name: Upload Converted docx
+      - name: Upload presentation
         uses: actions/upload-artifact@v4
         with:
           name: Presentation
           path: doc-presentation-example/presentation.pdf
 
-      - name: Convert LaTeX to docx
+      - name: Generate document
         working-directory: doc-document-example
         run: pdflatex document.tex
 
-      - name: Upload Converted docx
+      - name: Upload document
         uses: actions/upload-artifact@v4
         with:
           name: Document
