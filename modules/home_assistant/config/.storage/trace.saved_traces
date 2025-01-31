@@ -2,5 +2,925 @@
   "version": 1,
   "minor_version": 1,
   "key": "trace.saved_traces",
-  "data": {}
+  "data": {
+    "automation.1735807831255": [
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "0054b1730fc47a0aca064cbf5518baa0",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-29T15:00:00.256564+00:00",
+            "finish": "2025-01-29T15:00:00.259324+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807831255",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-29T15:00:00.256634+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.rozsviceni_svetla_vecer",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807831255",
+                      "last_triggered": "2025-01-28T15:00:00.284796+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Rozsv\u00edcen\u00ed sv\u011btla ve\u010der"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.178045+00:00",
+                    "last_reported": "2025-01-29T12:11:11.178045+00:00",
+                    "last_updated": "2025-01-29T12:11:11.178045+00:00",
+                    "context": {
+                      "id": "01JJRZHXYAPAHW2THWYBHM1X8F",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-29T16:00:00.256289+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-29T15:00:00.256931+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJS971M04CTJK0P8BQ5VMN1G",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "on"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807831255",
+            "alias": "Rozsv\u00edcen\u00ed sv\u011btla ve\u010der",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "16:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/lamp/cmnd",
+                  "payload": "on"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJS971M04CTJK0P8BQ5VMN1G",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "0054b1730fc47a0aca064cbf5518baa0",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-29T15:00:00.256564+00:00",
+            "finish": "2025-01-29T15:00:00.259324+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807831255",
+          "trigger": "time"
+        }
+      },
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "b3240f911a3e7f44ce6b114bbb0ad128",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T15:00:00.256789+00:00",
+            "finish": "2025-01-30T15:00:00.258648+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807831255",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-30T15:00:00.256839+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.rozsviceni_svetla_vecer",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807831255",
+                      "last_triggered": "2025-01-29T15:00:00.256745+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Rozsv\u00edcen\u00ed sv\u011btla ve\u010der"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.178045+00:00",
+                    "last_reported": "2025-01-29T15:00:00.259210+00:00",
+                    "last_updated": "2025-01-29T15:00:00.259210+00:00",
+                    "context": {
+                      "id": "01JJS971M04CTJK0P8BQ5VMN1G",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-30T16:00:00.256583+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-30T15:00:00.257075+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJVVKRM0X88MTS6ZDNTDGHCY",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "on"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807831255",
+            "alias": "Rozsv\u00edcen\u00ed sv\u011btla ve\u010der",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "16:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/lamp/cmnd",
+                  "payload": "on"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJVVKRM0X88MTS6ZDNTDGHCY",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "b3240f911a3e7f44ce6b114bbb0ad128",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T15:00:00.256789+00:00",
+            "finish": "2025-01-30T15:00:00.258648+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807831255",
+          "trigger": "time"
+        }
+      }
+    ],
+    "automation.1735807771911": [
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "ad31ec7bed3ed764fa9016d65d8c0cb5",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T05:00:00.122012+00:00",
+            "finish": "2025-01-30T05:00:00.124247+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807771911",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-30T05:00:00.122116+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.otevreni_dvirek_rano",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807771911",
+                      "last_triggered": "2025-01-29T05:00:00.126534+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Otev\u0159en\u00ed dv\u00ed\u0159ek r\u00e1no"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.177935+00:00",
+                    "last_reported": "2025-01-29T12:11:11.177935+00:00",
+                    "last_updated": "2025-01-29T12:11:11.177935+00:00",
+                    "context": {
+                      "id": "01JJRZHXY9H5DV00BCG21EE0V8",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-30T06:00:00.121713+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-30T05:00:00.122434+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJTS947SGV42Q7TTTBJBSWRN",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/door/cmnd",
+                      "payload": "open"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807771911",
+            "alias": "Otev\u0159en\u00ed dv\u00ed\u0159ek r\u00e1no",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "06:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/door/cmnd",
+                  "payload": "open"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJTS947SGV42Q7TTTBJBSWRN",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "ad31ec7bed3ed764fa9016d65d8c0cb5",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T05:00:00.122012+00:00",
+            "finish": "2025-01-30T05:00:00.124247+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807771911",
+          "trigger": "time"
+        }
+      },
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "dfc1813819cc22b7121640ee36c697e2",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-31T05:00:00.121423+00:00",
+            "finish": "2025-01-31T05:00:00.123380+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807771911",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-31T05:00:00.121477+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.otevreni_dvirek_rano",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807771911",
+                      "last_triggered": "2025-01-30T05:00:00.122240+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Otev\u0159en\u00ed dv\u00ed\u0159ek r\u00e1no"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.177935+00:00",
+                    "last_reported": "2025-01-30T05:00:00.124078+00:00",
+                    "last_updated": "2025-01-30T05:00:00.124078+00:00",
+                    "context": {
+                      "id": "01JJTS947SGV42Q7TTTBJBSWRN",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-31T06:00:00.121206+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-31T05:00:00.121696+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJXBNV7SZR3R084WWR18AVEQ",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/door/cmnd",
+                      "payload": "open"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807771911",
+            "alias": "Otev\u0159en\u00ed dv\u00ed\u0159ek r\u00e1no",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "06:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/door/cmnd",
+                  "payload": "open"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJXBNV7SZR3R084WWR18AVEQ",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "dfc1813819cc22b7121640ee36c697e2",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-31T05:00:00.121423+00:00",
+            "finish": "2025-01-31T05:00:00.123380+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807771911",
+          "trigger": "time"
+        }
+      }
+    ],
+    "automation.1735807908926": [
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "6ce4f0fdb2ce66e58952edb7769a5f4d",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T05:00:00.336239+00:00",
+            "finish": "2025-01-30T05:00:00.338111+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807908926",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-30T05:00:00.336285+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.zhasnuti_svetla_rano",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807908926",
+                      "last_triggered": "2025-01-29T05:00:00.464643+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Zhasnut\u00ed sv\u011btla r\u00e1no"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.178131+00:00",
+                    "last_reported": "2025-01-29T12:11:11.178131+00:00",
+                    "last_updated": "2025-01-29T12:11:11.178131+00:00",
+                    "context": {
+                      "id": "01JJRZHXYAFX660MFJMD2S93WV",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-30T06:00:00.335959+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-30T05:00:00.336513+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJTS94EG1X22086PDN3CQH3X",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "off"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807908926",
+            "alias": "Zhasnut\u00ed sv\u011btla r\u00e1no",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "06:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/lamp/cmnd",
+                  "payload": "off"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJTS94EG1X22086PDN3CQH3X",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "6ce4f0fdb2ce66e58952edb7769a5f4d",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T05:00:00.336239+00:00",
+            "finish": "2025-01-30T05:00:00.338111+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807908926",
+          "trigger": "time"
+        }
+      },
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "0e10bf290763a13485c1e502ae632f10",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-31T05:00:00.336396+00:00",
+            "finish": "2025-01-31T05:00:00.338245+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807908926",
+          "trigger": "time",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-31T05:00:00.336443+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.zhasnuti_svetla_rano",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807908926",
+                      "last_triggered": "2025-01-30T05:00:00.336363+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Zhasnut\u00ed sv\u011btla r\u00e1no"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.178131+00:00",
+                    "last_reported": "2025-01-30T05:00:00.337955+00:00",
+                    "last_updated": "2025-01-30T05:00:00.337955+00:00",
+                    "context": {
+                      "id": "01JJTS94EG1X22086PDN3CQH3X",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "time",
+                    "now": "2025-01-31T06:00:00.336199+01:00",
+                    "description": "time",
+                    "entity_id": null
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-31T05:00:00.336649+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJXBNVEGTDD5KPQ0WKBZK7V6",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "mqtt",
+                    "service": "publish",
+                    "service_data": {
+                      "evaluate_payload": false,
+                      "qos": 0,
+                      "retain": false,
+                      "topic": "room/lamp/cmnd",
+                      "payload": "off"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807908926",
+            "alias": "Zhasnut\u00ed sv\u011btla r\u00e1no",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "time",
+                "at": "06:00:00"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "mqtt.publish",
+                "metadata": {},
+                "data": {
+                  "evaluate_payload": false,
+                  "qos": 0,
+                  "retain": false,
+                  "topic": "room/lamp/cmnd",
+                  "payload": "off"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJXBNVEGTDD5KPQ0WKBZK7V6",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "0e10bf290763a13485c1e502ae632f10",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-31T05:00:00.336396+00:00",
+            "finish": "2025-01-31T05:00:00.338245+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807908926",
+          "trigger": "time"
+        }
+      }
+    ],
+    "automation.1735807419732": [
+      {
+        "extended_dict": {
+          "last_step": "action/0",
+          "run_id": "5f78cbb57fcfe49ba8427f74c82b8e1f",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T08:24:44.079818+00:00",
+            "finish": "2025-01-30T08:24:44.426668+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807419732",
+          "trigger": "state of binary_sensor.dog_detected",
+          "trace": {
+            "trigger/0": [
+              {
+                "path": "trigger/0",
+                "timestamp": "2025-01-30T08:24:44.079845+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "automation.notifikace_na_detekci_psa_ve_vybehu",
+                    "state": "on",
+                    "attributes": {
+                      "id": "1735807419732",
+                      "last_triggered": "2025-01-02T15:21:14.534389+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "friendly_name": "Notifikace na detekci psa ve v\u00fdb\u011bhu"
+                    },
+                    "last_changed": "2025-01-29T12:11:11.177690+00:00",
+                    "last_reported": "2025-01-29T12:11:11.177690+00:00",
+                    "last_updated": "2025-01-29T12:11:11.177690+00:00",
+                    "context": {
+                      "id": "01JJRZHXY9GWYEMND056P3VYKB",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "trigger": {
+                    "id": "0",
+                    "idx": "0",
+                    "alias": null,
+                    "platform": "state",
+                    "entity_id": "binary_sensor.dog_detected",
+                    "from_state": {
+                      "entity_id": "binary_sensor.dog_detected",
+                      "state": "off",
+                      "attributes": {
+                        "friendly_name": "Dog detected"
+                      },
+                      "last_changed": "2025-01-29T17:58:46.082223+00:00",
+                      "last_reported": "2025-01-29T17:58:46.082223+00:00",
+                      "last_updated": "2025-01-29T17:58:46.082223+00:00",
+                      "context": {
+                        "id": "01JJSKEC2271GCSXWPB7BM31NT",
+                        "parent_id": null,
+                        "user_id": null
+                      }
+                    },
+                    "to_state": {
+                      "entity_id": "binary_sensor.dog_detected",
+                      "state": "on",
+                      "attributes": {
+                        "friendly_name": "Dog detected"
+                      },
+                      "last_changed": "2025-01-30T08:24:44.079645+00:00",
+                      "last_reported": "2025-01-30T08:24:44.079645+00:00",
+                      "last_updated": "2025-01-30T08:24:44.079645+00:00",
+                      "context": {
+                        "id": "01JJV5009F28N414515E2VC9N3",
+                        "parent_id": null,
+                        "user_id": null
+                      }
+                    },
+                    "for": null,
+                    "attribute": null,
+                    "description": "state of binary_sensor.dog_detected"
+                  }
+                }
+              }
+            ],
+            "action/0": [
+              {
+                "path": "action/0",
+                "timestamp": "2025-01-30T08:24:44.079961+00:00",
+                "changed_variables": {
+                  "context": {
+                    "id": "01JJV5009FA83XVH5EF6NZ64Z6",
+                    "parent_id": "01JJV5009F28N414515E2VC9N3",
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "notify",
+                    "service": "notify",
+                    "service_data": {
+                      "title": "Detekov\u00e1n nep\u0159\u00edtel",
+                      "message": "Ve venkovn\u00edm v\u00fdb\u011bhu byl detekov\u00e1n pes!"
+                    },
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "id": "1735807419732",
+            "alias": "Notifikace na detekci psa ve v\u00fdb\u011bhu",
+            "description": "",
+            "triggers": [
+              {
+                "trigger": "state",
+                "entity_id": [
+                  "binary_sensor.dog_detected"
+                ],
+                "from": "off",
+                "to": "on"
+              }
+            ],
+            "conditions": [],
+            "actions": [
+              {
+                "action": "notify.notify",
+                "metadata": {},
+                "data": {
+                  "title": "Detekov\u00e1n nep\u0159\u00edtel",
+                  "message": "Ve venkovn\u00edm v\u00fdb\u011bhu byl detekov\u00e1n pes!"
+                }
+              }
+            ],
+            "mode": "single"
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JJV5009FA83XVH5EF6NZ64Z6",
+            "parent_id": "01JJV5009F28N414515E2VC9N3",
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "action/0",
+          "run_id": "5f78cbb57fcfe49ba8427f74c82b8e1f",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-01-30T08:24:44.079818+00:00",
+            "finish": "2025-01-30T08:24:44.426668+00:00"
+          },
+          "domain": "automation",
+          "item_id": "1735807419732",
+          "trigger": "state of binary_sensor.dog_detected"
+        }
+      }
+    ]
+  }
 }
