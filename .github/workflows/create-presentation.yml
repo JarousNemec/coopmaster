@@ -27,5 +27,5 @@ jobs:
       - name: Upload Converted docx
         uses: actions/upload-artifact@v4
         with:
-          name: Converted_Document
+          name: Presentation
           path: doc-presentation-example/presentation.pdf

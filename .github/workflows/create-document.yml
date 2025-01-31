@@ -21,11 +21,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
       - name: Convert LaTeX to docx
-        working-directory: doc-document-latex
+        working-directory: doc-document-example
         run: pandoc text.tex -s -o document.pdf
 
       - name: Upload Converted docx
         uses: actions/upload-artifact@v4
         with:
-          name: Converted_Document
-          path: doc-document-latex/document.pdf
+          name: Document
+          path: doc-document-example/document.pdf
