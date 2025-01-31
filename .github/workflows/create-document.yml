@@ -30,7 +30,7 @@ jobs:
 
       - name: Convert LaTeX to docx
         working-directory: doc-document-example
-        run: pdflatex main.tex -jobname=document
+        run: pdflatex document.tex
 
       - name: Upload Converted docx
         uses: actions/upload-artifact@v4
