@@ -20,6 +20,13 @@ jobs:
       - name: Install Pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
+
+      - name: Install TexLive (with LuaLaTeX)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-luatex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+
       - name: Convert LaTeX to docx
         working-directory: doc-document-example
         run: pandoc -s text.tex --pdf-engine=pdflatex -o document.pdf
