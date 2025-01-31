@@ -24,7 +24,7 @@ jobs:
         run: pandoc doc-example-latex/thesis.tex -s -o doc-example-latex/output.docx
 
       - name: Upload Converted docx
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Converted_Document
           path: doc-example-latex/output.docx
