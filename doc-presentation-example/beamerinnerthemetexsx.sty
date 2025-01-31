@@ -1,0 +1,28 @@
+\mode<presentation>
+
+\setbeamertemplate{footline}{
+\begin{center}
+    \usebeamerfont{footline}
+    \raisebox{-.5\height}{
+    \includegraphics[width=12px]{Image_01.jpg}} Středoškolská odborná činnost \insertdate \\
+\end{center}
+}
+
+% Title page
+\defbeamertemplate*{title page}{texsx}[1][]
+{ \renewcommand{\baselinestretch}{1.1}
+    \vskip-1cm
+    \hskip-1cm
+    \raisebox{-.5\height}{    \includegraphics[width=0.4\textwidth]{Image_02.jpg}} Obor: \@field \\
+    \vfill
+    \hskip-0.7cm
+    \begin{beamercolorbox}[]{title page header}
+        \huge\inserttitle\par
+        Autor: \insertauthor\par
+        \LargeŠkola: \@school \par
+        Kraj: \@region
+    \end{beamercolorbox}
+}
+
+\mode
+<all>

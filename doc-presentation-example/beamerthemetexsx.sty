@@ -1,0 +1,53 @@
+% 
+
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\usepackage{blindtext}
+\usepackage{mwe}
+
+% Settings
+\useinnertheme{texsx}
+\useoutertheme{texsx}
+\usecolortheme{texsx}
+
+\def\region#1{\def\@region{#1}}
+\def\school#1{\def\@school{#1}}
+
+\RequirePackage{xstring}
+\newcommand{\field}[1]{%
+\IfStrEqCase{#1}{
+    {1}{\def\@field{Matematika a~statistika}}
+    {2}{\def\@field{Fyzika}}
+    {3}{\def\@field{Chemie}}
+    {4}{\def\@field{Biologie, geografie a~geologie}}
+    {5}{\def\@field{Molekulární biologie}}
+    {6}{\def\@field{Zdravotnictví}}
+    {7}{\def\@field{Zemědělství, potravinářství, lesní a~vodní hospodářství}}
+    {8}{\def\@field{Ochrana a~tvorba životního prostředí}}
+    {9}{\def\@field{Strojírenství, hutnictví a~doprava}}
+    {10}{\def\@field{Elektrotechnika, elektronika a~telekomunikace}}
+    {11}{\def\@field{Stavebnictví, architektura a~design interiérů}}
+    {12}{\def\@field{Tvorba učebních pomůcek, didaktická technologie}}
+    {13}{\def\@field{Ekonomika a~řízení}}
+    {14}{\def\@field{Pedagogika, psychologie, sociologie a~problematika volného času}}
+    {15}{\def\@field{Teorie kultury, umění a~umělecké tvorby}}
+    {16}{\def\@field{Historie}}
+    {17}{\def\@field{Filozofie, politologie a~ostatní humanitní a~společenskovědní obory}}
+    {18}{\def\@field{Informatika}}
+  }
+  [Neznámé číslo oboru, upravte \\field{} příkaz!]
+}
+
+\newcommand{\finalpage}[1]{
+    \begin{center}
+        \Huge #1
+    \end{center}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]  
+\setbeamertemplate{items}[circle]
+
+\mode<all>

@@ -1,0 +1,31 @@
+name: Convert LaTeX to docx
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Convert LaTeX to docx
+        working-directory: doc-document-latex
+        run: pandoc text.tex -s -o document.pdf
+
+      - name: Upload Converted docx
+        uses: actions/upload-artifact@v4
+        with:
+          name: Converted_Document
+          path: doc-document-latex/document.pdf
