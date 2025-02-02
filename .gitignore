@@ -27,3 +27,6 @@
 /out/thesis.pdf
 /out/thesis.synctex.gz
 /out/thesis.toc
+/modules/home_assistant/config/home-assistant_v2.db
+/modules/home_assistant/config/home-assistant_v2.db-shm
+/modules/home_assistant/config/home-assistant_v2.db-wal

@@ -12,6 +12,7 @@
 \RequirePackage[backend=bibtex,bibstyle=numeric,sorting=none,date=long,dateabbrev=false,texencoding=utf8,bibencoding=utf8,style=iso-numeric]{biblatex}
 \RequirePackage{caption}
 
+\selectlanguage{czech}
 
 %%%%%% PŘÍKAZY
 \newcommand{\B}{\textbf} % tučné písmo
@@ -74,8 +75,8 @@
 }
 
 \titleen{}
-\region{Jihomoravský}
-\placefooter{Brno \the\year}
+\region{Královehradecký}
+\placefooter{Hradec Králové \the\year}
 \mentorstatement{\@mentor}
 
 %%% Titulní strany
@@ -175,15 +176,6 @@
 	{#1}
 
 	\vspace{\baselineskip}
-	\noindent Tato práce byla provedena za finanční podpory Jihomoravského kraje.
-	\begin{figure}[h]
-	\begin{subfigure}{.5\textwidth}
-  		\includegraphics[width=.8\linewidth]{template/jmk.png}
-	\end{subfigure}%
-	\begin{subfigure}{.5\textwidth}
-  		\includegraphics[width=.8\linewidth]{template/jcmm.png}
-	\end{subfigure}
-	\end{figure}
 
 	\newpage
 	\pagestyle{plain}
