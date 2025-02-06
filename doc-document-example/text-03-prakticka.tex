@@ -1,35 +1,82 @@
 ﻿\chapter{Praktická část}
-Abychom mohli napsat odborný text jasně a srozumitelně, musíme splnit několik základních předpokladů\cite{vut-zkousky}:
-\begin{itemize}
-    \item musíme mít co říci,
-    \item musíme vědět, komu to chceme říci,
-    \item musíme si dokonale promyslet obsah,
-    \item musíme psát strukturovaně.
-\end{itemize}
 
-\section{Musíme mít co říci}
-Nejdůležitějším předpokladem dobrého odborného textu je myšlenka.
-Je-li myšlenka dost závažná, tak přetrvá, i když je neobratně a zmateně podaná.
-Chceme-li však myšlenku podat co nejvýstižněji a ušetřit tak čtenáři čas, musíme dodržet určité zásady, o~kterých pojednáme dále.
+\section{Rozvržení person}
+- bylo potřeba rozvrhnout pro koho je aplikace určena\newline
+- zjistilo se že prymárně pro mě ale babička by s tím asi taky neměla mít problém\newline
+- takže aplikace je primárně pro člověka který rozumý chovu slepic a měla by šetřit jeho čas ve smyslu že zautomatizuje každodenní činnosti
 
-\section{Musíme vědět, komu to chceme říci}
-Dalším důležitým předpokladem dobrého psaní je psát pro někoho.
-Píšeme-li si poznámky sami pro sebe, píšeme je jinak než výzkumnou zprávu, článek, diplomovou práci, knihu nebo dopis.
-Podle předpokládaného čtenáře se rozhodneme pro způsob psaní, rozsah informace a míru detailů.
+\section{Výběr technologií}
+- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
+- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
+- mohlo se to psát klidně i v C# a použít třeba azure pro classifikaci\newline
+- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
+- python pro mě byla trochu výzva ale dopadlo to dobře
+\section{Rozmišlení konkrétní implementace}
+- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
+- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
+- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
+- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
+- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
+- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
+- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
 
-\section{Musíme si dokonale promyslet obsah}
-Jakmile víme, co chceme říci a komu, musíme si rozvrhnout látku.
-Ideální je takové rozvržení, které tvoří logicky přesný a psychologicky stravitelný celek, ve kterém je pro všechno místo a jehož jednotlivé části do sebe přesně zapadají.
-Jsou jasné všechny souvislosti a je zřejmé, co kam patří.
+\section{Návrh architektury}
+- aplikace se rozvrhla do několika modulů\newline
+- jako první moduly pro komunikaci s hardware nazvané drivery; takže vzniknul scale driver pro komunikaci s váhou, kamerami a arduinem pro dveře, světlo a senzory\newline
+- následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
+- drivery komunikují s výkonými službami pomosí http protokolu \newline
+- výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
 
-Abychom tohoto cíle dosáhli, musíme pečlivě organizovat látku.
-Rozhodneme, co budou hlavní kapitoly, co podkapitoly a jaké jsou mezi nimi vztahy.
-Diagramem takové organizace je graf, který je velmi podobný stromu, ale ne řetězci.
-Při organizaci látky je stejně důležitá otázka, co do osnovy zahrnout, jako otázka, co z~ní vypustit.
-Příliš mnoho podrobností může čtenáře právě tak odradit jako žádné detaily.
+\section{Implementace jednotlivých modulů}
+- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
+- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
+- verzuje se to na github
+- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
 
-\section{Musíme začít psát strukturovaně}
-Máme-li tedy myšlenku, představu o~budoucím čtenáři, cíl a osnovu textu, můžeme začít psát.
-Při psaní prvního konceptu se snažíme zaznamenat všechny své myšlenky a názory vztahující se k~jednotlivým kapitolám a podkapitolám.
-Každou myšlenku musíme vysvětlit, popsat a prokázat.
-Hlavní myšlenku má vždy vyjadřovat hlavní věta a nikoliv věta vedlejší.
+\section{Tvorba GUI rozhraní}
+- vybral se teda ten home assistant a ted ho nakonfit\newline
+- konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
+- byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
+- po přidání senzorů jsem si hrál s vizualizací jednotlivých hnízd tak aby to pro uživatele bylo přívětivě\newline
+- napsal jsem proto vlastní komponentu pro HA viz foto a trello\newline
+- zajímavé zjištění bylo že state který jsem využíval pro předávání textových zpráv má maximální velikost 255 bytů\newline
+- takže jsem z jsonu přešel na csv\newline
+- pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
+- následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
+- závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
+
+\section{První pracovní zapojení a běh}
+- zjistilo se že bez poe je to špatná volba \newline
+- kamery žerou dost proudu\newline
+- bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
+- byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
+- na stole to většinou funguje dobře \newline
+
+\section{Nasazení do kurníku}
+- bylo potřeba natahat elektřinu a internet \newline
+- elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
+- horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
+- vyřešilo se to wifi extenderem od tplinku který má zárověň i ethernet výstup díky čemuž nemuselisme dlouhého tahati kabelu a šlo nám to vzduhem přes dvůr a ve stodole pak drátem\newline
+- kamery bylo potřeba napájet a taky připojit přes internet; zprvu jsem si myslel že poe nebude potřeba ale taha 230 by bylo zbytečné námahy takže jsem pořídil poe switch od tplinku a ten připojuje kamery\newline
+- bylo někde potřeba udělat místo kam se nainstaluje celá technologie kurníku\newline
+- zvolila se plechová bedna ze starého domovního rozvaděče do níž se pro jednotlivé prvky vytvožili na míru držáčky a pouzdra ps.: fotky z tisku a pak z rozvaděče\newline
+- jak se zrealizovala váha\newline
+- jak vypadá řídící jednotka pri room assistanta\newline
+- jaké tam jsou dveře pro slepice\newline
+- celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
+- bylo potřeba zkalibrovat hmotnosti slepic a vajec
+
+\section{Konfigurace vzdáleného přístupu}
+- rpi propojene s nuckem a dev kompama přes tailscail\newline
+- v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
+    - do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
+- cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
+    - pronajmul jsem si doménu u doméhového registrátora forpsi\newline
+- zmínění jaká plynou nebezpečí z tohoto řešení
+
+\section{Rozvržení práce do budoucna}
+- jak by se řešení dalo zoptimalizovat\newline
+- vylepšení modelu pro classifykaci\newline
+- vylepšení a zpřesnění vah\newline
+- kontrola napajedla\newline
+- kontrola krmítka

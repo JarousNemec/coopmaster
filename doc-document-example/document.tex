@@ -1,11 +1,3 @@
-% soctepmlate unofficial - SOČ = Středoškolská odborná činnost - Czech competition
-% Author: Vojtěch Boček
-% Edit by: Jaroslav Páral
-% Version: 2018-02-12
-% Source code: https://github.com/RoboticsBrno/soctemplate/
-% Base on: http://www.jcmm.cz/cz/sablona-soc.html
-% License: CC BY 4.0
-
 \documentclass{template/socthesis}
 
 \usepackage{subcaption}
@@ -52,7 +44,6 @@
     \subsection*{Keywords}
     programming, automation, agriculture, neural networks, python, microservice architecture
 
-    \newpage
     \pagestyle{plain}
 
     \tableofcontents % vysází obsah
@@ -60,18 +51,18 @@
     %%% Začátek práce
     \setcounter{figure}{0}
     \setcounter{table}{0}
-    \newpage
+%    \newpage
 
     %%% Úvod
     \input{text-01-uvod}
 
-    %%% Jak psát
     \input{text-02-teoreticka}
 
-    %%% Slovo Romana
     \input{text-03-prakticka}
 
+    \input{text-04-zamysleni}
+
     %%% Závěr
-    \input{text-04-vyhodnoceni}
+    \input{text-05-vyhodnoceni}
 
 \end{document}

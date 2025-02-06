@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{template/socthesis}[2017/01/15 Document class for czech SOC theses]
-\LoadClass[12pt, a4paper, oneside]{book}
+\LoadClass[10pt, a4paper, oneside]{book}
 
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[czech]{babel}
