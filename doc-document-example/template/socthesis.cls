@@ -1,15 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{template/socthesis}[2017/01/15 Document class for czech SOC theses]
-\LoadClass[10pt, a4paper, oneside]{book}
+\LoadClass[12pt, a4paper, oneside]{book}
 
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[czech]{babel}
+\RequirePackage[main=czech,provide=*]{babel}
 \RequirePackage{graphicx}
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage[bookmarksopen,colorlinks,plainpages=false,linkcolor=black,urlcolor=blue,citecolor=black,filecolor=black,menucolor=black,unicode=true,breaklinks]{hyperref}
 \RequirePackage{csquotes}
-\RequirePackage[backend=bibtex,bibstyle=numeric,sorting=none,date=long,dateabbrev=false,texencoding=utf8,bibencoding=utf8,style=iso-numeric]{biblatex}
+\RequirePackage[backend=biber,bibstyle=numeric,sorting=none,date=long,dateabbrev=false,texencoding=utf8,bibencoding=utf8,style=iso-numeric]{biblatex}
 \RequirePackage{caption}
 
 \selectlanguage{czech}
@@ -158,7 +158,7 @@
 		\noindent {#1} dne: \rule{4cm}{1pt}
 		\hfill\parbox{5cm}{
     		\centering
-    		\vspace{9mm}
+    		\vspace{8.5mm}
     		\rule{5cm}{1pt}\\
         	\@author
 		}

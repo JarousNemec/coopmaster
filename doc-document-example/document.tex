@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{enumitem}
 
+%\usepackage[backend=biber]{biblatex}
 
 \addbibresource{text.bib}
 
@@ -63,6 +64,18 @@
     \input{text-04-zamysleni}
 
     %%% Závěr
-    \input{text-05-vyhodnoceni}
+    \input{text-05-zaver}
+
+    \printbibliography[title=Použitá Literatura]
+    \addcontentsline{toc}{section}{Použitá Literatura}
+
+    \listoffigures
+    \addcontentsline{toc}{section}{Seznam obrázků}
+
+    \listoftables
+    \addcontentsline{toc}{section}{Seznam tabulek}
+
+    \listoflistedequation
+    \addcontentsline{toc}{section}{Seznam rovnic}
 
 \end{document}

@@ -31,3 +31,6 @@
 /modules/home_assistant/config/home-assistant_v2.db-shm
 /modules/home_assistant/config/home-assistant_v2.db-wal
 /out/document-old.pdf
+/out/document.bbl
+/out/document.bcf
+/out/document.blg
