@@ -1,24 +1,21 @@
 ﻿\chapter{Praktická část}
+Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prácí.
+Zárověň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
 
 \section{Rozvržení person}
-- bylo potřeba rozvrhnout pro koho je aplikace určena\newline
-- zjistilo se že prymárně pro mě ale babička by s tím asi taky neměla mít problém\newline
-- takže aplikace je primárně pro člověka který rozumý chovu slepic a měla by šetřit jeho čas ve smyslu že zautomatizuje každodenní činnosti
-
-\section{Výběr technologií}
-- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
-- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
-- mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
-- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
-- python pro mě byla trochu výzva ale dopadlo to dobře
-\section{Rozmišlení konkrétní implementace}
-- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
-- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
-- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
-- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
-- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
-- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
-- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
+Před tím než se započne tvorba jakékoli aplikace, je třeba určit, pro koho danou aplikaci tvoříme a jak bychom chtěli, aby jí tento uživatel používal.
+V našem případě jde o to, že systém by měl být schopný používat člověk znalý v chovu hospodářských zvířat, ale často méně zdatný v používání informačních technologií a mobilních aplikací.
+Na základě toho, že už víme, kdo je cílový uživatel můžeme se zamýšlet jakou funkcionalitu do řešení implementovat.
+Jedná se tedy o to, aby aplikace umožňovala uživateli vzdálený dohled na jeho chov a pomáhala mu šetřit čas zautomatizováním každodenních činnosti.
+Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
+\begin{itemize}
+    \item Vzdálený přístup zkrze internet odkudkoli
+    \item Pohledy z bezpečnostních kamer ve vnitřním i venkovním výběhu
+    \item Dálkové ovládání a automatizace světla a bezpečnostních dvířek v kurníku
+    \item Intuitivní vizualizace stavů jednotlivých hnízd(sedící slepice, v opačném případě počet vajec)
+    \item Automatické upozornění notifikacemi v telefonu na vetřelce ve výběhu
+    \item Vizualizace aktuálních povětrnostních podmínek v kurníku (teplota a vlhkost)
+\end{itemize}
 
 \section{Návrh architektury}
 - aplikace se rozvrhla do několika modulů\newline
@@ -26,6 +23,12 @@
 - následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
 - drivery komunikují s výkonými službami pomosí http protokolu \newline
 - výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
+\subsection{Výběr technologií}
+- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
+- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
+- mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
+- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
+- python pro mě byla trochu výzva ale dopadlo to dobře
 
 \section{Implementace jednotlivých modulů}
 - implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
@@ -44,6 +47,15 @@
 - pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
 - následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
 - závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
+
+\section{Rozmyšlení konkrétní implementace}
+- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
+- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
+- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
+- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
+- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
+- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
+- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
 
 \section{První pracovní zapojení a běh}
 - zjistilo se že bez poe je to špatná volba \newline
