@@ -1,6 +1,10 @@
-﻿\chapter{Praktická část}
+﻿\externaldocument{text-02-teoreticka}
+
+
+\chapter{Praktická část}
 Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prácí.
 Zárověň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
+
 
 \section{Rozvržení person}
 Před tím než se započne tvorba jakékoli aplikace, je třeba určit, pro koho danou aplikaci tvoříme a jak bychom chtěli, aby jí tento uživatel používal.
@@ -17,12 +21,85 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
     \item Vizualizace aktuálních povětrnostních podmínek v kurníku (teplota a vlhkost)
 \end{itemize}
 
-\section{Návrh architektury}
+
+\section{Návrh architektury a volba technologií}
+Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
+Jsme nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
+Celý ekosystém se skládá z několika samostatných celků
+\begin{itemize}
+    \item Fyzická zařízení jako kamery a senzory
+    \item Backend systému obsahující hlavní funkcionalitu(sekce~\ref{sec:backend})
+    \item GUI(sekce~\ref{sec:gui})
+    \item Moduly pro komunikaci mezi GUI a Backendem
+    \item Modul pro propagaci a zpřístupnění aplikace z internetu
+\end{itemize}
+
+\subsection{Backend}
+Jako teoretický model na základě kterého, budeme organizovat backend a třídit jeho funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
+Tento způsob rozvržení zodpovědnosti jednotlivých částí systému jsem zvolil, kvůli velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.
+Služby jsou psány v programovacím jazyce Python(sekce~\ref{sec:ipcamera-rtsp}) a využívají jeho knihovny.
+Mezi hlavní patří knihovny
+\begin{itemize}
+    \item Flask(sekce~\ref{sec:flask})
+    \item Paho-mqtt(sekce~\ref{sec:paho-mqtt})
+    \item Python-dotenv(sekce~\ref{sec:python-dotenv})
+    \item APScheduler(sekce~\ref{sec:apscheduler})
+    \item Pyserial(sekce~\ref{sec:pyserial})
+\end{itemize}
+Na základě určeného způsobu zapouzdření funkcionality je funkcionalita backendu rozdělena do následujících služeb, které jsou pojmenovány dle jejich hlavní funkcionality
+\begin{itemize}
+    \item Camera driver
+    \item Scale driver
+    \item Room driver
+    \item Health checker
+    \item Room assistant
+    \item Nest watcher
+    \item Dog alarm
+    \item Chicken watch guard
+\end{itemize}
+
+\subsubsection{Camera driver}
+Camera driver je služba zodpovědná za komunikaci s ip kamerou(sekce~\ref{sec:ipcamera-rtsp}).
+S ní komunikuje pomocí protokolu RTSP(sekce~\ref{sec:ipcamera-rtsp}).
+Url ip kamery, k níž je driver přiřazen, je službě předávána pomocí envirnoment proměnných(sekce~\ref{sec:environment-variables}).
+Pro komunikaci se zbytkem backendu poskytuje služba své REST(sekce~\ref{sec:http-rest}) api.
+Konkrétně při zavolání na endpoint /api/image driver stáhne nejnovější obrázek z kamery a vrátí ho jako odpověď na volání.
+
+\subsubsection{Scale driver}
+
+\subsubsection{Room driver}
+
+\subsubsection{Health checker}
+
+\subsubsection{Room assistant}
+
+\subsubsection{Nest watcher}
+
+\subsubsection{Dog alarm}
+
+\subsubsection{Chicken watch guard}
+
+\subsection{GUI}
+Aplikace musí mít rozhodně i grafické rozhraní.
+Pro tento účel byla zvolena open source aplikace Home Assistant(sekce~\ref{sec:home-assistant}).
+Home assistant byl zvolen kvůli jeho univerzálnosti, rozsáhlé podpoře, komunitě bohaté na custom řešení a obrovské možnosti konfigurace a přispůsobení, čehoš pro ovládání a vizualizaci dat z našeho systému hojně využijeme.
+
+\subsection{Komunikace mezi Backendem a Frontendem}
+Je třeba zajistit komunikaci mezi Home Assistantem a Backendem.
+Tuto úlohu musíme přijmout velice zodpověďně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
+Nelze proto použít klasické HTTP(sekce~\ref{sec:http}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
+Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí Backendu nebo port jedné ze služeb, bylo by třeba překonfigurovat i home assistanta.
+Dalším problém nastane, když potřebujeme z Backendu poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby na Backendu věděli, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
+Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
+Tato technologie se běžně používá u IoT zařízení a pro naše použití bude vynikajícím řešením.
+
+
 - aplikace se rozvrhla do několika modulů\newline
 - jako první moduly pro komunikaci s hardware nazvané drivery; takže vzniknul scale driver pro komunikaci s váhou, kamerami a arduinem pro dveře, světlo a senzory\newline
 - následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
 - drivery komunikují s výkonými službami pomosí http protokolu \newline
 - výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
+
 \subsection{Výběr technologií}
 - vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
 - jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
@@ -30,11 +107,13 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 - pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
 - python pro mě byla trochu výzva ale dopadlo to dobře
 
+
 \section{Implementace jednotlivých modulů}
 - implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
 - jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
 - verzuje se to na github
 - na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
+
 
 \section{Tvorba GUI rozhraní}
 - vybral se teda ten home assistant a ted ho nakonfit\newline
@@ -48,6 +127,7 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 - následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
 - závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
 
+
 \section{Rozmyšlení konkrétní implementace}
 - budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
 - budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
@@ -57,12 +137,14 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 - uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
 - první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
 
+
 \section{První pracovní zapojení a běh}
 - zjistilo se že bez poe je to špatná volba \newline
 - kamery žerou dost proudu\newline
 - bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
 - byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
 - na stole to většinou funguje dobře \newline
+
 
 \section{Nasazení do kurníku}
 - bylo potřeba natahat elektřinu a internet \newline
@@ -78,13 +160,15 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 - celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
 - bylo potřeba zkalibrovat hmotnosti slepic a vajec
 
+
 \section{Konfigurace vzdáleného přístupu}
 - rpi propojene s nuckem a dev kompama přes tailscail\newline
 - v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
-    - do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
+- do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
 - cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
-    - pronajmul jsem si doménu u doméhového registrátora forpsi\newline
+- pronajmul jsem si doménu u doméhového registrátora forpsi\newline
 - zmínění jaká plynou nebezpečí z tohoto řešení
+
 
 \section{Rozvržení práce do budoucna}
 - jak by se řešení dalo zoptimalizovat\newline

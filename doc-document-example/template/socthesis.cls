@@ -9,6 +9,7 @@
 \RequirePackage{array}
 \RequirePackage[bookmarksopen,colorlinks,plainpages=false,linkcolor=black,urlcolor=blue,citecolor=black,filecolor=black,menucolor=black,unicode=true,breaklinks]{hyperref}
 \RequirePackage{csquotes}
+\RequirePackage{xr}
 \RequirePackage[backend=biber,bibstyle=numeric,sorting=none,date=long,dateabbrev=false,texencoding=utf8,bibencoding=utf8,style=iso-numeric]{biblatex}
 \RequirePackage{caption}
 
