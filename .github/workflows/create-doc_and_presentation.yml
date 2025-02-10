@@ -10,16 +10,6 @@ on:
       - '**'
 
 jobs:
-  build_latex_soc:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v3
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: doc-document-example/document.tex
-          
   convert:
     runs-on: ubuntu-latest
 
