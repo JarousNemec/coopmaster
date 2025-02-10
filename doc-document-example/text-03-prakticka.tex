@@ -1,12 +1,12 @@
 ﻿\externaldocument{text-02-teoreticka}
 
 
-\chapter{Praktická část}
+\chapter{Praktická část}\label{ch:prakticka-cast}
 Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prácí.
 Zárověň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
 
 
-\section{Rozvržení person}
+\section{Rozvržení person}\label{sec:rozvrzeni-person}
 Před tím než se započne tvorba jakékoli aplikace, je třeba určit, pro koho danou aplikaci tvoříme a jak bychom chtěli, aby jí tento uživatel používal.
 V našem případě jde o to, že systém by měl být schopný používat člověk znalý v chovu hospodářských zvířat, ale často méně zdatný v používání informačních technologií a mobilních aplikací.
 Na základě toho, že už víme, kdo je cílový uživatel můžeme se zamýšlet jakou funkcionalitu do řešení implementovat.
@@ -22,7 +22,7 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 \end{itemize}
 
 
-\section{Návrh architektury a volba technologií}
+\section{Návrh architektury a volba technologií}\label{sec:navrh-architektury-a-volba-technologii}
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
 Jsme nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
 Celý ekosystém se skládá z několika samostatných celků
@@ -34,19 +34,19 @@ Celý ekosystém se skládá z několika samostatných celků
     \item Modul pro propagaci a zpřístupnění aplikace z internetu
 \end{itemize}
 
-\subsection{Backend}
+\subsection{Backend}\label{subsec:backend}
 Jako teoretický model na základě kterého, budeme organizovat backend a třídit jeho funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
 Tento způsob rozvržení zodpovědnosti jednotlivých částí systému jsem zvolil, kvůli velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.
 Služby jsou psány v programovacím jazyce Python(sekce~\ref{sec:ipcamera-rtsp}) a využívají jeho knihovny.
-Mezi hlavní patří knihovny
-\begin{itemize}
-    \item Flask(sekce~\ref{sec:flask})
-    \item Paho-mqtt(sekce~\ref{sec:paho-mqtt})
-    \item Python-dotenv(sekce~\ref{sec:python-dotenv})
-    \item APScheduler(sekce~\ref{sec:apscheduler})
-    \item Pyserial(sekce~\ref{sec:pyserial})
-\end{itemize}
-Na základě určeného způsobu zapouzdření funkcionality je funkcionalita backendu rozdělena do následujících služeb, které jsou pojmenovány dle jejich hlavní funkcionality
+%Mezi hlavní patří knihovny
+%\begin{itemize}
+%    \item Flask(sekce~\ref{sec:flask})
+%    \item Paho-mqtt(sekce~\ref{sec:paho-mqtt})
+%    \item Python-dotenv(sekce~\ref{sec:python-dotenv})
+%    \item APScheduler(sekce~\ref{sec:apscheduler})
+%    \item Pyserial(sekce~\ref{sec:pyserial})
+%\end{itemize}
+Na základě určeného způsobu zapouzdření funkcionality je funkcionalita backendu rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
 \begin{itemize}
     \item Camera driver
     \item Scale driver
@@ -59,35 +59,105 @@ Na základě určeného způsobu zapouzdření funkcionality je funkcionalita ba
 \end{itemize}
 
 \subsubsection{Camera driver}
-Camera driver je služba zodpovědná za komunikaci s ip kamerou(sekce~\ref{sec:ipcamera-rtsp}).
+Camera driver je služba zodpovědná za komunikaci s ip kamerou(sekce~\ref{sec:ipcamera-rtsp}).\newline
 S ní komunikuje pomocí protokolu RTSP(sekce~\ref{sec:ipcamera-rtsp}).
 Url ip kamery, k níž je driver přiřazen, je službě předávána pomocí envirnoment proměnných(sekce~\ref{sec:environment-variables}).
 Pro komunikaci se zbytkem backendu poskytuje služba své REST(sekce~\ref{sec:http-rest}) api.
-Konkrétně při zavolání na endpoint /api/image driver stáhne nejnovější obrázek z kamery a vrátí ho jako odpověď na volání.
+Konkrétně při zavolání na endpoint driver stáhne nejnovější obrázek z kamery a vrátí ho jako odpověď na volání.
+%\begin{itemize}
+%    \item GET /api/image
+%\end{itemize}
 
 \subsubsection{Scale driver}
+Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
+Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
+Pro služby v systému tento driver poskytuje data o hmotnosti opět pomocí REST api.
+%\begin{itemize}
+%    \item GET /api/weight
+%\end{itemize}
 
 \subsubsection{Room driver}
+Room driver zařizuje komunikaci mezi ostatnímy službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
+Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobyt architekturu služby.
+Tento modul má tedy za úkol přes serialový port pomocí protokolu USB posílat příkazy a načítat stavy řídící jednotky na základě requestů příchozích na REST api služby.
+Pro služby v systému služba na vystavuje GET a POST endpointy
+%\begin{itemize}
+%    \item GET /api/temperature (dej teplotu)
+%    \item GET /api/humidity (dej vlhkost)
+%    \item GET /api/lamp/state (dej stav světla vypnuto/zapnuto)
+%    \item GET /api/door/state (dej pozici dvířek otevřeno/zavřeno)
+%    \item POST /api/lamp/on (rozsviť)
+%    \item POST /api/lamp/off (zhasni)
+%    \item POST /api/door/open (otevři)
+%    \item POST /api/door/close (zavři)
+%\end{itemize}
 
 \subsubsection{Health checker}
+Health checker je malá služba určená pro správce systému.\newline
+Poskytuje informace o tom zda všechny potřebné služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
+Výpis stavů jednotlivých služeb je poskytován RESTovým api [GET] /status
+%\begin{itemize}
+%    \item GET /status
+%\end{itemize}
 
 \subsubsection{Room assistant}
+Room assistant je zpřístupňuje komunikaci mezi GUI tedy konkrétně Home Assistantem a Room driverem.\newline
+S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
+Základní funkcí je zpracování a přeposlání příkazů do Room Driveru odebíraných z témat
+%\begin{itemize}
+%    \item coopmaster/room/door/cmnd
+%    \item coopmaster/room/lamp/cmnd
+%\end{itemize}
+Služba očekává, že na tato témata budou chodit zprávy open / close pro dveře a on / off jako příkazy pro světlo.
+Další úlohou je periodické načítání a aktualizace informací o stavu dveří, světla a dat z teplotního a vlhkostního senzorů.
+Tato data by měl Room assistant pravidelně načítat a posílat přes MQTT do Home Assistanta.
+%\begin{itemize}
+%    \item coopmaster/room/temperature
+%    \item coopmaster/room/humidity
+%    \item coopmaster/room/door/state
+%    \item coopmaster/room/lamp/state
+%\end{itemize}
 
 \subsubsection{Nest watcher}
+Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
+Hlavní funkcí je načítání a analýza dat z jednotlivých vah v hnízdech, která jsou reprezentována Scale Drivery.\newline
+Data jsou načítána několikrát do minuty a ukládána do databáze s časovým údajem, kdy byl záznam vytvořen.
+Následně se jednou za minutu vyhodnotí průměrná hodnota během posledních několika vážení.
+Na základě tohoto údaje jsme schopni zjisti několik případů
+\begin{itemize}
+    \item hnízdo je prázdné (hodnota na váze nepřevyšuje 50 g )
+    \item v hnízdě se nacházejí vejce (hmotnost jednoho vejce je průměrně 50 g)
+    \item v hnízdě sedí slepice (hmotnost slepice se pohybuje okolo 1200 g a více)
+\end{itemize}
+Pokud je na váze průměrně méně než 50 g, vzhledem k možným chybám měření, takový případ vyhodnotíme jako, že je hnízdo prázdné.
+Jesliže se hodnota pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce, a jejich počet je vypočítán vydělením celkové hmotnosti a hmotnosti jednoho vejce.
+V případě, že je na váze více jak 1200 g, vyhodnotí služba, že v hnízdě sedí slepice.
+Tyto tři zmíněné informace služba následně pomocí MQTT předává do Home Assistanta.
 
 \subsubsection{Dog alarm}
+Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
+Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
+Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
+Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
+Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
+
 
 \subsubsection{Chicken watch guard}
+Úkolem služby Chicken watch guard je sledovat stav a počet slepic v kurníku.\newline
+Aktuální záběry jsou stejně jako u Dog alarmu stahovány z konkrétního Camera driveru v kurníku.
+Následně po získání záběru proběhne detekce objektů a počet těchto objektů udává počet detekovaných slepic v obraze.
+Tato hodnota je publikována pomocí MQTT do Home Assistanta.
+Vedlejší funkcí služby je průběřné posílání aktuánlho pohledu z kamery v kurníku do Home Assistanta.
 
-\subsection{GUI}
+\subsection{GUI}\label{subsec:gui}
 Aplikace musí mít rozhodně i grafické rozhraní.
 Pro tento účel byla zvolena open source aplikace Home Assistant(sekce~\ref{sec:home-assistant}).
 Home assistant byl zvolen kvůli jeho univerzálnosti, rozsáhlé podpoře, komunitě bohaté na custom řešení a obrovské možnosti konfigurace a přispůsobení, čehoš pro ovládání a vizualizaci dat z našeho systému hojně využijeme.
 
-\subsection{Komunikace mezi Backendem a Frontendem}
+\subsection{Komunikace mezi Backendem a Frontendem}\label{subsec:komunikace-mezi-backendem-a-frontendem}
 Je třeba zajistit komunikaci mezi Home Assistantem a Backendem.
 Tuto úlohu musíme přijmout velice zodpověďně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
-Nelze proto použít klasické HTTP(sekce~\ref{sec:http}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
+Nelze proto použít klasické HTTP(sekce~\ref{sec:http-rest}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
 Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí Backendu nebo port jedné ze služeb, bylo by třeba překonfigurovat i home assistanta.
 Dalším problém nastane, když potřebujeme z Backendu poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby na Backendu věděli, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
 Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
@@ -100,7 +170,7 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - drivery komunikují s výkonými službami pomosí http protokolu \newline
 - výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
 
-\subsection{Výběr technologií}
+\subsection{Výběr technologií}\label{subsec:vyber-technologii}
 - vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
 - jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
 - mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
@@ -108,14 +178,14 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - python pro mě byla trochu výzva ale dopadlo to dobře
 
 
-\section{Implementace jednotlivých modulů}
+\section{Implementace jednotlivých modulů}\label{sec:implementace-jednotlivych-modulu}
 - implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
 - jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
 - verzuje se to na github
 - na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
 
 
-\section{Tvorba GUI rozhraní}
+\section{Tvorba GUI rozhraní}\label{sec:tvorba-gui-rozhrani}
 - vybral se teda ten home assistant a ted ho nakonfit\newline
 - konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
 - byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
@@ -128,7 +198,7 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
 
 
-\section{Rozmyšlení konkrétní implementace}
+\section{Rozmyšlení konkrétní implementace}\label{sec:rozmysleni-konkretni-implementace}
 - budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
 - budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
 - budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
@@ -138,7 +208,7 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
 
 
-\section{První pracovní zapojení a běh}
+\section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
 - zjistilo se že bez poe je to špatná volba \newline
 - kamery žerou dost proudu\newline
 - bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
@@ -146,7 +216,7 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - na stole to většinou funguje dobře \newline
 
 
-\section{Nasazení do kurníku}
+\section{Nasazení do kurníku}\label{sec:nasazeni-do-kurniku}
 - bylo potřeba natahat elektřinu a internet \newline
 - elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
 - horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
@@ -161,7 +231,7 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - bylo potřeba zkalibrovat hmotnosti slepic a vajec
 
 
-\section{Konfigurace vzdáleného přístupu}
+\section{Konfigurace vzdáleného přístupu}\label{sec:konfigurace-vzdaleneho-pristupu}
 - rpi propojene s nuckem a dev kompama přes tailscail\newline
 - v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
 - do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
@@ -170,9 +240,14 @@ Tato technologie se běžně používá u IoT zařízení a pro naše použití 
 - zmínění jaká plynou nebezpečí z tohoto řešení
 
 
-\section{Rozvržení práce do budoucna}
+\section{Rozvržení práce do budoucna}\label{sec:rozvrzeni-prace-do-budoucna}
 - jak by se řešení dalo zoptimalizovat\newline
 - vylepšení modelu pro classifykaci\newline
 - vylepšení a zpřesnění vah\newline
 - kontrola napajedla\newline
 - kontrola krmítka
+- implementace autonomního chování do Room Assistanta
+
+
+\section{Ekonomická stránka projektu}\label{sec:ekonomicka-stranka-projektu}
+
