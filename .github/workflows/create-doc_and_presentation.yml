@@ -3,7 +3,7 @@ name: Convert LaTeX to docx
 on:
   push:
     branches:
-      - main
+      - main2
 
 jobs:
   convert:
