@@ -1,9 +1,9 @@
-﻿\externaldocument{text-02-teoreticka}
+\externaldocument{text-02-teoreticka}
 
 
 \chapter{Praktická část}\label{ch:prakticka-cast}
-Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prácí.
-Zárověň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
+Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prací.
+Zároveň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
 
 
 \section{Rozvržení person}\label{sec:rozvrzeni-person}
@@ -13,7 +13,7 @@ Na základě toho, že už víme, kdo je cílový uživatel můžeme se zamýšl
 Jedná se tedy o to, aby aplikace umožňovala uživateli vzdálený dohled na jeho chov a pomáhala mu šetřit čas zautomatizováním každodenních činnosti.
 Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 \begin{itemize}
-    \item Vzdálený přístup zkrze internet odkudkoli
+    \item Vzdálený přístup skrze internet odkudkoli
     \item Pohledy z bezpečnostních kamer ve vnitřním i venkovním výběhu
     \item Dálkové ovládání a automatizace světla a bezpečnostních dvířek v kurníku
     \item Intuitivní vizualizace stavů jednotlivých hnízd(sedící slepice, v opačném případě počet vajec)
@@ -21,23 +21,24 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
     \item Vizualizace aktuálních povětrnostních podmínek v kurníku (teplota a vlhkost)
 \end{itemize}
 
-
 \section{Návrh architektury a volba technologií}\label{sec:navrh-architektury-a-volba-technologii}
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
 Jsme nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
 Celý ekosystém se skládá z několika samostatných celků
 \begin{itemize}
     \item Fyzická zařízení jako kamery a senzory
-    \item Backend systému obsahující hlavní funkcionalitu(sekce~\ref{sec:backend})
+    \item Architektura systému obsahující hlavní funkcionalitu(sekce~\ref{sec:backend})
     \item GUI(sekce~\ref{sec:gui})
-    \item Moduly pro komunikaci mezi GUI a Backendem
-    \item Modul pro propagaci a zpřístupnění aplikace z internetu
+    \item Komunikace mezi GUI a backendem systému
+    \item Zpřístupnění aplikace z internetu
 \end{itemize}
 
-\subsection{Backend}\label{subsec:backend}
-Jako teoretický model na základě kterého, budeme organizovat backend a třídit jeho funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
+\subsection{Architektura hlavního systému}\label{subsec:microservices}
+Jako teoretický model na základě kterého, budeme organizovat a třídit funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
 Tento způsob rozvržení zodpovědnosti jednotlivých částí systému jsem zvolil, kvůli velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.
-Služby jsou psány v programovacím jazyce Python(sekce~\ref{sec:ipcamera-rtsp}) a využívají jeho knihovny.
+Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:ipcamera-rtsp}).
+Python byl vybrán kvůli jeho univerzálnosti, snadné syntaxi a podpoře ze strany vývojářů a komunity.
+Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine(sekce~\ref{sec:kontejnerizace}) společně s rozšířením Docker Compose.
 %Mezi hlavní patří knihovny
 %\begin{itemize}
 %    \item Flask(sekce~\ref{sec:flask})
@@ -46,7 +47,7 @@ Služby jsou psány v programovacím jazyce Python(sekce~\ref{sec:ipcamera-rtsp}
 %    \item APScheduler(sekce~\ref{sec:apscheduler})
 %    \item Pyserial(sekce~\ref{sec:pyserial})
 %\end{itemize}
-Na základě určeného způsobu zapouzdření funkcionality je funkcionalita backendu rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
+Na základě určeného způsobu zapouzdření funkcionality je architektura rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
 \begin{itemize}
     \item Camera driver
     \item Scale driver
@@ -58,17 +59,105 @@ Na základě určeného způsobu zapouzdření funkcionality je funkcionalita ba
     \item Chicken watch guard
 \end{itemize}
 
-\subsubsection{Camera driver}
+\subsection{GUI}\label{subsec:gui}
+Aplikace musí mít rozhodně i grafické rozhraní.
+Pro tento účel byla zvolena open source aplikace Home Assistant(sekce~\ref{sec:home-assistant}).
+Home assistant byl zvolen kvůli jeho univerzálnosti, rozsáhlé podpoře, komunitě bohaté na custom řešení a obrovské možnosti konfigurace a přispůsobení, čehož pro ovládání a vizualizaci dat z našeho systému hojně využijeme.
+
+\subsection{Komunikace mezi Backendem a Frontendem}\label{subsec:komunikace-mezi-backendem-a-frontendem}
+Je třeba zajistit komunikaci mezi Home Assistantem a Službami.
+Tuto úlohu musíme přijmout velice zodpovědně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
+Nelze proto použít klasické HTTP(sekce~\ref{sec:http-rest}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
+Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí služeb nebo port jedné ze služeb, bylo by třeba překonfigurovat i home assistanta.
+Dalším problém nastane, když potřebujeme z některé ze služeb poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby věděli, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
+Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
+Tato technologie se běžně používá u IoT zařízení a pro naše použití bude vynikajícím řešením.
+
+- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
+- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
+- mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
+- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
+- python pro mě byla trochu výzva ale dopadlo to dobře
+- aplikace se rozvrhla do několika modulů\newline
+- jako první moduly pro komunikaci s hardware nazvané drivery; takže vzniknul scale driver pro komunikaci s váhou, kamerami a arduinem pro dveře, světlo a senzory\newline
+- následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
+- drivery komunikují s výkonými službami pomosí http protokolu \newline
+- výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
+
+\subsection{Hardwarová zařízení}\label{subsec:hardwarova-zarizeni}
+Tuto sekci je velmi důležité dobře a správně navrhnout, protože náš systém bude pracovat s daty z reálného světa.
+Tato data musejí získávat k tomu určená zařízení a na jejich přesnosti závisý efektivita a správnost chování zbytku systému.
+Musíme tedy navrhnout a realizovat několik zařízení, která společně budou plnit následující úlohy
+\begin{itemize}
+    \item snímání stavů hnízd
+    \item ovládatní dvířek
+    \item snímání teploty a vlhkosti
+    \item snímání scén v kurníku a ve výběhu
+\end{itemize}
+\subsubsection{Snímání stavů hnízd}
+Všechny případy, které potřebujeme v kontextu našeho hnízda řešit se dají rozpoznat na základě hmotnosti hnízda.
+Pokud je v hnízdě slepice, hnízdo bude hodně zatížené oproti počátečnímu prázdnému stavu.
+V případě, že bude hnízdo zatížené málo a nebo středně, může to pro nás ve většině případů spolehlivě znamenat, že se v hnízdě nacházejí vejce.
+Nestandartní situace jako neobviklý nepořánek v hnízdě případně výkal, řešit nebudeme, protože by to exponenciálně zvýšilo složitost řešení a nepřineslo by to o moc lepší data.
+Kurník ja navíc v našem případě pravidelně udržován, takže šance na výskyt chybového faktoru v podobě nežádoucí zátěže je nízká.
+Jako nejjednodužší prostředek pro splnění tohoto úkolu na základě předchozí analýzy se ukázala obyčejná digitální váha.
+Tu bude třeba vytvořit vlastní konstrukce vzhledem ke skutečnosti, že ji musíme zabudovat do již existujícího hnízda.
+Popis konkrétního zapojení a konstrukce je sepsán níže v sekci~\ref{subsec:digitalni-vaha-do-hnizda}.
+
+\subsubsection{Ovládatní dvířek, snímání teploty a vlhkosti}
+Pro ovládatní dvířek a snímání povětrnostních podmínek je nejrozumnější vytvořit řídící jednotku, která tyto požadavky obsáhne.
+Další částí částí jsou samotná elektrická dvířka, jejichž funkce bude na základě způsobu elektrického signálu být otevřená nebo zavřená.
+Teplota a vlhkost jsou snímány senzory, jež jsou souřástí řídící jednotky.
+Implementace je popsána v sekci~\ref{subsec:ridici-jednotka}.
+\subsubsection{Snímání scén v kurníku a ve výběhu}
+Ke snímání scén v daných oblastech je třeba vyprat zařízení s dostatečnou odolností proti povětrnostním vlivům.
+Speciálně v kurníku je hodně agresivní prostředí kvůli vysoké vlhkosti a pro dlouhodobý provoz je třeba vybrat kvalitní a odolnou techniku.
+Zařízení musí být připojeno přes ethernet a musí být napájené ze sítě nikoli pomocí baterie.
+Na základě předchozí analýzy je vhodné použít venkovní ip kameru.
+Ip kamera s dostatečným krytím, dobrou kvalitou obrazu a velkým zorným polem bude snadná na instalaci, je cenově dostupná a poskytuje dostatečně kvalitní data pro naše použití při detekci objektů.
+Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{subsec:kamerovy-system}
+
+\subsection{Zpřístupnění aplikace z internetu}\label{subsec:zpristupneni-aplikace-z-internetu}
+Aby systém mohl sloužit svému účelu musí být vzdáleně přístupný.
+To znamená, že server, na kterém systém poběží, musí mít veřejnou ip adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
+Tato problematika se dá řešit několika způsoby.
+\newline
+Jeden ze způsobů je zařízení si přímo veřejné ip adresy pro svůj server.
+Toto řešení je, technicky i teoreticky náročné, protože v případě, se kterým pracujeme my, běží server na lokální síti a veřejná ip adresa tedy není přímo pro náš server, ale celou síť.
+To vytváří v určitých situacích vytváří velmi vážná bezpečnostní rizika, díky čemuž je tato metoda velice náročná na hardware a implementaci.
+Navíc poskytování veřejné ip adresy je placená služba poskytovatel internetového připojení.
+\newline
+Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon AWS.
+Tato metody by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení.
+\newline
+Metoda, kterou využíváme v řešení my, je snadná, jednodužší na implementaci než zřizování veřejné ip adresy a levnější nez využití cloudové služba.
+Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
+Funguje na principu, při němž se zařízení šifrovaně propojíte s veřejným serverem a tento server bude skrze sebe vystavovat službu, která běží na lokálním počítači například u nás doma.
+Výhoda je, že vzdálený server disponuje kvalitním a odborně nastaveným firewalem, ktery zajistí dobrou ochranu našeho lokálního serveru.
+Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare.
+Tento způsob nejvíce odpovídá našim požadavkům, které byli cena a jednoduchost společně s rychlost nasazení.
+
+\newline
+Poslední nutnostní, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
+Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
+Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
+My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.
+\newline
+Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
+
+\section{Detailní popis služeb a jejich úloh v řešení}
+
+\subsection{Camera driver}
 Camera driver je služba zodpovědná za komunikaci s ip kamerou(sekce~\ref{sec:ipcamera-rtsp}).\newline
 S ní komunikuje pomocí protokolu RTSP(sekce~\ref{sec:ipcamera-rtsp}).
-Url ip kamery, k níž je driver přiřazen, je službě předávána pomocí envirnoment proměnných(sekce~\ref{sec:environment-variables}).
-Pro komunikaci se zbytkem backendu poskytuje služba své REST(sekce~\ref{sec:http-rest}) api.
+Url ip kamery, k níž je driver přiřazen, je službě předávána pomocí environment proměnných(sekce~\ref{sec:environment-variables}).
+Pro komunikaci se zbytkem služeb poskytuje Camera driver své REST(sekce~\ref{sec:http-rest}) api.
 Konkrétně při zavolání na endpoint driver stáhne nejnovější obrázek z kamery a vrátí ho jako odpověď na volání.
 %\begin{itemize}
 %    \item GET /api/image
 %\end{itemize}
 
-\subsubsection{Scale driver}
+\subsection{Scale driver}
 Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
 Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
 Pro služby v systému tento driver poskytuje data o hmotnosti opět pomocí REST api.
@@ -76,9 +165,9 @@ Pro služby v systému tento driver poskytuje data o hmotnosti opět pomocí RES
 %    \item GET /api/weight
 %\end{itemize}
 
-\subsubsection{Room driver}
-Room driver zařizuje komunikaci mezi ostatnímy službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
-Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobyt architekturu služby.
+\subsection{Room driver}
+Room driver zařizuje komunikaci mezi ostatními službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
+Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobit architekturu služby.
 Tento modul má tedy za úkol přes serialový port pomocí protokolu USB posílat příkazy a načítat stavy řídící jednotky na základě requestů příchozích na REST api služby.
 Pro služby v systému služba na vystavuje GET a POST endpointy
 %\begin{itemize}
@@ -92,7 +181,7 @@ Pro služby v systému služba na vystavuje GET a POST endpointy
 %    \item POST /api/door/close (zavři)
 %\end{itemize}
 
-\subsubsection{Health checker}
+\subsection{Health checker}
 Health checker je malá služba určená pro správce systému.\newline
 Poskytuje informace o tom zda všechny potřebné služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
 Výpis stavů jednotlivých služeb je poskytován RESTovým api [GET] /status
@@ -100,7 +189,7 @@ Výpis stavů jednotlivých služeb je poskytován RESTovým api [GET] /status
 %    \item GET /status
 %\end{itemize}
 
-\subsubsection{Room assistant}
+\subsection{Room assistant}
 Room assistant je zpřístupňuje komunikaci mezi GUI tedy konkrétně Home Assistantem a Room driverem.\newline
 S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
 Základní funkcí je zpracování a přeposlání příkazů do Room Driveru odebíraných z témat
@@ -118,7 +207,7 @@ Tato data by měl Room assistant pravidelně načítat a posílat přes MQTT do 
 %    \item coopmaster/room/lamp/state
 %\end{itemize}
 
-\subsubsection{Nest watcher}
+\subsection{Nest watcher}
 Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
 Hlavní funkcí je načítání a analýza dat z jednotlivých vah v hnízdech, která jsou reprezentována Scale Drivery.\newline
 Data jsou načítána několikrát do minuty a ukládána do databáze s časovým údajem, kdy byl záznam vytvořen.
@@ -130,59 +219,36 @@ Na základě tohoto údaje jsme schopni zjisti několik případů
     \item v hnízdě sedí slepice (hmotnost slepice se pohybuje okolo 1200 g a více)
 \end{itemize}
 Pokud je na váze průměrně méně než 50 g, vzhledem k možným chybám měření, takový případ vyhodnotíme jako, že je hnízdo prázdné.
-Jesliže se hodnota pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce, a jejich počet je vypočítán vydělením celkové hmotnosti a hmotnosti jednoho vejce.
+Jestliže se hodnota pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce, a jejich počet je vypočítán vydělením celkové hmotnosti a hmotnosti jednoho vejce.
 V případě, že je na váze více jak 1200 g, vyhodnotí služba, že v hnízdě sedí slepice.
 Tyto tři zmíněné informace služba následně pomocí MQTT předává do Home Assistanta.
 
-\subsubsection{Dog alarm}
+\subsection{Dog alarm}
 Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
 Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
 Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
 Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
 Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
 
-
-\subsubsection{Chicken watch guard}
+\subsection{Chicken watch guard}
 Úkolem služby Chicken watch guard je sledovat stav a počet slepic v kurníku.\newline
 Aktuální záběry jsou stejně jako u Dog alarmu stahovány z konkrétního Camera driveru v kurníku.
 Následně po získání záběru proběhne detekce objektů a počet těchto objektů udává počet detekovaných slepic v obraze.
 Tato hodnota je publikována pomocí MQTT do Home Assistanta.
-Vedlejší funkcí služby je průběřné posílání aktuánlho pohledu z kamery v kurníku do Home Assistanta.
+Vedlejší funkcí služby je průběžné posílání aktuálního pohledu z kamery v kurníku do Home Assistanta.
 
-\subsection{GUI}\label{subsec:gui}
-Aplikace musí mít rozhodně i grafické rozhraní.
-Pro tento účel byla zvolena open source aplikace Home Assistant(sekce~\ref{sec:home-assistant}).
-Home assistant byl zvolen kvůli jeho univerzálnosti, rozsáhlé podpoře, komunitě bohaté na custom řešení a obrovské možnosti konfigurace a přispůsobení, čehoš pro ovládání a vizualizaci dat z našeho systému hojně využijeme.
-
-\subsection{Komunikace mezi Backendem a Frontendem}\label{subsec:komunikace-mezi-backendem-a-frontendem}
-Je třeba zajistit komunikaci mezi Home Assistantem a Backendem.
-Tuto úlohu musíme přijmout velice zodpověďně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
-Nelze proto použít klasické HTTP(sekce~\ref{sec:http-rest}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
-Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí Backendu nebo port jedné ze služeb, bylo by třeba překonfigurovat i home assistanta.
-Dalším problém nastane, když potřebujeme z Backendu poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby na Backendu věděli, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
-Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
-Tato technologie se běžně používá u IoT zařízení a pro naše použití bude vynikajícím řešením.
-
-
-- aplikace se rozvrhla do několika modulů\newline
-- jako první moduly pro komunikaci s hardware nazvané drivery; takže vzniknul scale driver pro komunikaci s váhou, kamerami a arduinem pro dveře, světlo a senzory\newline
-- následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
-- drivery komunikují s výkonými službami pomosí http protokolu \newline
-- výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
-
-\subsection{Výběr technologií}\label{subsec:vyber-technologii}
-- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
-- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
-- mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
-- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
-- python pro mě byla trochu výzva ale dopadlo to dobře
-
-
-\section{Implementace jednotlivých modulů}\label{sec:implementace-jednotlivych-modulu}
+\section{Implementace služeb}\label{sec:implementace-sluzeb}
 - implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
 - jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
 - verzuje se to na github
 - na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
+
+\section{Implementace hardwarových prvků}\label{sec:implementace-hardwarovych-prvku}
+\subsection{Digitální váha do hnízda}\label{subsec:digitalni-vaha-do-hnizda}
+
+\subsection{Řídící jednotka}\label{subsec:ridici-jednotka}
+
+\subsection{Kamerový systém}\label{subsec:kamerovy-system}
 
 
 \section{Tvorba GUI rozhraní}\label{sec:tvorba-gui-rozhrani}
