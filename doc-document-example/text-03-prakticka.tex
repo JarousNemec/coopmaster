@@ -39,14 +39,6 @@ Tento způsob rozvržení zodpovědnosti jednotlivých částí systému jsem zv
 Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:ipcamera-rtsp}).
 Python byl vybrán kvůli jeho univerzálnosti, snadné syntaxi a podpoře ze strany vývojářů a komunity.
 Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine(sekce~\ref{sec:kontejnerizace}) společně s rozšířením Docker Compose.
-%Mezi hlavní patří knihovny
-%\begin{itemize}
-%    \item Flask(sekce~\ref{sec:flask})
-%    \item Paho-mqtt(sekce~\ref{sec:paho-mqtt})
-%    \item Python-dotenv(sekce~\ref{sec:python-dotenv})
-%    \item APScheduler(sekce~\ref{sec:apscheduler})
-%    \item Pyserial(sekce~\ref{sec:pyserial})
-%\end{itemize}
 Na základě určeného způsobu zapouzdření funkcionality je architektura rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
 \begin{itemize}
     \item Camera driver
@@ -72,17 +64,6 @@ Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď u
 Dalším problém nastane, když potřebujeme z některé ze služeb poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby věděli, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
 Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
 Tato technologie se běžně používá u IoT zařízení a pro naše použití bude vynikajícím řešením.
-
-- vybrali jsme si python a pro clasifikaci framework od ultralitics což znamená modely YOLO\newline
-- jako databáze pro sběr statistik byl vybrán postgres pro svou robustnost a dobrou cenu\newline
-- mohlo se to psát klidně i v C\# a použít třeba azure pro classifikaci\newline
-- pro kontejnerizaci jsme zvolili docker; dalo se i třeba podman nebo podobné ale toto se učíme ve škole a rád si to zopakuji a zlepším tak své dovednosti\newline
-- python pro mě byla trochu výzva ale dopadlo to dobře
-- aplikace se rozvrhla do několika modulů\newline
-- jako první moduly pro komunikaci s hardware nazvané drivery; takže vzniknul scale driver pro komunikaci s váhou, kamerami a arduinem pro dveře, světlo a senzory\newline
-- následně vzniky služby na základě požadovaných funkcí nest watcher, chicken watch guard, dog alarm, room assistant a ještě drobná službyčka health checker pro kontrolu a reportování systému a jeho chyb\newline
-- drivery komunikují s výkonými službami pomosí http protokolu \newline
-- výkonné služby komunikují s home assistantem pomocí mqtt realizovaným mosquitto serverem
 
 \subsection{Hardwarová zařízení}\label{subsec:hardwarova-zarizeni}
 Tuto sekci je velmi důležité dobře a správně navrhnout, protože náš systém bude pracovat s daty z reálného světa.
@@ -120,29 +101,23 @@ Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{subsec:kamerovy-s
 \subsection{Zpřístupnění aplikace z internetu}\label{subsec:zpristupneni-aplikace-z-internetu}
 Aby systém mohl sloužit svému účelu musí být vzdáleně přístupný.
 To znamená, že server, na kterém systém poběží, musí mít veřejnou ip adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
-Tato problematika se dá řešit několika způsoby.
-\newline
+Tato problematika se dá řešit několika způsoby.\newline
 Jeden ze způsobů je zařízení si přímo veřejné ip adresy pro svůj server.
 Toto řešení je, technicky i teoreticky náročné, protože v případě, se kterým pracujeme my, běží server na lokální síti a veřejná ip adresa tedy není přímo pro náš server, ale celou síť.
 To vytváří v určitých situacích vytváří velmi vážná bezpečnostní rizika, díky čemuž je tato metoda velice náročná na hardware a implementaci.
-Navíc poskytování veřejné ip adresy je placená služba poskytovatel internetového připojení.
-\newline
+Navíc poskytování veřejné ip adresy je placená služba poskytovatel internetového připojení.\newline
 Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon AWS.
-Tato metody by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení.
-\newline
+Tato metody by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení. \newline
 Metoda, kterou využíváme v řešení my, je snadná, jednodužší na implementaci než zřizování veřejné ip adresy a levnější nez využití cloudové služba.
 Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
 Funguje na principu, při němž se zařízení šifrovaně propojíte s veřejným serverem a tento server bude skrze sebe vystavovat službu, která běží na lokálním počítači například u nás doma.
 Výhoda je, že vzdálený server disponuje kvalitním a odborně nastaveným firewalem, ktery zajistí dobrou ochranu našeho lokálního serveru.
 Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare.
-Tento způsob nejvíce odpovídá našim požadavkům, které byli cena a jednoduchost společně s rychlost nasazení.
-
-\newline
+Tento způsob nejvíce odpovídá našim požadavkům, které byli cena a jednoduchost společně s rychlost nasazení.\newline
 Poslední nutnostní, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
-My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.
-\newline
+My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \section{Detailní popis služeb a jejich úloh v řešení}
