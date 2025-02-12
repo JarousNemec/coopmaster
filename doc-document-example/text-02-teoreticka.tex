@@ -2,23 +2,23 @@
 
 
 \section{Virtualizace}\label{sec:virtualizace}
-Virtualizace~\autocite{virtualizace-Martin-Polednik} je technologie, která se využívá pro efektivnější rozdělení hardwarových zdrojů fyzického počítače mezi virtualizované/hostované počítače.
+Virtualizace~\cite{virtualizace-Martin-Polednik} je technologie, která se využívá pro efektivnější rozdělení hardwarových zdrojů fyzického počítače mezi virtualizované/hostované počítače.
 Jednotlivé systémy běží v podstatě na jiném hardwaru, díky čemuž jsou jejich procesy izolovány, což přispívá k bezpečnosti řešení.
 Virtuální stroj je zároveň jednodušší spravovat, díky tomu, že máme úplnou kontrolu nad daným virtuálním strojem, což pomáhá například při klonování nebo restartu.
 
 
 \section{Kontejnerizace}\label{sec:kontejnerizace}
-Kontejnerizace~\autocite{virtualizace-Martin-Polednik} je technologie umožňující zapouzdření funkcionality jedné aplikace společně se všemi jejími závislostmi a zdroji do jednotky nazývané česky obrazy.
+Kontejnerizace~\cite{virtualizace-Martin-Polednik} je technologie umožňující zapouzdření funkcionality jedné aplikace společně se všemi jejími závislostmi a zdroji do jednotky nazývané česky obrazy.
 Konkrétní běžící instance jednoho obrazu se nazývá kontejner.
 Tyto kontejnery pak lze spouštět v prakticky neomezeném množství nezávisle na platformě a výhodou je, že jsou jejich běhy navzájem izolované, takže běh jednoho neovlivní ostatní.
 Je to v podstatě forma virtualizace se všemi jejími výhodami, s tím rozdílem, že daný kontejner obsahuje jen nezbytné věci pro běh dané aplikace.
 
 \subsection{Docker Engine}\label{subsec:docker-engine}
-Jedna z technologií používaných pro kontejnerizaci je Docker Engine~\autocite{kontejnerizace-docker}.
+Jedna z technologií používaných pro kontejnerizaci je Docker Engine~\cite{kontejnerizace-docker}.
 Používá se pro tvorbu, správu, orchestraci, verzování a nasazování jednotlivých kontejnerů.
 
 \subsection{Docker Compose}\label{subsec:docker-compose}
-Docker compose~\autocite{kontejnerizace-docker-compose} je nástroj pro Docker, který nám umožňuje tvořit komplikované ekosystémy jednotlivých kontejnerů, jež spolu v rámci něho mohou spolupracovat.
+Docker compose~\cite{kontejnerizace-docker-compose} je nástroj pro Docker, který nám umožňuje tvořit komplikované ekosystémy jednotlivých kontejnerů, jež spolu v rámci něho mohou spolupracovat.
 Pomáhá nám například se síťováním nebo konfigurací kontejnerů.
 
 

@@ -120,126 +120,33 @@ Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 kor
 My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
-\section{Detailní popis služeb a jejich úloh v řešení}
+\section{Popis jednotlivých modulů}\label{sec:popis-jednotlivych-modulu}
 
-\subsection{Camera driver}
-Camera driver je služba zodpovědná za komunikaci s ip kamerou(sekce~\ref{sec:ipcamera-rtsp}).\newline
-S ní komunikuje pomocí protokolu RTSP(sekce~\ref{sec:ipcamera-rtsp}).
-Url ip kamery, k níž je driver přiřazen, je službě předávána pomocí environment proměnných(sekce~\ref{sec:environment-variables}).
-Pro komunikaci se zbytkem služeb poskytuje Camera driver své REST(sekce~\ref{sec:http-rest}) api.
-Konkrétně při zavolání na endpoint driver stáhne nejnovější obrázek z kamery a vrátí ho jako odpověď na volání.
-%\begin{itemize}
-%    \item GET /api/image
-%\end{itemize}
+\input{text-300-camera-driver}
 
-\subsection{Scale driver}
-Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
-Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
-Pro služby v systému tento driver poskytuje data o hmotnosti opět pomocí REST api.
-%\begin{itemize}
-%    \item GET /api/weight
-%\end{itemize}
+\input{text-301-scale-driver}
 
-\subsection{Room driver}
-Room driver zařizuje komunikaci mezi ostatními službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
-Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobit architekturu služby.
-Tento modul má tedy za úkol přes serialový port pomocí protokolu USB posílat příkazy a načítat stavy řídící jednotky na základě requestů příchozích na REST api služby.
-Pro služby v systému služba na vystavuje GET a POST endpointy
-%\begin{itemize}
-%    \item GET /api/temperature (dej teplotu)
-%    \item GET /api/humidity (dej vlhkost)
-%    \item GET /api/lamp/state (dej stav světla vypnuto/zapnuto)
-%    \item GET /api/door/state (dej pozici dvířek otevřeno/zavřeno)
-%    \item POST /api/lamp/on (rozsviť)
-%    \item POST /api/lamp/off (zhasni)
-%    \item POST /api/door/open (otevři)
-%    \item POST /api/door/close (zavři)
-%\end{itemize}
+\input{text-302-room-driver}
 
-\subsection{Health checker}
-Health checker je malá služba určená pro správce systému.\newline
-Poskytuje informace o tom zda všechny potřebné služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
-Výpis stavů jednotlivých služeb je poskytován RESTovým api [GET] /status
-%\begin{itemize}
-%    \item GET /status
-%\end{itemize}
+\input{text-303-heatlh-checker}
 
-\subsection{Room assistant}
-Room assistant je zpřístupňuje komunikaci mezi GUI tedy konkrétně Home Assistantem a Room driverem.\newline
-S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
-Základní funkcí je zpracování a přeposlání příkazů do Room Driveru odebíraných z témat
-%\begin{itemize}
-%    \item coopmaster/room/door/cmnd
-%    \item coopmaster/room/lamp/cmnd
-%\end{itemize}
-Služba očekává, že na tato témata budou chodit zprávy open / close pro dveře a on / off jako příkazy pro světlo.
-Další úlohou je periodické načítání a aktualizace informací o stavu dveří, světla a dat z teplotního a vlhkostního senzorů.
-Tato data by měl Room assistant pravidelně načítat a posílat přes MQTT do Home Assistanta.
-%\begin{itemize}
-%    \item coopmaster/room/temperature
-%    \item coopmaster/room/humidity
-%    \item coopmaster/room/door/state
-%    \item coopmaster/room/lamp/state
-%\end{itemize}
+\input{text-304-room-assistant}
 
-\subsection{Nest watcher}
-Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
-Hlavní funkcí je načítání a analýza dat z jednotlivých vah v hnízdech, která jsou reprezentována Scale Drivery.\newline
-Data jsou načítána několikrát do minuty a ukládána do databáze s časovým údajem, kdy byl záznam vytvořen.
-Následně se jednou za minutu vyhodnotí průměrná hodnota během posledních několika vážení.
-Na základě tohoto údaje jsme schopni zjisti několik případů
-\begin{itemize}
-    \item hnízdo je prázdné (hodnota na váze nepřevyšuje 50 g )
-    \item v hnízdě se nacházejí vejce (hmotnost jednoho vejce je průměrně 50 g)
-    \item v hnízdě sedí slepice (hmotnost slepice se pohybuje okolo 1200 g a více)
-\end{itemize}
-Pokud je na váze průměrně méně než 50 g, vzhledem k možným chybám měření, takový případ vyhodnotíme jako, že je hnízdo prázdné.
-Jestliže se hodnota pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce, a jejich počet je vypočítán vydělením celkové hmotnosti a hmotnosti jednoho vejce.
-V případě, že je na váze více jak 1200 g, vyhodnotí služba, že v hnízdě sedí slepice.
-Tyto tři zmíněné informace služba následně pomocí MQTT předává do Home Assistanta.
+\input{text-305-nest-watcher}
 
-\subsection{Dog alarm}
-Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
-Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
-Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
-Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
-Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
+\input{text-306-dog-alarm}
 
-\subsection{Chicken watch guard}
-Úkolem služby Chicken watch guard je sledovat stav a počet slepic v kurníku.\newline
-Aktuální záběry jsou stejně jako u Dog alarmu stahovány z konkrétního Camera driveru v kurníku.
-Následně po získání záběru proběhne detekce objektů a počet těchto objektů udává počet detekovaných slepic v obraze.
-Tato hodnota je publikována pomocí MQTT do Home Assistanta.
-Vedlejší funkcí služby je průběžné posílání aktuálního pohledu z kamery v kurníku do Home Assistanta.
+\input{text-307-chicken-watch-guard}
 
-\section{Implementace služeb}\label{sec:implementace-sluzeb}
-- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
-- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
-- verzuje se to na github
-- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
+\input{text-308-gui-rozhrani}
 
-\section{Implementace hardwarových prvků}\label{sec:implementace-hardwarovych-prvku}
-\subsection{Digitální váha do hnízda}\label{subsec:digitalni-vaha-do-hnizda}
+\input{text-309-digitalni-vaha}
 
-\subsection{Řídící jednotka}\label{subsec:ridici-jednotka}
+\input{text-310-ridici-jednotka}
 
-\subsection{Kamerový systém}\label{subsec:kamerovy-system}
+\input{text-311-kamerovy-system}
 
-
-\section{Tvorba GUI rozhraní}\label{sec:tvorba-gui-rozhrani}
-- vybral se teda ten home assistant a ted ho nakonfit\newline
-- konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
-- byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
-- po přidání senzorů jsem si hrál s vizualizací jednotlivých hnízd tak aby to pro uživatele bylo přívětivě\newline
-- napsal jsem proto vlastní komponentu pro HA viz foto a trello\newline
-- zajímavé zjištění bylo že state který jsem využíval pro předávání textových zpráv má maximální velikost 255 bytů\newline
-- takže jsem z jsonu přešel na csv\newline
-- pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
-- následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
-- závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
-
-
-\section{Rozmyšlení konkrétní implementace}\label{sec:rozmysleni-konkretni-implementace}
+\subsection{---poznámky TODO ke smazání---}\label{subsec:---poznamky-todo-ke-smazani---}
 - budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
 - budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
 - budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
@@ -247,7 +154,10 @@ Vedlejší funkcí služby je průběžné posílání aktuálního pohledu z ka
 - a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
 - uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
 - první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
-
+- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
+- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
+- verzuje se to na github
+- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
 
 \section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
 - zjistilo se že bez poe je to špatná volba \newline

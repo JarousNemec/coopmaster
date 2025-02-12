@@ -1,0 +1,69 @@
+\externaldocument{text-02-teoreticka}
+
+\subsection{Scale driver}\label{subsec:scale-driver}
+Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
+Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
+Pro služby v systému tento driver poskytuje data o hmotnosti opět pomocí REST api.
+
+jak to funguje
+konfigurace
+scheduler
+otevře se tcp spojení
+gobler
+Je tam sleep kvůli tomu aby se nečetlo moc času
+posíláme příkaz w jako weight soucast programu ve vaze
+ctu v gramech aktuální hodnotu váhy
+proc používáme gramy
+
+ošetření vstupní hodnoty, cteme pomoci readline nakonci jsou netisknutelne znaky, vysvětlit error handling
+vracime -1 kdyz je chyba
+
+zalogujeme výstup pro případnou investigaci problémů v produkci
+
+a vracíme zpět hodnotu v gramech
+
+
+\subsubsection{Funkcionalita}
+v pravidelnych intervalech načíteá / aktualizuje hodnoty
+hmotností, které přes seriové porty poskytují jednotlivé váhy v hnizdech
+vystavuje REST API pro ziskani aktuálně načtené hodnoty
+vraci hodnotu v gramech
+
+\subsubsection{Technologie}
+python
+c++
+
+\subsubsection{Použíté knihovny}
+Flask: Lehký webový framework pro rychlý vývoj webových
+aplikací.
+colorama: Manipulace s barvami v textovém výstupu na
+terminálu.
+waitress: Rychlý WSGI server pro produkční nasazení webových
+aplikací.
+pyserial: Komunikace se sériovými zařízeními přes sériové
+porty.
+python-dotenv: Načítání konfigurace z .env souborů.
+knihovny arduina
+defaultní Arduino.h
+HX711.h: knihovna pro komunikaci s module AD Převodníku
+24-bit 2 kanály HX711
+
+\subsubsection{Hardware}
+arduino Nano v3.0
+AD převodník HX711
+tenzometrický senzor
+samotana konstrukce hnizda s vahou (podestylka/koberec)
+
+\subsubsection{Konstrukce váhy}
+tenzometricky sezor podobne jako u vcel
+hezky popsano v praci
+uvaha o tom co vybrat zavesna vaha nebo tlacna vaha
+problemy pri implementaci
+problémy s konstrukcí a nekvalitními součástkami
+senzory se deformují a tím vzniká chyba v měření
+chyby vznikají díky analogu i chybami / odpory v elektrickém
+vedení (pevné / pájene spoje vs odnímatelné konektrory)
+
+%\begin{itemize}
+%    \item GET /api/weight
+%\end{itemize}

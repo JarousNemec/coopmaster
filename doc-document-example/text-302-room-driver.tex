@@ -1,0 +1,16 @@
+\externaldocument{text-02-teoreticka}
+\subsection{Room driver}\label{subsec:room-driver}
+Room driver zařizuje komunikaci mezi ostatními službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
+Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobit architekturu služby.
+Tento modul má tedy za úkol přes serialový port pomocí protokolu USB posílat příkazy a načítat stavy řídící jednotky na základě requestů příchozích na REST api služby.
+Pro služby v systému služba na vystavuje GET a POST endpointy
+%\begin{itemize}
+%    \item GET /api/temperature (dej teplotu)
+%    \item GET /api/humidity (dej vlhkost)
+%    \item GET /api/lamp/state (dej stav světla vypnuto/zapnuto)
+%    \item GET /api/door/state (dej pozici dvířek otevřeno/zavřeno)
+%    \item POST /api/lamp/on (rozsviť)
+%    \item POST /api/lamp/off (zhasni)
+%    \item POST /api/door/open (otevři)
+%    \item POST /api/door/close (zavři)
+%\end{itemize}
