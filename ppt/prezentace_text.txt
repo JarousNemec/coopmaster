@@ -1,0 +1,29 @@
+Vážení pedagogové, milí spolužáci, dámy a pánové,
+
+dovolte mi, abych vám představil svou závěrečnou práci, která je vyvrcholením mého studia na Střední a Vyšší odborné škole kybernetiky v Hradci Králové. Tato práce je výsledkem propojení mých dosavadních zkušeností nejen v oblasti analýzy a programování, ale také řemeslných a praktických dovedností.
+
+Vše začalo pozorováním každodenních výzev, kterým čelí chovatelé drůbeže. Jako milovník technologií a zároveň někdo, kdo měl možnost vidět zblízka problémy spojené s chovem slepic, jsem se rozhodl vytvořit řešení, které by tyto výzvy usnadnilo. Chtěl jsem propojit tradiční zemědělské postupy s moderními technologiemi a nabídnout chovatelům nástroj, který by jim ušetřil čas a zvýšil efektivitu jejich práce.
+
+Moje motivace pramenila z touhy usnadnit život chovatelům drůbeže a zlepšit podmínky pro samotné slepice. Věřím, že technologie by měla sloužit lidem i zvířatům a přinášet skutečnou hodnotu tam, kde je to potřeba.
+
+Předmětem mé práce je komplexní modulární aplikace, která poskytuje následující služby pro chovatele drůbeže:
+
+    Detekce přítomnosti vetřelců v ohradě: Aplikace využívá senzory pohybu a kamerový systém k okamžitému upozornění na nezvané hosty, čímž chrání slepice před predátory a zloději.
+
+    Automatické otevírání a zavírání kurníku: Každé ráno aplikace automaticky otevře kurník a pustí slepice do výběhu. Večer je zase bezpečně zavře zpět, což zajišťuje jejich ochranu bez nutnosti ručního zásahu.
+
+    Informování o množství snesených vajec: Systém sleduje počet snesených vajec a poskytuje chovateli aktuální přehled prostřednictvím mobilní aplikace nebo webového rozhraní.
+
+    Řízení délky aktivního dne pro slepice: Pomocí nastavení osvětlení v kurníku lze optimalizovat délku dne, což pozitivně ovlivňuje snůšku vajec, zejména v zimních měsících.
+
+    Kontrola fyzické přítomnosti slepic v kurníku: Aplikace monitoruje, zda jsou všechny slepice přítomny, a upozorní na případné ztráty nebo úniky.
+
+    Monitoring komfortu v kurníku: Systém sleduje teplotu a vlhkost prostředí, čímž pomáhá udržovat ideální podmínky pro zdraví a pohodu slepic.
+
+    Sledování snůšky v průběhu času: Chovatel může analyzovat data o snůšce, identifikovat trendy a přizpůsobit péči o slepice pro dosažení lepších výsledků.
+
+Přidanou hodnotou tohoto projektu je skutečnost, že propojuje moderní technologie s tradičním chovem drůbeže. Tímto způsobem se otevírá cesta k efektivnějšímu a pohodlnějšímu chovu, který šetří čas a snižuje stres jak pro chovatele, tak pro slepice.
+
+Začal jsem tuto práci, protože jsem věřil, že je možné zlepšit způsob, jakým chováme slepice, a přinést inovace i do oblastí, kde by je možná ne všichni očekávali. Doufám, že vás moje práce zaujala a že vám ukázala, jak může technologie přispět k lepšímu a udržitelnějšímu zemědělství.
+
+Děkuji vám za pozornost a jsem připraven odpovědět na vaše dotazy.
