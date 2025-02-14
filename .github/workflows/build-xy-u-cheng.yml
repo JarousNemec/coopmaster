@@ -11,13 +11,24 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+
+      - name: Set Build Number
+        id: vars
+        run: echo "BUILD_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+        
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: doc-document-example
           root_file: document.tex
+
+
+      - name: Rename PDF with Dynamic Name
+        run: |
+          mv doc-document-example/document.pdf doc-document-example/coopmaster-${BUILD_NUMBER}.pdf
+          
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          name: PDF
-          path: doc-document-example/document.pdf
+          name: coopmaster-${{ env.BUILD_NUMBER }}
+          path: doc-document-example/coopmaster-${{ env.BUILD_NUMBER }}.pdf

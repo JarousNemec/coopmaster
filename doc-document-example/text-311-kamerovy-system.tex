@@ -1,2 +1,46 @@
 \externaldocument{text-02-teoreticka}
 \subsection{Kamerový systém}\label{subsec:kamerovy-system}
+Kamerový systém je jeden z hlavních prvků systému Coopmaster.
+Data z jeho kamer využívají skrze službu Camera driver služby Dog Alarm a Chicken Watch Guard.
+Do systému jsou aktuálně instalovány dvě kamery jedna pro venkovní výběh druhá pro pohled do kurníku.
+Po pečlivém výběru a volbě parametrů jsou vybrány kamery značky Hikvision typ Hilook IPC-B180HA-LU.
+
+\subsubsection{Výběr kamery}
+Klíčové vlastnosti pro výběr našich kamer byly
+\begin{itemize}
+    \item možnost venkovní instalace
+    \item drátové připojení
+    \item volitelně oba způsoby napájení buď POE nebo přímo ze sítě (záleží na způsobu instalace a umístění)
+    \item kvalitní noční vidění
+    \item velké zorné pole
+    \item vysoká kvalita obrazu (dostatek dat pro umělou inteligenci)
+\end{itemize}
+Snažil jsem se vybrat kameru, bude relativně cenově dostupná a bude vyhovovat zmíněným parametrům.
+Musel jsem se kvůli tomu dovzdělat v mnoha ohledech například detailně prozkoumat technologii PoE, digitálního videa, konstrukcí venkovních elektrických zařízení a mnoha dalších parametrů, které venkovní IP kamery mají.
+S výsledným výběrem jsem velmi spokojený.
+Kamera poskytuje kvalitní data pro vývoj tohoto systému a práce s ní není nijak komplikovaná jak je detailněji popsáno v sekci o službě Camera driver.
+
+\subsubsection{IP camera Hilook by Hikvision IPC-B180HA-LU}
+Klíčové parametry, které využíváme v projektu, jsou
+\begin{itemize}
+    \item Rozlišení 8 Mpx
+    \item Přísvit jak bílou LED a IR s dosahem až 30 m
+    \item Zajímavá technologie ColorVu pro snímání barev za horších světelných podmínek
+    \item Technologie Motion Detection 2.0 pro osob či vozidel
+    \item Technologie WDR pro zmenšení rozdílů při různě silném osvětlení scény
+    \item Napájení pomocí PoE nebo přes síťový adaptér na 12V 2A.
+    \item Buď REST api a HTTP nebo RSTP protokol pro poskytování obrázků, streamování videa a zvuku
+    \item Dobře zpracované webové rozhraní pro konfiguraci
+\end{itemize}
+
+%- vraci obrázek ve FULL HD rozliseni
+%- pro každý call se načte nový obrázek z kamery
+%
+%## technologie
+%- python
+%- rtsp - real-time streaming protocol
+%- knihovny
+%
+%
+%## hardware
+%- IP camera Hilook by Hikvision IPC-B180HA-LU
