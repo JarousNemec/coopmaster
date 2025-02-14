@@ -1,16 +1,72 @@
 \externaldocument{text-02-teoreticka}
+
 \subsection{Room driver}\label{subsec:room-driver}
-Room driver zařizuje komunikaci mezi ostatními službami a řídící jednotkou v kurníku, která ovládá dveře a světlo.\newline
-Jako mozek řídící jednotky je použito opět Arduino a tomu je třeba přizpůsobit architekturu služby.
-Tento modul má tedy za úkol přes serialový port pomocí protokolu USB posílat příkazy a načítat stavy řídící jednotky na základě requestů příchozích na REST api služby.
-Pro služby v systému služba na vystavuje GET a POST endpointy
-%\begin{itemize}
-%    \item GET /api/temperature (dej teplotu)
-%    \item GET /api/humidity (dej vlhkost)
-%    \item GET /api/lamp/state (dej stav světla vypnuto/zapnuto)
-%    \item GET /api/door/state (dej pozici dvířek otevřeno/zavřeno)
-%    \item POST /api/lamp/on (rozsviť)
-%    \item POST /api/lamp/off (zhasni)
-%    \item POST /api/door/open (otevři)
-%    \item POST /api/door/close (zavři)
-%\end{itemize}
+Room driver zařizuje komunikaci mezi službou Room Assistant a řídící jednotkou v kurníku.
+Tato jednotka se stará o ovládání dveří, světla a poskytování dat o aktuální teplotě a vlhkosti.
+Ovládání nízkoúrovňových komponent a komunikaci s připojeným počítačem zajišťuje Arduino Nano.
+Arduino je připojeno pomocí usb sběrnice k počítači, který na základě domluvených pravidel jednoduchého komunikačního protokolu posílá znaky, na než Arduino příslušně reaguje dle programu.
+Tato služba má tedy za úkol přes serialový port pomocí USB rozhraní posílat příkazy a načítat stavy řídící jednotky na základě requestů přijmutých na REST api.
+
+\subsubsection{Funkcionalita}
+Po startu služby se nejdříve vytvoří instance třídy ArduinoReader.
+Jedná se o vlastní třídu, při inicializaci vytvoří instanci serialového spojení k arduinu a to drží po celou dobu běhu aplikace.
+Třída má jedinou metodu a tou je run\_command.
+Tato metoda přijímá jako parametr jeden znak, který při provolání metody pošle zkrze serialové připojení do arduina a vrátí data typu String, kterými odpoví arduino, zpět.
+Jakmile se povede provést inicializaci serialového spojení je spuštěno REST api.
+Toto api poskytuje endpointy pro vyslání příkazů k zavření a otevření dvíře, zhasnutí a rozsvícení světla, vracení informací o aktuálních stavech jednotky a vrácení informací o teplotě a vlhkosti.
+Informace o aktuálním stavu jsou dobré pro případ, kdy se budou muset služby restartovat a bude třeba načíst reálný aktuální stav.
+V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz arduinu.
+Následně se počká na jeho odpověď, pokud je požadavek typu POST.
+Odpověď je následně převedena do JSON objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON.
+
+\subsubsection{Příkazy ovládacího protokolu}
+\begin{itemize}
+    \item o = otevřít dvířka
+    \item c = zavřít dvířka
+    \item l = rozsvítit světlo
+    \item d = zhasnout světlo
+    \item j = vrátí json s daty o teplotě a vlhkosti
+    \item s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+\end{itemize}
+
+\subsubsection{Technologie}
+\begin{itemize}
+    \item Jazyk Python a jeho knihovny
+    \item REST api
+    \item HTTP protokol
+    \item Serialový port
+\end{itemize}
+
+\subsubsection{Použíté knihovny}
+\begin{itemize}
+    \item Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
+    \item colorama: Manipulace s barvami v textovém výstupu na terminálu.
+    \item waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
+    \item pyserial: Komunikace se sériovými zařízeními přes sériovéporty.
+    \item python-dotenv: Načítání konfigurace z .env souborů.
+\end{itemize}
+
+
+%# coopmaster-room-driver
+%
+%Aplikace provazuje core aplikace(konkrétně službu room assistant) s arduinem ovladajicim svetla, dvere a poskytujici informaci o teplote a vzdusne vlhkosti.
+%Součástí projektu je i firmware arduina.
+
+%## funkcionalita
+%- umoznuje ovladat osvetleni kurniku
+%- resi otevírání a zavírání dvířek v kurníku
+%- ziskava informace ze senzoru o teplote a vlhkosti v kurniku
+%- komunikuje se zbytkem systému pomocí rest api
+%- s arduinem komunikuje pomocí serialového portu a pomocí zasílání příkazů v podobě jednoho písmene
+%- příkazy: o = otevřít dvířka, c = zavřít dvířka, l = rozsvítit světlo, d = zhasnout světlo, j = vrátí json s daty o teplotě a vlhkosti, s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+%
+%## technologie
+%- python
+%- knihovny pro python
+%- **Flask**: Lehký webový framework, flexibilní a rychlý vývoj webových aplikací.
+%- **colorama**: Manipulace s barvami v textovém výstupu na terminálu.
+%- **waitress**: Rychlý WSGI server pro produkční nasazení webových aplikací.
+%- **requests**: Jednoduché HTTP požadavky (GET, POST, atd.).
+%- **Werkzeug**: WSGI nástroje pro webové aplikace (routování, správa relací).
+%- **python-dotenv**: Načítání konfigurace z `.env` souborů.
+%- **pyserial**: Komunikace se sériovými zařízeními přes sériové porty.

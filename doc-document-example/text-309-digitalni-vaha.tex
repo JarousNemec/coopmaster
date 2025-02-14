@@ -7,7 +7,7 @@ Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice sná�
 \subsubsection{Funkcionalita}
 Po připojení napájení k arduinu, se nejdříve nastaví a připojí serialová komunikace rychlostí 9600 baudů pomocí usb.
 Následně je instancován objekt starající se o sprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
-Dále je nastaven kalibrační faktor, což je konstanta používaná HX711 knihovnou při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a poskytuje je po serialovém připojení.
+Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a poskytuje je po serialovém připojení.
 Jako poslední krok v rámci přípravy programu je vynulování váhy pomocí metody tare(), která je jedna z metod HX711.h knihovny.
 Jakmile program dokončí fázi příprav vstoupí do nekonečného cyklu.
 Tento cyklus pravidelně čte data přicházející po serialovém připojení.

@@ -6,6 +6,7 @@ Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) t
 
 \subsubsection{Funkcionalita}
 Nejprve naběhne hlavní vlákno, které se stará o poskytování RESTového api na portu 9004.
+Toto api obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí požadavku s metodou get.
 Následně je spuštěno nové vlákno, které má za úkol číst data z váhy a předávat je aplikačnímu rozhraní jako aktuálně naměřenou hmotnost na váze, jež se bude od teď poskytovat, pokud o ní někdo GET requestem požádá.
 Čtení informací z váhy se prování v nekonečném cyklu.
 Před začátkem cyklu se zaloguje že je nové vlákno úspěšně spuštěno a následně proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial.
@@ -21,12 +22,16 @@ Na závěr se zalogují aktuálně získaná data a následuje další volání 
 \begin{itemize}
     \item Jazyk Python a jeho knihovny
     \item REST api
+    \item HTTP protokol
     \item Serialový port
 \end{itemize}
 
 \subsubsection{Použíté knihovny}
-Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
-colorama: Manipulace s barvami v textovém výstupu na terminálu.
-waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
-pyserial: Komunikace se sériovými zařízeními přes sériovéporty.
-python-dotenv: Načítání konfigurace z .env souborů.
+\begin{itemize}
+    \item Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
+    \item colorama: Manipulace s barvami v textovém výstupu na terminálu.
+    \item waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
+    \item pyserial: Komunikace se sériovými zařízeními přes sériovéporty.
+    \item python-dotenv: Načítání konfigurace z .env souborů.
+\end{itemize}
+
