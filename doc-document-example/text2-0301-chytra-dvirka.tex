@@ -1,0 +1,172 @@
+\section{Chytrá dvířka}\label{sec:chytra-dvirka}
+\subsection{Stav před}\label{subsec:chytra-dvirka-problemy}
+-babi jezdí na dovolenou musím jezdit já\newline
+-ráno zapomenu nebo nepomene pustit\newline
+-večer zapomenem zavřít\newline
+-děda nepočítá slepice\newline
+\subsection{Možnosti řešení}\label{subsec:chytra-dvirka-moznosti-reseni}
+Automatizace zavírání kurníku představuje praktické řešení pro chovatele drůbeže, kteří chtějí zajistit bezpečí svých zvířat před predátory a zároveň si ulehčit každodenní rutinu. Existuje několik přístupů k realizaci tohoto úkolu, z nichž zde uvedeme tři potenciální řešení: zakoupení hotového produktu, vývoj vlastního řešení s využitím kladky a táhlového motoru a vývoj s využitím krokového motoru.\newline
+
+1. Zakoupení hotového řešení\newline
+Prvním a nejjednodušším řešením je zakoupení již existujícího automatizovaného systému na internetu. Tento přístup nabízí několik výhod:
+
+Snadná instalace: Komerčně dostupné produkty jsou navrženy s ohledem na snadnou montáž. Uživatelé obvykle obdrží podrobný manuál, který jim pomůže s instalací systému.
+Časová úspora: Zakoupení hotového produktu šetří čas, který by jinak byl potřeba na vývoj a testování vlastního řešení.
+Záruka a podpora: Výrobci často poskytují záruku a technickou podporu, což zvyšuje jistotu spolehlivosti systému.
+Na druhou stranu, nevýhodou může být omezená možnosti přizpůsobení specifickým potřebám uživatele nebo vyšší pořizovací náklady.\newline
+
+2. Vývoj vlastního řešení s kladkou a táhlovým motorem\newline
+Druhé řešení zahrnuje vývoj vlastního systému využívajícího kladky a táhlový motor. Tento přístup umožňuje větší flexibilitu a přizpůsobení se konkrétním podmínkám kurníku:
+
+Přizpůsobitelnost: Navržený systém může být přizpůsoben velikosti a tvaru dveří kurníku.
+Nízké náklady: V závislosti na dostupnosti komponentů může být tento přístup ekonomicky výhodnější než komerční řešení.
+Praktické dovednosti: Uživatel získá technické dovednosti spojené s vývojem a implementací mechanických systémů.
+Nevýhodou tohoto přístupu je časová náročnost spojená s návrhem a testováním systému, a potenciální potřeba seznámit se s technickými detaily týkajícími se motorů a kladek.\newline
+
+3. Vývoj vlastního řešení s krokovým motorem\newline
+Třetí možností je návrh vlastního systému využívajícího krokový motor. Tento přístup zahrnuje pokročilější technické znalosti, ale nabízí možnosti přesné kontrolování pohybu dveří kurníku:
+
+Přesnost: Krokový motor umožňuje přesnou kontrolu rychlosti a polohy dveří, což je užitečné v případě potřeby plynulého zavírání a otevírání.
+Programovatelnost: Systém může být naprogramován k automatickému otevírání a zavírání v závislosti na čase, světelných podmínkách nebo jiných parametrech.
+Možnosti rozšíření: Toto řešení může být rozšířeno o další senzory a kontrolní mechanismy pro zvýšení funkčnosti.
+Na druhou stranu, tento přístup vyžaduje více času na vývoj a testování, a také znalosti v oblasti elektroniky a programování.
+
+Každé z těchto řešení má své výhody a nevýhody, a výběr závisí na specifických potřebách uživatele, jeho technických schopnostech a rozpočtu.
+
+
+slepice zůstanou venku
+Bezpečné zavírání dvířek kurníku je klíčové, aby nedocházelo k uzavření slepic mimo kurník, kde by byly ohroženy predátory nebo nepříznivými povětrnostními podmínkami. Zde je několik tipů a technik, jak toho dosáhnout:
+
+Použití senzorů pohybu nebo přítomnosti:
+
+Instalujte senzory pohybu nebo infrapasivní senzory (PIR), které detekují přítomnost slepic v blízkosti dvířek. Pokud jsou senzory aktivovány, dvířka zůstanou otevřená nebo se znovu otevřou, aby umožnily slepicím bezpečný vstup.
+Časové zpoždění zavírání:
+
+Nastavte systém na časové zavírání dvířek s dostatečným zpožděním po soumraku, aby se všechny slepice stihly vrátit do kurníku. Pomocí časovače můžete určit optimální čas zavírání na základě ročních období.
+Světelný senzor:
+
+Použití světelného senzoru, který reaguje na změnu světla při západu slunce, umožní dvířkům se automaticky zavřít. Tento systém může být kalibrován tak, aby zohlednil přirozené chování slepic vracících se do kurníku, když se stmívá.
+Ruční ověření:
+
+Pokud je to možné, provádějte před zavřením dvířek poslední vizuální kontrolu, abyste se ujistili, že jsou všechny slepice v kurníku.
+Zvukové signály:
+
+Před zavřením dvířek může být spuštěn zvukový signál, jako je bzučák nebo jemný alarm, který slepicím naznačí, že se dvířka brzy zavřou, což je přiměje vstoupit do kurníku.
+Postupné zavírání:
+
+Počítání pomocí kamery
+
+Implementujte systém, který dveře zavírá postupně, což minimalizuje riziko, že by slepice zůstaly uvězněné venku. Tento systém může fungovat na principu pomalého sklápění dveří pomocí krokového motoru.
+Použití těchto opatření může výrazně snížit riziko, že by slepice zůstaly venku, a zároveň zvýšit celkovou bezpečnost a efektivitu provozu automatizovaného systému zavírání dvířek kurníku.
+
+\subsection{Řešení}\label{subsec:chytra-dvirka-reseni-problemu}
+Vytvoření automatických dvířek řízených Arduinem s pohonem na táhlový motor a integrací s Home Assistantem prostřednictvím MQTT může být zajímavý projekt. Zde je podrobný postup, jak můžete tento projekt uskutečnit:
+
+Materiály a nástroje
+Konstrukční materiál:
+
+Hliníkové profily a úhelníky pro rám a dvířka
+Spojovací materiál (šrouby, matice)
+Elektronika:
+
+Arduino (např. Arduino Uno)
+H-můstek (např. L298N) pro ovládání motoru
+Táhlový motor (např. stejnosměrný motor s posuvníkem)
+Napájecí adaptér pro motor (podle specifikace motoru)
+Senzory a další komponenty:
+
+Koncové spínače pro detekci polohy dvířek (otevřené/zavřené)
+Modul ESP8266 nebo ESP32 pro Wi-Fi připojení a komunikaci s MQTT
+Breadboard a propojovací vodiče
+Software:
+
+Arduino IDE
+MQTT broker (např. Mosquitto)
+Home Assistant upravený pro integraci MQTT
+Mobilní aplikace pro Home Assistant
+Krok za krokem
+Mechanická konstrukce:
+Návrh a sestavení:
+
+Navrhněte rozměry dvířek a rámu s ohledem na montáž táhlového motoru a připojení koncových spínačů.
+Sestavte hliníkový rám a upevněte pohyblivou část ke konstrukci pomocí táhlového motoru.
+Montáž táhlového motoru:
+
+Upevnite táhlový motor tak, aby mohl otevírat a zavírat dvířka.
+Připevněte koncové spínače, které budou detekovat koncové polohy (úplně otevřeno, úplně zavřeno).
+Elektronická konstrukce:
+Zapojení elektroniky:
+Připojte motor k H-můstku a ten k Arduinu, společně s napájením.
+Zapojte koncové spínače k Arduinu pro detekci polohy dvířek.
+Přidejte ESP8266/ESP32 k Arduinu pro Wi-Fi komunikaci.
+Naprogramování Arduina:
+Arduino kód:
+Naprogramujte Arduino k přijímání příkazů přes sériovou linku z ESP8266/ESP32 (pomocí knihovny pro komunikaci s MQTT).
+Implementujte logiku pro řízení motoru na základě příkazů (otevřít/zavřít), s využitím údajů z koncových spínačů pro bezpečné zastavení motoru.
+Použijte H-můstek pro přepínání polarity motoru, což umožní reverzaci směru otáčení.
+Integrace s MQTT:
+Nastavení MQTT:
+
+Zprovozněte MQTT broker. Pokud používáte Mosquitto, můžete ho spustit na serveru nebo Raspberry Pi.
+Nastavte ESP8266/ESP32 pro odesílání a přijímání MQTT zpráv z brokera.
+Integrace s Home Assistant:
+
+Přidejte MQTT integraci do Home Assistantu a vytvořte entity pro řízení dvířek (pomocí YAML konfigurace).
+Nastavte automatizace nebo scény, pokud je chcete ovládat na základě dalších podmínek (např. časovač, senzor).
+Ovládání z mobilní aplikace:
+Nastavení mobilní aplikace:
+Připojte mobilní aplikaci Home Assistant k vaší instanci Home Assistantu.
+Vytvořte uživatelsky přívětivé rozhraní pro ovládání dvířek z aplikace.
+Testování a ladění:
+Testování funkčnosti:
+Ověřte správnost mechanické instalace a zkontrolujte, zda dvířka správně reagují na příkazy.
+Testujte komunikaci přes MQTT a přesvědčte se, že příkazy z mobilu správně aktivují činnost dvířek.
+Otestujte automatizace a jejich spolehlivost.
+Tento projekt kombinuje mechanickou konstrukci, elektroniku a softwarové řešení. Ujistěte se, že každou část projektu pečlivě testujete a ladíte pro zajištění bezpečného a spolehlivého provozu.
+
+
+jak jsem to konkrétně realizoval
+
+ovladaní dvířek
+bezpečné zavírání - počítaní
+\subsection{Zhodnocení}\label{subsec:chytra-dvirka-zhodnoceni}
+
+Při zhodnocení nového stavu automatických dvířek postavených podle navrženého řešení je důležité zvážit obě strany – výhody i nevýhody.
+
+Klady
+Automatizace a pohodlí:
+
+Dvířka se otevírají a zavírají automaticky, což zvyšuje pohodlí, zejména pokud máte často obsazené ruce.
+Dálkové ovládání:
+
+Možnost ovládat dvířka na dálku pomocí mobilní aplikace představuje pohodlné a flexibilní řešení pro uživatele.
+Integrace s Home Assistantem:
+
+Systém je kompatibilní s Home Assistantem, což umožňuje integraci do širšího ekosystému chytré domácnosti a automatizace různých úloh.
+Možnost programování:
+
+Díky použití Arduina je možné systém snadno programovat a přizpůsobovat funkcionalitu podle potřeby.
+Vzdálené monitorování a ovládání:
+
+Schopnost monitorovat stav dvířek a řídit jejich funkčnost přes MQTT zvyšuje míru kontroly a bezpečnosti.
+Zápory
+Komplexita instalace:
+
+Sestavení a instalace mohou být složité a časově náročné, vyžadují znalosti z elektroniky, programování a konstrukce.
+Náklady:
+
+I když jsou komponenty jako Arduino a ESP8266 relativně levné, celkové náklady mohou narůst včetně motoru a dalších komponentů.
+Spolehlivost:
+
+Systém může být náchylný k problémům spojeným s výpadky připojení, chybami v softwaru nebo mechanickými poruchami.
+Spotřeba energie:
+
+Systém je závislý na elektrické energii, takže v případě výpadku proudu může dojít k nefunkčnosti.
+Bezpečnost a zabezpečení:
+
+Nezabezpečený přístup k MQTT brokeru nebo k systému Home Assistant by mohl způsobit bezpečnostní rizika.
+Údržba:
+
+Systém může vyžadovat pravidelnou údržbu, zejména u mechanických částí, aby bylo zajištěno jejich správné fungování.
+Závěr
+Realizace tohoto projektu může významně zvýšit komfort a automatizaci ve vaší domácnosti, ale přinese s sebou i určité výzvy, které je potřeba zvážit a připravit se na jejich řešení. Úspěch projektu bude záviset na kvalitní realizaci, testování a následné údržbě.
