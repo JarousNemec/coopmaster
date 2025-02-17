@@ -1,0 +1,37 @@
+\externaldocument{text-02-teoreticka}
+
+\subsection{Scale driver}\label{subsec:scale-driver}
+Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
+Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
+
+\subsubsection{Funkcionalita}
+Nejprve naběhne hlavní vlákno, které se stará o poskytování RESTového api na portu 9004.
+Toto api obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí požadavku s metodou get.
+Následně je spuštěno nové vlákno, které má za úkol číst data z váhy a předávat je aplikačnímu rozhraní jako aktuálně naměřenou hmotnost na váze, jež se bude od teď poskytovat, pokud o ní někdo GET requestem požádá.
+Čtení informací z váhy se prování v nekonečném cyklu.
+Před začátkem cyklu se zaloguje že je nové vlákno úspěšně spuštěno a následně proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial.
+Po úspěšném otervření spojení se váze vždy po uplinutí časového intervalu 2 sekundy, odešle znak w.
+Tento znak je ve firmwaru váhy vedeno jako příkaz, při jehož přijetí má váha vrátit aktuální naměřenou hodnotu.
+Časové spoždění je implementováno kvůli tomu, že není třeba číst data tak často a zároveň by mohlo docházet k zahlcení váhy.
+Jakmile je celá odpověď od váhy přijata programem zpět, jsou data zvalidována a následně, pokud je to možné, převedena na datový typ Int.
+Datový typ Int je zvolen z důvodu, že váha posílá data v gramech a je zbytečné v tomto případě používat desetinná čísla, protože gramy poskytují dostatečné rozlišení pro naše účeli.
+Pokud se nepodaří převézd přečtenou hodnotu na číslo, je výtupní promněnná nastavena na -1, což zbytku systému značí, že váha není v pořádku.
+Na závěr se zalogují aktuálně získaná data a následuje další volání cyklu.
+
+\subsubsection{Technologie}
+\begin{itemize}
+    \item Jazyk Python a jeho knihovny
+    \item REST api
+    \item HTTP protokol
+    \item Serialový port
+\end{itemize}
+
+\subsubsection{Použíté knihovny}
+\begin{itemize}
+    \item Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
+    \item colorama: Manipulace s barvami v textovém výstupu na terminálu.
+    \item waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
+    \item pyserial: Komunikace se sériovými zařízeními přes sériovéporty.
+    \item python-dotenv: Načítání konfigurace z .env souborů.
+\end{itemize}
+

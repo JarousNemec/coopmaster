@@ -11,50 +11,83 @@ Před tím než se započne tvorba jakékoli aplikace, je třeba určit, pro koh
 V našem případě jde o to, že systém by měl být schopný používat člověk znalý v chovu hospodářských zvířat, ale často méně zdatný v používání informačních technologií a mobilních aplikací.
 Na základě toho, že už víme, kdo je cílový uživatel můžeme se zamýšlet jakou funkcionalitu do řešení implementovat.
 Jedná se tedy o to, aby aplikace umožňovala uživateli vzdálený dohled na jeho chov a pomáhala mu šetřit čas zautomatizováním každodenních činnosti.
+
 Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 \begin{itemize}
-    \item Vzdálený přístup skrze internet odkudkoli
-    \item Pohledy z bezpečnostních kamer ve vnitřním i venkovním výběhu
-    \item Dálkové ovládání a automatizace světla a bezpečnostních dvířek v kurníku
+    \item Vzdálený přístup
+    \item Pohledy z bezpečnostních kamer
+    \item Dálkové ovládání a automatizace světla a dvířek v kurníku
     \item Intuitivní vizualizace stavů jednotlivých hnízd(sedící slepice, v opačném případě počet vajec)
-    \item Automatické upozornění notifikacemi v telefonu na vetřelce ve výběhu
-    \item Vizualizace aktuálních povětrnostních podmínek v kurníku (teplota a vlhkost)
+    \item Upozornění na detekování vetřelce ve výběhu
+    \item Poskytování dat o teplotě a vlhkosti
 \end{itemize}
 
 \section{Návrh architektury a volba technologií}\label{sec:navrh-architektury-a-volba-technologii}
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
-Jsme nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
-Celý ekosystém se skládá z několika samostatných celků
-\begin{itemize}
-    \item Fyzická zařízení jako kamery a senzory
-    \item Architektura systému obsahující hlavní funkcionalitu(sekce~\ref{sec:backend})
-    \item Uživatelské rozhraní
-    \item Komunikace mezi GUI a backendem systému
-    \item Zpřístupnění aplikace z internetu
-\end{itemize}
+Jsme tedy nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
+Tato sekce se bude zabývat analýzou a návrhem architektury systému Coopmaster dle požadavků ze sekce~\ref{sec:rozvrzeni-person}.
 
-\subsection{Architektura hlavního systému}\label{subsec:microservices}
+\subsection{Architektura dle jednotlivých potřeb uživatele}\label{subsec:microservices}
 Jako teoretický model na základě kterého, budeme organizovat a třídit funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
-Tento způsob rozvržení zodpovědnosti jednotlivých částí systému jsem zvolil, kvůli velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.
-Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:ipcamera-rtsp}).
+Tento způsob rozvržení zodpovědnosti částí systému jsem zvolil, díky velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.
+Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:python}).
 Python byl vybrán kvůli jeho univerzálnosti, snadné syntaxi a podpoře ze strany vývojářů a komunity.
 Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine(sekce~\ref{sec:kontejnerizace}) společně s rozšířením Docker Compose.
-Na základě určeného způsobu zapouzdření funkcionality je architektura rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
-\begin{itemize}
-    \item Camera driver
-    \item Scale driver
-    \item Room driver
-    \item Health checker
-    \item Room assistant
-    \item Nest watcher
-    \item Dog alarm
-    \item Chicken watch guard
-\end{itemize}
+%\subsubsection{Zjednodušení implementace uživatelského rozhraní a automatizace úkolů}
+Podstatnou otázkou bylo, zda se pouštět do tvorby kompletně vlastního systému pro uživatelského rozhraní a automatizaci.
+Po zvážení časové náročnosti, technologické náročnosti a komplexnosti takového systému, mi bylo jasné, že tudy cesta nepovede.
+Bylo tedy třeba najít open source systém, který již touto funkcionalitou disponuje.
+Nakonec jsem zvolil systém Home Assistant, protože jsem s ním již dříve pracoval a mám s ním dobré zkušenosti.
+Home Assistant má na internetu také rozsáhlou podporu a komunitu s množstvým nápadů a již hotových řešení pro inspiraci.
+Popis toho, jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno v sekci~\ref{subsec:tvorba-gui-rozhrani}.
 
-\subsection{Uživatelské rozhraní}\label{subsec:gui}
-Aplikace musí mít rozhodně i grafické rozhraní.
-Pro tento účel byla zvolena open source aplikace Home Assistant(sekce~\ref{sec:home-assistant}).
-Home assistant byl zvolen kvůli jeho univerzálnosti, rozsáhlé podpoře, komunitě bohaté na custom řešení a obrovské možnosti konfigurace a přispůsobení, čehož pro ovládání a vizualizaci dat z našeho systému hojně využijeme.
+\subsubsection{Ovládání světla a poskytování dat o teplotě a vlhkosti}
+%todo popis proč a jak to plní uživatelskou storku, popis jaké jsou vazby, jak jednotlivé moduly spolupracují, vysvětlení jak jsem se dobral k tomuto řešení
+Jsou použity částí Řídící jednotka, Moduly systému Coopmaster(Room Driver a Room Assistant) a systém Home Assistant.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/svetlo_teplo_vlhkost}
+    \caption{Mechanismus pro ovládání světla a poskytování dat o teplotě a vlhkosti}
+    \label{fig:svetlo_teplo_vlhkost}
+\end{figure}
+\subsubsection{Automatizace dvířek}
+%todo popis proč a jak to plní uživatelskou storku, popis jaké jsou vazby, jak jednotlivé moduly spolupracují, vysvětlení jak jsem se dobral k tomuto řešení
+Jsou použity částí Kamerový systém, Elektrická dvířka, Moduly systému Coopmaster(Camera Driver, Chicken Watch Guard, Room Driver a Room Assistant) a systém Home Assistant.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/automatizace_dvirek}
+    \caption{Mechanismus bezpečného zavření dvířek}
+    \label{fig:automatizace_dvirek}
+\end{figure}
+\subsubsection{Detekce vetřelců}
+%todo popis proč a jak to plní uživatelskou storku, popis jaké jsou vazby, jak jednotlivé moduly spolupracují, vysvětlení jak jsem se dobral k tomuto řešení
+Jsou použity částí Kamerový systém, Moduly systému Coopmaster(Camera Driver a Dog Alarm) a systém Home Assistant.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/detekce_vetrelcu}
+    \caption{Mechanismus detekce vetřelců}
+    \label{fig:detekce_vetrelcu}
+\end{figure}
+\subsubsection{Vizualizace stavů hnízd}
+%todo popis proč a jak to plní uživatelskou storku, popis jaké jsou vazby, jak jednotlivé moduly spolupracují, vysvětlení jak jsem se dobral k tomuto řešení
+Jsou použity částí Digitální Váha, Moduly systému Coopmaster(Scale Driver a Nest Watcher) a systém Home Assistant.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{img/vizualizace_stavu_hnizd}
+    \caption{Mechanismus vizualizace stavů hnízd}
+    \label{fig:vizualizace_stavu_hnizd}
+\end{figure}
+%Na základě určeného způsobu zapouzdření funkcionality je architektura rozdělena do následujících služeb, které jsou pojmenovány dle jejich účelu
+%\begin{itemize}
+%    \item Camera driver
+%    \item Scale driver
+%    \item Room driver
+%    \item Health checker
+%    \item Room assistant
+%    \item Nest watcher
+%    \item Dog alarm
+%    \item Chicken watch guard
+%\end{itemize}
 
 \subsection{Komunikace mezi Backendem a Frontendem}\label{subsec:komunikace-mezi-backendem-a-frontendem}
 Je třeba zajistit komunikaci mezi Home Assistantem a Službami.
@@ -89,9 +122,10 @@ Popis konkrétního zapojení a konstrukce je sepsán níže v sekci~\ref{subsec
 Pro ovládatní dvířek a snímání povětrnostních podmínek je nejrozumnější vytvořit řídící jednotku, která tyto požadavky obsáhne.
 Další částí částí jsou samotná elektrická dvířka, jejichž funkce bude na základě způsobu elektrického signálu být otevřená nebo zavřená.
 Teplota a vlhkost jsou snímány senzory, jež jsou souřástí řídící jednotky.
-Implementace je popsána v sekci~\ref{subsec:ridici-jednotka}.
+Řídící jednotka je popsána v sekci~\ref{subsec:ridici-jednotka} a konstrukce dvířek v sekci~\ref{subsec:konstrukce-dvirek}.
+
 \subsubsection{Snímání scén v kurníku a ve výběhu}
-Ke snímání scén v daných oblastech je třeba vyprat zařízení s dostatečnou odolností proti povětrnostním vlivům.
+Ke snímání scén v daných oblastech je třeba vybrat zařízení s dostatečnou odolností proti povětrnostním vlivům.
 Speciálně v kurníku je hodně agresivní prostředí kvůli vysoké vlhkosti a pro dlouhodobý provoz je třeba vybrat kvalitní a odolnou techniku.
 Zařízení musí být připojeno přes ethernet a musí být napájené ze sítě nikoli pomocí baterie.
 Na základě předchozí analýzy je vhodné použít venkovní ip kameru.
@@ -120,31 +154,33 @@ Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 kor
 My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
-\section{Popis jednotlivých modulů}\label{sec:popis-jednotlivych-modulu}
+\section{Popis jednotlivých modulů systému}\label{sec:popis-jednotlivych-modulu}
 
-\input{text-300-camera-driver}
+\input{text1/text-300-camera-driver}
 
-\input{text-301-scale-driver}
+\input{text1/text-301-scale-driver}
 
-\input{text-302-room-driver}
+\input{text1/text-302-room-driver}
 
-\input{text-303-heatlh-checker}
+\input{text1/text-303-heatlh-checker}
 
-\input{text-304-room-assistant}
+\input{text1/text-304-room-assistant}
 
-\input{text-305-nest-watcher}
+\input{text1/text-305-nest-watcher}
 
-\input{text-306-dog-alarm}
+\input{text1/text-306-dog-alarm}
 
-\input{text-307-chicken-watch-guard}
+\input{text1/text-307-chicken-watch-guard}
 
-\input{text-308-gui-rozhrani}
+\input{text1/text-308-gui-rozhrani}
 
-\input{text-309-digitalni-vaha}
+\input{text1/text-309-digitalni-vaha}
 
-\input{text-310-ridici-jednotka}
+\input{text1/text-310-ridici-jednotka}
 
-\input{text-311-kamerovy-system}
+\input{text1/text-311-kamerovy-system}
+
+\input{text1/text-312-konstrukce-dvirek}
 
 \subsection{---poznámky TODO ke smazání---}\label{subsec:---poznamky-todo-ke-smazani---}
 - budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline

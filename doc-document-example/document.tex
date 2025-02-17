@@ -1,5 +1,5 @@
 \documentclass{template/socthesis}
-\addbibresource{text.bib}
+\addbibresource{text3/zdroje/text.bib}
 
 \usepackage{subcaption}
 \usepackage{amsmath}
@@ -49,19 +49,40 @@
     %%% Začátek práce
     \setcounter{figure}{0}
     \setcounter{table}{0}
-%    \newpage
+
+    %%% Struktura práce
+
+%    %%% Úvod (úvod do problematiky, představení o co se bude zhruba jednat, nějaký stručný popis práce co do struktury a obsahu)
+%    \input{text3/text-01-uvod}
+%
+%    %%% Představení problémů neboli představení zadání (Vyjmenování a představení jednotlivých požadavků, které má zadavatel)
+%    \input{text3/text-02-zadane-problemy}
+%
+%    %%% Zamyslení nad možnými řešeními (Každý problém se dá řešit několika způsoby, zde je potřeba navrhnout několik možných řešení a odůvodnit proč jsou některá dobrá volba a proč ta další ne)
+%    \input{text3/text-03-analyza-reseni}
+%
+%    %%% Řešení zadání (Na základně toho že jsme si zvalidovali možná řešení a vybrali jedno z nich zde nyní popíšeme jak jsme jednotlivé prvky implementovali)
+%    \input{text3/text-04-reseni}
+%
+%    %%% Slovník pojmů (Stručné vysvětlení teoretických pojmů, jejichž tvorba nebyla součástí práce)
+%    \input{text3/text-05-slovnik-pojmů}
+%
+%    %%% Todo: možná by se sem pak dalo přidat ještě zamyslení nad dalšími možnými využitími podobných systému, ale to jenom pokud zbyde čas
+%
+%    %%% Závěr (vyhodnocení co se povedlo neboli jaký je aktuální stav, co se zlepšilo)
+%    \input{text3/text-06-zaver}
 
     %%% Úvod
-    \input{text-01-uvod}
+    \input{text1/text-01-uvod}
 
-    \input{text-02-teoreticka}
+    \input{text1/text-02-teoreticka}
 
-    \input{text2-03-prakticka}
+    \input{text1/text-03-prakticka}
 
-    \input{text-04-zamysleni}
+    \input{text1/text-04-zamysleni}
 
     %%% Závěr
-    \input{text-05-zaver}
+    \input{text1/text-05-zaver}
 
     \printbibliography[title=Použitá Literatura]
     \addcontentsline{toc}{section}{Použitá Literatura}
