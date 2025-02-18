@@ -23,6 +23,8 @@ Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
 \end{itemize}
 
 \newpage
+
+
 \section{Návrh architektury a volba technologií}\label{sec:navrh-architektury-a-volba-technologii}
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
 Jsme tedy nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
@@ -200,6 +202,8 @@ My v našem řešení využíváme službu Forpsi, protože s ní máme již př
 Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \newpage
+
+
 \section{Popis jednotlivých modulů systému}\label{sec:popis-jednotlivych-modulu}
 
 \input{text1/text-300-camera-driver}
@@ -242,6 +246,15 @@ Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je pop
 - na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
 
 \newpage
+
+
+\section{Učení Yolo modelů}\label{sec:uceni_yolo_modelu}
+\input{text1/text-350-ml-klasifikace}
+\newpage
+\input{text1/text-351-ml-segmentace}
+\newpage
+
+
 \section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
 - zjistilo se že bez poe je to špatná volba \newline
 - kamery žerou dost proudu\newline
@@ -250,6 +263,8 @@ Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je pop
 - na stole to většinou funguje dobře \newline
 
 \newpage
+
+
 \section{Nasazení do kurníku}\label{sec:nasazeni-do-kurniku}
 - bylo potřeba natahat elektřinu a internet \newline
 - elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
@@ -265,6 +280,8 @@ Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je pop
 - bylo potřeba zkalibrovat hmotnosti slepic a vajec
 
 \newpage
+
+
 \section{Konfigurace vzdáleného přístupu}\label{sec:konfigurace-vzdaleneho-pristupu}
 - rpi propojene s nuckem a dev kompama přes tailscail\newline
 - v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
@@ -274,6 +291,8 @@ Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je pop
 - zmínění jaká plynou nebezpečí z tohoto řešení
 
 \newpage
+
+
 \section{Rozvržení práce do budoucna}\label{sec:rozvrzeni-prace-do-budoucna}
 - jak by se řešení dalo zoptimalizovat\newline
 - vylepšení modelu pro classifykaci\newline
@@ -283,5 +302,7 @@ Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je pop
 - implementace autonomního chování do Room Assistanta
 
 \newpage
+
+
 \section{Ekonomická stránka projektu}\label{sec:ekonomicka-stranka-projektu}
 
