@@ -1,0 +1,12 @@
+\externaldocument{text-02-teoreticka}
+\subsection{GUI rozhraní}\label{subsec:tvorba-gui-rozhrani}
+- vybral se teda ten home assistant a ted ho nakonfit\newline
+- konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
+- byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
+- po přidání senzorů jsem si hrál s vizualizací jednotlivých hnízd tak aby to pro uživatele bylo přívětivě\newline
+- napsal jsem proto vlastní komponentu pro HA viz foto a trello\newline
+- zajímavé zjištění bylo že state který jsem využíval pro předávání textových zpráv má maximální velikost 255 bytů\newline
+- takže jsem z jsonu přešel na csv\newline
+- pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
+- následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
+- závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline

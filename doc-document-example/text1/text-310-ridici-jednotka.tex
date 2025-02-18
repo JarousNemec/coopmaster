@@ -1,0 +1,31 @@
+\externaldocument{text-02-teoreticka}
+\subsection{Řídící jednotka}\label{subsec:ridici-jednotka}
+Řídící jednotka je vlastní sestavené zařízení, které zprostředkovává pomocí USB připojení data o teplotě a vlhkosti v kurníku.
+Další úlohou je kontrola a ovládání dvířek a světla.
+Srdem řídící jednotky je Arduino Nano.
+Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovími prvky(relé, senzory) a počítačem, na němž běží služby ovládají nebo využívající data z těchto iprvky.
+
+%## funkcionalita
+%- umoznuje ovladat osvetleni kurniku
+%- resi otevírání a zavírání dvířek v kurníku
+%- ziskava informace ze senzoru o teplote a vlhkosti v kurniku
+%- komunikuje se zbytkem systému pomocí rest api
+%- s arduinem komunikuje pomocí serialového portu a pomocí zasílání příkazů v podobě jednoho písmene
+%- příkazy: o = otevřít dvířka, c = zavřít dvířka, l = rozsvítit světlo, d = zhasnout světlo, j = vrátí json s daty o teplotě a vlhkosti, s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+%
+%## technologie
+%- c++ / wire (jazyk pro programování v arduino ide)
+%- knihovny pro arduino
+%- defaultní **Arduino.h**
+%- **DHT**: pro ovládání teplotních+vlhkostních sezorů DHT11 a DHT22
+%- táhlový motor 12v nevím kolik neutonů
+%- zpřevodovaný motorek k navijáku
+%- relé 5v 10A
+%
+%
+%## hardware
+%- arduino Nano v3.0
+%- teplotni a vlhkosti senzor DHT11
+%- relatko ovladajici svetlo a relátka udávající chod a směr motoru
+%- napájeno připojením ke raspberry pi přes usb napětím 5V
+%

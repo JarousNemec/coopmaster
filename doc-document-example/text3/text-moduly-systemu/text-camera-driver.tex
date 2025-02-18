@@ -1,0 +1,48 @@
+\externaldocument{text-02-teoreticka}
+
+\subsection{Camera driver}\label{subsec:camera-driver}
+Camera driver je služba zodpovědná za sprostředkování komunikace mezi ip kamerami a službami zpracovánajícími obraz (Dog alarm, Chicken watch guard).\newline
+
+\subsubsection{Funkcionalita}
+Po startu služby naběhne RESTové api na portu 9001 vytvořené za pomoci pythonového frameworku Flask.
+Api poskytuje endpoint pro získání aktuálního snímku z každé kamery, která je službě přiřazena v konfiguraci.
+S kamerami služba komunikuje pomocí HTTP protokolu.
+Byla zvažována i možnost využití protokolu RTSP, ale protože nemáme prozatím žádne vysoké nároky na živý přenos a stačí nám pouze jednou za čas aktuální snímek, ukazala se proto lepší volba a to využití REST api kamery pro stažení obrázku.
+Jakmile je přijat požadavek na získání aktuálního snímku z konkrétní kamery, služba za pomocí get requestu stáhne obraz z restového api síťové kamery a vrátí ho ve Full HD rozlišení jako odpověď na http dotaz.
+Url, z kterého má služba obrázek stahovat, získá z konfigurace předávané pomocí systémových promenných.
+Kamery mají vlastní zabezpečení, proti neoprávněnému přístupu k datům.
+V případě ověřování HTTP komunikace se používá metoda Digest Access Authentication, pomocí které je kamerě předáváno uživatelské jméno a heslo.
+
+\subsubsection{Technologie}
+\begin{itemize}
+    \item Jazyk Python a jeho knihovny
+    \item REST api
+    \item HTTP protokol
+\end{itemize}
+
+\subsubsection{Použíté knihovny}
+\begin{itemize}
+    \item Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
+    \item colorama: Manipulace s barvami v textovém výstupu na terminálu.
+    \item waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
+    \item python-dotenv: Načítání konfigurace z .env souborů.
+    \item Requests: Jednoduché HTTP požadavky (GET, POST, atd.).
+\end{itemize}
+
+%# coopmaster-camera-driver
+%- komunikator mezi IP camerou a obraz zpracovavajici aplikaci (dog alarm, chicken watch guard)
+%
+%## funkcionalita
+%- nese si informaci o konfiguraci jednotlivych IP kamerach aktuálně je zde pevně zahardcoděne používání dvou kamer 1. pro dog alarm a 2. pro chicken watch guard
+%- vystavuje REST API pro ziskani aktualniho obrazu z chicken kamery a kamery v ohrade
+%- vraci obrazek ve FULL HD rozliseni
+%- pro každý call se načte nový obrázek z kamery
+%
+%## technologie
+%- python
+%- rtsp - real-time streaming protocol
+%- knihovny
+%
+%
+%## hardware
+%- IP camera Hilook by Hikvision IPC-B180HA-LU
