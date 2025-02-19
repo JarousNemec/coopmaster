@@ -1,10 +1,8 @@
-\externaldocument{text-02-teoreticka}
-
-\subsection{Digitální váha do hnízda}\label{subsec:digitalni-vaha-do-hnizda}
+\section{Digitální váha do hnízda}\label{sec:digitalni-vaha-do-hnizda}
 Pro účely projektu bylo potřeba postavit digitální váhu vlastní konstrukce.
 Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice snáší vejce, a jejím úkolem je přes usb poskytovat aktuální data o tom jakou hmotností je zatěžována podložka hnízda.
 
-\subsubsection{Funkcionalita}
+\subsection*{Funkcionalita}
 Po připojení napájení k arduinu, se nejdříve nastaví a připojí serialová komunikace rychlostí 9600 baudů pomocí usb.
 Následně je instancován objekt starající se o sprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
 Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a poskytuje je po serialovém připojení.
@@ -18,7 +16,7 @@ Přijmutý znak t znamená tare neboli vynulovat váhu.
 Na základě toho se programu řekne, že aktuální data přijímaná ze senzoru má brát jako hmotnost 0 g.
 
 
-\subsubsection{Konstrukce váhy}
+\subsection*{Konstrukce váhy}
 Jako řídící jednotka váhy je použito Arduino Nano, jež je zodpovědné za komunikaci s počítačem pomocí serialového připojení a načítání dat o hmotnosti z AD převodníku HX711 přes, který je arduino připojeno k tenzometrickému senzoru.
 Hmotnost je měřena tenzometrickým senzorem se jmenovitým zatížením 20 kg.
 Toto zapojení je nutné vzhledem ke konstrukci a vlastnostem senzoru.
@@ -33,7 +31,7 @@ Nakonec je jako platforma, na které slepice sedí, zvolena čtvercová miska o 
 Nemohla by to být například pouze rovná deska, protože slepice potřebuje pro pohodlné sezení podestýlku kterou tvoří seno a v případě desky by se seno dostalo mezi stěny hnízda a desku a váha by se tak nemohla volně pohybovat a zasekávala by se.
 Takto v misce je mnohem menší šance, že bude nějak větší množství sena vytlačeno a bude přidírat váhu.
 
-\subsubsection{Kalibrace}
+\subsection*{Kalibrace}
 Po fyzickém sestavení váhy je třeba provést kalibraci.
 Kalibrace námi používaných senzorů je obecně nutná, protože se díky ní eliminují rozdíli mezi senzory, překryjí se nedostatky konstukce váhy a zajistí přesnost a korektnost měření pro konkrétní senzor.
 To znamená najít vhodnou hodnotu kalibračního faktoru, která se již za běhu váhy nebude měnit.
@@ -43,7 +41,7 @@ Já doma použil 5 pitlů polohrubé mouky jejichž hmotnost jsem si ověřil p�
 Následujícím krokem je naleznutí odpovídající hodnoty kalibračního faktoru, čehož je docilováno buď zvyšováním nebo snižováním kalibračního faktoru na základě toho zda výsledná hmotnost dle výpočtů s využitím aktuálního faktoru je moc nízká nebo moc vysoká.
 
 
-\subsubsection{Hardware}
+\subsection*{Hardware}
 \begin{itemize}
     \item Arduino Nano v3.0
     \item AD převodník HX711
@@ -51,7 +49,7 @@ Následujícím krokem je naleznutí odpovídající hodnoty kalibračního fakt
     \item Železná konstrukce váhy
 \end{itemize}
 
-\subsubsection{Arduino knihovny}
+\subsection*{Arduino knihovny}
 \begin{itemize}
     \item Arduino.h - defaultní arduino knihovna
     \item HX711.h - pro usnadnění komunikace s AD převodníkem HX711

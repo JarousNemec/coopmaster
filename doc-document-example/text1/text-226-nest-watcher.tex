@@ -1,5 +1,4 @@
-\externaldocument{text-02-teoreticka}
-\subsection{Nest watcher}\label{subsec:nest-watcher}
+\section{Nest watcher}\label{sec:nest-watcher}
 Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
 Hlavní funkcí je načítání a analýza dat z jednotlivých vah v hnízdech, která jsou reprezentována Scale Drivery.\newline
 
@@ -66,15 +65,15 @@ Celkově systém obsluhuje šest hnízd, přičemž každé je nepřetržitě mo
 \subsection*{Předpokládaná datová struktura v databázi:}
 
 \begin{table}[h!]
-\centering
-\begin{tabular}{lll}
-\textbf{Pole} & \textbf{Datový typ} & \textbf{Popis} \\
-timestamp & DATETIME & Datum a čas měření \\
-nid & INT & Identifikační číslo hnízda (1 až 6) \\
-weight & FLOAT & Naměřená hmotnost v gramech \\
-nest\_status & VARCHAR & Stav hnízda (např. "prázdné", "vejce", "slepice") \\
-\end{tabular}
-\caption{Datová struktura v databázi}
+    \centering
+    \begin{tabular}{lll}
+        \textbf{Pole} & \textbf{Datový typ} & \textbf{Popis}                                    \\
+        timestamp     & DATETIME            & Datum a čas měření                                \\
+        nid           & INT                 & Identifikační číslo hnízda (1 až 6)               \\
+        weight        & FLOAT               & Naměřená hmotnost v gramech                       \\
+        nest\_status  & VARCHAR             & Stav hnízda (např. "prázdné", "vejce", "slepice") \\
+    \end{tabular}
+    \caption{Datová struktura v databázi}
 \end{table}
 
 Tato datová struktura umožňuje efektivní ukládání a vyhodnocování dat z jednotlivých hnízd. Pole \texttt{nest\_status} může být automaticky vypočítáno na základě hodnoty v poli \texttt{weight} podle výše uvedených kritérií. Tímto způsobem můžeme snadno filtrovat a analyzovat data pro sledování stavu každého hnízda v čase.

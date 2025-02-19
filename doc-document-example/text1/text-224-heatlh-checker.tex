@@ -1,11 +1,9 @@
-\externaldocument{text-02-teoreticka}
-
-\subsection{Health checker}\label{subsec:health-checker}
+\section{Health checker}\label{sec:health-checker}
 Health checker je malá služba určená pro správce systému.
 Poskytuje informace o tom zda všechny potřebné služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
 Výpis stavů jednotlivých služeb je poskytován pomocí jednoduché webové stránky.
 
-\subsubsection{Funkcionalita}
+\subsection*{Funkcionalita}
 Po nastartování služby je spuštěno REST api pro komunikaci se správcem.
 Jediným endpointem služby je /status.
 Pokud uživatel pomocí prohlížeče pošle GET požadavek na tuto službu, bude mu vrácen seznam služeb a jejich stavů převedený do formátu JSON.

@@ -13,6 +13,10 @@
 \RequirePackage{xr}
 \RequirePackage[backend=biber,bibstyle=numeric,sorting=none,date=long,dateabbrev=false,texencoding=utf8,bibencoding=utf8,style=iso-numeric]{biblatex}
 \RequirePackage{caption}
+\RequirePackage[automake]{glossaries-extra}
+\RequirePackage[automake]{glossaries}
+%\setglossarystyle{list}
+\makeglossaries
 
 \selectlanguage{czech}
 

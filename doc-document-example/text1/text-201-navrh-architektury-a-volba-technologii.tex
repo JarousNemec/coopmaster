@@ -1,63 +1,37 @@
-\externaldocument{text-02-teoreticka}
 
 
-\chapter{Praktická část}\label{ch:prakticka-cast}
-Tato část práce předvede čtenáři konkrétní realizaci myšlenky probírané v této prací.
-Zároveň v se v ní čtenář dozví jak v praxi využít poznatky nabyté v teoretické části.
-
-
-\section{Rozvržení person}\label{sec:rozvrzeni-person}
-Před tím než se započne tvorba jakékoli aplikace, je třeba určit, pro koho danou aplikaci tvoříme a jak bychom chtěli, aby jí tento uživatel používal.
-V našem případě jde o to, že systém by měl být schopný používat člověk znalý v chovu hospodářských zvířat, ale často méně zdatný v používání informačních technologií a mobilních aplikací.
-Na základě toho, že už víme, kdo je cílový uživatel můžeme se zamýšlet jakou funkcionalitu do řešení implementovat.
-Jedná se tedy o to, aby aplikace umožňovala uživateli vzdálený dohled na jeho chov a pomáhala mu šetřit čas zautomatizováním každodenních činnosti.
-
-Rozhodlo se tedy, že aplikace bude uživateli poskytovat následující funkce
-\begin{itemize}
-    \item Vzdálený přístup
-    \item Pohledy z bezpečnostních kamer
-    \item Dálkové ovládání a automatizace světla a dvířek v kurníku
-    \item Intuitivní vizualizace stavů jednotlivých hnízd(sedící slepice, v opačném případě počet vajec)
-    \item Upozornění na detekování vetřelce ve výběhu
-    \item Poskytování dat o teplotě a vlhkosti
-\end{itemize}
-
-\newpage
-
-
-\section{Návrh architektury a volba technologií}\label{sec:navrh-architektury-a-volba-technologii}
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, a k tomu dáme do hromady, co uživatel od naší aplikace očekává.
 Jsme tedy nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
-Tato sekce se bude zabývat analýzou a návrhem architektury systému Coopmaster dle požadavků ze sekce~\ref{sec:rozvrzeni-person}.
+Tato sekce se bude zabývat analýzou a návrhem architektury systému Coopmaster dle požadavků ze sekce~\ref{ch:tvorba-zadani}.
 
-\subsection{Šlužby dle jednotlivých potřeb uživatele}\label{subsec:microservices}
+\section{Šlužby dle jednotlivých potřeb uživatele}\label{sec:microservices}
 Jako teoretický model na základě kterého, budeme organizovat a třídit funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
 Tento způsob rozvržení zodpovědnosti částí systému jsem zvolil, díky velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.\newline
 Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:python}).
 Python byl vybrán kvůli jeho univerzálnosti, snadné syntaxi a podpoře ze strany vývojářů a komunity.\newline
 Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine(sekce~\ref{sec:kontejnerizace}) společně s rozšířením Docker Compose.\newline
-Na základě předchozích rozhodnutí jsem tedy systém rozdělil do jednotlivých mikroslužeb, tak aby vznikla robustní a rozšiřitelná mikroservisní architektura a byly splněny všechyn uživatelské požadavky, které jsme si určili (\ref{sec:rozvrzeni-person}).\newline
+Na základě předchozích rozhodnutí jsem tedy systém rozdělil do jednotlivých mikroslužeb, tak aby vznikla robustní a rozšiřitelná mikroservisní architektura a byly splněny všechyn uživatelské požadavky, které jsme si určili (\ref{ch:tvorba-zadani}).\newline
 Bylo tedy navrženo 8 služeb, které obsahují námi naprogramovanou funkcionalitu a dohromady společně s hardwarovými prvky tvoří systém Coopmaster.
 \begin{itemize}
-    \item Camera driver (\ref{subsec:camera-driver})
-    \item Scale driver (\ref{subsec:scale-driver})
-    \item Room driver (\ref{subsec:room-driver})
-    \item Health checker (\ref{subsec:health-checker})
-    \item Room assistant (\ref{subsec:room-assistant})
-    \item Nest watcher (\ref{subsec:nest-watcher})
-    \item Dog alarm (\ref{subsec:dog-alarm})
-    \item Chicken watch guard (\ref{subsec:chicken-watch-guard})
+    \item Camera driver (\ref{sec:camera-driver})
+    \item Scale driver (\ref{sec:scale-driver})
+    \item Room driver (\ref{sec:room-driver})
+    \item Health checker (\ref{sec:health-checker})
+    \item Room assistant (\ref{sec:room-assistant})
+    \item Nest watcher (\ref{sec:nest-watcher})
+    \item Dog alarm (\ref{sec:dog-alarm})
+    \item Chicken watch guard (\ref{sec:chicken-watch-guard})
 \end{itemize}
 
-\subsection{Systému pro uživatelské rozhraní a automatizaci}\label{subsec:systemu-pro-uzivatelske-rozhrani-a-automatizaci}
+\section{Systému pro uživatelské rozhraní a automatizaci}\label{sec:systemu-pro-uzivatelske-rozhrani-a-automatizaci}
 Podstatnou otázkou bylo, zda se pouštět do tvorby kompletně vlastního systému pro uživatelského rozhraní a automatizaci.
 Po zvážení časové náročnosti, technologické náročnosti a komplexnosti takového systému, mi bylo jasné, že tudy cesta nepovede.
 Bylo tedy třeba najít open source systém, který již touto funkcionalitou disponuje.
 Nakonec jsem zvolil systém Home Assistant, protože jsem s ním již dříve pracoval a mám s ním dobré zkušenosti.
 Home Assistant má na internetu také rozsáhlou podporu a komunitu s množstvým nápadů a již hotových řešení pro inspiraci.
-Popis toho, jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno v sekci~\ref{subsec:tvorba-gui-rozhrani}.
+Popis toho, jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
-\subsection{Komunikace mezi Backendem a Frontendem}\label{subsec:komunikace-mezi-backendem-a-frontendem}
+\section{Komunikace mezi Backendem a Frontendem}\label{sec:komunikace-mezi-backendem-a-frontendem}
 Je třeba zajistit komunikaci mezi Home Assistantem a Coopmaster službami.
 Tuto úlohu musíme přijmout velice zodpovědně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
 Nelze proto použít klasické HTTP(sekce~\ref{sec:http-rest}), z toho důvodu že bychom komunikaci vázali na buď doménové jméno a port nebo ip adresu a port.
@@ -66,7 +40,7 @@ Dalším problém nastane, když potřebujeme z některé ze služeb poslat nap�
 Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
 Tato technologie se běžně používá u IoT zařízení a pro naše použití je vynikajícím řešením.
 
-\subsection{Hardwarová zařízení}\label{subsec:hardwarova-zarizeni}
+\section{Hardwarová zařízení}\label{sec:hardwarova-zarizeni}
 Tuto sekci je velmi důležité dobře a správně navrhnout, protože náš systém bude pracovat s daty z reálného světa.
 Tato data musejí získávat k tomu určená zařízení a na jejich přesnosti závisý efektivita a správnost chování zbytku systému.
 Musíme tedy navrhnout a realizovat několik zařízení, která společně budou plnit následující úlohy
@@ -77,7 +51,7 @@ Musíme tedy navrhnout a realizovat několik zařízení, která společně budo
     \item snímání scén v kurníku a ve výběhu
 \end{itemize}
 
-\subsubsection{Snímání stavů hnízd}
+\subsection{Snímání stavů hnízd}
 Všechny případy, které potřebujeme v kontextu našeho hnízda řešit se dají rozpoznat na základě hmotnosti hnízda.
 Pokud je v hnízdě slepice, hnízdo bude hodně zatížené oproti počátečnímu prázdnému stavu.
 V případě, že bude hnízdo zatížené málo a nebo středně, může to pro nás ve většině případů spolehlivě znamenat, že se v hnízdě nacházejí vejce.
@@ -85,15 +59,15 @@ Nestandartní situace jako neobviklý nepořánek v hnízdě případně výkal,
 Kurník ja navíc v našem případě pravidelně udržován, takže šance na výskyt chybového faktoru v podobě nežádoucí zátěže je nízká.
 Jako nejjednodužší prostředek pro splnění tohoto úkolu na základě předchozí analýzy se ukázala obyčejná digitální váha.
 Tu bude třeba vytvořit vlastní konstrukce vzhledem ke skutečnosti, že ji musíme zabudovat do již existujícího hnízda.
-Popis konkrétního zapojení a konstrukce je sepsán níže v sekci~\ref{subsec:digitalni-vaha-do-hnizda}.
+Popis konkrétního zapojení a konstrukce je sepsán níže v sekci~\ref{sec:digitalni-vaha-do-hnizda}.
 
-\subsubsection{Ovládatní dvířek, snímání teploty a vlhkosti}
+\subsection{Ovládatní dvířek, snímání teploty a vlhkosti}
 Pro ovládatní dvířek a snímání povětrnostních podmínek je nejrozumnější vytvořit řídící jednotku, která tyto požadavky obsáhne.
 Další částí částí jsou samotná elektrická dvířka, jejichž funkce bude na základě způsobu elektrického signálu být otevřená nebo zavřená.
 Teplota a vlhkost jsou snímány senzory, jež jsou souřástí řídící jednotky.
 Řídící jednotka je popsána v sekci~\ref{subsec:ridici-jednotka} a konstrukce dvířek v sekci~\ref{subsec:konstrukce-dvirek}.
 
-\subsubsection{Snímání scén v kurníku a ve výběhu}
+\subsection{Snímání scén v kurníku a ve výběhu}
 Ke snímání scén v daných oblastech je třeba vybrat zařízení s dostatečnou odolností proti povětrnostním vlivům.
 Speciálně v kurníku je hodně agresivní prostředí kvůli vysoké vlhkosti a pro dlouhodobý provoz je třeba vybrat kvalitní a odolnou techniku.
 Zařízení musí být připojeno přes ethernet a musí být napájené ze sítě nikoli pomocí baterie.
@@ -101,9 +75,9 @@ Na základě předchozí analýzy je vhodné použít venkovní ip kameru.
 Ip kamera s dostatečným krytím, dobrou kvalitou obrazu a velkým zorným polem bude snadná na instalaci, je cenově dostupná a poskytuje dostatečně kvalitní data pro naše použití při detekci objektů.
 Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{subsec:kamerovy-system}
 
-\subsection{Spolupráce modulů dle požadavků uživatele}\label{subsec:schematicka-vyjadreni-zavislosti-jednotlivych-modulu}
+\section{Spolupráce modulů dle požadavků uživatele}\label{sec:schematicka-vyjadreni-zavislosti-jednotlivych-modulu}
 
-\subsubsection{Ovládání světla, data o teplotě a vlhkosti}
+\subsection{Ovládání světla, data o teplotě a vlhkosti}
 Tato sekce je důležitá pro chovatele, aby měl na dálku přehled o podmínkách v kurníku, a to převážně o teplotě.
 Dalším z požadavkům bylo dálkové ovládání a automatizace světla čehož se tato sekce také dotýká.
 Graficky jsou použité moduly a jejich závislosti vyjádřeny v obrázku~\ref{fig:svetlo_teplo_vlhkost}.\newline
@@ -122,7 +96,7 @@ Data o teplotě a vlhkosti Room Assistant aktualizuje každých 10 vteřin.
     \label{fig:svetlo_teplo_vlhkost}
 \end{figure}
 
-\subsubsection{Automatizace dvířek}
+\subsection{Automatizace dvířek}
 Hlavním z důvodů proč vznikl tento projekt, je zautomatizování raního otevírání a večerního zavírání dvířek v kurníku.
 V této sekci si tedy zjednodušeně popíšeme princip, jak je v systému Coopmaster řešené automatické ovládání dvířek.
 Graficky jsou závislosti mezi jednotlivými moduly vysvětleny v obrázku~\ref{fig:automatizace_dvirek}.\newline
@@ -145,7 +119,7 @@ Home Assistant je nakonfigurován tak, aby se od určitého časového okamžiku
     \label{fig:automatizace_dvirek}
 \end{figure}
 
-\subsubsection{Detekce vetřelců}
+\subsection{Detekce vetřelců}
 Pro tento úkol bude třeba využít obrázků s kamery ve výběhu a umělé inteligence, která v obraze rozpozná určené vetřelce.
 Princip komunikace je graficky vysvětlen v obrázku~\ref{fig:detekce_vetrelcu}.\newline
 S kamerou ve výběhu komunikuje pomocí HTTP protokolu služba Camera Driver.
@@ -161,7 +135,7 @@ Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální sníme
     \label{fig:detekce_vetrelcu}
 \end{figure}
 
-\subsubsection{Vizualizace stavů hnízd}
+\subsection{Vizualizace stavů hnízd}
 Abychom splnili tento úkol, bude potřeba získat data z jednotlivých vah ve hnízdech.
 Tato data pak dostat z do systému Coopmaster.
 Coopmaster následně data vyhodnotí a výsledky předá k vizualizaci do systému Home Assistant.
@@ -170,7 +144,7 @@ Pro komunikaci s modulem Digitální váha je použita služba Scale Driver, kte
 Data o váhách si ze Scale Driveru stahuje služba Nest Watcher.
 Tato služba ukládá v daném intervalu data z každé váhy do databáze.
 Služba po uplinutí časové konstanty analyzuje časovou řadu v databazi a vyhodnotí stav hnízda.
-Detailní popis algoritmu v sekci o službě Nest Watcher (\ref{subsec:nest-watcher}).
+Detailní popis algoritmu v sekci o službě Nest Watcher (\ref{sec:nest-watcher}).
 Po vyhodnocení stavů jsou data předávány pomocí MQTT protokolu do systému Home Assistant, který je díky na míru dělané komponentě zobrazí uživateli.
 \begin{figure}[h]
     \centering
@@ -179,7 +153,7 @@ Po vyhodnocení stavů jsou data předávány pomocí MQTT protokolu do systému
     \label{fig:vizualizace_stavu_hnizd}
 \end{figure}
 
-\subsection{Zpřístupnění aplikace z internetu}\label{subsec:zpristupneni-aplikace-z-internetu}
+\section{Zpřístupnění aplikace z internetu}\label{sec:zpristupneni-aplikace-z-internetu}
 Aby systém mohl sloužit svému účelu musí být vzdáleně přístupný.
 To znamená, že server, na kterém systém poběží, musí mít veřejnou ip adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
 Tato problematika se dá řešit několika způsoby.\newline
@@ -199,112 +173,6 @@ Poslední nutnostní, kterou ovšem je třeba zaplatit, je pronájem vlastního 
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
 My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
-Dále je tato část rozvedena v sekci~\ref{sec:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
+Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \newpage
-
-
-\section{Popis jednotlivých modulů systému}\label{sec:popis-jednotlivych-modulu}
-
-\input{text1/text-300-camera-driver}
-
-\input{text1/text-301-scale-driver}
-
-\input{text1/text-302-room-driver}
-
-\input{text1/text-303-heatlh-checker}
-
-\input{text1/text-304-room-assistant}
-
-\input{text1/text-305-nest-watcher}
-
-\input{text1/text-306-dog-alarm}
-
-\input{text1/text-307-chicken-watch-guard}
-
-\input{text1/text-308-gui-rozhrani}
-
-\input{text1/text-309-digitalni-vaha}
-
-\input{text1/text-310-ridici-jednotka}
-
-\input{text1/text-311-kamerovy-system}
-
-\input{text1/text-312-konstrukce-dvirek}
-
-\subsection{---poznámky TODO ke smazání---}\label{subsec:---poznamky-todo-ke-smazani---}
-- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
-- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
-- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
-- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
-- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
-- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
-- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
-- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
-- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
-- verzuje se to na github
-- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
-
-\newpage
-
-
-\section{Učení Yolo modelů}\label{sec:uceni_yolo_modelu}
-\input{text1/text-350-ml-klasifikace}
-\newpage
-\input{text1/text-351-ml-segmentace}
-\newpage
-
-
-\section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
-- zjistilo se že bez poe je to špatná volba \newline
-- kamery žerou dost proudu\newline
-- bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
-- byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
-- na stole to většinou funguje dobře \newline
-
-\newpage
-
-
-\section{Nasazení do kurníku}\label{sec:nasazeni-do-kurniku}
-- bylo potřeba natahat elektřinu a internet \newline
-- elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
-- horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
-- vyřešilo se to wifi extenderem od tplinku který má zárověň i ethernet výstup díky čemuž nemuselisme dlouhého tahati kabelu a šlo nám to vzduhem přes dvůr a ve stodole pak drátem\newline
-- kamery bylo potřeba napájet a taky připojit přes internet; zprvu jsem si myslel že poe nebude potřeba ale taha 230 by bylo zbytečné námahy takže jsem pořídil poe switch od tplinku a ten připojuje kamery\newline
-- bylo někde potřeba udělat místo kam se nainstaluje celá technologie kurníku\newline
-- zvolila se plechová bedna ze starého domovního rozvaděče do níž se pro jednotlivé prvky vytvožili na míru držáčky a pouzdra ps.: fotky z tisku a pak z rozvaděče\newline
-- jak se zrealizovala váha\newline
-- jak vypadá řídící jednotka pri room assistanta\newline
-- jaké tam jsou dveře pro slepice\newline
-- celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
-- bylo potřeba zkalibrovat hmotnosti slepic a vajec
-
-\newpage
-
-
-\section{Konfigurace vzdáleného přístupu}\label{sec:konfigurace-vzdaleneho-pristupu}
-- rpi propojene s nuckem a dev kompama přes tailscail\newline
-- v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
-- do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
-- cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
-- pronajmul jsem si doménu u doméhového registrátora forpsi\newline
-- zmínění jaká plynou nebezpečí z tohoto řešení
-
-\newpage
-
-
-\section{Rozvržení práce do budoucna}\label{sec:rozvrzeni-prace-do-budoucna}
-- jak by se řešení dalo zoptimalizovat\newline
-- vylepšení modelu pro classifykaci\newline
-- vylepšení a zpřesnění vah\newline
-- kontrola napajedla\newline
-- kontrola krmítka\newline
-- implementace autonomního chování do Room Assistanta\newline
-\newline
-\input{text1/text-352-nejlepsi-nosnice}
-
-\newpage
-
-
-\section{Ekonomická stránka projektu}\label{sec:ekonomicka-stranka-projektu}
-

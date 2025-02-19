@@ -1,11 +1,10 @@
 \documentclass{template/socthesis}
-\addbibresource{text3/zdroje/text.bib}
-
+\addbibresource{text.bib}
 \usepackage{subcaption}
 \usepackage{amsmath}
-
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
+
 
 \titlecz{Coopmaster - systém pro řízení a automatizaci kurníku}
 \titleen{Coopmaster - system for coop control and automation}
@@ -15,6 +14,9 @@
 \mentor{Ing. David Podzimek}
 \mentorstatement{Ing. Davida Podzimka}
 \newcommand{\mentorthanks}{Ing. Davidu Podzimkovi}
+
+\newacronym{nato}{NATO}{North Atlantic Treaty Organization}
+\newacronym{osn}{OSN}{Organizace spojených národů}
 
 \begin{document}
 
@@ -38,7 +40,7 @@
     \section*{Annotation}
     In my work, I have been involved in the design and implementation of a complete solution for small and medium farmers and homesteaders to help them carry out their day-to-day activities.
     The aim of this work was to design and implement a system for control and automation of livestock farming.
-
+    V tomto dokumentu používáme několik zkratek. Například \gls{nato} a \gls{osn} jsou důležité mezinárodní organizace.
     \subsection*{Keywords}
     programming, automation, agriculture, neural networks, python, microservice architecture
 
@@ -51,44 +53,20 @@
     \setcounter{table}{0}
 
     %%% Struktura práce
-
-%    %%% Úvod (úvod do problematiky, představení o co se bude zhruba jednat, nějaký stručný popis práce co do struktury a obsahu)
-%    \input{text3/text-01-uvod}
-%
-%    %%% Představení problémů neboli představení zadání (Vyjmenování a představení jednotlivých požadavků, které má zadavatel)
-%    \input{text3/text-02-zadane-problemy}
-%
-%    %%% Zamyslení nad možnými řešeními (Každý problém se dá řešit několika způsoby, zde je potřeba navrhnout několik možných řešení a odůvodnit proč jsou některá dobrá volba a proč ta další ne)
-%    \input{text3/text-03-analyza-reseni}
-%
-%    %%% Řešení zadání (Na základně toho že jsme si zvalidovali možná řešení a vybrali jedno z nich zde nyní popíšeme jak jsme jednotlivé prvky implementovali)
-%    \input{text3/text-04-reseni}
-%
-%    %%% Slovník pojmů (Stručné vysvětlení teoretických pojmů, jejichž tvorba nebyla součástí práce)
-%    \input{text3/text-05-slovnik-pojmů}
-%
-%    %%% Todo: možná by se sem pak dalo přidat ještě zamyslení nad dalšími možnými využitími podobných systému, ale to jenom pokud zbyde čas
-%
-%    %%% Závěr (vyhodnocení co se povedlo neboli jaký je aktuální stav, co se zlepšilo)
-%    \input{text3/text-06-zaver}
-
     %%% Úvod
     \input{text1/text-01-uvod}
 
-    \input{text1/text-02-teoreticka}
-
-    \input{text1/text-03-prakticka}
-
-%    \newpage
-%    \input{text1/text-04-zamysleni}
-
+    \input{text1/text-02-kontent}
 
     %%% Závěr
     \newpage
-    \input{text1/text-05-zaver}
+    \input{text1/text-03-zaver}
+
+    \addcontentsline{toc}{section}{Seznam zkratek}
+    \printglossary[type=\acronymtype, title={Seznam zkratek}]
 
     \printbibliography[title=Použitá Literatura]
-    \addcontentsline{toc}{section}{Použitá Literatura}
+    \addcontentsline{toc}{section}{Použitá literatura}
 
     \listoffigures
     \addcontentsline{toc}{section}{Seznam obrázků}

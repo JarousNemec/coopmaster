@@ -1,8 +1,6 @@
-\externaldocument{text-02-teoreticka}
+\section{Klasifikace objektů pomocí strojového učení}\label{sec:klasifikace-objektu-pomoci-strojoveho-uceni}
 
-\subsection{Klasifikace objektů pomocí strojového učení}\label{subsec:klasifikace-objektu-pomoci-strojoveho-uceni}
-
-\subsubsection{Úvod do problematiky}
+\subsection{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
 V posledních letech došlo k významnému pokroku v oblasti strojového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
 Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLOv8 (You Only Look Once version 8).
 Tato knihovna přináší rychlé a přesné metody detekce objektů a je ideální pro implementaci v reálném čase.
@@ -17,7 +15,7 @@ Použití YOLOv8 přináší následující výhody:
 \end{enumerate}
 V následujících sekcích si podrobně projdeme kroky, jak připravit dataset, trénovat vlastní model se zaměřením na rozpoznávání slepic a jak jej implementovat do našeho systému monitorování.
 
-\subsubsection{Obrázkový dataset}
+\subsection{Obrázkový dataset}\label{subsec:obrazkovy-dataset}
 
 Obrázkový dataset je strukturovaná kolekce obrazových dat, která se používána pro potřeby strojového učení a počítačového vidění.
 Tyto datasety obsahují jednotlivé obrázky, které jsou často spojeny s dodatečnými informacemi nebo anotacemi, jež jsou potřebné pro trénink modelů.
@@ -139,7 +137,7 @@ Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:
     \label{fig:coco_format}
 \end{figure}
 
-\subsubsection{Doučování modelu Yolov11 o novou třídu}
+\subsection{Doučování modelu Yolov11 o novou třídu}\label{subsec:doucovani-modelu-yolov11-o-novou-tridu}
 V předchozí sekci jsem si popsali jak vytvořit zdroje dat a nyní jsme připraveni, vyučit existující model.
 Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na strankach https://docs.ultralytics.com/ jsem to zvladnul.
 Základem pro úspěšné a efektivní učení je hardware.
@@ -159,26 +157,26 @@ Volání jednotlivých kroků pro učení je znázorněno na screenshotu učíc�
     \label{fig:learn_script}
 \end{figure}
 
-\paragraph{Krok 1 - CleanWorkspace}
+\paragraph*{Krok 1 - CleanWorkspace}
 
 Tento krok je zodpovědný za přípravu pracovního prostředí před zahájením tréninkového procesu.
 Odstranuji v něm archivaci stávajících dat a modelů, které mi ve workspace zůstaly z předchozich běhů a již nejsou potřebné.
 Čištění pomáhá zabránit kolizím s předchozími seancemi a udržet v něm pořádek, což zajišťuje, že nové modely a datové soubory jsou aktuální a správně organizované.
 
-\paragraph{Krok 2 - GroupCreator}
+\paragraph*{Krok 2 - GroupCreator}
 
 Tento krok se zaměřuje na organizaci dat do různých skupin pro trénování a testování modelu.
 Data mám rozdělena v několika různých adresářích a tento krok má na starost jejich správné složení.
 Stejná data používám výuků modelu na počítání slepic, detekce vetřelce a plánované reidentifikace slepic.
 
-\paragraph{Krok 3 - DatasetSplitter}
+\paragraph*{Krok 3 - DatasetSplitter}
 
 Proces rozdělení datasetu je klíčový pro oddělení trénovací, validační a testovací sady.
 Rozdělení může být prováděno v daných poměrech, například 70% trénovací data, 15% validační data a 15% testovací data.
 Správné rozdělení dat je důležité pro zajištění objektivního hodnocení modelu, aby se předešlo přeškolení.
 Tento krok také zajišťuje, že žádné datové soubory nejsou opominuty a že rozdělení je náhodné a reprezentativní.
 
-\paragraph{Krok 4 - TrainYolo}
+\paragraph*{Krok 4 - TrainYolo}
 
 Jedná se o hlavní krok, kde je model YOLOv11 trénován na trénovacích datech.
 Proces zahrnuje několik iterací (epoch) přes trénovací data, během kterých model aktualizuje své váhy podle chybného odhadu.
@@ -212,7 +210,7 @@ Batch Size – specifikuje kolik vláken poběží paralelně, je třeba dbát n
 Pretrained – říká, že budeme rozšiřovat již naučený model\newline
 Data Path – specifikuje odkud se mají vzit data k učeni.\newline
 
-\paragraph{Krok 5 - YOLOTester:}
+\paragraph*{Krok 5 - YOLOTester:}
 
 Po úspěšném tréninku modelu je nutné jeho testování na dříve oddělené testovací sadě.
 Tento krok zahrnuje vyhodnocení výkonnosti modelu pomocí metrik, jako je přesnost, citlivost.
@@ -271,7 +269,5 @@ Výsledky detekce jsou demostrovány na obrázcích~\ref{fig:chicken_detection1}
         \label{fig:chicken_detection4}
     \end{subfigure}
 \end{figure}
-
-\newpage
 
 %todo fix render obrázků

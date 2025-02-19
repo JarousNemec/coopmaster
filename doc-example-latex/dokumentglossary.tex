@@ -1,0 +1,25 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{glossaries-extra}
+\usepackage{glossaries}
+\setglossarystyle{list}
+\makeglossaries
+
+% Definice zkratek
+\newacronym{nato}{NATO}{North Atlantic Treaty Organization}
+\newacronym{osn}{OSN}{Organizace spojených národů}
+
+\begin{document}
+
+\tableofcontents
+
+\section{Úvod}
+
+V tomto dokumentu používáme několik zkratek. Například \gls{nato} a \gls{osn} jsou důležité mezinárodní organizace.
+
+% Vložení seznamu zkratek
+\printglossary[type=\acronymtype, title={Seznam zkratek}]
+
+\end{document}
