@@ -29,23 +29,28 @@ Algoritmus tedy na počátku vezme jako vstup obrázek z kamery viz obrázek~\re
 Dále je obrázek segmentován a jsou vyjmuty pouze tvary, které algoritmus vyhodnotil jako slepice viz obrázek~\ref{fig:segmented_chicks2}.
 Na závěr je pro každý výřez vypočítán tenzor na jehož základě jsou slepice roztřízeny do jednotlivých skupin podle barvy viz obrázek~\ref{fig:chicks_in_clusters}.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{img/source_chick_image}
-    \caption{Jeden ze vstupů do algoritmu pro nosnice}
-    \label{fig:source_chick_image}
-\end{figure}
+
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{img/segmented_chicks}
-    \caption{Segmentované slepice z fotek}
-    \label{fig:segmented_chicks2}
-\end{figure}
+    \begin{subfigure}[t]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/source_chick_image}
+        \caption{Jeden ze vstupů do algoritmu pro nosnice}
+        \label{fig:source_chick_image}
+    \end{subfigure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{img/chicks_in_clusters}
-    \caption{Algoritmem rozdělené slepice dle tenzorů}
-    \label{fig:chicks_in_clusters}
+    \begin{subfigure}[t]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/segmented_chicks}
+        \caption{Segmentované slepice z fotek}
+        \label{fig:segmented_chicks2}
+    \end{subfigure}
+
+    \begin{subfigure}[t]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/chicks_in_clusters}
+        \caption{Algoritmem rozdělené slepice dle tenzorů}
+        \label{fig:chicks_in_clusters}
+    \end{subfigure}
 \end{figure}
