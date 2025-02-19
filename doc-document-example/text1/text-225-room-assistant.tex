@@ -1,15 +1,33 @@
 \section{Room assistant}\label{sec:room-assistant}
-Room assistant je zpřístupňuje komunikaci mezi GUI tedy konkrétně Home Assistantem a Room driverem.\newline
+Room assistant zpřístupňuje komunikaci mezi systémem Home Assistant a službou Room Driver.\newline
 S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
-Základní funkcí je zpracování a přeposlání příkazů do Room Driveru odebíraných z témat
+Tato služba zpřístupňuje do systému Home Assistant data o teplotě a vlhkosti a Home Assistant přes ní ovládá světlo a dvířka.
+
+\subsection*{Funkcionalita}
+Po odstartování služby se stane hned několik věcí.
+Jako první naběhnou MQTT subscribery pro přijímání příkazů ze systému Home Assistant.
+Jeden přijímá příkazy pro dívřka druhý pro světlo.
+Vytvoří se vlastně instance dvou tříd LampTimeChecker a DoorTimeChecker.
+Tyto instance mají každá svou instanci třídy NestMQTTClient, která zaobaluje základní funkcionalitu ohledně používání protokolu MQTT.\newline
+
+\textbf{NestMQTTClient} zaobaluje metody pro publikování a odebírání zprávy, připojení a odpojení od MQTT brokeru, reakci na navázané spojení s MQTT brokerem a reakci na odebrání nové zprávy.\newline
+\textbf{LampTimeChecker} odebírá téma coopmaster/room/lamp/cmnd a zpracovává zprávu pokud je jejím obsahem \textbf{on} nebo \textbf{off}.
+Na základě přijatého obsahu zprávy se zavolá statická metoda call\_room\_driver\_command třídy driver\_client, aby odeslala příslušný příkaz do Room Driveru na endpoint, který je předáván jako parametr.
+
+\textbf{DoorTimeChecker} funguje stejně jako NestMQTTClient, ale odebírá téma coopmaster/room/door/cmnd a reaguje pokud je obsah MQTT zprávy \textbf{open} nebo \textbf{close}.
+.\newline
+Po startu se rozběhne BackgroundScheduler, který má za úkol vždy po uplinutí 5 vteřin spustit nový běh jobu pro aktualizování stavů z řídící jednotky.
+Podmínkou pro spuštění nového běhu jobu je, že předchozí běh musí být dokončen.
+Tuto funkci má již v sobě implementovanou scheduler z knihovny APScheduler, který využíváme.
+Job pro aktualizaci obsahuje jednu metodu a to detect\_hardware\_state.
+Tato metoda nejdříve stáhne data z Room Driveru.
+Následně načte z konfigurace témata pro stav dvíře, stav světla, teplotu a vlhkost.
+Dále jsou pak data z Room Driveru zveřejněna na téma daná kofigurací odkud je přijímá systém Home Assistant a vizualizuje je.
+
+%\subsection*{MQTT témata}
 %\begin{itemize}
 %    \item coopmaster/room/door/cmnd
 %    \item coopmaster/room/lamp/cmnd
-%\end{itemize}
-Služba očekává, že na tato témata budou chodit zprávy open / close pro dveře a on / off jako příkazy pro světlo.
-Další úlohou je periodické načítání a aktualizace informací o stavu dveří, světla a dat z teplotního a vlhkostního senzorů.
-Tato data by měl Room assistant pravidelně načítat a posílat přes MQTT do Home Assistanta.
-%\begin{itemize}
 %    \item coopmaster/room/temperature
 %    \item coopmaster/room/humidity
 %    \item coopmaster/room/door/state

@@ -9,7 +9,7 @@ Jako teoretický model na základě kterého, budeme organizovat a třídit funk
 Tento způsob rozvržení zodpovědnosti částí systému jsem zvolil, díky velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.\newline
 Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:python}).
 Python byl vybrán kvůli jeho univerzálnosti, snadné syntaxi a podpoře ze strany vývojářů a komunity.\newline
-Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine(sekce~\ref{sec:kontejnerizace}) společně s rozšířením Docker Compose.\newline
+Pro realizaci, konfiguraci a síťování mikroservistní architektury je použit Docker Engine společně s rozšířením Docker Compose.\newline
 Na základě předchozích rozhodnutí jsem tedy systém rozdělil do jednotlivých mikroslužeb, tak aby vznikla robustní a rozšiřitelná mikroservisní architektura a byly splněny všechyn uživatelské požadavky, které jsme si určili (\ref{ch:tvorba-zadani}).\newline
 Bylo tedy navrženo 8 služeb, které obsahují námi naprogramovanou funkcionalitu a dohromady společně s hardwarovými prvky tvoří systém Coopmaster.
 \begin{itemize}
@@ -65,7 +65,7 @@ Popis konkrétního zapojení a konstrukce je sepsán níže v sekci~\ref{sec:di
 Pro ovládatní dvířek a snímání povětrnostních podmínek je nejrozumnější vytvořit řídící jednotku, která tyto požadavky obsáhne.
 Další částí částí jsou samotná elektrická dvířka, jejichž funkce bude na základě způsobu elektrického signálu být otevřená nebo zavřená.
 Teplota a vlhkost jsou snímány senzory, jež jsou souřástí řídící jednotky.
-Řídící jednotka je popsána v sekci~\ref{subsec:ridici-jednotka} a konstrukce dvířek v sekci~\ref{subsec:konstrukce-dvirek}.
+Řídící jednotka je popsána v sekci~\ref{sec:ridici-jednotka} a konstrukce dvířek v sekci~\ref{sec:konstrukce-dvirek}.
 
 \subsection{Snímání scén v kurníku a ve výběhu}
 Ke snímání scén v daných oblastech je třeba vybrat zařízení s dostatečnou odolností proti povětrnostním vlivům.
@@ -73,7 +73,7 @@ Speciálně v kurníku je hodně agresivní prostředí kvůli vysoké vlhkosti 
 Zařízení musí být připojeno přes ethernet a musí být napájené ze sítě nikoli pomocí baterie.
 Na základě předchozí analýzy je vhodné použít venkovní ip kameru.
 Ip kamera s dostatečným krytím, dobrou kvalitou obrazu a velkým zorným polem bude snadná na instalaci, je cenově dostupná a poskytuje dostatečně kvalitní data pro naše použití při detekci objektů.
-Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{subsec:kamerovy-system}
+Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{sec:kamerovy-system}
 
 \section{Spolupráce modulů dle požadavků uživatele}\label{sec:schematicka-vyjadreni-zavislosti-jednotlivych-modulu}
 
@@ -173,6 +173,6 @@ Poslední nutnostní, kterou ovšem je třeba zaplatit, je pronájem vlastního 
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
 My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
-Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-do-kurniku}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
+Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-systemu-do-produkce}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \newpage

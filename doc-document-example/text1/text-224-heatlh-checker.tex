@@ -12,5 +12,6 @@ Služby jsou v seznamu identifikovány na základě portů.
 Každá služby v systému Coopmaster má svůj port a porty jsou po sobě v intervalu od 9000 do 9010.
 Tento způsob identifikace a rozdělení portů službám zjednodušuje jejich monitorování.
 Algoritmus funguje na základě plánoveče úloh neboli scheduleru, který jednou do minuty spustí kontrolu všech služeb a jejich stavy uloží do seznamu odkud jsou pak načítány při požadavku na api.
+Kontrola se provádí právě posláním HTTP požadavku na /ping každé služby a následným uložením odpovědi.
 
 %todo: sehnat obrázek jsonu který služba vrací

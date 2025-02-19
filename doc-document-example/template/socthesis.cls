@@ -4,6 +4,8 @@
 
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[main=czech,provide=*]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
 \RequirePackage{graphicx}
 \RequirePackage{tabularx}
 \RequirePackage{array}
