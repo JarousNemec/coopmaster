@@ -46,3 +46,6 @@
 /modules/mosquitto/data/mosquitto.db
 /modules/mosquitto/log/mosquitto.log
 /doc-document-example/document.log
+/doc-document-example/text1/text-02-kontent.tex.bak
+/doc-document-example/document.tex.bak
+/doc-document-example/text.bib.bak

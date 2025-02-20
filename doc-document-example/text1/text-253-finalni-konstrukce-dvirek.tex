@@ -1,0 +1,33 @@
+\section{Vylepšení konstrukce dvířek}\label{sec:vylepseni-konstrukce-dvirek}
+Vylepšení konstrukce dvířek a realizace finálního řešení je jeden z plánů do budoucna pro tento projekt.
+Jak již bylo zmíněno v popisu současné konstrukce v sekci~\ref{sec:konstrukce-dvirek}, aktuální konstrukce je příliš drahá na výrobu a také zbytečně robustní.
+Pro finální instalaci v následujících větách popíšu návrh na realizaci produkční konstrukce.\newline
+Konstrukce by měla být levnější na výrobu i na materiál a zároveň stejně bezpečná a výkonná jako ta stávající prototypová.
+Nový rám bude tvořen z železných U profilů použitých zároveň jako vodící lišty pro posuv dvířek.
+Posuvný plát bude z plastové desky.
+
+\subsection*{Navíjecí mechanismus}\label{subsec:navijeci-mechanismus}
+Způsob ovládání neboli napájení se nemění takže není třeba dělat žádné úpravy na řídící jednotce popsané detailněji v sekci~\ref{sec:ridici-jednotka}.
+Pohyb bude dvířkům dodávat malý elektrický naviják vlastní konstrukce.
+Díky vlastnímu návrhu bude možno celý rám navijáku navrhnout pomocí CAD programu a následně ho celý vyrobit na 3D tiskárně.
+Tento způsob výroby šetří čas a je zajiště přiměřeně stejná kvalita u všech součástek.
+Pohonnou jednotkou navijáku bude 12 V elektromotor model JGA25-370 na stejnosměrné napětí s vestavěnou převodovkou.
+Díky převodovce dokáže motor vyvinout kroutící moment až 130N na 1cm dlouhé páce, což je na pohyb dvířek dostačující.
+Vývodový hřídel z převodovky elektromotoru bude připevněn k navíjecímu bubnu o průměru okolo 15 mm.
+Na navíjecím bubnu bude připevněno i lanko, které se bude používat na vytahování dvířek nahoru.
+Pohyb dolů je zajištěn díky gravitaci, díky čemuž stačí povolit lanko a dvířka sama sjedou dolů.
+Jako pokračování v ose otáčení motoru a bubnu bude k bubnu připevněn malý šnekový hřídel s maticí.
+Matici je zamezeno otáčení opřením o rám navijáku takže se při otáčení hřídele se bude matice posouvat.
+Tohoto pohybu bude využívat poslední součást navijáku a to systém dorazů, aby bylo možno nastavit maximální počet otáček bubnu a nedošlo tak k úplnému odvinutí lanka.
+Úplné odvinutí lanka by v případě, že by se motor pořád točil, znamenalo, že se lanko zase začne navíjet opačným směrem, což obrátí navíjecí logiku navijáku.
+Řídící jednotka totiž počítá pouze s jedním směrem otáčení a nepočítá s náhlým přehozením směru otáček motoru pro navíjení a odvíjení.
+
+
+%konstrukce dveří - instalováno
+%- zdroj 12V
+%- rám z
+%- naviják je s dvířky přopojen lankem
+%- navíjecí systém / systém navijáku
+%- 12V motor s převodovkou, rychlostí otáčení 60rpm
+%- navíjecí buben vytištěný na 3d tiskárně
+%- dorazový systém
