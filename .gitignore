@@ -40,3 +40,8 @@
 /out/images_test.log
 /out/images_test.pdf
 /out/images_test.synctex.gz
+/modules/home_assistant/config/.HA_VERSION
+/modules/home_assistant/config/home-assistant.log
+/modules/home_assistant/config/home-assistant.log.1
+/modules/mosquitto/data/mosquitto.db
+/modules/mosquitto/log/mosquitto.log
