@@ -1,6 +1,39 @@
 \section{Dog alarm}\label{sec:dog-alarm}
-Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
-Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
-Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
-Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
-Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
+%Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
+%Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
+%Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
+%Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
+%Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
+
+
+Jednou z klíčových komponent systému Coopmaster je integrované řešení pro ochranu slepic před potenciálním nebezpečím ve výběhu, nazvané Dog Alarm.
+Tato služba je navržena k automatické detekci přítomnosti psů nebo jiných predátorů pomocí moderních technologií zpracování obrazu.
+
+\subsection*{Funkční princip}
+
+Služba využívá kamerový systém instalovaný ve výběhu, který poskytuje aktuální záběry prostřednictvím GET requestů na Camera driver.
+Tento komponent je zodpovědný za komunikaci s fyzickým zařízením kamery a poskytuje pravidelné snímky pro analýzu.
+
+\subsection*{Analýza pomocí umělé inteligence}
+
+Pro zpracování záběrů je implementována pokročilá metoda detekce objektů využívající umělou inteligenci (AI). AI model je trénován na rozpoznávání specifických charakteristik psů a dalších potenciálně nebezpečných zvířat.
+Detekce probíhá v definovaných intervalech, což zajišťuje pravidelný monitoring výběhu.
+
+\subsection*{Integrace s Home Assistanta}
+
+Jakmile AI model pozitivně identifikuje přítomnost psa nebo jiného predátora, služba Dog Alarm okamžitě vygeneruje výstrahu.
+Tato výstraha je odeslána pomocí protokolu MQTT do systému Home Assistant.
+Spolu se zprávou je připojen specifický záběr, na kterém byl predátor detekován, což poskytuje přehledný a důkazní materiál pro rychlé rozhodování.
+
+Kromě výstražných zpráv, Dog Alarm pravidelně zasílá aktuální záběry z kamery do Home Assistanta, čímž umožňuje uživatelům mít kontinuální přehled o situaci ve výběhu.
+
+\subsection*{Výhody a přínosy}
+
+Implementace Dog Alarm v systému Coopmaster nabízí několik klíčových výhod:
+\begin{itemize}
+    \item \textbf{Automatizovaný dohled:} Automatická detekce predátorů výrazně zvyšuje bezpečnost slepic tím, že minimalizuje závislost na lidském dohledu.
+    \item \textbf{Rychlá reakce:} Díky okamžitému odesílání upozornění může být rychle aktivována ochranná opatření.
+    \item \textbf{Dokumentace incidentů:} Uložení snímků predátorů poskytuje důležitou dokumentaci pro další analýzu a případné právní kroky.
+\end{itemize}
+
+V rámci shrnutí je služba Dog Alarm nepostradatelným prvkem v rozsáhlém ekosystému Coopmaster, který podporuje snahu o vytvoření plně automatizovaného, bezpečného a efektivního prostředí pro chov slepic.

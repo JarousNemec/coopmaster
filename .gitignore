@@ -45,3 +45,4 @@
 /modules/home_assistant/config/home-assistant.log.1
 /modules/mosquitto/data/mosquitto.db
 /modules/mosquitto/log/mosquitto.log
+/doc-document-example/document.log
