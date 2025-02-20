@@ -5,7 +5,25 @@ Srdem řídící jednotky je Arduino Nano.
 Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovími prvky(relé, senzory, táhlový motor) a počítačem, na němž běží služby ovládají nebo využívající data z těchto prvků.
 
 \subsection*{Popis zapojení}
-Zapojení řídící jednotky je zdokumentováno na obrázku~\ref{fig:ridici_jednotka} a blokové schéma zapojení je na obrázku~\ref{fig}
+Zapojení řídící jednotky je zdokumentováno na obrázku~\ref{fig:ridici_jednotka} a blokové schéma zapojení je na obrázku~\ref{fig:schema_ridici_jednotky}.
+Vezkratce, jak již bylo zmíněno, je řídící jednotka složena z několika částí.
+\begin{itemize}
+    \item mikrokontroler Arduino Nano v3.0
+    \item senzor DHT11 pro teplotu a vlhkost
+    \item relé s napětím cívky 5 V a spínacím proudem 10 A stejnosměrných
+\end{itemize}
+Pro snadnou práci s jednotlivými součástmi během vývoje, byly zvoleny moduly, které disponují svorkovnicemi a není tedy nutné k nim nic pájet.
+Připojení Ardruina je realizováno pomocí terminal schieldu, který pro každý pin desky disponuje jednou svorkou pro připojení kabelu.
+Obdobně byl pro práci s relátky vybrán modul osazený již 4 relátky a samozřejmě svorkovnicí pro snadné zapojení.
+Nejkomplikovanější byl modul snímače ke kterému bylo třeba vytvořit konektor protože disponoval pouze výstupními piny.
+Po pečlivém vybrání a sehnání všech součástí byla zvolena dřevotřísková deska jako platforma na níž se naistalují všechny moduly pomocí krátkých vrutů do dřeva.
+Jednotlivé moduly byli následně propojeny kablíky o průřezu 0,15 mm² dle technické dokumentace dodávané ke každému modulu.
+Hardwarová stránka byla tímto hotová.
+\newline
+Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit, žádné přídavné napájení.
+Přídavné napájení by bylo třeba řešit například, kdybychom používali 10 relejových modulů současně, protože limit pro napájení skrze USB 2.0 je pouze 500 mA a jedna cívka spotřebuje až 70 mA.\newline
+Následovala tedy poslední věc a to nahrád kód programu do samotné vývojové desky Arduno Nano.
+K tomu to účelu jsem využil open-source vývojářského nástroje Arduino IDE, který celý složitý proces nahrávání vyřeší.
 
 \begin{figure}[htbp]
     \centering
