@@ -2,7 +2,7 @@
 Pro účely projektu bylo potřeba postavit digitální váhu vlastní konstrukce.
 Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice snáší vejce, a jejím úkolem je přes usb poskytovat aktuální data o tom jakou hmotností je zatěžována podložka hnízda.
 
-\subsection*{Funkcionalita}
+\subsection*{Popis algoritmu}
 Po připojení napájení k arduinu, se nejdříve nastaví a připojí serialová komunikace rychlostí 9600 baudů pomocí usb.
 Následně je instancován objekt starající se o sprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
 Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a poskytuje je po serialovém připojení.

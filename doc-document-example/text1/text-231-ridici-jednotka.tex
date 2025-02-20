@@ -1,8 +1,48 @@
 \section{Řídící jednotka}\label{sec:ridici-jednotka}
 Řídící jednotka je vlastní sestavené zařízení, které zprostředkovává pomocí USB připojení data o teplotě a vlhkosti v kurníku.
-Další úlohou je kontrola a ovládání dvířek a světla.
+Další úlohou je ovládání dvířek a světla.
 Srdem řídící jednotky je Arduino Nano.
-Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovími prvky(relé, senzory) a počítačem, na němž běží služby ovládají nebo využívající data z těchto iprvky.
+Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovími prvky(relé, senzory, táhlový motor) a počítačem, na němž běží služby ovládají nebo využívající data z těchto prvků.
+
+\subsection*{Popis zapojení}
+Zapojení řídící jednotky je zdokumentováno na obrázku~\ref{fig:ridici_jednotka} a blokové schéma zapojení je na obrázku~\ref{fig}
+
+\begin{figure}[htbp]
+    \centering
+    % První řádek
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/ridici_jednotka}
+        \caption{Výsledek detekce slepic 1}
+        \label{fig:ridici_jednotka}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/schema_ridici_jednotky}
+        \caption{Výsledek detekce slepic 2}
+        \label{fig:schema_ridici_jednotky}
+    \end{minipage}
+\end{figure}
+
+\subsection*{Popis algoritmu}
+V části programu Setup se jako první po startu programu nastavý příslušné módy na vstupní a výstupní piny.
+Následně se provede inicializace seriálového připojení s rychlostí 9600 baudů.
+Poté se inicializuje připojení s čidlem DHT11 pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
+Dále program pokračuje do části Loop, což je metoda, která se volá pořád dokola jako nekonečný cyklus.
+Tato metoda řeší pravidelnou aktualizaci dat ze senzoru dále čtení příkazů ze seriálového připojení a posílání odpovědí na ně.
+Aktualizace senzorových dat se provádí jednou do vteřiny za pomocí mětod readTemperature a readHumidity, které jsou součástí knihovny DHT.h.
+Zpracování příkazů probíhá zavoláním metody processCommand, která pokud je v zásobníku přijatých dat něco ke čtení, přečte první znak a ten následně zpracuje jako příkaz dle seznamu níže.
+
+\subsection*{Seznam příkazů ovládacího protokolu}
+\begin{itemize}
+    \item o = otevřít dvířka
+    \item c = zavřít dvířka
+    \item l = rozsvítit světlo
+    \item d = zhasnout světlo
+    \item j = vrátí json s daty o teplotě a vlhkosti
+    \item s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+\end{itemize}
 
 %## funkcionalita
 %- umoznuje ovladat osvetleni kurniku

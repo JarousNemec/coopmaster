@@ -5,7 +5,7 @@ Ovládání nízkoúrovňových komponent a komunikaci s připojeným počítač
 Arduino je připojeno pomocí usb sběrnice k počítači, který na základě domluvených pravidel jednoduchého komunikačního protokolu posílá znaky, na než Arduino příslušně reaguje dle programu.
 Tato služba má tedy za úkol přes serialový port pomocí USB rozhraní posílat příkazy a načítat stavy řídící jednotky na základě requestů přijmutých na REST api.
 
-\subsection*{Funkcionalita}
+\subsection*{Popis algoritmu}
 Po startu služby se nejdříve vytvoří instance třídy ArduinoReader.
 Jedná se o vlastní třídu, při inicializaci vytvoří instanci serialového spojení k arduinu a to drží po celou dobu běhu aplikace.
 Třída má jedinou metodu a tou je run\_command.

@@ -3,7 +3,7 @@ Room assistant zpřístupňuje komunikaci mezi systémem Home Assistant a služb
 S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
 Tato služba zpřístupňuje do systému Home Assistant data o teplotě a vlhkosti a Home Assistant přes ní ovládá světlo a dvířka.
 
-\subsection*{Funkcionalita}
+\subsection*{Popis algoritmu}
 Po odstartování služby se stane hned několik věcí.
 Jako první naběhnou MQTT subscribery pro přijímání příkazů ze systému Home Assistant.
 Jeden přijímá příkazy pro dívřka druhý pro světlo.

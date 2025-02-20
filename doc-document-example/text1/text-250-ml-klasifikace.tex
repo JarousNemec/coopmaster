@@ -40,9 +40,9 @@ Já jsem zvolil Azure AI - Azure Machine Learning studio.
 Pro práci je velmi intuitivní a nechá spustit v několika krocích.
 Nejdříve jsem pomocí průvodce vytvořil nový projekt jak je znázorněno na obrázku~\ref{fig:create_learning_project}.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/create_learning_project}
+    \includegraphics[width=0.6\textwidth]{img/create_learning_project}
     \caption{Vytvoření nového projektu v AML}
     \label{fig:create_learning_project}
 \end{figure}
@@ -52,9 +52,9 @@ Dále jsem vybral zdroj obrázků, které bylo potřeba klasifikovat.
 Vzhledem k tomu, že se jedná o cloudovou službu bylo třeba obrázky slepiček na Azure naimportovat.
 Na obrázku~\ref{fig:dataset_selection} je screenshot z Azure Machine Learning studia, kde se zrovna dataset importuje.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/dataset_selection}
+    \includegraphics[width=0.6\textwidth]{img/dataset_selection}
     \caption{Tvorba datasetu v AML}
     \label{fig:dataset_selection}
 \end{figure}
@@ -63,9 +63,9 @@ V dalším kroku jsem nadefinoval kategorie, které budu chtít v obraze identif
 V mém případě jsem zvolil label „slepice“.
 Definice kategorií je na obrázku~\ref{fig:category_definition}.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/category_definition}
+    \includegraphics[width=0.6\textwidth]{img/category_definition}
     \caption{Definice kategorií pro učení v AML}
     \label{fig:category_definition}
 \end{figure}
@@ -75,9 +75,9 @@ Bylo třeba projít jednotlivé snímky a ručně vybrat oblasti, kde já jako �
 Oblast, kterou jsem označil se pak následně ukládá jako metadata k obrázku.
 Tento proces je znárorněn na obrázku~\ref{fig:chicken_labeling}.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/chicken_labeling}
+    \includegraphics[width=0.6\textwidth]{img/chicken_labeling}
     \caption{Označování slepic pomocí AML}
     \label{fig:chicken_labeling}
 \end{figure}
@@ -91,9 +91,9 @@ Formát COCO (Common Objects in Context) je standardní formát pro anotaci obr�
 Jeho hlavním cílem je poskytnout strukturu pro uložení informací o objektech v obrázcích, což umožňuje efektivní trénink a hodnocení modelů detekce objektů, segmentace a dalších úloh počítačového vidění.
 Obrázek~\ref{fig:create_learning_project} ukazuje jak například může vypadat nastavení pro export COCO formátu z AML.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/export_coco_format}
+    \includegraphics[width=0.6\textwidth]{img/export_coco_format}
     \caption{Export metadat k obrázkům z AML do COCO formátu}
     \label{fig:export_coco_format}
 \end{figure}
@@ -130,9 +130,9 @@ Tento JSON tedy popisuje dataset obsahující obrázek s jedním označeným obj
 COCO formát umožňuje uložení komplexních a strukturovaných dat o objektech na obrázcích, což je velmi užitečné pro trénování a testování modelů strojového učení.
 Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:coco_format}.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/coco_format}
+    \includegraphics[width=0.6\textwidth]{img/coco_format}
     \caption{Vytvoření nového projektu v AML}
     \label{fig:coco_format}
 \end{figure}
@@ -150,9 +150,9 @@ Rád bych alespon představil blokové schema učícího procesu.\newline
 Pro učení jsem použil script, ktery jsem si pripravil.
 Volání jednotlivých kroků pro učení je znázorněno na screenshotu učící metody na obrázku~\ref{fig:learn_script}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/learn_script}
+    \includegraphics[width=0.6\textwidth]{img/learn_script}
     \caption{Vytvoření nového projektu v AML}
     \label{fig:learn_script}
 \end{figure}
@@ -183,9 +183,9 @@ Proces zahrnuje několik iterací (epoch) přes trénovací data, během kterýc
 Na obrázku~\ref{fig:train_yolo}.
 
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/train_yolo}
+    \includegraphics[width=0.6\textwidth]{img/train_yolo}
     \caption{Proces trénování YOLOv11 modelu}
     \label{fig:train_yolo}
 \end{figure}
@@ -214,60 +214,67 @@ Data Path – specifikuje odkud se mají vzit data k učeni.\newline
 
 Po úspěšném tréninku modelu je nutné jeho testování na dříve oddělené testovací sadě.
 Tento krok zahrnuje vyhodnocení výkonnosti modelu pomocí metrik, jako je přesnost, citlivost.
-Testování nám poskytuje objektivní zpětnou vazbu o tom, co za objekty model umí ve snímcích rozpoznat. Důležíté je předkladat pro testování snímky, které během tréninku neviděl.
+Testování nám poskytuje objektivní zpětnou vazbu o tom, co za objekty model umí ve snímcích rozpoznat.
+Důležíté je předkladat pro testování snímky, které během tréninku neviděl.
 Na základě testovacích výsledků jsem pak následně prováděl úpravy učicích parametrů, případně jsem dodával další data do učícího datasetu.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/loss_funkce}
+    \includegraphics[width=0.6\textwidth]{img/loss_funkce}
     \caption{Graf loss funkce v závyslosti na počtu etap}
     \label{fig:loss_funkce}
 \end{figure}
 
-Graf který je automaticky generováný při učení nám umožnuje sledovat, jak dobře se model učí vzhledem k časové ose tréninku.
+Graf na obrázku~\ref{fig:loss_funkce} je automaticky generováný při učení nám umožnuje sledovat, jak dobře se model učí vzhledem k časové ose tréninku.
 Tento graf typicky zobrazuje ztrátovou funkci (loss) na svislé ose (Y) a počet trénovacích epoch nebo kroků na vodorovné ose (X).
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/top1_accuracy}
+    \includegraphics[width=0.6\textwidth]{img/top1_accuracy}
     \caption{Vytvoření nového projektu v AML}
     \label{fig:top1_accuracy}
 \end{figure}
 
-Tento graf se zaměřuje na metriku přesnosti, konkrétně na \"top-1 accuracy,\" která měří, jak často je nejpravděpodobnější (nejvyšší hodnocená) předpověď modelu správná.
+Graf na obrázku~\ref{fig:top1_accuracy} se zaměřuje na metriku přesnosti, konkrétně na \"top-1 accuracy,\" která měří, jak často je nejpravděpodobnější (nejvyšší hodnocená) předpověď modelu správná.
 
-Výsledky detekce jsou demostrovány na obrázcích~\ref{fig:chicken_detection1},~\ref{fig:chicken_detection2},~\ref{fig:chicken_detection3},~\ref{fig:chicken_detection4},
+Výsledky detekce jsou demostrovány na obrázcích~\ref{fig:chicken_detection1},\ref{fig:chicken_detection2},~\ref{fig:chicken_detection3},~\ref{fig:chicken_detection4},
 
-\begin{figure}[h]
+
+\begin{figure}[htbp]
     \centering
-
-    \begin{subfigure}[t]{1\textwidth}
+    % První řádek
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/chicken_detection1}
-        \caption{Výsledek detekce slepic}
+        \caption{Výsledek detekce slepic 1}
         \label{fig:chicken_detection1}
-    \end{subfigure}
-
-    \begin{subfigure}[t]{1\textwidth}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/chicken_detection2}
-        \caption{Výsledek detekce slepic}
+        \caption{Výsledek detekce slepic 2}
         \label{fig:chicken_detection2}
-    \end{subfigure}
+    \end{minipage}
 
-    \begin{subfigure}[t]{1\textwidth}
+    \vskip\baselineskip % Vertikální mezera mezi řádky
+
+    % Druhý řádek
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/chicken_detection3}
-        \caption{Výsledek detekce slepic}
+        \caption{Výsledek detekce slepic 3}
         \label{fig:chicken_detection3}
-    \end{subfigure}
-
-    \begin{subfigure}[t]{1\textwidth}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/chicken_detection4}
-        \caption{Výsledek detekce slepic}
+        \caption{Výsledek detekce slepic 4}
         \label{fig:chicken_detection4}
-    \end{subfigure}
+    \end{minipage}
 \end{figure}
+
+
 
 %todo fix render obrázků

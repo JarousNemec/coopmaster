@@ -2,7 +2,7 @@
 Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
 Protože jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}) tento modul komunikuje přes serialový port pomocí protokolu USB a na dotaz přijmutý RESTovým api poskytne jako odpověď hodnotu načtenou z váhy.
 
-\subsection*{Funkcionalita}
+\subsection*{Popis algoritmu}
 Nejprve naběhne hlavní vlákno, které se stará o poskytování RESTového api na portu 9004.
 Toto api obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí požadavku s metodou get.
 Následně je spuštěno nové vlákno, které má za úkol číst data z váhy a předávat je aplikačnímu rozhraní jako aktuálně naměřenou hmotnost na váze, jež se bude od teď poskytovat, pokud o ní někdo GET requestem požádá.
