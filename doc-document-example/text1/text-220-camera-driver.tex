@@ -1,7 +1,7 @@
 \section{Camera driver}\label{sec:camera-driver}
 Camera driver je služba zodpovědná za sprostředkování komunikace mezi ip kamerami a službami zpracovánajícími obraz (Dog alarm, Chicken watch guard).\newline
 
-\subsection*{Funkcionalita}
+\subsection*{Popis algoritmu}
 Po startu služby naběhne RESTové api na portu 9001 vytvořené za pomoci pythonového frameworku Flask.
 Api poskytuje endpoint pro získání aktuálního snímku z každé kamery, která je službě přiřazena v konfiguraci.
 S kamerami služba komunikuje pomocí HTTP protokolu.

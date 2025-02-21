@@ -1,11 +1,46 @@
 \section{GUI rozhraní}\label{sec:tvorba-gui-rozhrani}
-- vybral se teda ten home assistant a ted ho nakonfit\newline
-- konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
-- byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
-- po přidání senzorů jsem si hrál s vizualizací jednotlivých hnízd tak aby to pro uživatele bylo přívětivě\newline
-- napsal jsem proto vlastní komponentu pro HA viz foto a trello\newline
-- zajímavé zjištění bylo že state který jsem využíval pro předávání textových zpráv má maximální velikost 255 bytů\newline
-- takže jsem z jsonu přešel na csv\newline
-- pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
-- následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
-- závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
+%- vybral se teda ten home assistant a ted ho nakonfit\newline
+%- konfiguruje se to přes yaml configuration.yaml což je hlavní konfigurák HA\newline
+%- byla výzva přijít na to jak se přidávají vlastní mqtt senzory viz seznam závad v trellu\newline
+%- po přidání senzorů jsem si hrál s vizualizací jednotlivých hnízd tak aby to pro uživatele bylo přívětivě\newline
+%- napsal jsem proto vlastní komponentu pro HA viz foto a trello\newline
+%- zajímavé zjištění bylo že state který jsem využíval pro předávání textových zpráv má maximální velikost 255 bytů\newline
+%- takže jsem z jsonu přešel na csv\newline
+%- pokecat trochu o tom jak vytvořit takovou komponentu jaké to má části a předpoklady a jak se to následně přidává a konfiguruje v HA\newline
+%- následně pak konfigurace automations pro dveře, přepínačů pro manuální ovladání světla a dvěří, obrázků z kamer které taky chodí pomocí mqtt, a následně ještě dog alert aby se poslalo upozornění pokud je mobilní apka a na dashboardu vyskočil daný obrázek a výstrahou\newline
+%- závěrem pak výpis teploty, vlhkosti a počtu slepic v kurníku které systém poznal\newline
+
+Konfigurace Home Assistanta se realizuje skrze soubor \texttt{configuration.yaml}, což je hlavní konfigurační soubor celého systému.
+Práci s YAML jsem si rychle osvojil, jelikož je to efektivní způsob, jak strukturovaně a přehledně nastavit jednotlivé komponenty a integrace.
+
+\subsection*{Výzvy s MQTT senzory}
+
+Jednou z hlavních výzev bylo pochopit a aplikovat způsob, jak přidávat vlastní MQTT senzory do HA. Tato fáze byla složitá, jak ukázal i seznam závad v nástroji Trello, kde jsem sledoval všechny úkoly a problémy.
+Po několika pokusech a testech jsem úspěšně integroval senzory, což umožnilo sledovat různé metriky z projektu Coopmaster.
+
+\subsection*{Uživatelské rozhraní a vizualizace}
+
+Po integraci senzorů jsem se zaměřil na vizualizaci dat tak, aby bylo uživatelsky přívětivé.
+Chtěl jsem, aby uživatelé měli intuitivní přístup k informacím o jednotlivých hnízdech a celkovém stavu kurníku.
+Proto jsem vytvořil vlastní komponentu pro Home Assistant, jak ukazují i fotografie a naše Trello deska.
+
+\subsection*{Limity textové předávání a přechod na CSV}
+
+Zajímavou výzvou bylo zjištění limitu velikosti stavu (\textit{state}) v HA, který je pro textové zprávy maximální velikosti 255 bytů.
+Tato omezení mě přiměly ke změně formátu přenášených dat z JSON na CSV, což pomohlo efektivně předávat větší objemy informací bez ztráty jejich kvality.
+
+\subsection*{Vytváření vlastní komponenty}
+
+Vytvoření vlastní komponenty pro HA vyžadovalo znalost architektury systému.
+Komponenta se skládá z několika částí, včetně definice vlastností, funkcí pro zpracování dat a integrace do existujícího UI. Implementace a konfigurace této komponenty v HA umožnily přizpůsobení funkcionalit projektu konkrétním potřebám Coopmasteru.
+
+\subsection*{Automatizace a další konfigurace}
+
+Nakonec jsem se zaměřil na konfiguraci automatizací pro různé systémy Coopmaster, jako jsou dveře nebo přepínače pro manuální ovládání světel a dveří.
+Snímky z kamer, přenášené pomocí MQTT, byly začleněny do HA, což umožnilo rychlé zobrazení obrázků při výstrahách, jako například u Dog Alert systému, který posílá upozornění doprovázené relevantními snímky jak na mobilní aplikaci, tak na dashboardu.
+
+\subsection*{Shrnutí dat a informací}
+
+Závěrem jsem zajistil, aby HA pravidelně zobrazoval klíčové metriky, jako teplotu, vlhkost a počet slepic v kurníku.
+Tyto informace jsou neustále aktualizovány a umožňují uživatelům mít kompletní přehled o stavu jejich chovu.
+Celý tento proces ukázal, jak důležité je precizní plánování a inovativní přístup ve fázi konfigurace a vývoje uživatelského rozhraní, aby bylo dosaženo vysoké úrovně automatizace a efektivity v projektu Coopmaster.

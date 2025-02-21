@@ -1,6 +1,35 @@
 \section{Dog alarm}\label{sec:dog-alarm}
-Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
-Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
-Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
-Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
-Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.
+Jednou z klíčových komponent systému Coopmaster je služba pro ochranu slepic před potenciálním nebezpečím ve výběhu, nesoucí název Dog Alarm.\newline
+Služba je skrze MQTT protokol propojena se systémem Home Assistant, který data ze služby zpracovává a v případě nutnosti notifikuje chovatele.
+Jako zdroj dat je použit kamerový systém ve výběhu, který je reprezentován službou Camera Driver.
+Z této služby pak Dog Alarm stahuje pomocí GET požadavků fotografie z kamery ve výběhu.\newline
+Pro detekci predátorů je využito modelu Yolo11.
+Tento model má již předučeno 80 kategorii, které umí v základní verzi detekovat.
+Mezi těmito kategoriemi je také pes.
+Obecně je model velmi kvalitně vyučený a společnost Ultralytics k němu nabízí rozsáhlou dokumentaci, což je také jeden z hlavních důvodů mojí volby.
+Model jsem se před nazasením rozhodl ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:klasifikace-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografii.\newline
+Pro shrnutí je Dog Alarm služba, která za použití model Yolo11 detekuje vetřelce (psa) na fotkách z kamery ve výběhu a informuje pomocí MQTT protokolu chovatele do systému Home Assistant.
+
+\subsection*{Popis algoritmu}
+\subsection*{Integrace s se systémem Home Assistant}
+
+Jakmile AI model pozitivně identifikuje přítomnost psa nebo jiného predátora, služba Dog Alarm okamžitě vygeneruje výstrahu.
+Tato výstraha je odeslána pomocí protokolu MQTT do systému Home Assistant.
+Spolu se zprávou je připojen specifický záběr, na kterém byl predátor detekován, což poskytuje přehledný a důkazní materiál pro rychlé rozhodování.
+
+Kromě výstražných zpráv, Dog Alarm pravidelně zasílá aktuální záběry z kamery do Home Assistanta, čímž umožňuje uživatelům mít kontinuální přehled o situaci ve výběhu.
+
+\subsection*{Výhody a přínosy}
+
+Implementace Dog Alarm v systému Coopmaster nabízí několik klíčových výhod:
+\begin{itemize}
+    \item \textbf{Automatizovaný dohled:} Automatická detekce predátorů výrazně zvyšuje bezpečnost slepic tím, že minimalizuje závislost na lidském dohledu.
+    \item \textbf{Rychlá reakce:} Díky okamžitému odesílání upozornění může být rychle aktivována ochranná opatření.
+    \item \textbf{Dokumentace incidentů:} Uložení snímků predátorů poskytuje důležitou dokumentaci pro další analýzu a případné právní kroky.
+\end{itemize}
+
+%Služba Dog alarm má detekovat nebezpečí ve výběhu a poslat tuto zprávu do Home Assistanta.\newline
+%Aktuální záběry jsou pomocí GET requestů stahovány z konkrétní instance služby Camera driver, která je přiřazena ke kameře ve výběhu.
+%Analýza probíhá v určitých intervalech za pomocí umělé inteligence, kde je konkrétně použita metoda detekce objektů.
+%Jakmile jako výsledek klasifikace vyjde jednoznačně, že v záběru byl spatřen pes nebo jiný predátor, je zpráva poslána pomocí MQTT do Home Assistanta společně s konkrétním záběrem, na němž byl predátor detekován.
+%Tato služba zároveň přes MQTT posílá do Home Assistanta aktuální záběr z kamery.

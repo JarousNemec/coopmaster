@@ -13,6 +13,7 @@ http:
   trusted_proxies:
     - 172.18.0.9/32
     - 172.19.0.2/32
+    - 172.19.0.3/32
 
 mqtt:
   - sensor:

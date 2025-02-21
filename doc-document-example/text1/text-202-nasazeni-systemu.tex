@@ -1,49 +1,99 @@
 \section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
-- zjistilo se že bez poe je to špatná volba \newline
-- kamery žerou dost proudu\newline
-- bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
-- byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
-- na stole to většinou funguje dobře \newline
+%- zjistilo se že bez poe je to špatná volba \newline
+%- kamery žerou dost proudu\newline
+%- bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
+%- byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
+%- na stole to většinou funguje dobře \newline
+Během prvního pracovního zapojení a spuštění systému se ukázalo několik klíčových aspektů, které je třeba optimalizovat pro zajištění spolehlivého provozu.
+Jedním z prvních zjištění bylo, že absence technologie Power over Ethernet (PoE) není ideální, zejména proto, že kamery spotřebovávají značné množství elektrického proudu.
+To vedlo k potřebě přehodnotit napájecí řešení.
+\newline
+Kromě napájení bylo nezbytné doladit nastavení kamer, včetně přiřazení statických IP adres.
+Některé kamery totiž disponovaly bezpečnostními opatřeními, která blokovala IP adresy, což způsobovalo komplikace v připojení a stabilitě systému.
+\newline
+Dalším technickým problémem byly kontakty na váze, kde se původně používaly lisované spoje, které se ukázaly být nespolehlivými.
+Pro zajištění lepšího výkonu a spolehlivosti byly tyto spoje nahrazeny pájenými, což přineslo lepší výsledky.
+\newline
+Navzdory těmto problémům systém fungoval relativně dobře při testování na pracovním stole, což naznačuje, že se na této úrovni setkáváme s minimálními problémy.
+Tyto zjištění poskytují pevný základ pro další optimalizaci a nasazení systému v reálných podmínkách.
+
 
 \newpage
 
 
 \section{Nasazení do kurníku}\label{sec:nasazeni-do-kurniku}
-- bylo potřeba natahat elektřinu a internet \newline
-- elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
-- horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
-- vyřešilo se to wifi extenderem od tplinku který má zárověň i ethernet výstup díky čemuž nemuselisme dlouhého tahati kabelu a šlo nám to vzduhem přes dvůr a ve stodole pak drátem\newline
-- kamery bylo potřeba napájet a taky připojit přes internet; zprvu jsem si myslel že poe nebude potřeba ale taha 230 by bylo zbytečné námahy takže jsem pořídil poe switch od tplinku a ten připojuje kamery\newline
-- bylo někde potřeba udělat místo kam se nainstaluje celá technologie kurníku\newline
-- zvolila se plechová bedna ze starého domovního rozvaděče do níž se pro jednotlivé prvky vytvožili na míru držáčky a pouzdra ps.: fotky z tisku a pak z rozvaděče\newline
-- jak se zrealizovala váha\newline
-- jak vypadá řídící jednotka pri room assistanta\newline
-- jaké tam jsou dveře pro slepice\newline
-- celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
-- bylo potřeba zkalibrovat hmotnosti slepic a vajec
+%- bylo potřeba natahat elektřinu a internet \newline
+%- elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
+%- horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
+%- vyřešilo se to wifi extenderem od tplinku který má zárověň i ethernet výstup díky čemuž nemuselisme dlouhého tahati kabelu a šlo nám to vzduhem přes dvůr a ve stodole pak drátem\newline
+%- kamery bylo potřeba napájet a taky připojit přes internet; zprvu jsem si myslel že poe nebude potřeba ale taha 230 by bylo zbytečné námahy takže jsem pořídil poe switch od tplinku a ten připojuje kamery\newline
+%- bylo někde potřeba udělat místo kam se nainstaluje celá technologie kurníku\newline
+%- zvolila se plechová bedna ze starého domovního rozvaděče do níž se pro jednotlivé prvky vytvožili na míru držáčky a pouzdra ps.: fotky z tisku a pak z rozvaděče\newline
+%- jak se zrealizovala váha\newline
+%- jak vypadá řídící jednotka pri room assistanta\newline
+%- jaké tam jsou dveře pro slepice\newline
+%- celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
+%- bylo potřeba zkalibrovat hmotnosti slepic a vajec
+
+Nasazení systému Coopmaster přímo do kurníku vyžadovalo několik klíčových kroků, abychom zajistili jeho plnou funkčnost a efektivitu.
+Jedním z prvních úkolů bylo natažení elektřiny a připojení k internetu.
+Elektřina byla přivedena bez větších problémů; využili jsme stávající zdroje z kůlny prostřednictvím otvoru ve zdi.
+\newline
+Výrazně náročnější bylo zajistit internetové připojení, protože signál Wi-Fi nedosahoval až ke kurníku.
+Toto jsme vyřešili instalací Wi-Fi extenderu od TP-Link, který nabízí také ethernetový výstup.
+Toto řešení nám umožnilo přenášet data vzduchem přes dvůr, a dále pak ve stodole drátem, čímž jsme se vyhnuli nepotřebnému natahování kabeláže.
+\newline
+Dalším úkolem bylo napájení a připojení kamer přes internet.
+Zpočátku jsem předpokládal, že Power over Ethernet (PoE) nebude nutné, ale poté, co by tahání 230V kabelů znamenalo nadměrné úsilí, jsem pořídil PoE switch od TP-Link, který tyto kamery napájí i připojuje.
+\newline
+Dále bylo nutné vytvořit prostor, kam nainstalovat veškerou technologii kurníku.
+Pro tento účel jsme zvolili plechovou bednu ze starého domovního rozvaděče.
+Do této bedny byly přesně vyrobeny držáčky a pouzdra pro jednotlivé komponenty, jak dokládají fotografie z výroby a samotného rozvaděče.
+\newline
+Při instalaci bylo důležité řešit i váhu systému a její kalibraci pro přesné měření hmotnosti slepic a vajec.
+Řídící jednotka pro Home Assistant je součástí tohoto systému a zajišťuje bezproblémový provoz.
+Dveře pro slepice jsou integrovány do celkového řešení a celé řízení probíhá prostřednictvím Raspberry Pi 5, které komunikuje s NUC pomocí řešení Tailscale, ale tuto problematiku rozvedeme v další kapitole.
+\newline
+Tento komplexní proces nasazení do kurníku neustále vyžadoval přesné plánování a realizaci, abychom zajistili vysokou úroveň automatizace a efektivity potřebnou pro moderní chov slepic.
 
 \newpage
 
 
 \section{Konfigurace vzdáleného přístupu}\label{sec:konfigurace-vzdaleneho-pristupu}
-- rpi propojene s nuckem a dev kompama přes tailscail\newline
-- v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
-- do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
-- cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
-- pronajmul jsem si doménu u doméhového registrátora forpsi\newline
-- zmínění jaká plynou nebezpečí z tohoto řešení
+%- rpi propojene s nuckem a dev kompama přes tailscail\newline
+%- v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
+%- do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
+%- cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
+%- pronajmul jsem si doménu u doméhového registrátora forpsi\newline
+%- zmínění jaká plynou nebezpečí z tohoto řešení
+
+Konfigurace vzdáleného přístupu k systému Coopmaster byla založena na robustní infrastruktuře, která zajišťuje bezpečné a efektivní propojení mezi klíčovými komponentami.
+Raspberry Pi (rpi) bylo propojeno s NUC a vývojářskými počítači prostřednictvím Tailscale, což umožňuje vytvoření privátní sítě VPN, která je snadno spravovatelná a zajišťuje bezpečné spojení.
+\newline
+Pro Home Assistant byl na NUC v systému Docker vytvořen specifický síťový most.
+Tento most je dedikovaný pouze pro Home Assistant a jeho potřeby komunikace s vnějším světem.
+K této síti byl přidán i kontejner Cloudflared, který umožňuje vytvoření bezpečného tunelu na platformu Cloudflare.
+Cloudflared zajišťuje průchod dat skrz Cloudflare firewall a proxy servery na internet, čímž zvyšuje bezpečnost a spolehlivost komunikace.
+\newline
+Aby byl tunel funkční, bylo nutné jej namapovat na naši vlastněnou doménu.
+Pro tento účel jsem si registroval doménu u doménového registrátora Forpsi, což nám poskytlo potřebné DNS záznamy k propojení s Cloudflare.
+\newline
+Je důležité poznamenat, že taková konfigurace s sebou nese i jistá bezpečnostní rizika.
+Primárním rizikem je možnost neautorizovaného přístupu, pokud není správně nakonfigurováno zabezpečení tunelu a neprovádí se pravidelné audity.
+Dále mohou existovat zranitelnosti v softwaru kontejneru nebo sítě, které by mohly být zneužity, pokud nejsou průběžně aktualizovány.
+Z těchto důvodů je klíčové udržovat systém aktualizovaný a implementovat vhodná bezpečnostní opatření.
 
 \newpage
 
-\section*{---poznámky TODO ke smazání---}\label{sec:---poznamky-todo-ke-smazani---}
-- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
-- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
-- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
-- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
-- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
-- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
-- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
-- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
-- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
-- verzuje se to na github
-- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
+%\section*{---poznámky TODO ke smazání---}\label{sec:---poznamky-todo-ke-smazani---}
+%- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
+%- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
+%- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
+%- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
+%- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
+%- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
+%- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
+%- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
+%- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
+%- verzuje se to na github
+%- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
