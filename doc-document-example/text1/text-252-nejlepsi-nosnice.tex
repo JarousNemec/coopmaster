@@ -25,7 +25,6 @@ Nakonec jsem nalezl článek \cite{medium-person-reidentification}, který mě i
 
 Z článku jsem pochopil zakladní princip.
 
-
 Postupuji následujícím způsobem.
 Nejprve procházím videozáznam a identifikuji oblasti, kde se slepice nacházejí.
 Tyto oblasti následně vystřihnu a uložím do samostatných souborů.
@@ -45,7 +44,7 @@ Algoritmus tedy na počátku vezme jako vstup obrázek z kamery viz obrázek~\re
     \label{fig:source_chick_image}
 \end{figure}
 
-Dále je obrázek segmentován a jsou vyjmuty pouze tvary, které algoritmus vyhodnotil jako slepice viz obrázek~\ref{fig:segmented_chicks2}.
+Dále je slepice z obrázku vystřižena (segmentována) podle kontury, kterou algoritmus vyhodnotil jako slepice viz obrázek~\ref{fig:segmented_chicks2}.
 
 \begin{figure}[H]
     \centering
@@ -54,7 +53,7 @@ Dále je obrázek segmentován a jsou vyjmuty pouze tvary, které algoritmus vyh
     \label{fig:segmented_chicks2}
 \end{figure}
 
-Na závěr je pro každý výřez vypočítán tenzor na jehož základě jsou slepice roztřízeny do jednotlivých skupin podle barvy viz obrázek~\ref{fig:chicks_in_clusters}.
+Na závěr je pro každý výřez vypočítán tenzor na jehož základě jsou slepice roztřízeny do jednotlivých skupin viz obrázek~\ref{fig:chicks_in_clusters}.
 
 \begin{figure}[H]
     \centering
@@ -68,3 +67,20 @@ Na závěr je pro každý výřez vypočítán tenzor na jehož základě jsou s
     \caption{Segmentované slepice z fotek}
     \label{fig:segmented_chicks}
 \end{figure}
+
+
+Zmiňuji tuto funkcionalitu v sekci "plány do budoucna", protože se mi zatím nepodařilo algoritmus dostatečně vypilovat.
+Při vývoji jsem sice testoval na několika obrázcích a zdálo se, že princip by mohl fungovat, ale v reálném prostředí byl výsledek značně nepřesný.
+Babička má totiž dvakrát červenou, dvakrát bílou a dvakrát černou slepici, plus jednoho bílého kohouta.
+Proto jsou ty slepice často hodně podobné a rozdíly mezi nimi jen nepatrné.
+
+Momentálně přemýšlím, jak ty slepice odlišit, ale nejsem si jistý, že by mi babička dovolila je pomalovat.
+Možná by pomohlo i zjednodušení úkolu.
+Namísto soutěže o nejlepší nosnici bych se možná mohl zamyslet nad sestavením nejlepšího závodního týmu.
+
+Mohly by to být týmy bílých, červených či černých slepic.
+
+
+
+
+
