@@ -5,6 +5,11 @@
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
 
+%nastavení kapitol aby se nepsalo slovo kapitola ale číslo se psalo rovnou před název kapitoly
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{1em}{\Huge\thechapter\Huge\hspace{1em}}
+%kvůli nečíslovaným kapitolám se musí přidat toto protže vlastně rozdrbáváme daný styl který to má
+\titleformat{name=\chapter,numberless}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+
 
 \titlecz{Coopmaster - systém pro řízení a automatizaci kurníku}
 \titleen{Coopmaster - system for coop control and automation}
@@ -61,19 +66,20 @@
     %%% Závěr
     \input{text1/text-03-zaver}
 
-    \addcontentsline{toc}{section}{Seznam zkratek}
-    \printglossary[type=\acronymtype, title={Seznam zkratek}]
 
-    \printbibliography[title=Použitá Literatura]
-    \addcontentsline{toc}{section}{Použitá literatura}
+    \printglossary[type=\acronymtype, title=Seznam zkratek]
+    \addcontentsline{toc}{chapter}{Seznam zkratek}
+
+    \printbibliography[title=Použitá literatura]
+    \addcontentsline{toc}{chapter}{Použitá literatura}
 
     \listoffigures
-    \addcontentsline{toc}{section}{Seznam obrázků}
+    \addcontentsline{toc}{chapter}{Seznam obrázků}
 
     \listoftables
-    \addcontentsline{toc}{section}{Seznam tabulek}
+    \addcontentsline{toc}{chapter}{Seznam tabulek}
 
     \listoflistedequation
-    \addcontentsline{toc}{section}{Seznam rovnic}
+    \addcontentsline{toc}{chapter}{Seznam rovnic}
 
 \end{document}

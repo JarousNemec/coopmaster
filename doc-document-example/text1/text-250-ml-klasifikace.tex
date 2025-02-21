@@ -1,6 +1,6 @@
 \section{Klasifikace objektů pomocí strojového učení}\label{sec:klasifikace-objektu-pomoci-strojoveho-uceni}
 
-\subsection{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
+\subsection*{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
 V posledních letech došlo k významnému pokroku v oblasti strojového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
 Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLOv8 (You Only Look Once version 8).
 Tato knihovna přináší rychlé a přesné metody detekce objektů a je ideální pro implementaci v reálném čase.
@@ -15,7 +15,7 @@ Použití YOLOv8 přináší následující výhody:
 \end{enumerate}
 V následujících sekcích si podrobně projdeme kroky, jak připravit dataset, trénovat vlastní model se zaměřením na rozpoznávání slepic a jak jej implementovat do našeho systému monitorování.
 
-\subsection{Obrázkový dataset}\label{subsec:obrazkovy-dataset}
+\subsection*{Obrázkový dataset}\label{subsec:obrazkovy-dataset}
 
 Obrázkový dataset je strukturovaná kolekce obrazových dat, která se používána pro potřeby strojového učení a počítačového vidění.
 Tyto datasety obsahují jednotlivé obrázky, které jsou často spojeny s dodatečnými informacemi nebo anotacemi, jež jsou potřebné pro trénink modelů.
@@ -137,7 +137,7 @@ Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:
     \label{fig:coco_format}
 \end{figure}
 
-\subsection{Doučování modelu Yolov11 o novou třídu}\label{subsec:doucovani-modelu-yolov11-o-novou-tridu}
+\subsection*{Doučování modelu Yolov11 o novou třídu}\label{subsec:doucovani-modelu-yolov11-o-novou-tridu}
 V předchozí sekci jsem si popsali jak vytvořit zdroje dat a nyní jsme připraveni, vyučit existující model.
 Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na strankach https://docs.ultralytics.com/ jsem to zvladnul.
 Základem pro úspěšné a efektivní učení je hardware.
@@ -274,7 +274,3 @@ Výsledky detekce jsou demostrovány na obrázcích~\ref{fig:chicken_detection1}
         \label{fig:chicken_detection4}
     \end{minipage}
 \end{figure}
-
-
-
-%todo fix render obrázků
