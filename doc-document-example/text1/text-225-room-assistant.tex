@@ -1,4 +1,5 @@
 \section{Room assistant}\label{sec:room-assistant}
+
 Room assistant zpřístupňuje komunikaci mezi systémem Home Assistant a službou Room Driver.\newline
 S Home Assistantem je komunikace realizována pomocí MQTT(\ref{sec:mqtt}) a s Room driverem pomocí HTTP(\ref{sec:http-rest}) protokolu.
 Tato služba zpřístupňuje do systému Home Assistant data o teplotě a vlhkosti a Home Assistant přes ní ovládá světlo a dvířka.
@@ -9,13 +10,10 @@ Jako první naběhnou MQTT subscribery pro přijímání příkazů ze systému 
 Jeden přijímá příkazy pro dívřka druhý pro světlo.
 Vytvoří se vlastně instance dvou tříd LampTimeChecker a DoorTimeChecker.
 Tyto instance mají každá svou instanci třídy NestMQTTClient, která zaobaluje základní funkcionalitu ohledně používání protokolu MQTT.\newline
-
 \textbf{NestMQTTClient} zaobaluje metody pro publikování a odebírání zprávy, připojení a odpojení od MQTT brokeru, reakci na navázané spojení s MQTT brokerem a reakci na odebrání nové zprávy.\newline
 \textbf{LampTimeChecker} odebírá téma coopmaster/room/lamp/cmnd a zpracovává zprávu pokud je jejím obsahem \textbf{on} nebo \textbf{off}.
-Na základě přijatého obsahu zprávy se zavolá statická metoda call\_room\_driver\_command třídy driver\_client, aby odeslala příslušný příkaz do Room Driveru na endpoint, který je předáván jako parametr.
-
-\textbf{DoorTimeChecker} funguje stejně jako NestMQTTClient, ale odebírá téma coopmaster/room/door/cmnd a reaguje pokud je obsah MQTT zprávy \textbf{open} nebo \textbf{close}.
-.\newline
+Na základě přijatého obsahu zprávy se zavolá statická metoda call\_room\_driver\_command třídy driver\_client, aby odeslala příslušný příkaz do Room Driveru na endpoint, který je předáván jako parametr.\newline
+\textbf{DoorTimeChecker} funguje stejně jako NestMQTTClient, ale odebírá téma coopmaster/room/door/cmnd a reaguje pokud je obsah MQTT zprávy \textbf{open} nebo \textbf{close}.\newline
 Po startu se rozběhne BackgroundScheduler, který má za úkol vždy po uplinutí 5 vteřin spustit nový běh jobu pro aktualizování stavů z řídící jednotky.
 Podmínkou pro spuštění nového běhu jobu je, že předchozí běh musí být dokončen.
 Tuto funkci má již v sobě implementovanou scheduler z knihovny APScheduler, který využíváme.

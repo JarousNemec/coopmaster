@@ -31,20 +31,20 @@ K tomu to účelu jsem využil open-source vývojářského nástroje Arduino ID
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/ridici_jednotka}
-        \caption{Výsledek detekce slepic 1}
+        \caption{Skutečné zapojení řídící jednotky}
         \label{fig:ridici_jednotka}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/schema_ridici_jednotky}
-        \caption{Výsledek detekce slepic 2}
+        \caption{Blokové schéma řídící jednotky}
         \label{fig:schema_ridici_jednotky}
     \end{minipage}
 \end{figure}
 
 \subsection*{Popis algoritmu}
-V části programu Setup se jako první po startu programu nastavý příslušné módy na vstupní a výstupní piny.
+V části programu Setup se jako první po startu programu nastaví příslušné módy na vstupní a výstupní piny.
 Následně se provede inicializace seriálového připojení s rychlostí 9600 baudů.
 Poté se inicializuje připojení s čidlem DHT11 pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
 Dále program pokračuje do části Loop, což je metoda, která se volá pořád dokola jako nekonečný cyklus.

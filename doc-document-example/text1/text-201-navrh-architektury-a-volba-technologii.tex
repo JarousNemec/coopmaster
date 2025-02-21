@@ -4,7 +4,7 @@ Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace,
 Jsme tedy nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
 Tato sekce se bude zabývat analýzou a návrhem architektury systému Coopmaster dle požadavků ze sekce~\ref{ch:tvorba-zadani}.
 
-\section{Šlužby dle jednotlivých potřeb uživatele}\label{sec:microservices}
+\section{Služby dle jednotlivých potřeb uživatele}\label{sec:microservices}
 Jako teoretický model na základě kterého budeme organizovat a třídit funkcionalitu, jsem zvolil mikroservisní architekturu(sekce~\ref{sec:microservice-architecture}).
 Tento způsob rozvržení zodpovědnosti částí systému jsem zvolil díky velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému případně znovunasazení.\newline
 Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python(sekce~\ref{sec:python}).
@@ -32,7 +32,7 @@ Home Assistant má na internetu také rozsáhlou podporu a komunitu s množstvý
 Jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
 \section{Komunikace mezi Backendem a Frontendem}\label{sec:komunikace-mezi-backendem-a-frontendem}
-Je třeba zajistit komunikaci mezi Home Assistantem a Coopmaster službami.
+Je třeba zajistit komunikaci mezi systémem Home Assistant a Coopmaster službami.
 Tuto úlohu musíme přijmout velice zodpovědně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
 Z toho důvodu nelze použít klasické HTTP(sekce~\ref{sec:http-rest}), protože bychom komunikaci vázali na buď doménové jméno a port, nebo ip adresu a port.
 Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí služeb nebo port jedné ze služeb, bylo by třeba překonfigurovat i Home Assistanta.
