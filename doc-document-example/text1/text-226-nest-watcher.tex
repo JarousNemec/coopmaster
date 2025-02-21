@@ -1,20 +1,26 @@
 \section{Nest watcher}\label{sec:nest-watcher}
 Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
-Hlavní funkcí je načítání a analýza dat z jednotlivých vah v hnízdech, která jsou reprezentována Scale Drivery.\newline
+Úkolem této služby je načítání a analýza dat z jednotlivých hnízd v kurníku.
+Každé hnízdo je reprezentováno jednou instancí služby Scale Driver.\newline
+V aktuální situaci služba obsluhuje šest hnízd, přičemž se data z každého hnízda monitorují a vyhodnocují.
+Toto komplexní sledování umožňuje efektivní řízení kurníku, zajišťuje optimální péči o slepice a včasný sběr vajec.
+Přístup založený na datech zvyšuje naši schopnost udržovat zdravé slepice a maximalizovat jejich produktivitu.\newline
+
+\subsection*{Popis algoritmu}
+
 Data jsou načítána několikrát za minutu a ukládána do databáze s časovým údajem, kdy byl záznam vytvořen.
 Záznam v databázi obsahuje následující sloupce:
+
 \begin{itemize}
-    \item id: Jednoznačný identifikátor záznamu v databázi.
-    \item nest\_id: Identifikační číslo hnízda (v naší implementaci aktuálně 1 až 6).
-    \item weight: Naměřená hmotnost v gramech pro dané hnízdo.
-    \item timestamp: Čas vytvoření záznamu.
+    \item \textbf{id}: Jednoznačný identifikátor záznamu v databázi.
+    \item \textbf{nest\_id}: Identifikační číslo hnízda.
+    \item \textbf{weight}: Naměřená hmotnost v gramech pro dané hnízdo.
+    \item \textbf{timestamp}: Čas vytvoření záznamu.
 \end{itemize}
+
 Následně se jednou za minutu vyhodnotí průměrná hodnota během posledních několika vážení.
-Tento kontinuální sběr a analýza dat nám umožňuje monitorovat statistiky pro jednotlivá hnízda.
-Výsledky můžeme využít například ke zlepšení podmínek chovu.
-Například v případě, kdy bychom zjistili, že některé hnízdo není pravidelně navštěvováno stejně jako ostatní, znamená to, že v hnízdě je něco, co slepice pravidelně odrazuje.\newline
-\newline
-Na základě vyhodnocené průměrné hmotnosti jsme schopni zjistit několik případů:
+Na základě vyhodnocené průměrné hmotnosti jsme schopni zjistit několik hlavních stavů hnízda:
+
 \begin{enumerate}
     \item \textbf{Hnízdo je prázdné}: Pokud průměrná hmotnost nepřevyšuje 50 gramů (vzhledem k možným chybám měření), vyhodnotíme, že hnízdo je prázdné.
     V hnízdě není ani slepice, ani vejce.
@@ -24,7 +30,7 @@ Na základě vyhodnocené průměrné hmotnosti jsme schopni zjistit několik p�
     Hmotnost slepice se pohybuje kolem 1200 gramů a více.
 \end{enumerate}
 
-Obrázek~\ref{fig:weight_egg_chart_timeline} znázořňuje hodnotu hmotnosti v čase pro hnízdo s nest\_id 1.
+Obrázek~\ref{fig:weight_egg_chart_timeline} znázorňuje hodnotu hmotnosti v čase pro hnízdo s nest\_id 1.
 
 \begin{figure}[h]
     \centering
@@ -33,10 +39,21 @@ Obrázek~\ref{fig:weight_egg_chart_timeline} znázořňuje hodnotu hmotnosti v �
     \label{fig:weight_egg_chart_timeline}
 \end{figure}
 
-Tyto tři zmíněné informace služba následně pomocí MQTT předává do systému Home Assistant, aby je zpracoval a vizualizoval chovateli.
-Tím je umožněno přijímat notifikace či provádět akce na základě stavů hnízd.
-Díky měřením hmotnosti z jednotlivých hnízd můžeme odvodit i další vzorce, které vypovídají o aktuálním stavu daného hnízda.
-Kromě třech výše uvedených případů můžeme z nasbíraných dat identifikovat například tyto situace:
+Výsledné stavy pro jednotlivá hízda služba následně pomocí MQTT protokolu předává do systému Home Assistant, aby je zpracoval a vizualizoval chovateli.
+Tato data nám umožňují následně pomocí systému Home Assistant například posílat notifikace chovateli nebo provádět akce na základě stavů hnízd.
+\newline
+
+
+\subsection*{Popis možných vylepšení práce s váhou}
+Díky měřením hmotnosti můžeme odvodit i další vzorce, které mohou být využity jak k diagnostice závady na váze a nebo identifikaci toho, že některá ze slepic má nějaký problém.
+V případě, kdy by se data z váhy na základě času spojila společně se záběrem z kamery, dalo by se v tomto případě přesně určit o, kterou ze slepic se jedná. \newline
+Určit by slepice mohl jednak chovatel díky tomu, že by mu byl předložen snímek na němž je slepice v konkrétním hnízdě, které hlásí problém.
+Konkrétní slepici by časem mohla detekovat i neuronová síť. \newline
+Toto řešení je však velmi komplikované, protože vzhledem k vysoké podobnosti bude složité rozlišit například dvě podobně bílé slepice a chovateli jednoznačně sdělit, která slepice má problém.
+Na druhou stranu, pokud by se tento princip reidentifikace dovedl k dokonalosti, přinesl by revoluci monitoringu pomocí kamerových systémů.
+Dále se o implementaci vlastního reidentifikačního algoritmu hovoří v sekci~\ref{sec:koncept-identifikace-nejlepsi-nosnice}.
+\newline
+Kromě výše zmíněných stavů by se v budoucnu z váhy dalo identifikovat i následující seznam situací.
 
 \begin{itemize}
     \item \textbf{Doba setrvání slepice v hnízdě}: Analýzou délky období, kdy je hmotnost hnízda nad 1200 gramů, lze zjistit, jak dlouho slepice v hnízdě zůstává.
@@ -48,10 +65,6 @@ Kromě třech výše uvedených případů můžeme z nasbíraných dat identifi
     \item \textbf{Denní vzorce aktivity}: Analýzou hmotnostních dat během dne lze určit období nejvyšší aktivity slepic.
     To může být užitečné pro plánování krmení, čištění kurníku nebo jiných činností, které by mohly slepice rušit.
 \end{itemize}
-
-Celkově systém obsluhuje šest hnízd, přičemž se data z každého hnízda monitorují a vyhodnocují.
-Toto komplexní sledování umožňuje efektivní řízení kurníku, zajišťuje optimální péči o slepice a včasný sběr vajec.
-Přístup založený na datech zvyšuje naši schopnost udržovat zdravé slepice a maximalizovat jejich produktivitu.
 
 %\subsection*{Předpokládaná datová struktura v databázi:}
 %
