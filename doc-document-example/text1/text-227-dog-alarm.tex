@@ -7,9 +7,8 @@ Jako zdroj dat je použit kamerový systém ve výběhu, který je reprezentová
 Z této služby pak Dog Alarm stahuje pomocí GET požadavků fotografie z kamery ve výběhu.\newline
 
 Pro detekci predátorů je využito modelu Yolo11.
-
 Model je velmi kvalitně vyučený a společnost Ultralytics k němu nabízí rozsáhlou dokumentaci, což je také jeden z hlavních důvodů mojí volby.
-Model jsem se před nasazením rozhodl ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografii.\newline
+Před nasazením jsem model ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografii.\newline
 
 Jakmile model identifikuje přítomnost psa nebo jiného predátora, služba Dog Alarm okamžitě vygeneruje výstrahu.
 Tato výstraha je odeslána pomocí protokolu MQTT do systému Home Assistant.
@@ -29,7 +28,8 @@ Prvním krokem jobu je stažení aktuálního obrázku z kamery ve výběhu.
 Další následuje načtení příslušného Yolo modelu dle konfigurace.
 Následně je provedena detekce objektů v obraze (ukázka výsledku je na obrázku~\ref{fig:dog_detected}), o čemž se dále rozepisuji v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}.
 Výsledný seznam detekovaných objektů se analyzuje a zjistí se, zda obsahuje kategorii pes.
-Závěrem se informace, zda byl detekován pes, společně s aktuálním obrázkem odešlou pomocí MQTT protokolu do systému Home Assistant.
+Před koncem jobu se stav, zda byl detekován pes publiku na MQTT topic coopmaster/dog/detected a aktuální obrázek na topic coopmaster/dog/image/actual.
+Tyto MQTT topics odebírá systém Home Assistant a dále s nimi pracuje což je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
 \begin{figure}[H]
     \centering
