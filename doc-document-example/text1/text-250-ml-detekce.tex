@@ -5,7 +5,7 @@
 %Mezi těmito kategoriemi je také pes.
 
 \subsection*{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
-V posledních letech došlo k významnému pokroku v oblasti strojového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
+V posledních letech došlo k významnému pokroku v oblasti počítačového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
 Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLOv11 (You Only Look Once version 11).
 Tato knihovna přináší rychlé a přesné metody detekce objektů a je ideální pro implementaci v reálném čase.
 V této sekci se zaměříme na to, jak využít YOLOv11 ke specifickému úkolu: rozpoznávání slepic v kurníku.
@@ -13,24 +13,24 @@ Automatizované rozpoznávání umožňuje sledování počtu slepic.
 Použití YOLOv11 přináší následující výhody:
 
 \begin{enumerate}
-    \item Rychlost a Přesnost: YOLOv11 je navrženo pro rychlou detekci objektů s vysokou mírou přesnosti, což je ideální pro aplikování v reálném čase na farmách.
-    \item Jednoduchost Implementace: Díky snadnému rozhraní a rozsáhlé dokumentaci je integrace YOLOv11 do existujících systémů velmi přímočará.
-    \item Flexibilita: Můžete trénovat model na vlastním datasetu slepic, což zajistí optimální rozpoznávání i v specifických podmínkách vašeho kurníku.
+    \item Rychlost a přesnost: YOLOv11 je navrženo pro rychlou detekci objektů s vysokou mírou přesnosti, což je ideální pro aplikování v reálném čase na farmách.
+    \item Jednoduchost implementace: Díky snadnému rozhraní a rozsáhlé dokumentaci je integrace YOLOv11 do existujících systémů velmi přímočará.
+    \item Flexibilita: Můžete trénovat model na vlastním datasetu slepic, což zajistí optimální rozpoznávání i ve specifických podmínkách vašeho kurníku.
 \end{enumerate}
 V následujících sekcích si podrobně projdeme kroky, jak připravit dataset, trénovat vlastní model se zaměřením na rozpoznávání slepic a jak jej implementovat do našeho systému monitorování.
 
 \subsection*{Obrázkový dataset}\label{subsec:obrazkovy-dataset}
 
-Obrázkový dataset je strukturovaná kolekce obrazových dat, která se používána pro potřeby strojového učení a počítačového vidění.
+Obrázkový dataset je strukturovaná kolekce obrazových dat, která se používá pro potřeby strojového učení a počítačového vidění.
 Tyto datasety obsahují jednotlivé obrázky, které jsou často spojeny s dodatečnými informacemi nebo anotacemi, jež jsou potřebné pro trénink modelů.
 Níže jsou uvedeny hlavní aspekty, které charakterizují obrázkové datasety:
 
 \begin{enumerate}
-    \item Obrázky: Základní komponentou datasetu jsou samotné snímky, které mohou být v různých formátech (např. JPEG, PNG). Rozlišení a počet barev se může lišit v závislosti na účelu datasetu.
-    \item Anotace: Kromě samotných obrázků obsahují datasety take anotace. Tyto anotace zahrnují následující informace
+    \item Obrázky - snímky, které mohou být v různých formátech (např. JPEG, PNG). Rozlišení a počet barev se může lišit v závislosti na účelu datasetu
+    \item Anotace - metadata, obsahující následující elementy
     \begin{itemize}
-        \item Klasifikační štítky: Které identifikují, co se na obrázku nachází (např. „kočka“, „pes“, „slepice“).
-        \item Ohraničující boxy: Které označují polohu specifických objektů na obrázku.
+        \item Klasifikační štítky - identifikují, co se na obrázku nachází (např. „kočka“, „pes“, „slepice“)
+        \item Ohraničující boxy - polohu specifických objektů na obrázku
     \end{itemize}
 \end{enumerate}
 
@@ -39,8 +39,8 @@ Příklady známých obrázkových datasetů zahrnují ImageNet, COCO (Common Ob
 V kontextu využití datasetů pro strojové učení je důležité zajistit, aby datasety byly kvalitní, rozmanité a dostatečně rozsáhlé, což pomáhá modelům převážně se zobecněním a výkonem v různorodých situacích.
 Pro specifické nasazení v babičině kurníku jsem připravil vlastní dataset, který jsem použil pro doučení již existujícího základního modelu, který poskytuje Yolov11.
 Záběry jsem vyfotil mobilem v prostředí babiččina výběhu a kurníku.
-Existuje mnoho systému pro tvorbu anotaci anglicky image labeling.
-Já jsem zvolil Azure AI - Azure Machine Learning studio.
+Existuje mnoho systémů pro tvorbu anotací (image labeling).
+Já jsem zvolil Azure AI - Azure Machine Learning studio~\cite{aml}.
 Pro práci je velmi intuitivní a nechá spustit v několika krocích.
 Nejdříve jsem pomocí průvodce vytvořil nový projekt jak je znázorněno na obrázku~\ref{fig:create_learning_project}.
 
@@ -76,7 +76,7 @@ Definice kategorií je na obrázku~\ref{fig:category_definition}.
 
 V následujícím kroku následovala nejméně zábavná činnost.
 Bylo třeba projít jednotlivé snímky a ručně vybrat oblasti, kde já jako člověk vidím slepici.
-Oblast, kterou jsem označil se pak následně ukládá jako metadata k obrázku.
+Oblast, kterou jsem označil se pak následně ukládá jako metadata k~obrázku.
 Tento proces je znárorněn na obrázku~\ref{fig:chicken_labeling}.
 
 \begin{figure}[htbp]
@@ -107,26 +107,26 @@ Zde je popis jednotlivých částí daného JSON souboru ve formátu COCO:
 \begin{enumerate}
     \item images: Tato sekce obsahuje informace o každém obrázku v datasetu.
     \begin{itemize}
-        \item id: Unikátní identifikátor obrázku (zde 1).
-        \item width a height: Rozměry obrázku (zde 534 pixelů x 291 pixelů).
-        \item file\_name: Cesta k souboru obrázku včetně názvu souboru.
-        \item coco\_url, absolute\_url: Adresy, kde je obrázek uložen, ať už v cloudovém sandboxu (coco\_url) nebo přes URL pro přímý přístup (absolute\_url).
-        \item date\_captured: Čas a datum zachycení obrázku v UTC formátu.
+        \item[] id - unikátní identifikátor obrázku (zde 1)
+        \item[] width a height - rozměry obrázku (zde 534 pixelů x 291 pixelů)
+        \item[] file\_name: cesta k souboru obrázku včetně názvu souboru
+        \item[] coco\_url, absolute\_url - adresy, kde je obrázek uložen, ať už v cloudovém sandboxu (coco\_url) nebo přes URL pro přímý přístup (absolute\_url)
+        \item[] date\_captured - čas a datum zachycení obrázku v UTC formátu
     \end{itemize}
-    \item annotations: Tato sekce popisuje anotace neboli poznámky k jednotlivým objektům na obrázcích.
+    \item annotations - poznámky k jednotlivým objektům na obrázcích.
     \begin{itemize}
-        \item id: Unikátní identifikátor anotace (zde 1).
-        \item category\_id: Odkazuje na kategorii objektu (zde 1, což odpovídá \"slepice\").
-        \item image\_id: ID obrázku, na který se tato anotace vztahuje.
-        \item area: Relativní plocha objektu na obrázku (zde 0.016).
-        Tato hodnota je často normalizována vzhledem k velikosti obrázku.
-        \item bbox: Vektor čtyř čísel, který definuje obdélník (bounding box) okolo objektu na obrázku.
+        \item[] id - unikátní identifikátor anotace (zde 1)
+        \item[] category\_id - odkazuje na kategorii objektu
+        \item[] image\_id - ID obrázku, na který se tato anotace vztahuje
+        \item[] area - relativní plocha objektu na obrázku (zde 0.016).
+        Tato hodnota je často normalizována vzhledem k velikosti obrázku
+        \item[] bbox - vektor čtyř čísel, který definuje obdélník (bounding box) okolo objektu na obrázku
         Hodnoty jsou obvykle normalizované, takže se pohybují mezi 0 a 1 a odpovídají relativním souřadnicím a rozměrům (x, y, šířka, výška).
     \end{itemize}
-    \item categories: Tato sekce obsahuje seznam kategorií, do kterých mohou objekty na obrázcích patřit.
+    \item categories - seznam kategorií, do kterých mohou objekty na obrázcích patřit.
     \begin{itemize}
-        \item id: Unikátní identifikátor kategorie.
-        \item name: Jméno nebo popis kategorie (zde \"slepice\" a \"unknown\").
+        \item id - unikátní identifikátor kategorie.
+        \item name - jméno nebo popis kategorie (zde slepice a unknown).
     \end{itemize}
 \end{enumerate}
 
@@ -143,15 +143,15 @@ Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:
 
 \subsection*{Doučování modelu Yolov11 o novou třídu}\label{subsec:doucovani-modelu-yolov11-o-novou-tridu}
 V předchozí sekci jsem si popsali jak vytvořit zdroje dat a nyní jsme připraveni, vyučit existující model.
-Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na strankach https://docs.ultralytics.com/ jsem to zvladnul.
+Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na strankach Ultralytics.com~\cite{ultralytics} jsem to zvladnul.
 Základem pro úspěšné a efektivní učení je hardware.
 Hlavně GPU, protože trénování modelů hlubokého učení je výpočetně náročné.
 Vypozoroval jsem, že největší vliv na učení má velikost paměti grafické karty.
 V mém případě byla použita Nvidia RTX 4070.
-O stavbě a následném učení neuronových sítí by se nechalo desítky stránek, ale to není předmětem mojí práce.
-Rád bych alespon představil blokové schema učícího procesu.\newline
+O stavbě a následném učení neuronových sítí by se nechalo napsat desítky stránek, ale to není předmětem mojí práce.
+Rád bych alespon představil blokové schéma učícího procesu, který jsem použil.\newline
 \newline
-Pro učení jsem použil script, ktery jsem si pripravil.
+Pro učení jsem použil script, který jsem si připravil.
 Volání jednotlivých kroků pro učení je znázorněno na screenshotu učící metody na obrázku~\ref{fig:learn_script}
 
 \begin{figure}[htbp]
@@ -164,14 +164,14 @@ Volání jednotlivých kroků pro učení je znázorněno na screenshotu učíc�
 \paragraph*{Krok 1 - CleanWorkspace}
 
 Tento krok je zodpovědný za přípravu pracovního prostředí před zahájením tréninkového procesu.
-Odstranuji v něm archivaci stávajících dat a modelů, které mi ve workspace zůstaly z předchozich běhů a již nejsou potřebné.
+Odstraňuji v něm archivaci stávajících dat a modelů, které mi ve workspace zůstaly z předchozích běhů a již nejsou potřebné.
 Čištění pomáhá zabránit kolizím s předchozími seancemi a udržet v něm pořádek, což zajišťuje, že nové modely a datové soubory jsou aktuální a správně organizované.
 
 \paragraph*{Krok 2 - GroupCreator}
 
 Tento krok se zaměřuje na organizaci dat do různých skupin pro trénování a testování modelu.
 Data mám rozdělena v několika různých adresářích a tento krok má na starost jejich správné složení.
-Stejná data používám výuků modelu na počítání slepic, detekce vetřelce a plánované reidentifikace slepic.
+Stejná data používám pro výuků modelu na počítání slepic, detekce vetřelce a plánované reidentifikace slepic.
 
 \paragraph*{Krok 3 - DatasetSplitter}
 
@@ -198,54 +198,53 @@ Během trénování se sleduje výkonnost modelu na validačních datech, která
 Přeškolení si můžeme představit například u modelu, který rozpoznává kačeny, kočky a slepice.
 I když všechny konfigurační parametry byly správně,  systém v některých případech špatně identifikoval kočku.
 Až zpětnou analýzou trénovacích dat bylo zjištěno, že došlo k přeškolení.
-System identifikoval kachnu nikoliv podle tvaru jejího těla, případně zabarvení, jako to udělá člověk, ale podle toho, zda na obrázku byla ci nebyla tráva.
+Systém identifikoval kachnu nikoliv podle tvaru jejího těla, případně zabarvení, jako to udělá člověk, ale podle toho, zda na obrázku byla ci nebyla tráva.
 To pak vedlo k tomu, že pokud byla kočka na trávě, byla označena za kachnu.
-Spusti trénovací smyčku je jednoduché.
+Spustit trénovací smyčku je jednoduché.
 Bylo třeba předat jen několik základních parametrů.
-\newline
-Training Parameters\newline
-Epochs: 50\newline
-Batch Size: 16\newline
-Pretrained: True (using pretrained weights)\newline
-Data Path: c:/kurnik/klasifikace/kurnik\_learn\_temp/train\newline
 
-50 Epoch známená kolik poběží učících cyklů.\newline
-Batch Size – specifikuje kolik vláken poběží paralelně, je třeba dbát na velikost pameti grafické karty\newline
-Pretrained – říká, že budeme rozšiřovat již naučený model\newline
-Data Path – specifikuje odkud se mají vzit data k učeni.\newline
+
+\begin{itemize}
+    \item[] Training parameters - znamená kolik poběží učících cyklů.
+    \item[] Epochs: 50 - známená kolik poběží učících cyklů
+    \item[] Batch size: 16 - specifikuje kolik vláken poběží paralelně, je třeba dbát na velikost pameti grafické karty
+    \item[] Pretrained: True - říká, že budeme rozšiřovat již naučený model
+    \item[] Data path: c:/kurnik/klasifikace/kurnik\_learn\_temp/train - specifikuje cestu odkud se mají vzit data k učeni
+\end{itemize}
 
 \paragraph*{Krok 5 - YOLOTester:}
 
 Po úspěšném tréninku modelu je nutné jeho testování na dříve oddělené testovací sadě.
 Tento krok zahrnuje vyhodnocení výkonnosti modelu pomocí metrik, jako je přesnost, citlivost.
 Testování nám poskytuje objektivní zpětnou vazbu o tom, co za objekty model umí ve snímcích rozpoznat.
-Důležíté je předkladat pro testování snímky, které během tréninku neviděl.
+Důležité je předkládat pro testování snímky, které během tréninku neviděl.
 Na základě testovacích výsledků jsem pak následně prováděl úpravy učicích parametrů, případně jsem dodával další data do učícího datasetu.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{img/loss_funkce}
-    \caption{Graf loss funkce v závyslosti na počtu etap}
+    \caption{Graf loss funkce v závislosti na počtu etap}
     \label{fig:loss_funkce}
 \end{figure}
 
-Graf na obrázku~\ref{fig:loss_funkce} je automaticky generováný při učení nám umožnuje sledovat, jak dobře se model učí vzhledem k časové ose tréninku.
+Graf na obrázku~\ref{fig:loss_funkce} je automaticky generovaný při učení, nám umožnuje sledovat, jak dobře se model učí vzhledem k časové ose tréninku.
 Tento graf typicky zobrazuje ztrátovou funkci (loss) na svislé ose (Y) a počet trénovacích epoch nebo kroků na vodorovné ose (X).
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{img/top1_accuracy}
-    \caption{Vytvoření nového projektu v AML}
+    \caption{Top-1 accuracy chart}
     \label{fig:top1_accuracy}
 \end{figure}
 
-Graf na obrázku~\ref{fig:top1_accuracy} se zaměřuje na metriku přesnosti, konkrétně na \"top-1 accuracy,\" která měří, jak často je nejpravděpodobnější (nejvyšší hodnocená) předpověď modelu správná.
+Graf na obrázku~\ref{fig:top1_accuracy} se zaměřuje na metriku přesnosti, konkrétně na
+``top-1 accuracy'' která měří, jak často je nejpravděpodobnější (nejvyšší hodnocená) předpověď modelu správná.
 
 Výsledky detekce jsou demostrovány na obrázku~\ref{fig:detekce_slepic}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{img/detekce_slepic}
-    \caption{Vytvoření nového projektu v AML}
+    \caption{Model detekujici slepice}
     \label{fig:detekce_slepic}
 \end{figure}

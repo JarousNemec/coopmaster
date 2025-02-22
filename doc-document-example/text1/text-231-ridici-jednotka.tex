@@ -25,8 +25,9 @@ Hardwarová stránka byla tímto hotová.
 \newline
 Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit, žádné přídavné napájení.
 Přídavné napájení by bylo třeba řešit například, kdybychom používali 10 relejových modulů současně, protože limit pro napájení skrze USB 2.0 je pouze 500 mA a jedna cívka spotřebuje až 70 mA.\newline
-Následovala tedy poslední věc a to nahrád kód programu do samotné vývojové desky Arduno Nano.
-K tomu to účelu jsem využil open-source vývojářského nástroje Arduino IDE, který celý složitý proces nahrávání vyřeší.
+Následovala tedy poslední věc a to nahrát kód programu do samotné vývojové desky Arduino Nano.
+Zde je vyborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-ide}, který celý složitý proces nahrávání vyřeší.
+
 
 \begin{figure}[htbp]
     \centering
@@ -48,22 +49,25 @@ K tomu to účelu jsem využil open-source vývojářského nástroje Arduino ID
 
 \subsection*{Popis algoritmu}
 V části programu Setup se jako první po startu programu nastaví příslušné módy na vstupní a výstupní piny.
-Následně se provede inicializace seriálového připojení s rychlostí 9600 baudů.
+Následně se provede inicializace seriového připojení s rychlostí 9600 baudů.
 Poté se inicializuje připojení s čidlem DHT11 pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
 Dále program pokračuje do části Loop, což je metoda, která se volá pořád dokola jako nekonečný cyklus.
-Tato metoda řeší pravidelnou aktualizaci dat ze senzoru dále čtení příkazů ze seriálového připojení a posílání odpovědí na ně.
-Aktualizace senzorových dat se provádí jednou do vteřiny za pomocí mětod readTemperature a readHumidity, které jsou součástí knihovny DHT.h.
+Tato metoda řeší pravidelnou aktualizaci dat ze senzoru dále čtení příkazů ze seriového připojení a posílání odpovědí na ně.
+Aktualizace senzorových dat se provádí jednou do vteřiny za pomocí metod readTemperature a readHumidity, které jsou součástí knihovny DHT.h.
 Zpracování příkazů probíhá zavoláním metody processCommand, která pokud je v zásobníku přijatých dat něco ke čtení, přečte první znak a ten následně zpracuje jako příkaz dle seznamu níže.
 
 \subsection*{Seznam příkazů ovládacího protokolu}
 \begin{itemize}
-    \item o = otevřít dvířka
-    \item c = zavřít dvířka
-    \item l = rozsvítit světlo
-    \item d = zhasnout světlo
-    \item j = vrátí json s daty o teplotě a vlhkosti
-    \item s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+    \item[] o = otevřít dvířka
+    \item[] c = zavřít dvířka
+    \item[] l = rozsvítit světlo
+    \item[] d = zhasnout světlo
+    \item[] j = vrátí json s daty o teplotě a vlhkosti
+    \item[] s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
 \end{itemize}
+
+
+
 
 %## funkcionalita
 %- umoznuje ovladat osvetleni kurniku
