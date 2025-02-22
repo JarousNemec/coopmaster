@@ -3,15 +3,15 @@ Pro účely projektu bylo potřeba postavit digitální váhu.
 Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice snáší vejce, a jejím úkolem je přes USB poskytovat aktuální data o tom jakou hmotností je zatěžována podložka hnízda.
 
 \subsection*{Popis algoritmu}
-Po připojení napájení k Arduinu, se nejdříve nastaví a připojí seriálová komunikace rychlostí 9600 baudů pomocí USB.
+Po připojení napájení k Arduinu, se nejdříve nastaví a připojí sériová komunikace rychlostí 9600 baudů pomocí USB.
 Následně je instancován objekt starající se o sprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
-Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a následně je posílá po seriálovém připojení.
+Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a následně je posílá po sériovém připojení.
 Jako poslední krok v rámci přípravy programu je vynulování váhy pomocí metody tare(), která je jedna z metod HX711.h knihovny.
 Jakmile program dokončí fázi příprav, vstoupí do nekonečného cyklu.
 Tento cyklus pravidelně čte data přicházející po seriovém připojení.
 V případě, kdy jsou přijata data, program počítá se třemi scénáři.
 Buď je přijat znak "w", znak "t" nebo jakákoli jiná data.
-V případě znaku "w" (od slova weight) program reaguje odesláním aktuální naměřené hodnoty váhy po seriálovém připojení jako reakce na příkaz.
+V případě znaku "w" (od slova weight) program reaguje odesláním aktuální naměřené hodnoty váhy po sériovém připojení jako reakce na příkaz.
 Přijmutý znak "t" znamená tare neboli vynulovat váhu.
 Na základě toho se programu řekne, že aktuální data přijímaná ze senzoru má brát jako hmotnost 0 g.
 

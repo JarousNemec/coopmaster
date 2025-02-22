@@ -24,7 +24,7 @@ Bylo tedy navrženo 8 služeb, které obsahují námi naprogramovanou funkcional
 Podstatnou otázkou bylo, zda se pouštět do tvorby kompletně vlastního systému pro uživatelské rozhraní a automatizaci.
 Po zvážení časové náročnosti, technologické náročnosti a komplexnosti takového systému, mi bylo jasné, že tudy cesta nepovede.
 Bylo tedy třeba najít open source systém, který již touto funkcionalitou disponuje.
-Nakonec jsem zvolil systém Home Assistant, protože jsem s ním již dříve pracoval a mám s ním dobré zkušenosti. ~\cite{homeassistant-web}
+Nakonec jsem zvolil systém Home Assistant, protože jsem s ním již dříve pracoval a mám s ním dobré zkušenosti~\cite{homeassistant-web}.
 Home Assistant má na internetu také rozsáhlou podporu.
 Má bohaté diskuzní fornum a širokou komunitu.
 Zároveň je možné nahlédnout do již hotových řešeních pro inspiraci.
@@ -105,7 +105,7 @@ Uživatel pak může za pomoci Home Assistanta vysílat požadavky na změnu sta
 Data o teplotě a vlhkosti Room Assistant aktualizuje každých 10 vteřin.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{img/svetlo_teplo_vlhkost}
+    \includegraphics[width=0.8\textwidth]{img/svetlo_teplo_vlhkost}
     \caption{Diagram ovládání světla a poskytování dat o teplotě a vlhkosti}
     \label{fig:svetlo_teplo_vlhkost}
 \end{figure}
@@ -128,7 +128,7 @@ Zde je toho právě využito pro automatizaci zavírání a otevírání dvíře
 Home Assistant je nakonfigurován tak, aby se od určitého časového okamžiku snažil zavřít dvířka pod podmínkou, že bude počet slepic, který identifikoval Chicken Watch Guard, stejný jako ten, jež jsme nastavili jako pevnou konstantu neboli aktuální počet slepic v kurníku.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{img/automatizace_dvirek}
+    \includegraphics[width=0.8\textwidth]{img/automatizace_dvirek}
     \caption{Diagram bezpečného zavření dvířek}
     \label{fig:automatizace_dvirek}
 \end{figure}
@@ -144,7 +144,7 @@ Home Assistant je nastaven tak, že při přijetí takové zprávy, odešle uži
 Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální snímek z kamery ve výběhu, aby měl uživatel stále přehled.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{img/detekce_vetrelcu}
+    \includegraphics[width=0.8\textwidth]{img/detekce_vetrelcu}
     \caption{Diagram detekce vetřelců}
     \label{fig:detekce_vetrelcu}
 \end{figure}
@@ -162,7 +162,7 @@ Detailní popis algoritmu v sekci o službě Nest Watcher (\ref{sec:nest-watcher
 Po vyhodnocení stavů jsou data předávána pomocí MQTT protokolu do systému Home Assistant, který je díky na míru dělané komponentě zobrazí uživateli.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{img/vizualizace_stavu_hnizd}
+    \includegraphics[width=0.8\textwidth]{img/vizualizace_stavu_hnizd}
     \caption{Diagram vizualizace stavů hnízd}
     \label{fig:vizualizace_stavu_hnizd}
 \end{figure}
@@ -182,12 +182,12 @@ Metoda, kterou využíváme v našem řešení, je snadná, jednodušší na imp
 Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
 Funguje na principu, při němž zařízení šifrovaně propojíte s veřejným serverem a tento server bude skrze sebe vystavovat službu, která běží na lokálním počítači například u nás doma.
 Výhoda je, že vzdálený server disponuje kvalitním a odborně nastaveným firewalem, který zajistí dobrou ochranu našeho lokálního serveru.
-Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare ~\cite{cloudflare}.
+Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare~\cite{cloudflare}.
 Tento způsob nejvíce odpovídá našim požadavkům, které byly cena a jednoduchost společně s rychlostí nasazení.\newline
 Poslední nutností, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
-My v našem řešení využíváme službu Forpsi ~\cite(forpsi), protože s ní mám již předchozí zkušenost.\newline
+My v našem řešení využíváme službu Forpsi~\cite(forpsi), protože s ní mám již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-systemu-do-produkce}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \newpage
