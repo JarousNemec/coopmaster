@@ -1,14 +1,16 @@
 \section{Camera driver}\label{sec:camera-driver}
-Camera driver je služba zodpovědná za sprostředkování komunikace mezi ip kamerami a službami zpracovánajícími obraz (Dog alarm, Chicken watch guard).\newline
+Camera driver je služba zodpovědná za sprostředkování komunikace mezi IP kamerami a službami zpracovánajícími obraz (Dog alarm, Chicken watch guard).\newline
 
 \subsection*{Popis algoritmu}
-Po startu služby naběhne RESTové api na portu 9001 vytvořené za pomoci pythonového frameworku Flask.
+Po startu služby naběhne REST api na portu 9001 vytvořené za pomoci python frameworku Flask.
 Api poskytuje endpoint pro získání aktuálního snímku z každé kamery, která je službě přiřazena v konfiguraci.
 S kamerami služba komunikuje pomocí HTTP protokolu.
-Byla zvažována i možnost využití protokolu RTSP, ale protože nemáme prozatím žádne vysoké nároky na živý přenos a stačí nám pouze jednou za čas aktuální snímek, ukazala se proto lepší volba a to využití REST api kamery pro stažení obrázku.
+Byla zvažována i možnost využití protokolu RTSP.
+Nicméně naše řešení prozatím nemá žádne vysoké nároky na živý přenos.
+Proto se jako lepší volba ukázala cesta využití REST api kamery, které umožnuje jednou začas si sváthnout aktuální snímek.
 Jakmile je přijat požadavek na získání aktuálního snímku z konkrétní kamery, služba za pomocí get requestu stáhne obraz z restového api síťové kamery a vrátí ho ve Full HD rozlišení jako odpověď na http dotaz.
-Url, z kterého má služba obrázek stahovat, získá z konfigurace předávané pomocí systémových promenných.
-Kamery mají vlastní zabezpečení, proti neoprávněnému přístupu k datům.
+Endpoint kamery ze kterého má služba obrázek stahovat, získá z konfigurace předávané pomocí systémových promenných.
+Kamery mají vlastní zabezpečení proti neoprávněnému přístupu k datům.
 V případě ověřování HTTP komunikace se používá metoda Digest Access Authentication, pomocí které je kamerě předáváno uživatelské jméno a heslo.
 
 \subsection*{Technologie}
@@ -18,13 +20,11 @@ V případě ověřování HTTP komunikace se používá metoda Digest Access Au
     \item HTTP protokol
 \end{itemize}
 
-\subsection*{Použíté knihovny}
+\subsection*{Použité knihovny}
 \begin{itemize}
-    \item Flask: Lehký webový framework pro rychlý vývoj webových aplikací.
-    \item colorama: Manipulace s barvami v textovém výstupu na terminálu.
-    \item waitress: Rychlý WSGI server pro produkční nasazení webových aplikací.
-    \item python-dotenv: Načítání konfigurace z .env souborů.
-    \item Requests: Jednoduché HTTP požadavky (GET, POST, atd.).
+    \item Flask - lehký webový framework pro rychlý vývoj webových aplikací
+    \item python-dotenv - načítání konfigurace z .env souborů
+    \item requests - jednoduché HTTP požadavky (GET, POST, atd.)
 \end{itemize}
 
 %# coopmaster-camera-driver
