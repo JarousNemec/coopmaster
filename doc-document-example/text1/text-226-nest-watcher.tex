@@ -12,10 +12,10 @@ Data jsou načítána několikrát za minutu a ukládána do databáze s časov�
 Záznam v databázi obsahuje následující sloupce:
 
 \begin{itemize}
-    \item \textbf{id}: Jednoznačný identifikátor záznamu v databázi.
-    \item \textbf{nest\_id}: Identifikační číslo hnízda.
-    \item \textbf{weight}: Naměřená hmotnost v gramech pro dané hnízdo.
-    \item \textbf{timestamp}: Čas vytvoření záznamu.
+    \item \textbf{id} - jednoznačný identifikátor záznamu v databáz.
+    \item \textbf{nest\_id} - dentifikační číslo hnízda
+    \item \textbf{weight} -  naměřená hmotnost v gramech pro dané hnízdo
+    \item \textbf{timestamp} - čas vytvoření záznamu
 \end{itemize}
 
 Následně se jednou za minutu vyhodnotí průměrná hodnota během posledních několika vážení.
@@ -45,15 +45,15 @@ Tato data nám umožňují následně pomocí systému Home Assistant napříkla
 
 
 \subsection*{Popis možných vylepšení práce s váhou}
-Díky měřením hmotnosti můžeme odvodit i další vzorce, které mohou být využity jak k diagnostice závady na váze a nebo identifikaci toho, že některá ze slepic má nějaký problém.
-V případě, kdy by se data z váhy na základě času spojila společně se záběrem z kamery, dalo by se v tomto případě přesně určit o, kterou ze slepic se jedná. \newline
-Určit by slepice mohl jednak chovatel díky tomu, že by mu byl předložen snímek na němž je slepice v konkrétním hnízdě, které hlásí problém.
+Díky měřením hmotnosti můžeme odvodit i další vzorce, které mohou být využity k diagnostice závady na váze a nebo identifikaci toho, že některá ze slepic má nějaký problém.
+V případě, kdy by se data z váhy na základě času spojila společně se záběrem z kamery, dalo by se v tomto případě přesně určit, o kterou ze slepic se jedná. \newline
+Určit by slepice mohl jednak chovatel díky tomu, že by mu byl předložen snímek, na němž je slepice v konkrétním hnízdě, které hlásí problém.
 Konkrétní slepici by časem mohla detekovat i neuronová síť. \newline
 Toto řešení je však velmi komplikované, protože vzhledem k vysoké podobnosti bude složité rozlišit například dvě podobně bílé slepice a chovateli jednoznačně sdělit, která slepice má problém.
 Na druhou stranu, pokud by se tento princip reidentifikace dovedl k dokonalosti, přinesl by revoluci monitoringu pomocí kamerových systémů.
 Dále se o implementaci vlastního reidentifikačního algoritmu hovoří v sekci~\ref{sec:koncept-identifikace-nejlepsi-nosnice}.
 \newline
-Kromě výše zmíněných stavů by se v budoucnu z váhy dalo identifikovat i následující seznam situací.
+Kromě výše zmíněných stavů by se v budoucnu z váhy dal identifikovat i následující seznam situací.
 
 \begin{itemize}
     \item \textbf{Doba setrvání slepice v hnízdě}: Analýzou délky období, kdy je hmotnost hnízda nad 1200 gramů, lze zjistit, jak dlouho slepice v hnízdě zůstává.

@@ -7,8 +7,8 @@ Jako zdroj dat je použit kamerový systém ve výběhu, který je reprezentová
 Z této služby pak Dog Alarm stahuje pomocí GET požadavků fotografie z kamery ve výběhu.\newline
 
 Pro detekci predátorů je využito modelu Yolo11.
-Model je velmi kvalitně vyučený a společnost Ultralytics k němu nabízí rozsáhlou dokumentaci, což je také jeden z hlavních důvodů mojí volby.
-Před nasazením jsem model ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografii.\newline
+Model je velmi kvalitně vyučený a společnost Ultralytics~\cite{ultralytics} k němu nabízí rozsáhlou dokumentaci, což je také jeden z hlavních důvodů mojí volby.
+Před nasazením jsem model ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografií.\newline
 
 Jakmile model identifikuje přítomnost psa nebo jiného predátora, služba Dog Alarm okamžitě vygeneruje výstrahu.
 Tato výstraha je odeslána pomocí protokolu MQTT do systému Home Assistant.

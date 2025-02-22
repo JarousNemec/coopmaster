@@ -1,12 +1,14 @@
 \section{Řídící jednotka}\label{sec:ridici-jednotka}
 Řídící jednotka je vlastní sestavené zařízení, které zprostředkovává pomocí USB připojení data o teplotě a vlhkosti v kurníku.
 Další úlohou je ovládání dvířek a světla.
-Srdem řídící jednotky je Arduino Nano.
-Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovími prvky(relé, senzory, táhlový motor) a počítačem, na němž běží služby ovládají nebo využívající data z těchto prvků.
+Srdcem řídící jednotky je Arduino Nano.
+Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovíýi prvky(relé, senzory, táhlový motor) a počítačem.
+Na počítači zase běží služby ovládají nebo využívající data z těchto prvků.
 
 \subsection*{Popis zapojení}
 Zapojení řídící jednotky je zdokumentováno na obrázku~\ref{fig:ridici_jednotka} a blokové schéma zapojení je na obrázku~\ref{fig:schema_ridici_jednotky}.
-Vezkratce, jak již bylo zmíněno, je řídící jednotka složena z několika částí.
+
+Základní komponenty řídící jednotky:
 \begin{itemize}
     \item mikrokontroler Arduino Nano v3.0
     \item senzor DHT11 pro teplotu a vlhkost
@@ -14,10 +16,11 @@ Vezkratce, jak již bylo zmíněno, je řídící jednotka složena z několika 
 \end{itemize}
 Pro snadnou práci s jednotlivými součástmi během vývoje, byly zvoleny moduly, které disponují svorkovnicemi a není tedy nutné k nim nic pájet.
 Připojení Ardruina je realizováno pomocí terminal schieldu, který pro každý pin desky disponuje jednou svorkou pro připojení kabelu.
-Obdobně byl pro práci s relátky vybrán modul osazený již 4 relátky a samozřejmě svorkovnicí pro snadné zapojení.
-Nejkomplikovanější byl modul snímače ke kterému bylo třeba vytvořit konektor protože disponoval pouze výstupními piny.
-Po pečlivém vybrání a sehnání všech součástí byla zvolena dřevotřísková deska jako platforma na níž se naistalují všechny moduly pomocí krátkých vrutů do dřeva.
-Jednotlivé moduly byli následně propojeny kablíky o průřezu 0,15 mm² dle technické dokumentace dodávané ke každému modulu.
+Obdobně byl pro práci s relátky vybrán modul, které již 4 rele obsahoval a pro snadné zapojení také svorkovnici.
+
+Nejkomplikovanější byl modul snímače ke kterému bylo třeba vytvořit konektor, protože disponoval pouze výstupními piny.
+Jako instalační platformu jsem zvolil dřevotřískovou desku a na ni jsem připevnil všechny moduly pomocí krátkých vrutů do dřeva.
+Jednotlivé moduly byly následně propojeny vodiči o průřezu 0,15 mm² dle technické dokumentace dodávané ke každému modulu.
 Hardwarová stránka byla tímto hotová.
 \newline
 Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit, žádné přídavné napájení.
