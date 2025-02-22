@@ -15,7 +15,7 @@ Dalším technickým problémem byly kontakty na váze, kde se původně použí
 Pro zajištění lepšího výkonu a spolehlivosti byly tyto spoje nahrazeny pájenými, což přineslo lepší výsledky.
 \newline
 Navzdory těmto problémům systém fungoval relativně dobře při testování na pracovním stole, což naznačuje, že se na této úrovni setkáváme s minimálními problémy.
-Tyto zjištění poskytují pevný základ pro další optimalizaci a nasazení systému v reálných podmínkách.
+Tato zjištění poskytují pevný základ pro další optimalizaci a nasazení systému v reálných podmínkách.
 
 
 \newpage
@@ -37,22 +37,22 @@ Tyto zjištění poskytují pevný základ pro další optimalizaci a nasazení 
 
 Nasazení systému Coopmaster přímo do kurníku vyžadovalo několik klíčových kroků, abychom zajistili jeho plnou funkčnost a efektivitu.
 Jedním z prvních úkolů bylo natažení elektřiny a připojení k internetu.
-Elektřina byla přivedena bez větších problémů; využili jsme stávající zdroje z kůlny prostřednictvím otvoru ve zdi.
+Elektřina byla přivedena bez větších problémů, využili jsme stávající zdroje z kůlny prostřednictvím otvoru ve zdi.
 \newline
 Výrazně náročnější bylo zajistit internetové připojení, protože signál Wi-Fi nedosahoval až ke kurníku.
 Toto jsme vyřešili instalací Wi-Fi extenderu od TP-Link, který nabízí také ethernetový výstup.
 Toto řešení nám umožnilo přenášet data vzduchem přes dvůr, a dále pak ve stodole drátem, čímž jsme se vyhnuli nepotřebnému natahování kabeláže.
 \newline
 Dalším úkolem bylo napájení a připojení kamer přes internet.
-Zpočátku jsem předpokládal, že Power over Ethernet (PoE) nebude nutné, ale poté, co by tahání 230V kabelů znamenalo nadměrné úsilí, jsem pořídil PoE switch od TP-Link, který tyto kamery napájí i připojuje.
+Zpočátku jsem předpokládal, že Power over Ethernet (PoE) nebude nutné, ale poté, co by instalace 230V kabelů znamenala nadměrné úsilí, jsem pořídil PoE switch od TP-Link, který tyto kamery napájí i připojuje.
 \newline
 Dále bylo nutné vytvořit prostor, kam nainstalovat veškerou technologii kurníku.
-Pro tento účel jsme zvolili plechovou bednu ze starého domovního rozvaděče.
+Pro tento účel jsem zvolil plechovou bednu ze starého domovního rozvaděče.
 Do této bedny byly přesně vyrobeny držáčky a pouzdra pro jednotlivé komponenty, jak dokládají fotografie z výroby a samotného rozvaděče.
 \newline
 Při instalaci bylo důležité řešit i váhu systému a její kalibraci pro přesné měření hmotnosti slepic a vajec.
 Řídící jednotka pro Home Assistant je součástí tohoto systému a zajišťuje bezproblémový provoz.
-Dveře pro slepice jsou integrovány do celkového řešení a celé řízení probíhá prostřednictvím Raspberry Pi 5, které komunikuje s NUC pomocí řešení Tailscale, ale tuto problematiku rozvedeme v další kapitole.
+Dveře pro slepice jsou integrovány do celkového řešení a celé řízení probíhá prostřednictvím Raspberry Pi 5, které komunikuje s NUC pomocí řešení Tailscale, ale tuto problematiku rozveduv další kapitole.
 \newline
 Tento komplexní proces nasazení do kurníku neustále vyžadoval přesné plánování a realizaci, abychom zajistili vysokou úroveň automatizace a efektivity potřebnou pro moderní chov slepic.
 
@@ -75,8 +75,8 @@ Tento most je dedikovaný pouze pro Home Assistant a jeho potřeby komunikace s 
 K této síti byl přidán i kontejner Cloudflared, který umožňuje vytvoření bezpečného tunelu na platformu Cloudflare.
 Cloudflared zajišťuje průchod dat skrz Cloudflare firewall a proxy servery na internet, čímž zvyšuje bezpečnost a spolehlivost komunikace.
 \newline
-Aby byl tunel funkční, bylo nutné jej namapovat na naši vlastněnou doménu.
-Pro tento účel jsem si registroval doménu u doménového registrátora Forpsi, což nám poskytlo potřebné DNS záznamy k propojení s Cloudflare.
+Aby byl tunel funkční, bylo nutné jej namapovat na mnou vlastněnou doménu.
+Pro tento účel jsem si registroval doménu u doménového registrátora Forpsi, což mi poskytlo potřebné DNS záznamy k propojení s Cloudflare.
 \newline
 Je důležité poznamenat, že taková konfigurace s sebou nese i jistá bezpečnostní rizika.
 Primárním rizikem je možnost neautorizovaného přístupu, pokud není správně nakonfigurováno zabezpečení tunelu a neprovádí se pravidelné audity.
