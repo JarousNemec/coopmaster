@@ -13,7 +13,7 @@ Jako první je vytvořeno API definované pomocí Flask frameworku pro komunikac
 Následně je inicializován a spuštěn scheduler, který má za úkol jednou za minutu spustit job s názvem check\_chicken.
 Závěrem spouštěcí metody se spustí propagace API na portu 9003, který je předáván jako proměnná prostředí při startu služby.
 
-\subsection*{Popis algoritmu pro job check\_chicken}
+\subsection*{Popis algoritmu pro počítání slepic}
 Po spuštění se jako první provolá metoda get\_image, která je zodpovědná za stažení aktuálního obrázku ze služby Camera Driver.
 Dále je inicializován detekční upravený model Yolov11 a provedena detekce objektů v obraze (sekce~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}).
 Výsledkem je seznam objektů, které se podařilo identifikovat.

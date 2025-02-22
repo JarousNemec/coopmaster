@@ -1,6 +1,7 @@
 Díky tomu, že si přesně určíme, kdo je cílový uživatel naší aplikace, co uživatel od naší aplikace očekává jsme  nyní schopni bez větších problémů teoreticky navrhnout architekturu našeho systému a přesně popsat požadovanou funkcionalitu, jakou budou disponovat jeho jednotlivé části.
 Tato sekce se bude zabývat analýzou a návrhem architektury systému Coopmaster dle požadavků popsaných v předchozí kapitole.
 
+\clearpage
 \section{Služby dle jednotlivých potřeb uživatele}\label{sec:microservices}
 Jako teoretický model na základě kterého budeme organizovat a třídit funkcionalitu, jsem zvolil mikroservisní architekturu (sekce~\ref{sec:microservice-architecture}).
 Tento způsob rozvržení zodpovědnosti částí systému jsem zvolil díky velké možnosti rozšíření, zapouzdření funkcionality a snadné úpravě jednotlivých služeb bez nutnosti kompletního restartu systému v případě znovunasazení.\newline
@@ -20,6 +21,7 @@ Bylo tedy navrženo 8 služeb, které obsahují námi naprogramovanou funkcional
     \item Chicken watch guard (\ref{sec:chicken-watch-guard})
 \end{itemize}
 
+\clearpage
 \section{Systém pro uživatelské rozhraní a automatizaci}\label{sec:systemu-pro-uzivatelske-rozhrani-a-automatizaci}
 Podstatnou otázkou bylo, zda se pouštět do tvorby kompletně vlastního systému pro uživatelské rozhraní a automatizaci.
 Po zvážení časové náročnosti, technologické náročnosti a komplexnosti takového systému, mi bylo jasné, že tudy cesta nepovede.
@@ -30,6 +32,7 @@ Má bohaté diskuzní fornum a širokou komunitu.
 Zároveň je možné nahlédnout do již hotových řešeních pro inspiraci.
 Jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
+\clearpage
 \section{Komunikace mezi moduly}\label{sec:komunikace-mezi-backendem-a-frontendem}
 Je třeba zajistit komunikaci mezi systémem Home Assistant a Coopmaster službami.
 Tuto úlohu musíme přijmout velice zodpovědně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
@@ -39,6 +42,7 @@ Další problém nastane, když potřebujeme z některé ze služeb poslat např
 Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT(sekce~\ref{sec:mqtt}).
 Tato technologie se běžně používá u IoT zařízení a pro naše použití je vynikajícím řešením.
 
+\clearpage
 \section{Hardwarová zařízení}\label{sec:hardwarova-zarizeni}
 Tuto sekci je velmi důležité dobře a správně navrhnout, protože náš systém bude pracovat s daty z reálného světa.
 Tato data musejí získávat k tomu určená zařízení a na jejich přesnosti závisí efektivita a správnost chování zbytku systému.
@@ -85,6 +89,7 @@ Kamera musím mít následující vlastnosti
 \end{itemize}
 Podrobnosti ohledně výběru kamery se nachází v sekci~\ref{sec:kamerovy-system}
 
+\clearpage
 \section{Spolupráce modulů dle požadavků uživatele}\label{sec:schematicka-vyjadreni-zavislosti-jednotlivych-modulu}
 
 \subsection{Ovládání světla, data o teplotě a vlhkosti}
@@ -167,6 +172,7 @@ Po vyhodnocení stavů jsou data předávána pomocí MQTT protokolu do systému
     \label{fig:vizualizace_stavu_hnizd}
 \end{figure}
 
+\clearpage
 \section{Zpřístupnění aplikace z internetu}\label{sec:zpristupneni-aplikace-z-internetu}
 Aby systém mohl sloužit svému účelu, musí být vzdáleně přístupný.
 To znamená, že server, na kterém systém poběží, musí mít veřejnou IP adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
