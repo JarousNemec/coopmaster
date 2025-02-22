@@ -150,10 +150,10 @@ Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální sníme
 \end{figure}
 
 \subsection{Vizualizace stavů hnízd}
-Abychom splnili tento úkol, bude potřeba získat data z jednotlivých vah ve hnízdech.
-Tato data pak dostat z do systému Coopmaster.
+Abychom splnili tento úkol, bude potřeba získat údaje o aktuální hmotnosti z jednotlivých vah ve hnízdech.
+Tato data je pak nutné předat do systému Coopmaster.
 Coopmaster následně data vyhodnotí a výsledky předá k vizualizaci do systému Home Assistant.
-Schémadické vyjádření principu pro vizualizaci stavů hnízd je znázorněno v obrázku~\ref{fig:vizualizace_stavu_hnizd}. \newline
+Schématické vyjádření principu pro vizualizaci stavů hnízd je znázorněno v obrázku~\ref{fig:vizualizace_stavu_hnizd}. \newline
 Pro komunikaci s modulem digitální váhy je použita služba Scale Driver, která s jednotlivými váhami komunikuje přes USB sběrnici.
 Data o váhách si ze Scale Driveru stahuje služba Nest Watcher.
 Tato služba ukládá v daném intervalu data z každé váhy do databáze.
@@ -175,18 +175,19 @@ Jeden ze způsobů je zřízení veřejné IP adresy pro svůj server.
 Toto řešení je, technicky i teoreticky náročné, protože v případě, se kterým pracujeme my, běží server na lokální síti a veřejná IP adresa tedy není přímo pro náš server, ale celou síť.
 To vytváří v určitých situacích velmi vážná bezpečnostní rizika, díky čemuž je tato metoda velice náročná na hardware a implementaci.
 Navíc poskytování veřejné IP adresy je placená služba poskytovatele internetového připojení.\newline
+
 Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon AWS.
 Tato metoda by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení. \newline
-Metoda, kterou využíváme v řešení my, je snadná, jednodušší na implementaci než zřizování veřejné IP adresy a levnější než využití cloudové služby.
+Metoda, kterou využíváme v našem řešení, je snadná, jednodušší na implementaci než zřizování veřejné IP adresy a levnější než využití cloudové služby.
 Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
 Funguje na principu, při němž zařízení šifrovaně propojíte s veřejným serverem a tento server bude skrze sebe vystavovat službu, která běží na lokálním počítači například u nás doma.
 Výhoda je, že vzdálený server disponuje kvalitním a odborně nastaveným firewalem, který zajistí dobrou ochranu našeho lokálního serveru.
-Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare.
-Tento způsob nejvíce odpovídá našim požadavkům, které byly cena a jednoduchost společně s rychlost nasazení.\newline
+Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare ~\cite{cloudflare}.
+Tento způsob nejvíce odpovídá našim požadavkům, které byly cena a jednoduchost společně s rychlostí nasazení.\newline
 Poslední nutností, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
-My v našem řešení využíváme službu Forpsi, protože s ní máme již předchozí zkušenost.\newline
+My v našem řešení využíváme službu Forpsi ~\cite(forpsi), protože s ní mám již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-systemu-do-produkce}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 \newpage
