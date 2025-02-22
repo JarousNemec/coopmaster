@@ -18,6 +18,7 @@
 \RequirePackage[automake]{glossaries-extra}
 \RequirePackage[automake]{glossaries}
 \RequirePackage{float}
+\RequirePackage{listings}
 %\setglossarystyle{list}
 \makeglossaries
 

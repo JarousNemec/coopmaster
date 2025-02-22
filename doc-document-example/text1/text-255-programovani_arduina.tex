@@ -1,0 +1,99 @@
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{green},
+}
+
+
+V tomto dokumentu podrobně popíšeme postup, jak vytvořit jednoduchý systém pro měření hmotnosti pomocí tenzometrického snímače a modulu HX711 připojeného k Arduinu.
+Tento projekt bude používat knihovnu HX711 pro usnadnění komunikace a přesné měření.
+Pro dosažení našich cílů budeme následovat několik fází, včetně přípravy hardwaru a softwaru, napsání kódu a jeho nahrání do Arduina.
+
+\section*{Import a Definice Pinů}
+Nejprve se zaměřme na import potřebných knihoven a definici pinů.
+Knihovna HX711.h je klíčová pro komunikaci s modulem HX711, zatímco Arduino.h je základní knihovnou pro všechny Arduino projekty.
+Kromě toho definujeme piny, které budeme používat pro připojení k modulu HX711.
+Použijeme makra \#define pro stanovení pinů 3 a 2, ke kterým připojíme DOUT a CLK vývody modulu.
+
+\begin{lstlisting}
+#include "Arduino.h"
+#include "HX711.h"
+
+#define DOUT 3
+#define CLK 2
+\end{lstlisting}
+
+\section*{Inicializace}
+Následně vytváříme instanci třídy HX711 nazvanou scale, kterou využijeme pro všechny operace spojené s měřením.
+Stanovujeme počáteční kalibrační faktor na -100.935, který bude pravděpodobně potřebovat úpravu během procesu kalibrace pro dosažení přesnosti.
+Tato úprava se provádí manuálně porovnáním s referenční hmotností.
+K uložení aktuální naměřené hmotnosti použijeme proměnnou current\_weight.
+
+\begin{lstlisting}
+HX711 scale;
+float calibration_factor = -100.935;
+float current_weight = 0;
+\end{lstlisting}
+
+\section*{Nastavení Systému}
+Jakmile máme vše připravené, můžeme se pustit do funkce setup().
+Prvním krokem je inicializace sériové komunikace na 9600 baudů, což nám umožní komunikovat s počítačem přes Serial Monitor v Arduino IDE. Poté použijeme begin() pro inicializaci modulu HX711 a set\_scale() k nastavení kalibračního faktoru.
+Funkce tare() slouží k vynulování váhy, takže při spuštění programu předpokládáme, že na váhách není žádný objekt.
+
+\begin{lstlisting}
+void setup() {
+  Serial.begin(9600);
+  scale.begin(DOUT, CLK);
+
+  scale.set_scale(calibration_factor);
+
+  scale.tare();
+}
+\end{lstlisting}
+
+\section*{Hlavní Program}
+Ve smyčce loop(), která se opakuje nepřetržitě, čteme z bufferu pomocí funkce Serial.read(), což nám dává jeden byte z bufferu.
+Funkce scale.get\_units(1) nám poskytuje aktuální hmotnost.
+Pokud obdržíme znak w, vytiskneme aktuální váhu na Serial Monitor s přesností na čtyři desetinná místa.
+Při obdržení znaku t provádíme tare() pro opětovné vynulování váhy.
+
+\begin{lstlisting}
+void loop() {
+  char c = Serial.read();
+
+  current_weight = scale.get_units(1);
+
+  if (c == 'w') {
+    Serial.println(current_weight, 4);
+  }
+  else if (c == 't') {
+    scale.tare();
+  }
+}
+\end{lstlisting}
+
+\section*{Nahrávání programu do Arduina}
+Nahrání programu do Arduino desky je klíčová část tohoto postupu.
+Nejprve se ujistíme, že máme nainstalované Arduino IDE, což je vývojové prostředí umožňující psaní, kompilaci a nahrávání kódu do Arduino zařízení.
+Zde je detailní postup:
+
+\begin{itemize}
+  \item \textbf{Instalace Arduino IDE}: Navštivte oficiální webovou stránku Arduina a stáhněte nejnovější verzi IDE kompatibilní s vaším operačním systémem.
+  Nainstalujte jej podle pokynů.
+  \item \textbf{Připojení Arduino k počítači}: Použijte USB kabel k fyzickému připojení Arduino desky k počítači.
+  Ujistěte se, že je deska správně rozpoznána.
+  \item \textbf{Otevření Arduino IDE a kopírování kódu}: Spusťte Arduino IDE a vložte do něj váš kód.
+  \item \textbf{Výběr desky a portu}: V menu Tools zvolte správný typ Arduino desky a správný port, kam je vaše Arduino připojeno.
+  \item \textbf{Nahrání programu}: Klikněte na tlačítko Upload.
+  Program se nejprve zkompiluje a poté nahraje do Arduino desky.
+  Proces je úspěšný, pokud neuvidíte žádné chyby.
+  \item \textbf{Použití Serial Monitoru}: Pro interakci s vaším programem použijte Serial Monitor, který najdete v Arduino IDE.
+\end{itemize}
+
+\section*{Závěr}
+Celý tento projekt a postup práce nabízí efektivní způsob využití Arduina pro měření hmotnosti pomocí modulu HX711.
+Spojení teoretických znalostí se skutečnou aplikací ilustruje praktickou využitelnost takového systému v různých oblastech od vědy po průmysl.
+
+
