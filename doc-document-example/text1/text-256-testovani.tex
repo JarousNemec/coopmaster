@@ -1,0 +1,39 @@
+Testování systému Coopmaster je klíčovým krokem k zajištění jeho spolehlivosti, správnosti a bezpečnosti.
+Jako programátor bych se zaměřil na několik úrovní testování, které by zajistily, že všechny komponenty systému fungují podle očekávání.
+
+\section{Jednotkové testy}\label{sec:jednotkove-testy}
+
+Začal bych s jednotkovými testy pro jednotlivé mikroslužby, abych ověřil, že každá část funguje izolovaně správně.
+Například bych vytvořil testy pro kamerový ovladač, které by simulovaly přijetí obrázků z kamer a kontrolovaly správné vrácení obrazu.
+Podobně bych testoval ovladač váhy pro správné čtení a zpracování dat.
+Frameworky pro testování jako \texttt{unittest} nebo \texttt{pytest} v Pythonu by byly ideální pro tuto úroveň.
+
+\section{Integrační testy}\label{sec:integracni-testy}
+
+Poté bych přešel na integrační testy, jejichž cílem je ověřit, zda jednotlivé mikroslužby spolupracují podle očekávání.
+Například bych testoval komunikaci mezi Room Assistantem a Home Assistantem přes MQTT, a zajistil, že data o teplotě a vlhkosti jsou správně přenášena.
+Integrační testy by měly zahrnovat i scénáře zahrnující hardwarovou interakci, abych se ujistil, že fyzické prvky systému správně komunikují se softwarem.
+
+\section{Systémové testy}\label{sec:systemove-testy}
+
+Systematické testování celého systému by zahrnovalo simulaci reálných uživatelských scénářů, jako je detekce vetřelce pomocí kamery a následné zaslání notifikace.
+Zde bych se soustředil na testování, zda celý systém od snímání přes analýzu až po odpověď pro uživatele funguje bez chyby.
+Testovací scénáře by také zahrnovaly abnormální situace, jako je výpadek některé z mikroslužeb, a sledování, jak systém reaguje.
+
+\section{Testy výkonu a zátěžové testování}\label{sec:testy-vykonu-a-zatezove-testovani}
+
+Systém by měl být také testován pro výkon při různých zátěžových podmínkách, abych zjistil jeho limitace.
+To by zahrnovalo generování velkého množství dat například z kamer a sledování, jak si systém poradí s jejich zpracováním a zda připojení mezi mikroslužbami (přes Docker a MQTT) drží krok.
+
+\section{Testování bezpečnosti}\label{sec:testovani-bezpecnosti}
+
+Jelikož je systém přístupný z internetu, další kritickou oblastí by bylo testování bezpečnosti.
+Použití nástrojů pro penetrační testy ke zjištění potenciálních zranitelností, simulace útoků jako jsou DDoS, a kontrola správného nastavení komunikace přes tunely a šifrování pomocí nástrojů jako \texttt{Wireshark} pro monitorování datového provozu.
+
+\section{Uživatelské testování}\label{sec:uzivatelske-testovani}
+
+Nakonec bych se obrátil na testy z pohledu uživatele.
+To zahrnuje uživatelskou zkušenost s Home Assistantem - např. přehlednost vizualizací, snadnost ovládání systému z mobilní aplikace.
+Zde by bylo důležité získat zpětnou vazbu od skutečných uživatelů systému.
+
+Tím, že bych tuto metodiku testování aplikoval důkladně, bych mohl s jistotou říct, že systém Coopmaster je připraven na nasazení do produkce a splňuje všechny očekávané požadavky na funkcionalitu a spolehlivost.
