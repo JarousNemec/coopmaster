@@ -1,40 +1,35 @@
 \section{Chicken watch guard}\label{sec:chicken-watch-guard}
+Služba Chicken Watch Guard je dalším klíčovým prvkem systému Coopmaster.
+Poskytuje data o počtu slepic v kurníku a tato data předává do systému Home Assistant.\newline
+
+\subsection*{Obecný princip}
+Podobně jako u služby Dog Alarm, Chicken Watch Guard používá kamerový systém pro získávání aktuálních záběrů z kurníku.
+Tyto záběry jsou staženy ze služby Camera Driver~\ref{sec:camera-driver}.
+Získané obrázky se analyzují modelem Yolov11, který je upravený pro přesnější detekci v našich lokálních podmínkách.
+Výsledkem detekce je seznam detekovaných objektů.
+Tohoto seznamu je využito právě pro počítání slepic tak, že se spočítá kolikrát seznam obsahuje danou kategorii.
+Výsledný součet společně s aktuální fotografií je pomocí protokolu MQTT odeslán do systému Home Assistant, který jej využije při automatizaci dvířek a vizualizuje tento počet chovateli ve svém uživatelském rozhraní.
+
+\subsection*{Popis algoritmu}
+Jako první je vytvořeno API definované pomocí Flask frameworku pro komunikaci se službou Health Checker.
+Následně je inicializován a spuštěn scheduler, který má za úkol jednou za minutu spustit job s názvem check\_chicken.
+Závěrem spouštěcí metody se spustí propagace API na portu 9003, který je předáván jako proměnná prostředí při startu služby.
+
+\subsection*{Popis algoritmu pro job check\_chicken}
+Po spuštění se provede jako první provolá metody get\_image, která je zodpovědná za stažení aktuálního obrázku ze služby Camera Driver.
+Dále je inicializován detekční upravený model Yolov11
+
+
+%\subsection*{Výhody a přínosy}
+%
+%Implementace služby Chicken Watch Guard přináší do systému Coopmaster následující výhody:
+%\begin{itemize}
+%    \item \textbf{Přesný monitoring:} Automatizovaný systém poskytuje přesné a aktuální informace o počtu slepic, což napomáhá efektivnímu plánování a rozhodování.
+%    \item \textbf{Reálný čas přehledu:} Díky integraci s Home Assistanta je zajištěno promptní informování o změnách v kurníku, což umožňuje rychlou reakci.
+%    \item \textbf{Vizualizace stavu:} Průběžné vizuální sledování přispívá k lepšímu porozumění a řízení prostředí v kurníku.
+%\end{itemize}
 %Úkolem služby Chicken watch guard je sledovat stav a počet slepic v kurníku.\newline
 %Aktuální záběry jsou stejně jako u Dog alarmu stahovány z konkrétního Camera driveru v kurníku.
 %Následně po získání záběru proběhne detekce objektů a počet těchto objektů udává počet detekovaných slepic v obraze.
 %Tato hodnota je publikována pomocí MQTT do Home Assistanta.
 %Vedlejší funkcí služby je průběžné posílání aktuálního pohledu z kamery v kurníku do Home Assistanta.
-
-Služba Chicken Watch Guard je dalším klíčovým prvkem systému Coopmaster, zaměřeným na zajištění efektivního sledování stavu a počtu slepic v kurníku.
-Tato služba využívá pokročilé technologie k poskytování přesných a aktuálních informací pro optimalizaci řízení chovu.
-
-\subsection*{Funkční princip}
-
-Podobně jako u služby Dog Alarm, Chicken Watch Guard používá kamerový systém pro získávání aktuálních záběrů.
-Tyto záběry jsou staženy z konkrétní instance Camera driveru umístěného v kurníku.
-Tento driver zajišťuje plynulou komunikaci s kamerou a poskytuje vizuální data pro následné zpracování.
-
-\subsection*{Detekce a počítání slepic}
-
-Po získání obrazu z kamery probíhá analýza pomocí metody detekce objektů.
-Tato metoda je optimalizována pro rozpoznávání a počítání slepic v kurníku.
-Výsledný počet detekovaných objektů přímo reflektuje počet slepic, což umožňuje rychlé zhodnocení jejich přítomnosti a stavu v kurníku.
-
-\subsection*{Integrace s Home Assistanta}
-
-Detekovaný počet slepic je následně publikován do systému Home Assistant pomocí protokolu MQTT. Díky tomu mají uživatelé okamžitý přehled o dynamice a změnách v počtu slepic.
-Tato integrace umožňuje snadné sledování a řízení chovu v reálném čase.
-
-Kromě informací o počtu slepic, služba Chicken Watch Guard také poskytuje kontinuální zasílání aktuálních záběrů z kamery v kurníku do Home Assistanta.
-Uživatelům je tak zajištěn průběžný vizuální přehled o situaci v kurníku.
-
-\subsection*{Výhody a přínosy}
-
-Implementace služby Chicken Watch Guard přináší do systému Coopmaster následující výhody:
-\begin{itemize}
-    \item \textbf{Přesný monitoring:} Automatizovaný systém poskytuje přesné a aktuální informace o počtu slepic, což napomáhá efektivnímu plánování a rozhodování.
-    \item \textbf{Reálný čas přehledu:} Díky integraci s Home Assistanta je zajištěno promptní informování o změnách v kurníku, což umožňuje rychlou reakci.
-    \item \textbf{Vizualizace stavu:} Průběžné vizuální sledování přispívá k lepšímu porozumění a řízení prostředí v kurníku.
-\end{itemize}
-
-Služba Chicken Watch Guard je neocenitelným nástrojem pro moderní chovatele, kteří usilují o dosažení vysokého standardu efektivity a péče v řízení kurníku prostřednictvím systému Coopmaster.
