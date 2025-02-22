@@ -92,13 +92,33 @@ Tato data jsou ve formátu CSV, kdy každý prvek v poli znamená jedno hnízdo.
 Data se do komponenty dostávají z entit.
 Tyto entity jsou se nastavují jako parametry během přidávání komponenty na dashboard.
 Data, která dostaneme z entity, jsou v CSV formátu, takže se pomocí funkce split rozdělí podle separátoru, kterým je v tomto případě znak středníku.
-
-
 %todo dodat ukázky kodu
+Skript pokračuje do další části, kde dochází ke zpracování naparsovaných dat.
+Jednoduchými dvěma for cykly se zajišťuje vykreslování nastaveného počtu řádků a sloupců v kurníku.
+Jedno hnízdo se vykresluje obarvený div a jeho child komponenta je div, který slouží k vizualizaci stavů hnízda.
+Graficky jsou divy nastylovány tak, aby uživateli připomínali hnízdo.
+Do child divu se následně vykreslí vpravo dole počet vajec, pokud je větší než 0, a zároveň se ve středu vykresluje ikonka slepice, která značí, že slepice sedí v hnízdě.
+Komponenta také při každém updatu dat loguje do konzole, pro případ, kdy by se něco pokazilo.
+%todo obrazek komponenty
+
 %todo zdroj pro tvorbu vlastní komponenty https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/
 
 
-\subsection*{Problémy a poznatky během konfigurace}
-maximální velikost state je 255 bytů
-json a csv proč
-trošku problém s dokumentací
+%\subsection*{Problémy a poznatky během konfigurace}
+%Během práce se systémem Home Assistant, jsem posbíral několik poznatků a narazil na několik problém.
+
+\subsection*{Maximální velkost hodnoty senzoru}
+Během tvorby komponenty pro hnízda, mě poněkud zaskočil fakt, že maximální velikost hodnoty state v entitě je 255 bytů.
+Z počátku jsem chtěl posílat data o hnízdech ve formátu JSON.
+Dlouho mi to procházelo, ale problém začal v situaci, kdy jsem serializoval celý seznam s objekty hnízd a chtěl ho poslat jako hodnotu senzoru.
+Nebylo jednoduché na to přijít protože v tomto případě Home Assistant data prostě nenačítal a já nevěděl proč.
+Nakonec jsem se na diskusním fóru dočetl, že velikost hodnoty state je omezena.
+Byl jsem tedy donucen začít používat formát csv a posílaná data omezit pouze na nejnutnější informaci o stavu.
+Pořád je zde problém s maximální velikostí v případě, že bych měl více než 128 hnízd místo by mi i tak nevystačilo,
+Na kontrolu tolika hnízd, bych ale potřeboval pravděpodobně o dost celkově robustnější infrastrukturu systému Coopmaster, takže to ponechávám ve formátu CSV.
+%todo najít zdroj pro 255 bytů
+
+%\subsubsection{Pozitivní zkušenost s tvorbou komponent}
+%Práce na komponentě pro vizualizaci hnízd mi přinesla mnoho informací
+
+
