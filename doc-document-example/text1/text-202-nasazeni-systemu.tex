@@ -1,105 +1,83 @@
-%todo docker
-%todo workflowy
-%todo ethernet
-%todo rozvrzeni raspberry a nuc
-%todo problemy během tohoto procesu
+V této kapitole si popíšeme, jaký je vlastně aktuální stav běžícího systému, a vysvětlíme si, co je potřeba pro přidání nového modulu
+%todo obrázek
+\section*{Verzování a Nasazení}
 
-\section{První pracovní zapojení a běh}\label{sec:prvni-pracovni-zapojeni-a-beh}
-%- zjistilo se že bez poe je to špatná volba \newline
-%- kamery žerou dost proudu\newline
-%- bylo potřeba odladit nastavení kamer a jejich statické ip adresy, kamery měli zabezpečení na blokování ip address a tak\newline
-%- byl problém s kontakty na váze takže se nakonec museli vyměnit lisované za pájené\newline
-%- na stole to většinou funguje dobře \newline
-Během prvního pracovního zapojení a spuštění systému se ukázalo několik klíčových aspektů, které je třeba optimalizovat pro zajištění spolehlivého provozu.
-Jedním z prvních zjištění bylo, že absence technologie Power over Ethernet (PoE) není ideální, zejména proto, že kamery spotřebovávají značné množství elektrického proudu.
-To vedlo k potřebě přehodnotit napájecí řešení.
-\newline
-Kromě napájení bylo nezbytné doladit nastavení kamer, včetně přiřazení statických IP adres.
-Některé kamery totiž disponovaly bezpečnostními opatřeními, která blokovala IP adresy, což způsobovalo komplikace v připojení a stabilitě systému.
-\newline
-Dalším technickým problémem byly kontakty na váze, kde se původně používaly lisované spoje, které se ukázaly být nespolehlivými.
-Pro zajištění lepšího výkonu a spolehlivosti byly tyto spoje nahrazeny pájenými, což přineslo lepší výsledky.
-\newline
-Navzdory těmto problémům systém fungoval relativně dobře při testování na pracovním stole, což naznačuje, že se na této úrovni setkáváme s minimálními problémy.
-Tato zjištění poskytují pevný základ pro další optimalizaci a nasazení systému v reálných podmínkách.
+Pro verzování zdrojových kódů svých služeb jsem se rozhodl využívat GitHub, což mi umožňuje efektivně zálohovat kód.
+V rámci GitHubu používám GitHub Workflow, které automatizuje proces vytváření Docker image, což zrachluje a automatizuje proces nasezení nové verze služby.
+Jakmile je Docker image vytvořen, nahrávám jej na platformu Docker Hub.
+Na tuto platformu image ukládám a následně je vzdáleně načítám při nasazení konkrétní služby.
+%todo obrázek
+\section*{Přípravné práce pro fyzickou infrastrukturu}
 
+Vlastní instalaci částí systému Coopmaster do kurníku a výběhu předcházely přípravné stavební práce.
+Do budovy bylo třeba přivést ethernetové připojení, což nebyl vůbec snadný úkol.
+Dále pak bylo potřeba připravit a nainstalovat rozvaděč s řídící elektronikou.
+Musel jsem také na příslušných místech udělat průrazy zdí, v místech kde povedou kabely z rozvaděče ke kamerám a do kurníku.
+Samotné ethernetové připojení jsem vyřešil poněkud nestandardně.
+Nepřicházelo v úvahu abych táhl metalický kabel od domácího routeru do chléva, kvůli přílišné náročnosti na stavební úpravy.
+Použil jsem tedy Wifi extender s ethernet výstupem a elektroniku v kurníku jsem k internetu připojil přes něj.
+%todo obrázek
+\section*{Výsledná fyzická infrastruktura}
 
-\newpage
+Doma v místnosti se stabilním prostředím, které je vhodné pro výpočetní techniku, běží Intel NUC 11.
+Tento počítač slouží jako hlavní server a zdroj výpočetního výkonu pro neuronové sítě.
+Výpočetní výkon je poskytnut díky grafické kartě NVIDIA GeForce RTX 2060.\newline
+Dále pak máme v kurníku a ve výběhu periferie periferie (dvířka, senzory a kamery), které potřebuji propojit se systémem Coopmaster.
+Všechny tyto periferie jsou do systému připojeny skrze mikropočítač Raspberry pi 5.
+Výpočetní část je takto rozdělena do dvou částí kvůli agresivnímu prostředí v kurníku (vlhkost, teplotní výkyvy).
+Raspberry PI 5 je mnohem levnější než Intel NUC 11 a v případě poškození zařízení vlivem prostředí nevznikne tak velká škoda.
+Síťová komunikace mezi těmito dvěma počítači realizována pomocí služby Tailscale, která mezi nimi vytváří mesh VPN.
+Zároveň této služby využívám já jako správce, abych měl vzdálený přístup k oběma zařízením.
 
-
-\section{Nasazení do kurníku}\label{sec:nasazeni-do-kurniku}
-%- bylo potřeba natahat elektřinu a internet \newline
-%- elektřina nebyla problém vzala se z kůlny zkrz díru ve zdi\newline
-%- horší to bylo s netem protože wifi signál do kurníku nedosáhne\newline
-%- vyřešilo se to wifi extenderem od tplinku který má zárověň i ethernet výstup díky čemuž nemuselisme dlouhého tahati kabelu a šlo nám to vzduhem přes dvůr a ve stodole pak drátem\newline
-%- kamery bylo potřeba napájet a taky připojit přes internet; zprvu jsem si myslel že poe nebude potřeba ale taha 230 by bylo zbytečné námahy takže jsem pořídil poe switch od tplinku a ten připojuje kamery\newline
-%- bylo někde potřeba udělat místo kam se nainstaluje celá technologie kurníku\newline
-%- zvolila se plechová bedna ze starého domovního rozvaděče do níž se pro jednotlivé prvky vytvožili na míru držáčky a pouzdra ps.: fotky z tisku a pak z rozvaděče\newline
-%- jak se zrealizovala váha\newline
-%- jak vypadá řídící jednotka pri room assistanta\newline
-%- jaké tam jsou dveře pro slepice\newline
-%- celé je to propojené s rpi 5 které to v kurníku řídí a s ním pak komunikuje nuc pomocí tail scailu ale to zas v další kapitole\newline
-%- bylo potřeba zkalibrovat hmotnosti slepic a vajec
-
-Nasazení systému Coopmaster přímo do kurníku vyžadovalo několik klíčových kroků, abychom zajistili jeho plnou funkčnost a efektivitu.
-Jedním z prvních úkolů bylo natažení elektřiny a připojení k internetu.
-Elektřina byla přivedena bez větších problémů, využili jsme stávající zdroje z kůlny prostřednictvím otvoru ve zdi.
-\newline
-Výrazně náročnější bylo zajistit internetové připojení, protože signál Wi-Fi nedosahoval až ke kurníku.
-Toto jsme vyřešili instalací Wi-Fi extenderu od TP-Link, který nabízí také ethernetový výstup.
-Toto řešení nám umožnilo přenášet data vzduchem přes dvůr, a dále pak ve stodole drátem, čímž jsme se vyhnuli nepotřebnému natahování kabeláže.
-\newline
-Dalším úkolem bylo napájení a připojení kamer přes internet.
-Zpočátku jsem předpokládal, že Power over Ethernet (PoE) nebude nutné, ale poté, co by instalace 230V kabelů znamenala nadměrné úsilí, jsem pořídil PoE switch od TP-Link, který tyto kamery napájí i připojuje.
-\newline
-Dále bylo nutné vytvořit prostor, kam nainstalovat veškerou technologii kurníku.
-Pro tento účel jsem zvolil plechovou bednu ze starého domovního rozvaděče.
-Do této bedny byly přesně vyrobeny držáčky a pouzdra pro jednotlivé komponenty, jak dokládají fotografie z výroby a samotného rozvaděče.
-\newline
-Při instalaci bylo důležité řešit i váhu systému a její kalibraci pro přesné měření hmotnosti slepic a vajec.
-Řídící jednotka pro Home Assistant je součástí tohoto systému a zajišťuje bezproblémový provoz.
-Dveře pro slepice jsou integrovány do celkového řešení a celé řízení probíhá prostřednictvím Raspberry Pi 5, které komunikuje s NUC pomocí řešení Tailscale, ale tuto problematiku rozveduv další kapitole.
-\newline
-Tento komplexní proces nasazení do kurníku neustále vyžadoval přesné plánování a realizaci, abychom zajistili vysokou úroveň automatizace a efektivity potřebnou pro moderní chov slepic.
-
-\newpage
+%todo obrázek
+\section*{Základní konfigurace a klíčové služby}
 
 
-\section{Konfigurace vzdáleného přístupu}\label{sec:konfigurace-vzdaleneho-pristupu}
-%- rpi propojene s nuckem a dev kompama přes tailscail\newline
-%- v docker compose na nuckoj se vyrobila nová network jenom pro home assistanta a jeho propagaci na venek\newline
-%- do vzniklé sítě se přidal ještě kontejner Cloudflared který zajišťuje tunel ven na cloudflare a přes jeho firewall a proxyny do internetu\newline
-%- cloudflare tunel bylo potřeba namapovat na doménu kterou vlastníme\newline
-%- pronajmul jsem si doménu u doméhového registrátora forpsi\newline
-%- zmínění jaká plynou nebezpečí z tohoto řešení
+Systém je rozvržen tak, že na počítači v kurníku běží služby, které zajišťují komunikaci mezi hardwarovými periferiemi a dalšími službami systému Coopmaster.
+Doma na počítači jsou služby, jež potřebují výpočetní výkon a řeší konkrétní body zadání.
+Na obou počítačích musí tedy být nainstalovaný Docker společně s nástrojem Docker Compose, aby bylo možné služby hromadně spouštět a konfigurovat.
+Parametry jednotlivých služeb se načítají v obou případech ze souboru .env, aby konfigurační soubor Docker Compose neztrácel na přehlednosti.\newline
 
-Konfigurace vzdáleného přístupu k systému Coopmaster byla založena na robustní infrastruktuře, která zajišťuje bezpečné a efektivní propojení mezi klíčovými komponentami.
-Raspberry Pi (rpi) bylo propojeno s NUC a vývojářskými počítači prostřednictvím Tailscale, což umožňuje vytvoření privátní sítě VPN, která je snadno spravovatelná a zajišťuje bezpečné spojení.
-\newline
-Pro Home Assistant byl na NUC v systému Docker vytvořen specifický síťový most.
-Tento most je dedikovaný pouze pro Home Assistant a jeho potřeby komunikace s vnějším světem.
-K této síti byl přidán i kontejner Cloudflared, který umožňuje vytvoření bezpečného tunelu na platformu Cloudflare.
-Cloudflared zajišťuje průchod dat skrz Cloudflare firewall a proxy servery na internet, čímž zvyšuje bezpečnost a spolehlivost komunikace.
-\newline
-Aby byl tunel funkční, bylo nutné jej namapovat na mnou vlastněnou doménu.
-Pro tento účel jsem si registroval doménu u doménového registrátora Forpsi, což mi poskytlo potřebné DNS záznamy k propojení s Cloudflare.
-\newline
-Je důležité poznamenat, že taková konfigurace s sebou nese i jistá bezpečnostní rizika.
-Primárním rizikem je možnost neautorizovaného přístupu, pokud není správně nakonfigurováno zabezpečení tunelu a neprovádí se pravidelné audity.
-Dále mohou existovat zranitelnosti v softwaru kontejneru nebo sítě, které by mohly být zneužity, pokud nejsou průběžně aktualizovány.
-Z těchto důvodů je klíčové udržovat systém aktualizovaný a implementovat vhodná bezpečnostní opatření.
+Základní služby, které jsou nutným minimem pro fungování systému, jsou
+\begin{itemize}
+    \item Home Assistant (část~\ref{sec:home-assistant})
+    \item Postgres 15 (část~\ref{sec:postgres-15})
+    \item Eclipse Mosquitto (část~\ref{sec:eclipse-mosquitto})
+    \item Health Checker (část~\ref{sec:health-checker})
+    \item Cloudflared (část~\ref{sec:cloudflared})
+\end{itemize}
+Tyto služby tvoří běhové prostředí, do kterého jsou již pouze zasazovány jednotlivé moduly systému Coopmaster.
 
-\newpage
+%todo obrázek
+\section*{Procedura přidání nového modulu}
 
-%\section*{---poznámky TODO ke smazání---}\label{sec:---poznamky-todo-ke-smazani---}
-%- budeme potřebovat váhu pro kontrolu hnízd zda tam slepice je a nebo kolik je tam vajec\newline
-%- budeme potřebovat ideálně ip kamery s vhodným IP krytím abychom mohly monitorovat kurník vevnitř a venku\newline
-%- budeme potřebovat ovladačku asi arduino pro dveře, světlo, senzory teploty a vlhkosti\newline
-%- předchozí věci je potřeba dostat na síť takže nějaké rpi pro předávání komunikace a směrování\newline
-%- a všechno to musí řídit něco s dostatečným výkonem pro klasifikace třeba my tu máme nucka s RTX2080\newline
-%- uživatelské rozhraní se rozhodlo že je zbytečné vyrábět vlastní a ztrácet tím čas lepší bude použít HA který disponuje všemi funkcemi je open source a má komunitu která ho udržuje
-%- první řešení ale bude na stole takže se nemusíme zaobírat detaily kontkrétní instalace, alespoň pro zatím
-%- implementace probíhala v jazyce python za využítí vypsaných knihoven viz readmečka modulů\newline
-%- jak se konfiguroval logger, flask blueprinty, jak propojit python a arduino, jak na to s cronem/schedulerem, jak posílat mqtt a přijímat(jaká je struktura našich topiců, jak se to pojmenovává)
-%- verzuje se to na github
-%- na githubu běží workflow které vytváří jednolivé docker image pro každý modul a uploaduje je na můj docker hub kvůli snadnému deployi a distribuci po internetu
+
+Nyní si ukážeme celý proces, jak přidat do systému Coopmaster nový modul.
+Ukázku provedeme na modulu pro detekci vetřelců.
+Máme tedy dvě služby Camera Driver a Dog Alarm, tedy jedna služba pro poskytování dat a druhá pro výpočty.\newline
+
+Například tento modul využívá data z IP kamery ve výběhu, kterou je zde potřeba nainstalovat, nakonfigurovat a připojit na ethernet.\newline
+
+Následně je třeba do Docker Compose konfigurace v kurníku přidat službu, která bude data z kamery předávat do útrob systému Coopmaster.
+Této službě je třeba nastavit parametry na základě nichž bude fungovat.
+V aktuální situaci je tato služba Camera Driver a vyžaduje IP adresu a přihlašovací údaje ke IP kameře.\newline
+
+Jakmile připojíme novou periferii pomocí driver služby do systému, potřebujeme službu, která data zpracuje.
+Tato služba se musí přidat do Docker Compose konfigurace běžící doma na počítači Intel NUC 11 a opět jí musíme nastavit požadované parametry.
+Každá služba z výpočetní sekce vyžaduje minimálně přihlašovací údaje a IP adresu MQTT brokeru.
+V tomto případě se jedná o službu Dog Alarm, která se stará o detekci vetřelců na záběrech kamery.
+Jako parametry tato služba vyžaduje zmíněné údaje o MQTT brokeru a dále pak IP adresu a port služby, ze které má stahovat obrázky k analýze.\newline
+
+Služby z výpočetní části posílají výsledky své činnosti skrze MQTT broker do systému Home Assistant aby je zobrazil.
+Aby Home Assistant věděl jak má s daty pracovat, je třeba ho nakonfigurovat za pomocí souboru configuration.yaml.
+Do tohoto souboru se definují entity, které představují jednotlivé vstupní a výstupní prvky.
+Zde se jedná o několik MQTT entitu, které každé definujeme název, topic a datový formát.\newline
+
+Na závěr je třeba pomocí webového rozhraní systému Home Assistant přidat karty a automatizace, které budou vizualizovat a reagovat na data přijmutá do entit.
+Pro tento modul je potřeba hned několik karet a to kartu pro vizualizaci fotografií z kamery, kartu pro upozornění chovatele na hrozbu.
+Je třeba také přidat automatizaci, která odešle chovateli notifikaci o hrozícím nebezpečí.\newline
+
+Pro shrnutí můžeme říci, že jsme si popsali kompletní proces přípravy, přidání, konfigurace a nasazení nového modulu do ekosystému Coopmaster.
+
+
+
