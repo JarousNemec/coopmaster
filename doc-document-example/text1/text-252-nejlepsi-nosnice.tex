@@ -53,26 +53,42 @@ Dále je slepice z obrázku vystřižena (segmentována) podle kontury, kterou a
     \label{fig:segmented_chicks2}
 \end{figure}
 
-Na závěr je pro každý výřez vypočítán tenzor na jehož základě jsou slepice roztřízeny do jednotlivých skupin viz obrázek~\ref{fig:chicks_in_clusters}.
+Na závěr je pro každý výřez vypočítán tenzor (vektor) na jehož základě jsou slepice roztřízeny do jednotlivých skupin viz obrázek~\ref{fig:chicks_in_clusters}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/chicks_in_clusters}
-    \caption{Algoritmem rozdělené slepice dle tenzorů}
+    \caption{Algoritmem rozdělené vektory}
     \label{fig:chicks_in_clusters}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/chicks_in_clusters_2}
+    \caption{Algoritmem rozdělené slepice}
+    \label{fig:chicks_in_clusters_2}
+\end{figure}
 
-Zmiňuji tuto funkcionalitu v sekci "plány do budoucna", protože se mi zatím nepodařilo algoritmus dostatečně vypilovat.
-Při vývoji jsem sice testoval na několika obrázcích a zdálo se, že princip by mohl fungovat, ale v reálném prostředí byl výsledek značně nepřesný.
-Babička má totiž dvakrát červenou, dvakrát bílou a dvakrát černou slepici, plus jednoho bílého kohouta.
-Proto jsou ty slepice často hodně podobné a rozdíly mezi nimi jen nepatrné.
+Během této části projektu, zaměřeného na třídění slepic pomocí umělé inteligence a počítačového vidění, jsem vyvinul základní procesy pro načítání a zpracování obrázků.
+Pomocí modelu ResNet50 jsem z obrázků extrahoval klíčové vlastnosti a pokusil se slepice zařadit do skupin pomocí metody K-means.
+Bohužel, výsledky zatím nesplnily očekávání.
 
-Momentálně přemýšlím, jak ty slepice odlišit, ale nejsem si jistý, že by mi babička dovolila je pomalovat.
-Možná by pomohlo i zjednodušení úkolu.
-Namísto soutěže o nejlepší nosnici bych se možná mohl zamyslet nad sestavením nejlepšího závodního týmu.
+Hlavním problémem je nedostatečná přesnost klasifikace.
+Model má potíže s rozpoznáním rozdílů mezi slepicemi, což vede k logicky nehodnotným skupinám.
+Tím ukazuje, že model aktuálně neumí efektivně vyhodnotit důležité charakteristiky pro úspěšné třídění.
 
-Mohly by to být týmy bílých, červených či černých slepic.
+Je zřejmé, že projekt vyžaduje další práci.
+Potřebuji prozkoumat pokročilejší metody zpracování obrázků a shlukování, případně i techniky hlubokého učení speciálně zaměřené na rozpoznávání zvířat.
+Je možné, že bude nutné rozšířit dataset o větší různorodost obrázků a aplikovat techniky, které zlepší schopnost modelu třídit.
+Věřím, že s lepšími daty a vylepšeným modelem dosáhnu lepších výsledků.
+
+Při testování na několika obrázcích se zdálo, že by princip mohl fungovat, ale v praxi byl výsledek nepřesný.
+Moje babička má dvě červené, dvě bílé a dvě černé slepice, plus jednoho bílého kohouta, což způsobuje, že jsou si slepice často velmi podobné, s nepatrnými rozdíly.
+
+Aktuálně přemýšlím, jak tyto slepice jednoduše odlišit.
+Ačkoli pomalování slepic babička pravděpodobně nepovolí, možná by pomohlo zjednodušení úkolu.
+
+Namísto soutěže o nejlepší nosnici bych mohl zaměřit úsilí na sestavení nejefektivnějšího závodního týmu, jako např. týmů bílých, červených nebo černých slepic.
 
 
 
