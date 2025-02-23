@@ -2,8 +2,8 @@
 Řídící jednotka je vlastní sestavené zařízení, které zprostředkovává pomocí USB připojení data o teplotě a vlhkosti v kurníku.
 Další úlohou je ovládání dvířek a světla.
 Srdcem řídící jednotky je Arduino Nano.
-Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovíýi prvky(relé, senzory, táhlový motor) a počítačem.
-Na počítači zase běží služby ovládají nebo využívající data z těchto prvků.
+Tento programovatelný mikrokontroler slouží jako logický prvek mezi nízkoúrovňovými prvky (relé, senzory, táhlový motor) a počítačem.
+Na počítači zase běží služby ovládající nebo využívající data z těchto prvků.
 
 \subsection*{Popis zapojení}
 Zapojení řídící jednotky je zdokumentováno na obrázku~\ref{fig:ridici_jednotka} a blokové schéma zapojení je na obrázku~\ref{fig:schema_ridici_jednotky}.
@@ -16,17 +16,17 @@ Základní komponenty řídící jednotky:
 \end{itemize}
 Pro snadnou práci s jednotlivými součástmi během vývoje, byly zvoleny moduly, které disponují svorkovnicemi a není tedy nutné k nim nic pájet.
 Připojení Ardruina je realizováno pomocí terminal schieldu, který pro každý pin desky disponuje jednou svorkou pro připojení kabelu.
-Obdobně byl pro práci s relátky vybrán modul, které již 4 rele obsahoval a pro snadné zapojení také svorkovnici.
+Obdobně byl pro práci s relátky vybrán modul, který již 4 rele obsahoval a pro snadné zapojení také svorkovnici.
 
-Nejkomplikovanější byl modul snímače ke kterému bylo třeba vytvořit konektor, protože disponoval pouze výstupními piny.
+Nejkomplikovanější byl modul snímače, ke kterému bylo třeba vytvořit konektor, protože disponoval pouze výstupními piny.
 Jako instalační platformu jsem zvolil dřevotřískovou desku a na ni jsem připevnil všechny moduly pomocí krátkých vrutů do dřeva.
 Jednotlivé moduly byly následně propojeny vodiči o průřezu 0,15 mm² dle technické dokumentace dodávané ke každému modulu.
 Hardwarová stránka byla tímto hotová.
 \newline
-Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit, žádné přídavné napájení.
+Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit žádné přídavné napájení.
 Přídavné napájení by bylo třeba řešit například, kdybychom používali 10 relejových modulů současně, protože limit pro napájení skrze USB 2.0 je pouze 500 mA a jedna cívka spotřebuje až 70 mA.\newline
 Následovala tedy poslední věc a to nahrát kód programu do samotné vývojové desky Arduino Nano.
-Zde je vyborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-ide}, který celý složitý proces nahrávání vyřeší.
+Zde je výborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-ide}, který celý složitý proces nahrávání vyřeší.
 
 
 \begin{figure}[htbp]
@@ -49,10 +49,10 @@ Zde je vyborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-i
 
 \subsection*{Popis algoritmu}
 V části programu Setup se jako první po startu programu nastaví příslušné módy na vstupní a výstupní piny.
-Následně se provede inicializace seriového připojení s rychlostí 9600 baudů.
+Následně se provede inicializace sériového připojení s rychlostí 9600 baudů.
 Poté se inicializuje připojení s čidlem DHT11 pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
 Dále program pokračuje do části Loop, což je metoda, která se volá pořád dokola jako nekonečný cyklus.
-Tato metoda řeší pravidelnou aktualizaci dat ze senzoru dále čtení příkazů ze seriového připojení a posílání odpovědí na ně.
+Tato metoda řeší pravidelnou aktualizaci dat ze senzoru, dále čtení příkazů ze sériového připojení a posílání odpovědi na ně.
 Aktualizace senzorových dat se provádí jednou do vteřiny za pomocí metod readTemperature a readHumidity, které jsou součástí knihovny DHT.h.
 Zpracování příkazů probíhá zavoláním metody processCommand, která pokud je v zásobníku přijatých dat něco ke čtení, přečte první znak a ten následně zpracuje jako příkaz dle seznamu níže.
 
@@ -62,8 +62,8 @@ Zpracování příkazů probíhá zavoláním metody processCommand, která poku
     \item c = zavřít dvířka
     \item l = rozsvítit světlo
     \item d = zhasnout světlo
-    \item j = vrátí json s daty o teplotě a vlhkosti
-    \item s = vrátí json s daty o stavech jednotlivých ovládaných prvku (dvěře, světlo)
+    \item j = vrátí JSON s daty o teplotě a vlhkosti
+    \item s = vrátí JSON s daty o stavech jednotlivých ovládaných prvku (dveře, světlo)
 \end{itemize}
 
 

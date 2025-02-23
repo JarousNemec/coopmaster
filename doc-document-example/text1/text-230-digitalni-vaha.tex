@@ -1,10 +1,10 @@
 \section{Digitální váha do hnízda}\label{sec:digitalni-vaha-do-hnizda}
 Pro účely projektu bylo potřeba postavit digitální váhu.
-Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice snáší vejce, a jejím úkolem je přes USB poskytovat aktuální data o tom jakou hmotností je zatěžována podložka hnízda.
+Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice snáší vejce, a jejím úkolem je přes USB poskytovat aktuální data o tom, jakou hmotností je zatěžována podložka hnízda.
 
 \subsection*{Popis algoritmu}
 Po připojení napájení k Arduinu, se nejdříve nastaví a připojí sériová komunikace rychlostí 9600 baudů pomocí USB.
-Následně je instancován objekt starající se o sprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
+Následně je instancován objekt starající se o zprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
 Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a následně je posílá po sériovém připojení.
 Jako poslední krok v rámci přípravy programu je vynulování váhy pomocí metody tare(), která je jedna z metod HX711.h knihovny.
 Jakmile program dokončí fázi příprav, vstoupí do nekonečného cyklu.
@@ -12,12 +12,12 @@ Tento cyklus pravidelně čte data přicházející po seriovém připojení.
 V případě, kdy jsou přijata data, program počítá se třemi scénáři.
 Buď je přijat znak "w", znak "t" nebo jakákoli jiná data.
 V případě znaku "w" (od slova weight) program reaguje odesláním aktuální naměřené hodnoty váhy po sériovém připojení jako reakce na příkaz.
-Přijmutý znak "t" znamená tare neboli vynulovat váhu.
-Na základě toho se programu řekne, že aktuální data přijímaná ze senzoru má brát jako hmotnost 0 g.
+Přijatý znak "t" znamená tare neboli vynulovat váhu.
+Na základě toho se programu řekne, že aktuální hodnotu, kterou získal ze senzoru, má brát jako hmotnost 0 g.
 
 
 \subsection*{Konstrukce váhy}
-Jako řídící jednotka váhy je použito Arduino Nano, jež je zodpovědné za komunikaci s počítačem pomocí sériového připojení a načítání dat o hmotnosti z AD převodníku HX711 přes, který je arduino připojeno k tenzometrickému senzoru.
+Jako řídící jednotka váhy je použito Arduino Nano, jež je zodpovědné za komunikaci s počítačem pomocí sériového připojení a načítání dat o hmotnosti z AD převodníku HX711 přes, který je Arduino připojeno k tenzometrickému senzoru.
 Hmotnost je měřena tenzometrickým senzorem se jmenovitým zatížením 20 kg.
 Toto zapojení je nutné vzhledem ke konstrukci a vlastnostem senzoru.
 Tenzometrické senzory jsou analogové a jejich výstupem jsou velmi malé změny v napětí v rozmězí 0.15 až 1 mV.
@@ -26,20 +26,21 @@ Složitější zapojení není jedinou nevýhodou.
 Značnou nevýhodu představuje také fakt, že už vlivem zatížení se profil senzoru mírně deformuje a na základě toho narůstá chyba měření v průběhu času.
 Tento problém se dá snadno řešit pravidelným nulováním v případech, kdy zrovna senzor zatížen není.
 Na konstrukci váhy je velmi zajímavý tvar a důvody samotné železné konstrukce.
-Protože má být váha instalována do již existujícího hnízda a slepice bude vlastně sedět rovnou na váze, je třeba navrhnout konstrukci váhy tak, aby slepice se funkce a způsob sezení nezměnil.
+Protože má být váha instalována do již existujícího hnízda a slepice bude vlastně sedět rovnou na váze.
 Nakonec je jako platforma, na které slepice sedí, zvolena čtvercová miska o rozměrech odpovídající s rezervou rozměrům celého hnízda.
-Nemohla by to být například pouze rovná deska, protože slepice potřebuje pro pohodlné sezení podestýlku kterou tvoří seno a v případě desky by se seno dostalo mezi stěny hnízda a desku a váha by se tak nemohla volně pohybovat a zasekávala by se.
+Nemohla by to být například pouze rovná deska, protože slepice potřebuje pro pohodlné sezení podestýlku, kterou tvoří seno a v případě řešení s deskou by se seno dostalo mezi stěny hnízda a desku a váha by se tak nemohla volně pohybovat a zasekávala by se.
 Takto v misce je mnohem menší šance, že bude nějak větší množství sena vytlačeno a bude přidírat váhu.
 
 \subsection*{Kalibrace}
 Po fyzickém sestavení váhy je třeba provést kalibraci.
 Kalibrace používaných senzorů je nutná, protože se díky ní eliminují rozdíly mezi senzory, překryjí se nedostatky konstukce váhy a zajistí přesnost a korektnost měření pro konkrétní senzor.
 To znamená najít vhodnou hodnotu kalibračního faktoru, která se již za běhu váhy nebude měnit.
-Doporučená metoda jak provádět kalibraci, je vzít si předmět o němž víme přesně jeho hmotnost a ten použít jako vzorové závaží, na které chceme váhu kalibrovat.
-Konkrétně u námi použitého senzoru do 20 kg je dobré volit závaží v řádech minimálně několika kil.
-Já doma použil 5 balíčků polohrubé mouky jejichž hmotnost jsem si ověřil přesnou kuchyňskou váhou.
-Následujícím krokem je nalezení odpovídající hodnoty kalibračního faktoru, čehož je docilováno buď zvyšováním nebo snižováním kalibračního faktoru na základě toho zda výsledná hmotnost dle výpočtů s využitím aktuálního faktoru je moc nízká nebo moc vysoká.
-
+Doporučená metoda, jak provádět kalibraci, je vzít si předmět, o němž víme přesně jeho hmotnost a ten použít jako vzorové závaží, na které chceme váhu kalibrovat.
+Konkrétně u mnou použitého senzoru do 20 kg je dobré volit závaží v řádech minimálně několika kil.
+Já jsem doma použil 5 balíčků polohrubé mouky.
+Hmotnost balení jsem si ověřil přesnou kuchyňskou váhou.
+Následujícím krokem je nalezení odpovídající hodnoty kalibračního faktoru pro náš senzor.
+Položil jsem známé závaží na váhu a zvyšováním nebo snižováním kalibračního faktoru, jsem sedoval, jestli se návratová hodnota na vystupu, při aktuálním faktoru přibližuje nebo vzdaluje k hodnotě hmotnosti závaží na váze.
 
 \subsection*{Hardware}
 \begin{itemize}
