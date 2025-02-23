@@ -2,25 +2,25 @@ Testování je klíčovým krokem k zajištění spolehlivosti, správnosti a be
 Jako programátor bych se zaměřil na několik úrovní testování, které by zajistily, že všechny komponenty systému fungují podle očekávání.
 Já jsem na svůj projekt ručně aplikoval Integrační testy, Systémové společně se Smoke testy a na závěr Uživatelské testy.
 Unit testy, které jsou jinak základem každého správně vyvíjeného softwaru, jsem prozatím vynechal, protože služby zatím nejsou, v této fázi, tak rozsáhlé, aby bylo třeba je nějak robustně testovat.
+
 \section{Integrační testy}\label{sec:integracni-testy}
-Ručně jsem prováděl Integrační testy vždy po dokončení služby, abych zjistil zda všechna komunikační rozhraní fungují správně.
+Ručně jsem prováděl integrační testy vždy po dokončení služby, abych zjistil zda všechna komunikační rozhraní fungují správně.
 K ověření funkčnosti Flask API rozhraní jsem používal program Postman.
 Pro ověření komunikace skrze MQTT jsem použil program MQTT-Explorer.
 
-\section{Systémové a Smoke testy}\label{sec:systemove-a-smoke-testy}
-Tyto testy byly to hlavní, co jsem prováděl.
-Vykazují totiž funkčnost celého systému pod vlivem času a různých situací.
-Díky tomuto testu jsem například odhalil špatnou konfiguraci MQTT brokeru, který byl nastaven, aby ukládal všechny zprávy, které skrze něj projdou.
-To je věc, která při běhu maximálně 2 hodiny během vývoje nezaznamenáte.
-Odhalil jsem to až v testovacím provozu, když najednou přestala komplet fungovat MQTT komunikace a já zjistil, že díky posílání aktuálních obrázků z kamer se za týden běhu cache brokeru naplnila a ten již nadále nezpracovával zprávy.\newline
-Další byli například restarty.
+\section{Systémové a Longrunové testy}\label{sec:systemove-a-smoke-testy}
+Tyto testy byly ty hlavní, které jsem opakovaně prováděl.
+Ukazovaly totiž funkčnost celého systému během času a ověřovali funkčnosti různých v situacích.
+Díky těmto testům jsem například odhalil špatnou konfiguraci MQTT brokeru, který byl nastaven, aby ukládal všechny zprávy, které skrze něj projdou.
+Odhalil jsem to až v testovacím provozu, kdy najednou přestala komplet fungovat MQTT komunikace a já zjistil, že díky posílání aktuálních obrázků z kamer se za týden běhu cache brokeru naplnila a ten již nadále nezpracovával zprávy.\newline
+Další byly například restarty.
 Hlavní problém s restarty je při nastavování linuxových práv k různým periferiím a souborům.
 Problém nastal například v případě, kdy bylo potřeba udělit práva pro využití USB portu službě Scale Driver.
-Práva se totiž nastavila na konkrétní port jenže po restartu systému se porty zpřeházely a služba k novému portu neměla přítup.
+Práva se totiž nastavila na konkrétní port, jenže po restartu systému se porty zpřeházely a služba k novému portu neměla přítup.
 
 \section{Uživatelské testování}\label{sec:uzivatelske-testovani}
-Uživatelské testování jsem prováděl kvůli tomu, abych zjistil zda je grafické rozhraní v systému Home Assistant dostatečně srozumitelné a přehledné.
-Díky těmto testům jsem například opravil nelogičnost ikonkách tlačítek nebo směnil rozvržení komponent podle toho, v jakém pořadí je chce uživatel na první pohled vidět.
+Uživatelské testování jsem prováděl kvůli tomu, abych zjistil, zda je grafické rozhraní v systému Home Assistant dostatečně srozumitelné a přehledné.
+Díky těmto testům jsem například opravil nelogičnost v ikonkách tlačítek nebo jsem změnil rozvržení komponent podle toho, v jakém pořadí je chce uživatel na první pohled vidět.
 
 
 

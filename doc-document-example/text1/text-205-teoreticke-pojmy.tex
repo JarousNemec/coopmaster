@@ -26,7 +26,7 @@ Wiring poskytuje intuitivní prostředí pro psaní kódu, jeho kompilaci a nahr
 
 \section{Táhlový motor}\label{sec:tahlovy-motor}
 Jedná se o linearní motor (actuator), jehož součástí je elektromotor a k němu je připevněn šnekový převod.
-Šnek je pevně upevněn na šroubovici, která se stará o rozvod síli a točivého momentu po celé délce motoru.
+Šnek je pevně upevněn na šroubovici, která se stará o rozvod síly a točivého momentu po celé délce motoru.
 Převod z otáčivého pohybu na pohyb přímočarý je zajištěn maticí, která pevně drží na táhlu.
 Rozhodnutí, zda se bude táhlo zasouvat nebo vysouvat, je dáno polaritou napětí dodávaného elektromotoru, který se na základě toho otáčí buď po nebo proti směru hodinových ručiček.
 
@@ -36,13 +36,13 @@ Umožňuje vytvářet a spravovat tzv. workflow pomocí souborů ve formátu YAM
 Tyto kroky nebo také akce, se mohou spouštět na základě různých událostí, jako je push kódu nebo vytvoření pull requestu.
 GitHub Workflow podporuje kontinuální integraci a nasazení (CI/CD), automatické testování, nasazení aplikací a další úlohy.
 
-\section{Mqtt}\label{sec:mqtt}
+\section{MQTT}\label{sec:mqtt}
 MQTT (Message Queuing Telemetry Transport) je lehký messagingový protokol pro publikování a odebírání zpráv, navržený pro komunikaci mezi zařízeními v sítích s omezenou kapacitou nebo vysokou latencí.
 Je často využíván v oblasti Internetu věcí (IoT) pro přenos dat mezi senzory, akčními členy a centrálními systémy.
 MQTT pracuje na principu architektury klient–server, kde klienti(publisheři) publikují zprávy na určité téma(topic) a broker tyto zprávy distribuuje odběratelům(subscriberům), kteří jsou na dané téma přihlášeni.
 
 \section{Home Assistant}\label{sec:home-assistant}
-Home Assistant~\cite{co-je-to-ha} je open-source platforma pro automatizaci domácnosti, která umožňuje integraci různých IoT zařízení pomocí protokolů jako MQTT, Z-Wave a Zigbee.
+Home Assistant~\cite{co-je-to-ha} je open source platforma pro automatizaci domácnosti, která umožňuje integraci různých IoT zařízení pomocí protokolů jako MQTT, Z-Wave a Zigbee.
 Umožňuje vytvářet pokročilé automatizace a skripty prostřednictvím YAML konfigurace nebo webového rozhraní, přičemž vše běží lokálně, což zajišťuje vysokou úroveň soukromí a bezpečnosti.
 Podporuje integraci s hlasovými asistenty jako Google Assistant a Amazon Alexa.
 Platforma je kompatibilní s různými zařízeními, včetně Raspberry Pi, a nabízí mobilní aplikace pro iOS a Android pro vzdálený přístup.
@@ -50,7 +50,7 @@ Home Assistant je flexibilní, rozšiřitelný a široce používaný v aplikac�
 Díky pravidelným aktualizacím a podpoře komunity je ideálním nástrojem pro uživatele, kteří chtějí mít plnou kontrolu nad svou chytrou domácností.
 
 \section{Arduino}\label{sec:arduino}
-Arduino je open-source platforma pro prototypování elektroniky založená na snadno použitelném hardwaru a softwaru.
+Arduino je open source platforma pro prototypování elektroniky založená na snadno použitelném hardwaru a softwaru.
 Skládá se z mikroprocesorové desky a vývojového prostředí Arduino IDE, které využívá jazyk podobný C/C++.
 Arduino desky umožňují komunikaci s různými senzory a akčními členy, což usnadňuje tvorbu interaktivních projektů.
 Podporuje řadu rozšiřujících modulů, tzv. shieldů, které rozšiřují jeho funkčnost například o bezdrátovou komunikaci, ovládání motorů či připojení k internetu.
