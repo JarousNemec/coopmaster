@@ -44,21 +44,6 @@ Další problém nastane, když potřebujeme z některé ze služeb poslat např
 Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT (část~\ref{sec:mqtt}).
 Tato technologie se běžně používá u IoT zařízení a pro naše použití je vynikajícím řešením.
 
-
-// TODO - popsat obrazek komunikace mezi moduly a presunout do sekce mikroservisni archittura popis
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{img/orientacni_topologie}
-    \caption{Orientační topologie systému}
-    \label{fig:orientacni_topologie}
-\end{figure}
-
-
-
-
-
-
 \clearpage
 \section{Hardwarová zařízení}\label{sec:hardwarova-zarizeni}
 Tuto sekci je velmi důležité dobře a správně navrhnout, protože náš systém bude pracovat s daty z reálného světa.
@@ -175,7 +160,7 @@ Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální sníme
 Abych mohl splnit tento požadavek, bude potřeba získat údaje o aktuální hmotnosti z jednotlivých vah ve hnízdech.
 Tato data je pak nutné předat do služby Nest Watcher.
 Nest Watcher následně data vyhodnotí a výsledky předá k vizualizaci do systému Home Assistant.
-Schématické vyjádření principu pro vizualizaci stavů hnízd je znázorněno v obrázku~\ref{fig:vizualizace_stavu_hnizd}. \newline
+Schématické vyjádření principu pro vizualizaci stavů hnízd je znázorněno na obrázku~\ref{fig:vizualizace_stavu_hnizd}. \newline
 Pro komunikaci s modulem digitální váhy je použita služba Scale Driver, která s jednotlivými váhami komunikuje přes USB sběrnici.
 Data o váhách si ze Scale Driveru stahuje služba Nest Watcher.
 Tato služba ukládá v daném intervalu data z každé váhy do databáze.
@@ -205,10 +190,23 @@ Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
 Funguje na principu, při němž zařízení šifrovaně propojíte s veřejným serverem a tento server bude skrze sebe vystavovat službu, která běží na lokálním počítači například u nás doma.
 Výhoda je, že vzdálený server disponuje kvalitním a odborně nastaveným firewalem, který zajistí dobrou ochranu našeho lokálního serveru.
 Tuto službu poskytuje zdarma a bez omezení například společnost Cloudflare~\cite{cloudflare}.
-Tento způsob nejvíce odpovídá našim požadavkům, kterými byly cena a jednoduchost, společně s rychlostí nasazení.\newline
+Tento způsob nejvíce odpovídá našim požadavkům, kterými byly cena a jednoduchost, společně s rychlostí nasazení.
+Pro lepší znázornění komunikace mezi moduly přikládám schéma ~\ref{fig:vizualizace_stavu_hnizd}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/orientacni_topologie}
+    \caption{Orientační topologie systému}
+    \label{fig:orientacni_topologie}
+\end{figure}
+
+
+\newline
 Poslední nutností, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
 Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
 My v našem řešení využíváme službu Forpsi~\cite{forpsi}, protože s ní mám již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-systemu-do-produkce}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
+
+
 
