@@ -1,9 +1,13 @@
-\section{Vylepšení funkcionality služby Room Assistant}\label{sec:vylepseni-funkcionality-sluzby-room-assistant}
+\usepackage{hyperref}\section{Vylepšení funkcionality služby Room Assistant}\label{sec:vylepseni-funkcionality-sluzby-room-assistant}
 
-// TODO
+Aktuální systém zavírání dvířek je nastaven na pevný čas, například na 18. hodinu, což představuje problém, protože nezohledňuje změny času východu a západu slunce během roku.
 
-- lze doimplementovat automatické ovládání světel a dvířek pro případ nefunkčnosti home assistanta
-- resi rano otevirani dveri kurniku a vecer zavirani
-- Integrace se sluzbou  - https://api.sunrise-sunset.org/json?lat=50\&lng=14.5
-- dvere se nezavrou pokud nejsou slepice doma (kontrolu lze provézd zavoláním přímo na chicken watch guarda)
-- dvere v modu automatickeho zavirani si volaji o data kdy zavirat https://kodim.cz/czechitas/daweb/js2/server-komunikace/cv-volani-api/vychod-zapad
+Plánované řešení by mělo umožnit nastavit otvírání a zavírání dveří podle aktuálních údajů o slunci.
+Pomocí API, jako je například \href{https://api.sunrise-sunset.org/}{https://api.sunrise-sunset.org/}, získáme přesný čas východu a západu slunce pro naši farmu.
+Díky tomuto systému se dveře kurníku otevřou ve chvíli, kdy slunce vyjde, a zavřou se, když zapadne.
+Slepice tak mohou využít co nejvíce denního světla a večer budou chráněny před predátory a nepříznivým počasím.
+
+V této implementaci také zajišťujeme kontrolu, zda jsou všechny  slepice večer doma. Pokud ne, dveře se nezavřou.
+Tím se zajistí, že systém funguje podle aktuální situace.
+
+Tento dynamický systém je mnohem lepší než starší statické nastavení, protože snižuje možnost lidské chyby, usnadňuje práci farmářům a zlepšuje péči o slepice.
