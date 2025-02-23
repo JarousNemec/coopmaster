@@ -1,13 +1,13 @@
 V této kapitole si popíšeme, jaký je vlastně aktuální stav běžícího systému, a vysvětlíme si, co je potřeba pro přidání nového modulu
 %todo obrázek
-\section*{Verzování a Nasazení}
+\section*{Verzování a nasazení}
 
 Pro verzování zdrojových kódů svých služeb jsem se rozhodl využívat GitHub, což mi umožňuje efektivně zálohovat kód.
 V rámci GitHubu používám GitHub Workflow, které automatizuje proces vytváření Docker image, což zrachluje a automatizuje proces nasezení nové verze služby.
 Jakmile je Docker image vytvořen, nahrávám jej na platformu Docker Hub.
 Na tuto platformu image ukládám a následně je vzdáleně načítám při nasazení konkrétní služby.
 %todo obrázek
-\section*{Přípravné práce pro fyzickou infrastrukturu}
+\section*{Infrastrukturní přípravné práce}
 
 Vlastní instalaci částí systému Coopmaster do kurníku a výběhu předcházely přípravné stavební práce.
 Do budovy bylo třeba přivést ethernetové připojení, což nebyl vůbec snadný úkol.
@@ -25,7 +25,7 @@ Výpočetní výkon je poskytnut díky grafické kartě NVIDIA GeForce RTX 2060.
 Dále pak máme v kurníku a ve výběhu periferie periferie (dvířka, senzory a kamery), které potřebuji propojit se systémem Coopmaster.
 Všechny tyto periferie jsou do systému připojeny skrze mikropočítač Raspberry pi 5.
 Výpočetní část je takto rozdělena do dvou částí kvůli agresivnímu prostředí v kurníku (vlhkost, teplotní výkyvy).
-Raspberry PI 5 je mnohem levnější než Intel NUC 11 a v případě poškození zařízení vlivem prostředí nevznikne tak velká škoda.
+Raspberry PI 5 je mnohem levnější než Intel NUC 11 a v případě poškození zařízení vlivem prostředí, nevznikne tak velká škoda.
 Síťová komunikace mezi těmito dvěma počítači realizována pomocí služby Tailscale, která mezi nimi vytváří mesh VPN.
 Zároveň této služby využívám já jako správce, abych měl vzdálený přístup k oběma zařízením.
 
@@ -40,11 +40,11 @@ Parametry jednotlivých služeb se načítají v obou případech ze souboru .en
 
 Základní služby, které jsou nutným minimem pro fungování systému, jsou
 \begin{itemize}
-    \item Home Assistant (část~\ref{sec:home-assistant})
-    \item Postgres 15 (část~\ref{sec:postgres-15})
-    \item Eclipse Mosquitto (část~\ref{sec:eclipse-mosquitto})
-    \item Health Checker (část~\ref{sec:health-checker})
-    \item Cloudflared (část~\ref{sec:cloudflared})
+    \item Home Assistant (\ref{sec:home-assistant})
+    \item Postgres 15 (\ref{sec:postgres-15})
+    \item Eclipse Mosquitto (\ref{sec:eclipse-mosquitto})
+    \item Health Checker (\ref{sec:health-checker})
+    \item Cloudflared (\ref{sec:cloudflared})
 \end{itemize}
 Tyto služby tvoří běhové prostředí, do kterého jsou již pouze zasazovány jednotlivé moduly systému Coopmaster.
 
