@@ -111,7 +111,7 @@ Komponenta také při každém updatu dat loguje do konzole, pro případ, kdy b
 Během tvorby komponenty pro hnízda, mě poněkud zaskočil fakt, že maximální velikost hodnoty state v entitě je 255 bytů.
 Z počátku jsem chtěl posílat data o hnízdech ve formátu JSON.
 Dlouho mi to procházelo, ale problém začal v situaci, kdy jsem serializoval celý seznam s objekty hnízd a chtěl ho poslat jako hodnotu senzoru.
-Nebylo jednoduché na to přijít protože v tomto případě Home Assistant data prostě nenačítal a já nevěděl proč.
+Nebylo jednoduché na to přijít, protože v tomto případě Home Assistant data prostě nenačítal a já nevěděl proč.
 Nakonec jsem se na diskusním fóru dočetl, že velikost hodnoty state je omezena.
 Byl jsem tedy donucen začít používat formát csv a posílaná data omezit pouze na nejnutnější informaci o stavu.
 Pořád je zde problém s maximální velikostí v případě, že bych měl více než 128 hnízd místo by mi i tak nevystačilo,

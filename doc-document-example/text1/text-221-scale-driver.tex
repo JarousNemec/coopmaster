@@ -2,22 +2,23 @@
 Scale driver zodpovídá za komunikaci mezi fyzickou váhou a službami, které využívají data o vážení.\newline
 
 Jako řídící jednotka váhy je použito Arduino(\ref{sec:arduino}).
-Scale driver modul je pripojen usb kabelem a komunikuje přes serialový port.
-Pomocí jednoduchého proprietálního protokolu a na přijaty dotaz  poskytne jako odpověď aktuální hodnotu načtenou z váhy.
+Scale driver modul je připojen USB kabelem a komunikuje přes sériový port.
+Pomocí jednoduchého proprietálního protokolu a na přijatý dotaz poskytne jako odpověď aktuální hodnotu načtenou ze senzoru váhy.
 Scaler driver má vystavené REST rozhraní, které umožnuje komunikaci s ostatními komponentami systému.
 
 \subsection*{Popis algoritmu}
-Nejprve naběhne hlavní vlákno, které se stará o poskytování REST api na portu 9004.
-Toto api obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí požadavku s metodou GET.
+Nejprve naběhne hlavní vlákno, které se stará o poskytování REST API na portu 9004.
+Toto API obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí požadavku s metodou GET.
 Následně je spuštěno nové vlákno, které má za úkol číst data z váhy a předávat je aplikačnímu rozhraní jako aktuálně naměřenou hmotnost na váze, jež se bude od teď poskytovat, pokud o ní někdo GET requestem požádá.
 Čtení informací z váhy se provádí v nekonečném cyklu.
-Před začátkem cyklu se do log souboru zapíše informace ohledně úspěšném spuštění nového vlákna a pak proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial.
+Před začátkem cyklu se do log souboru zapíše informace ohledně úspěšného spuštění nového vlákna.
+Poté proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial.
 Po úspěšném otevření spojení se váze vždy po uplynutí časového intervalu 2 sekundy, odešle znak "w".
 Tento znak je ve firmwaru váhy veden jako příkaz, po jehož přijetí má váha vrátit aktuální naměřenou hodnotu.
 Časové zpoždění je implementováno kvůli tomu, že není třeba číst data tak často a zároveň by mohlo docházet k zahlcení váhy.
 Jakmile je celá odpověď od váhy přijata programem zpět, jsou data zvalidována a následně, pokud je to možné, převedena na datový typ Int.
 Datový typ Int je zvolen z důvodu, že váha posílá data v gramech a je zbytečné v tomto případě používat desetinná čísla, protože gramy poskytují dostatečné rozlišení pro naše účely.
-Pokud se nepodaří převézd přečtenou hodnotu na číslo, je výstupní promněnná nastavena na -1, což zbytku systému značí, že váha není v pořádku.
+Pokud se nepodaří převézt přečtenou hodnotu na číslo, je výstupní proměnná nastavena na -1, což zbytku systému naznačí, že váha není v pořádku.
 Na závěr se zalogují aktuálně získaná data a následuje další volání cyklu.
 
 

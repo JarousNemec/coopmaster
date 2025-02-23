@@ -1,28 +1,28 @@
 \section{Health checker}\label{sec:health-checker}
-Health checker je malá služba určená pro správce systému.
-Poskytuje informace o tom zda, všechny služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
+Health Checker je malá služba určená pro správce systému.
+Poskytuje informace o tom, zda všechny služby běží, aby správce nebyl nucen přihlašovat se vzdáleně na server a manuálně kontrolovat každou službu.
 Výpis stavů jednotlivých služeb je poskytován pomocí jednoduché webové stránky.
 
 \subsection*{Popis algoritmu}
-Po nastartování služby je spuštěno REST api pro komunikaci se správcem.
+Po nastartování služby je spuštěno REST API pro komunikaci se správcem.
 Jediným endpointem služby je <server:port>/status.
 Pokud uživatel pomocí prohlížeče pošle GET požadavek na tuto službu, bude mu vrácen seznam služeb a jejich stavů převedený do formátu JSON.
 Stavem aplikace je myšlen status kód a případné chybové hlášky, které služby po zavolání jejich metody <server:port>/ping.
 Služby jsou v seznamu identifikovány na základě portů.
 Každá služba v systému Coopmaster má svůj port a porty jsou po sobě v intervalu od 9000 do 9010.
 Tento způsob identifikace a rozdělení portů službám zjednodušuje jejich monitorování.
-Algoritmus funguje na základě plánoveče úloh neboli scheduleru, který jednou do minuty spustí kontrolu všech služeb a jejich stavy uloží do seznamu odkud jsou pak načítány při požadavku na api.
+Algoritmus funguje na základě plánovače úloh neboli scheduleru, který jednou do minuty spustí kontrolu všech služeb a jejich stavy uloží do seznamu odkud jsou pak načítány při požadavku na API.
 Kontrola se provádí právě posláním HTTP požadavku na <server:port>/ping každé služby a následným uložením odpovědi.
 
-Tento modul umí poskytovat základní informace o aktuálním zdraví svých komponent.
-Pokud by se v budoucnu objevil požadavek na historická data, bylo by velmi jednoduché integrovat tuto komponentu s některou z open-source platforem určenou pro analytiku a vizualizaci dat.
+Tento modul umí poskytovat základní informace o aktuálním stavu služeb sytému Coopmaster.
+Pokud by se v budoucnu objevil požadavek na historická data, bylo by velmi jednoduché integrovat tuto komponentu s některou z open source platforem určenou pro analytiku a vizualizaci dat.
 Například Grafana~\cite{grafana} umožňuje uživatelům vytvářet interaktivní a dynamické panely (dashboardy), které vizualizují různorodé časové řady dat získané z různých zdrojů.
 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{img/health-checker-grafana-dashboard}
-    \caption{Příklad monitoringu aplikace vytvořeny pomocí platformy Grafana}
+    \caption{Možná vizualizace pomoci platformy Grafana}
     \label{fig:health-checker-grafana-dashboard}
 \end{figure}
 

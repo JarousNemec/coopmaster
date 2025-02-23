@@ -1,20 +1,20 @@
 \section{Room driver}\label{sec:room-driver}
-Room driver zařizuje komunikaci mezi službou Room Assistant a řídící jednotkou v kurníku.
+Room driver zajišťuje komunikaci mezi službou Room Assistant a řídící jednotkou v kurníku.
 Tato jednotka se stará o ovládání dveří, světla a poskytování dat o aktuální teplotě a vlhkosti.
 Ovládání nízkoúrovňových komponent a komunikaci s připojeným počítačem zajišťuje Arduino Nano.
 Arduino je připojeno pomocí USB sběrnice k počítači, který na základě domluvených pravidel jednoduchého komunikačního protokolu posílá znaky, na které Arduino příslušně reaguje dle programu.
-Tato služba má tedy za úkol přes sériové rozhraní posílat příkazy a načítat stavy řídící jednotky na základě requestů přijmutých na REST api.
+Tato služba má tedy za úkol přes sériové rozhraní posílat příkazy a načítat stavy řídící jednotky na základě requestů přijmutých na REST API.
 
 \subsection*{Popis algoritmu}
 Po startu služby se nejdříve vytvoří instance třídy ArduinoReader.
 Jedná se o vlastní třídu, při inicializaci vytvoří instanci sériového spojení k Arduinu.
 Je zde implementován connection pool, který se stará o zdraví spojení po celou dobu běhu aplikace.
-Třída má jedinou metodu a tou je run\_command.
-Tato metoda přijímá jako parametr jeden znak, který při provolání metody pošle zkrze serialové připojení do arduina a vrátí data typu String, kterými odpoví Arduino, zpět.
-Jakmile se povede provést inicializaci serialového spojení je spuštěno REST api.
-Toto api poskytuje endpointy pro vyslání příkazů k zavření a otevření dvíře, zhasnutí a rozsvícení světla, vracení informací o aktuálních stavech jednotky a vrácení informací o teplotě a vlhkosti.
+Třída má jedinou metodu, a tou je run\_command.
+Tato metoda přijímá jako parametr jeden znak, který při provolání metody pošle zkrze sériové připojení do Arduina a vrátí data typu String, kterými odpoví Arduino zpět.
+Jakmile se povede provést inicializaci sériového spojení je spuštěno REST API.
+Toto API poskytuje endpointy pro vyslání příkazů k zavření a otevření dvířek, zhasnutí a rozsvícení světla, informací o aktuálních stavech jednotky a informací o teplotě a vlhkosti v kurníku.
 Informace o aktuálním stavu jsou dobré pro případ, kdy se budou muset služby restartovat a bude třeba načíst reálný aktuální stav.
-V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz arduinu.
+V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz Arduinu.
 Následně se počká na jeho odpověď, pokud je požadavek typu POST.
 Odpověď je následně převedena do JSON objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON.
 
@@ -24,8 +24,8 @@ Odpověď je následně převedena do JSON objektů a vrácena v HTTP odpovědi 
     \item c = zavřít dvířka
     \item l = rozsvítit světlo
     \item d = zhasnout světlo
-    \item j = vrátí zprávu ve formátu json s daty o teplotě a vlhkosti
-    \item s = vrátí zprávu ve formátu json s daty o stavech jednotlivých ovládaných prvků (dvěře, světlo)
+    \item j = vrátí zprávu ve formátu JSON s daty o teplotě a vlhkosti
+    \item s = vrátí zprávu ve formátu SJON s daty o stavech jednotlivých ovládaných prvků (dveře, světlo)
 \end{itemize}
 
 
