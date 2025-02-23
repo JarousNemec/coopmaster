@@ -1,61 +1,47 @@
-\section*{Docker Engine}\label{sec:docker-engine}
+\section{Docker Engine}\label{sec:docker-engine}
 Jedna z technologií používaných pro kontejnerizaci je Docker Engine~\cite{kontejnerizace-docker}.
 Používá se pro tvorbu, správu, orchestraci, verzování a nasazování jednotlivých kontejnerů.
 
-\section*{Docker Compose}\label{sec:docker-compose}
+\section{Docker Compose}\label{sec:docker-compose}
 Docker compose~\cite{kontejnerizace-docker-compose} je nástroj pro Docker, který nám umožňuje tvořit komplikované ekosystémy jednotlivých kontejnerů, jež spolu v rámci něho mohou spolupracovat.
 Pomáhá nám například se síťováním nebo konfigurací kontejnerů.
 
-
-\section*{Mikroservisní architektura}\label{sec:microservice-architecture}
+\section{Mikroservisní architektura}\label{sec:microservice-architecture}
 Mikroservisní architektura je přístup k vývoji softwarových aplikací, kdy je celek rozdělen na malé, nezávislé služby nazývané mikroservisy.
 Každá služba běží samostatně, komunikuje s ostatními službami pomocí dobře definovaného API a je zaměřena na konkrétní funkcionalitu.
 Tento model umožňuje snadnější údržbu, škálovatelnost a flexibilitu systému.
 
-
-\section*{Jazyk Python}\label{sec:python}
+\section{Jazyk Python}\label{sec:python}
 Python je vysokoúrovňový programovací jazyk známý svou jednoduchou a čitelnou syntaxí.
 Podporuje několik programovacích paradigmat, včetně objektově orientovaného, procedurálního a funkcionálního programování.
 Python je široce používán v různých oblastech, jako je webový vývoj, vědecké výpočty, umělá inteligence, strojové učení a datová analýza.
 Disponuje rozsáhlou standardní knihovnou a množstvím externích modulů, které usnadňují vývoj komplexních aplikací.
 Je multiplatformní, což znamená, že programy v Pythonu lze spouštět na různých operačních systémech.
 
-
-\section*{Wire}\label{sec:wiring}
+\section{Wire}\label{sec:wiring}
 Wiring je open source programovací jazyk a vývojové prostředí určené pro práci s mikrokontroléry.
 Jeho cílem je usnadnit programování elektronických zařízení a interaktivních projektů, zejména pro umělce, designéry a studenty.
 Syntaxe jazyka Wire vychází z jazyka C++ a je navržena tak, aby byla snadno pochopitelná i pro začátečníky.
 Wiring poskytuje intuitivní prostředí pro psaní kódu, jeho kompilaci a nahrávání přímo do mikrokontroléru.
 
-\section*{Táhlový motor}\label{sec:tahlovy-motor}
+\section{Táhlový motor}\label{sec:tahlovy-motor}
 Jedná se o linearní motor (actuator), jehož součástí je elektromotor a k němu je připevněn šnekový převod.
 Šnek je pevně upevněn na šroubovici, která se stará o rozvod síli a točivého momentu po celé délce motoru.
 Převod z otáčivého pohybu na pohyb přímočarý je zajištěn maticí, která pevně drží na táhlu.
 Rozhodnutí, zda se bude táhlo zasouvat nebo vysouvat, je dáno polaritou napětí dodávaného elektromotoru, který se na základě toho otáčí buď po nebo proti směru hodinových ručiček.
 
-\section*{Git}\label{sec:git}
-Git je systém pro správu verzí, který umožňuje sledovat změny ve zdrojovém kódu během vývoje softwaru.
-Tento systém se stal již dnes standardem moderního vývoje softwaru.
-Vytvořil ho Linus Torvalds v roce 2005 pro potřeby vývoje jádra operačního systému Linux.
-Git umožňuje více vývojářům pracovat současně na jednom projektu bez rizika přepsání či ztráty práce.
-Každá kopie repozitáře obsahuje kompletní historii projektu, což zajišťuje možnost vrátit se k předchozím verzím a pracovat i bez připojení k internetu.
-Důležité funkce Gitu zahrnují rychlost, efektivitu při práci s velkými projekty a podporu nelineárního vývoje prostřednictvím větvení.
-
-
-\section*{Github workflow}\label{sec:github-workflow}
+\section{Github workflow}\label{sec:github-workflow}
 GitHub Workflow je nástroj pro automatizaci procesů při vývoji softwaru na platformě GitHub.
 Umožňuje vytvářet a spravovat tzv. workflow pomocí souborů ve formátu YAML, které definují jednotlivé kroky.
 Tyto kroky nebo také akce, se mohou spouštět na základě různých událostí, jako je push kódu nebo vytvoření pull requestu.
 GitHub Workflow podporuje kontinuální integraci a nasazení (CI/CD), automatické testování, nasazení aplikací a další úlohy.
 
-
-\section*{Mqtt}\label{sec:mqtt}
+\section{Mqtt}\label{sec:mqtt}
 MQTT (Message Queuing Telemetry Transport) je lehký messagingový protokol pro publikování a odebírání zpráv, navržený pro komunikaci mezi zařízeními v sítích s omezenou kapacitou nebo vysokou latencí.
 Je často využíván v oblasti Internetu věcí (IoT) pro přenos dat mezi senzory, akčními členy a centrálními systémy.
 MQTT pracuje na principu architektury klient–server, kde klienti(publisheři) publikují zprávy na určité téma(topic) a broker tyto zprávy distribuuje odběratelům(subscriberům), kteří jsou na dané téma přihlášeni.
 
-
-\section*{Home Assistant}\label{sec:home-assistant}
+\section{Home Assistant}\label{sec:home-assistant}
 Home Assistant~\cite{co-je-to-ha} je open-source platforma pro automatizaci domácnosti, která umožňuje integraci různých IoT zařízení pomocí protokolů jako MQTT, Z-Wave a Zigbee.
 Umožňuje vytvářet pokročilé automatizace a skripty prostřednictvím YAML konfigurace nebo webového rozhraní, přičemž vše běží lokálně, což zajišťuje vysokou úroveň soukromí a bezpečnosti.
 Podporuje integraci s hlasovými asistenty jako Google Assistant a Amazon Alexa.
@@ -63,56 +49,35 @@ Platforma je kompatibilní s různými zařízeními, včetně Raspberry Pi, a n
 Home Assistant je flexibilní, rozšiřitelný a široce používaný v aplikacích pro chytrou domácnost a domácí bezpečnostní systémy.
 Díky pravidelným aktualizacím a podpoře komunity je ideálním nástrojem pro uživatele, kteří chtějí mít plnou kontrolu nad svou chytrou domácností.
 
-%Home Assistant je open-source platforma pro automatizaci domácnosti napsaná v jazyce Python.
-%Umožňuje centrálně ovládat a monitorovat různá zařízení v chytré domácnosti, jako jsou osvětlení, termostaty, bezpečnostní systémy a další IoT zařízení.
-%Home Assistant podporuje integraci s více než tisíci různými komponentami a službami, což umožňuje vytvořit komplexní a přizpůsobené automatizační scénáře.
-%Platforma běží lokálně, což zajišťuje vyšší úroveň soukromí a nezávislost na cloudových službách.
-%Uživatelé mohou využít webové rozhraní pro správu a nastavování automatizací nebo psát vlastní konfigurace pomocí YAML souborů.
-
-
-\section*{Arduino}\label{sec:arduino}
+\section{Arduino}\label{sec:arduino}
 Arduino je open-source platforma pro prototypování elektroniky založená na snadno použitelném hardwaru a softwaru.
 Skládá se z mikroprocesorové desky a vývojového prostředí Arduino IDE, které využívá jazyk podobný C/C++.
 Arduino desky umožňují komunikaci s různými senzory a akčními členy, což usnadňuje tvorbu interaktivních projektů.
 Podporuje řadu rozšiřujících modulů, tzv. shieldů, které rozšiřují jeho funkčnost například o bezdrátovou komunikaci, ovládání motorů či připojení k internetu.
 Arduino usnadňuje rychlý vývoj a testování elektronických aplikací bez hlubokých znalostí elektroniky.
 
-
-\section*{IP kamera a RTSP}\label{sec:ipcamera-rtsp}
+\section{IP kamera a RTSP}\label{sec:ipcamera-rtsp}
 IP kamera je digitální zařízení, které přenáší obraz a zvuk přes IP sítě, jako je internet nebo lokální síť.
 To umožňuje vzdálený přístup k živému vysílání nebo záznamům bez nutnosti speciálního kabelového připojení.
 Pro efektivní přenos multimediálních dat v reálném čase se často využívá protokol RTSP (Real Time Streaming Protocol).
 
-
-\section*{Flask}\label{sec:flask}
+\section{Flask}\label{sec:flask}
 Flask je lehký webový framework pro Python, který umožňuje rychlé a jednoduché vytváření webových aplikací.
 Patří mezi mikroframeworky, což znamená, že poskytuje pouze základní funkce potřebné pro webový vývoj, jako je směrování URL a zpracování HTTP požadavků.
 Díky své modularitě umožňuje vývojářům přidávat rozšíření a knihovny podle potřeby, například pro práci s databázemi, autentizaci či validaci.
 Flask využívá šablonovací systém Jinja2 pro vytváření dynamických HTML stránek a nástroj Werkzeug pro WSGI kompatibilitu.
 
-
-\section*{Yolo Ultralytics}\label{sec:yolo-ultralytics}
+\section{Yolo Ultralytics}\label{sec:yolo-ultralytics}
 Ultralytics YOLO je pokročilý systém pro detekci objektů v reálném čase založený na hlubokém učení. Jedná se o implementaci architektury YOLO (You Only Look Once), kterou vyvinula společnost Ultralytics. Tento model využívá konvoluční neuronové sítě k analýze obrazových dat a současné identifikaci více objektů během jediného průchodu sítí. Díky své vysoké rychlosti a přesnosti je ideální pro aplikace náročné na čas, jako je autonomní řízení, bezpečnostní systémy nebo analýza videa. Ultralytics YOLO je dostupný jako open source software, což umožňuje jeho široké využití ve výzkumu i v průmyslových aplikacích.
 
-
-\section*{Tenzometrický senzor}\label{sec:tenzo}
+\section{Tenzometrický senzor}\label{sec:tenzor}
 Tenzometrický senzor je zařízení sloužící k měření mechanického napětí nebo deformace v materiálu či konstrukci. Základním principem tenzometru je využití změny elektrického odporu vodivého materiálu při jeho mechanickém zatížení. Nejčastěji se používají tenzometry s kovovou fólií nebo drátkem, který je pevně spojen s měřeným objektem. Když je objekt zatížen silou, dojde k jeho deformaci, což způsobí prodloužení nebo zkrácení tenzometru a tím i změnu jeho elektrického odporu. Tato změna je úměrná velikosti aplikovaného napětí a může být přesně změřena pomocí elektrických obvodů, jako je Wheatstoneův můstek. Tenzometrické senzory nacházejí uplatnění v oblastech jako je strojírenství, stavebnictví, letectví či při vývoji nových materiálů, kde je důležité sledovat mechanické vlastnosti a bezpečnost konstrukcí.
 
-
-\section*{Power over Ethernet (PoE)}\label{sec:poe}
+\section{Power over Ethernet (PoE)}\label{sec:poe}
 Power over Ethernet (PoE) je technologie umožňující přenos elektrické energie společně s daty prostřednictvím standardního ethernetového kabelu typu kroucená dvojlinka. Tato technologie umožňuje napájet síťová zařízení, jako jsou IP kamery, bezdrátové přístupové body nebo VoIP telefony, bez potřeby samostatného napájecího zdroje. PoE využívá nevyužité páry vodičů v kabelu nebo kombinuje napájení s datovými signály na stejných vodičích. Existují různé standardy PoE, jako IEEE 802.3af, 802.3at a 802.3bt, které definují maximální výkon a kompatibilitu zařízení. Použití PoE zjednodušuje instalaci, snižuje náklady na kabeláž a umožňuje flexibilnější umístění zařízení bez závislosti na elektrických zásuvkách.
 
-
-\section*{Wifi extender}\label{sec:wifi-extender}
+\section{Wifi extender}\label{sec:wifi-extender}
 Wi-Fi extender, také známý jako repeater nebo zesilovač signálu, je zařízení určené k rozšíření dosahu bezdrátové sítě. Přijímá existující Wi-Fi signál z routeru a znovu ho vysílá do oblastí s nedostatečným pokrytím. Tím eliminuje "mrtvé zóny" v domácnosti nebo kanceláři, kde je signál slabý nebo žádný. Instalace je obvykle jednoduchá a nevyžaduje dodatečné kabely. Wi-Fi extendery podporují různé standardy Wi-Fi, jako 802.11n nebo 802.11ac, a nabízejí přenosové rychlosti odpovídající těmto standardům. Pro efektivní rozšíření sítě je důležité umístit extender tam, kde ještě přijímá silný signál z routeru.
 
-
-\section*{TailScale VPN}\label{sec:tailscale}
+\section{TailScale VPN}\label{sec:tailscale}
 Tailscale VPN je moderní služba pro vytváření virtuálních privátních sítí, která využívá protokol WireGuard k zajištění bezpečné komunikace mezi zařízeními. Umožňuje snadné nastavení sítě bez složitých konfiguračních procesů tradičních VPN řešení. Tailscale vytváří šifrované peer-to-peer spojení mezi zařízeními na základě jejich identity, spravované prostřednictvím cloudu. To umožňuje uživatelům bezpečně přistupovat k interním sítím a službám odkudkoli na světě. Díky automatické správě síťových konfigurací a firewallu snižuje nároky na údržbu a zvyšuje celkovou bezpečnost. Tailscale je vhodný pro jednotlivce, týmy i organizace hledající efektivní a jednoduché VPN řešení pro propojení svých zařízení.
-
-
-\section*{HTTP a REST}\label{sec:http-rest}
-HTTP (Hypertext Transfer Protocol) je základní komunikační protokol pro web, který umožňuje přenos dat mezi klientem a serverem pomocí žádostí a odpovědí.
-
-\subsection*{REST (Representational State Transfer)}
-REST(Representational State Transfer) je architektonický styl pro tvorbu webových služeb, který využívá protokol HTTP. REST definuje sadu principů pro uspořádání API tak, aby byly škálovatelné, flexibilní a snadno použitelné. V rámci RESTful služeb se využívají standardní HTTP metody jako GET, POST, PUT a DELETE k manipulaci s prostředky. Tento přístup usnadňuje komunikaci mezi různými systémy a umožňuje efektivní integraci aplikací v rámci webu.
