@@ -4,32 +4,34 @@ Za využití modelu Yolo11 služba detekuje vetřelce (psa) na fotkách z kamery
 
 \subsection*{Obecný princip}
 Jako zdroj dat je použit kamerový systém ve výběhu, který je reprezentován službou Camera Driver.
-Z této služby pak Dog Alarm stahuje pomocí GET požadavků fotografie z kamery ve výběhu.\newline
+Z této služby pak Dog Alarm stahuje pomocí GET požadavků fotografie z kamery ve výběhu.
 
 Pro detekci predátorů je využito modelu Yolo11.
 Model je velmi kvalitně vyučený a společnost Ultralytics~\cite{ultralytics} k němu nabízí rozsáhlou dokumentaci, což je také jeden z hlavních důvodů mojí volby.
-Před nasazením jsem model ještě doučit o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografií.\newline
+Před nasazením jsem model ještě doučil o další fotografie psa pořízené z venkovní kamery, podobně jako je to v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}, aby se model více přizpůsobil podmínkám vstupních fotografií.
 
 Jakmile model identifikuje přítomnost psa nebo jiného predátora, služba Dog Alarm okamžitě vygeneruje výstrahu.
 Tato výstraha je odeslána pomocí protokolu MQTT do systému Home Assistant.
-Spolu se zprávou je připojen specifický záběr, na kterém byl predátor detekován, aby mohl chovatel zhodnotit situaci sám.\newline
+Spolu se zprávou je připojen specifický záběr, na kterém byl predátor detekován, aby mohl chovatel zhodnotit situaci sám.
 
-Kromě výstražných zpráv, Dog Alarm pravidelně zasílá aktuální záběry z kamery do Home Assistanta, čímž umožňuje uživatelům mít průběžný přehled o situaci ve výběhu.\newline
+Kromě výstražných zpráv, Dog Alarm pravidelně zasílá aktuální záběry z kamery do Home Assistanta, čímž umožňuje uživatelům mít průběžný přehled o situaci ve výběhu.
 
 \subsection*{Popis algoritmu}
 Po startu služby se inicializuje REST API vytvořené pomocí Flask frameworku.
 Toto API poskytuje endpoint pro volání služby Health Checker s dotazem na stav služby.
-Následně je spuštěn scheduler, který má za úkol jednou za minutu spustit job s názvem check\_dog.
+Následně je spuštěn scheduler, který má za úkol jednou za minutu spustit úkol s názvem check\_dog.
 Jako poslední je spuštěno poskytování REST API na portu 9008.\newline
 
 \subsection*{Popis algoritmu pro detekci vetřelců}
-Tento job detekuje vetřelce a stará se o report informací.
-Prvním krokem jobu je stažení aktuálního obrázku z kamery ve výběhu.
+Tento úkol běží v pravidelných intervalech detekuje vetřelce v obraze a stará se o report informací.
+Prvním krokem je stažení aktuálního snímku z kamery ve výběhu.
 Další následuje načtení příslušného Yolo modelu dle konfigurace.
 Následně je provedena detekce objektů v obraze (ukázka výsledku je na obrázku~\ref{fig:dog_detected}), o čemž se dále rozepisuji v sekci~\ref{sec:detekce-objektu-pomoci-strojoveho-uceni}.
 Výsledný seznam detekovaných objektů se analyzuje a zjistí se, zda obsahuje kategorii pes.
-Před koncem jobu se stav, zda byl detekován pes publiku na MQTT topic coopmaster/dog/detected a aktuální obrázek na topic coopmaster/dog/image/actual.
-Tyto MQTT topics odebírá systém Home Assistant a dále s nimi pracuje což je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
+Na závěr se předávají aktuální výsledky na MQTT server.
+Pokud byl detekován pes posílá se zpráva na topic coopmaster/dog/detected.
+Dále posíláme aktuální obrázek na topic coopmaster/dog/image/actual.
+Tyto MQTT topics odebírá systém Home Assistant a dále s nimi pracuje, což je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
 \begin{figure}[H]
     \centering

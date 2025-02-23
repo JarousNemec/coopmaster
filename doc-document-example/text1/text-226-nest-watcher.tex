@@ -1,4 +1,4 @@
-\section{Nest watcher}\label{sec:nest-watcher}
+\section{Nest Watcher}\label{sec:nest-watcher}
 Tato služba interpretuje stavy jednotlivých hnízd v kurníku pro Home Assistanta.
 Úkolem této služby je načítání a analýza dat z jednotlivých hnízd v kurníku.
 Každé hnízdo je reprezentováno jednou instancí služby Scale Driver.\newline
@@ -12,25 +12,33 @@ Data jsou načítána několikrát za minutu a ukládána do databáze s časov�
 Záznam v databázi obsahuje následující sloupce:
 
 \begin{itemize}
-    \item \textbf{id} - jednoznačný identifikátor záznamu v databáz.
-    \item \textbf{nest\_id} - dentifikační číslo hnízda
-    \item \textbf{weight} -  naměřená hmotnost v gramech pro dané hnízdo
-    \item \textbf{timestamp} - čas vytvoření záznamu
+    \item id - jednoznačný identifikátor záznamu v databáz.
+    \item nest\_id - dentifikační číslo hnízda
+    \item weight - naměřená hmotnost v gramech pro dané hnízdo
+    \item timestamp - čas vytvoření záznamu
 \end{itemize}
 
 Následně se jednou za minutu vyhodnotí průměrná hodnota během posledních několika vážení.
 Na základě vyhodnocené průměrné hmotnosti jsme schopni zjistit několik hlavních stavů hnízda:
 
-\begin{enumerate}
-    \item \textbf{Hnízdo je prázdné}: Pokud průměrná hmotnost nepřevyšuje 50 gramů (vzhledem k možným chybám měření), vyhodnotíme, že hnízdo je prázdné.
+\begin{itemize}
+    \item Hnízdo je prázdné - pokud průměrná hmotnost nepřevyšuje 50 gramů (vzhledem k možným chybám měření), vyhodnotíme, že hnízdo je prázdné.
     V hnízdě není ani slepice, ani vejce.
-    \item \textbf{V hnízdě se nacházejí vejce}: Jestliže se hodnota hmotnosti pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce.
+    \item V hnízdě se nacházejí vejce - jestliže se hodnota hmotnosti pohybuje mezi 50 a 1200 gramy, znamená to, že v hnízdě jsou pravděpodobně vejce.
     Hmotnost jednoho vejce je přibližně 50 gramů, takže počet vajec lze vypočítat vydělením celkové hmotnosti hmotností jednoho vejce.
-    \item \textbf{V hnízdě sedí slepice}: Pokud je průměrná hmotnost na váze více než 1200 gramů, vyhodnotí služba, že v hnízdě sedí slepice.
+    \item V hnízdě sedí slepice - pokud je průměrná hmotnost na váze více než 1200 gramů, vyhodnotí služba, že v hnízdě sedí slepice.
     Hmotnost slepice se pohybuje kolem 1200 gramů a více.
-\end{enumerate}
+\end{itemize}
 
-Obrázek~\ref{fig:weight_egg_chart_timeline} znázorňuje hodnotu hmotnosti v čase pro hnízdo s nest\_id 1.
+Pro lepší pochopení jsem přiložil grafickou reprezentaci dat z databáze~(\ref{fig:weight_egg_chart_timeline}).
+Znázorňuje vývoj hodnoty hmotnosti v čase pro konkrétní hnízdo.
+Na ose x je znázorněn čas a na ose y je hmotnost.
+Z grafu je možné odvodit následující příběh.
+Ve dvacaté minutě vlezla slepice s hmotnosti kolem 2000 gramu na váhu.
+Po 28 minutach ji opustila a zůstalo po ní snesené vejce s hmotnosti 55 gramu.
+Další slepice vstoupila do hnízda ve 186 minutě a opustila hnizdo za 37 minut.
+Následně pak váha ukazuje hmotnost kolem 115 gramu, což při znalosti hmotnosti jednoho vejce indikuje přítomnost 2 vajec.
+
 
 \begin{figure}[h]
     \centering
@@ -39,8 +47,8 @@ Obrázek~\ref{fig:weight_egg_chart_timeline} znázorňuje hodnotu hmotnosti v č
     \label{fig:weight_egg_chart_timeline}
 \end{figure}
 
-Výsledné stavy pro jednotlivá hízda služba následně pomocí MQTT protokolu předává do systému Home Assistant, aby je zpracoval a vizualizoval chovateli.
-Tato data nám umožňují následně pomocí systému Home Assistant například posílat notifikace chovateli nebo provádět akce na základě stavů hnízd.
+Výsledná data pro jednotlivá hnízda služba pomocí MQTT protokolu předává do systému Home Assistant, aby je zpracoval a vizualizoval chovateli.
+
 \newline
 
 
@@ -56,13 +64,13 @@ Dále se o implementaci vlastního reidentifikačního algoritmu hovoří v sekc
 Kromě výše zmíněných stavů by se v budoucnu z váhy dal identifikovat i následující seznam situací.
 
 \begin{itemize}
-    \item \textbf{Doba setrvání slepice v hnízdě}: Analýzou délky období, kdy je hmotnost hnízda nad 1200 gramů, lze zjistit, jak dlouho slepice v hnízdě zůstává.
+    \item Doba setrvání slepice v hnízdě - analýzou délky období, kdy je hmotnost hnízda nad 1200 gramů, lze zjistit, jak dlouho slepice v hnízdě zůstává.
     To může poskytnout informace o jejím chování, pohodě a případně upozornit na možné zdravotní problémy, pokud setrvává déle než obvykle.
-    \item \textbf{Frekvence snášení u jednotlivých hnízd}: Porovnáním počtu snesených vajec v různých hnízdech lze zjistit, zda některá hnízda nejsou preferována více než jiná.
+    \item Frekvence snášení u jednotlivých hnízd - porovnáním počtu snesených vajec v různých hnízdech lze zjistit, zda některá hnízda nejsou preferována více než jiná.
     To může vést k úpravám uspořádání kurníku nebo kontrolám hnízd, která jsou méně využívána.
-    \item \textbf{Poruchy senzorů}: Pokud hmotnost zůstává nezměněna po dlouhou dobu nebo vykazuje nerealistické hodnoty, může to indikovat technickou závadu.
+    \item Poruchy senzorů - pokud hmotnost zůstává nezměněna po dlouhou dobu nebo vykazuje nerealistické hodnoty, může to indikovat technickou závadu.
     Pravidelná kontrola a kalibrace senzorů zajistí spolehlivost dat.
-    \item \textbf{Denní vzorce aktivity}: Analýzou hmotnostních dat během dne lze určit období nejvyšší aktivity slepic.
+    \item Denní vzorce aktivity - analýzou hmotnostních dat během dne lze určit období nejvyšší aktivity slepic.
     To může být užitečné pro plánování krmení, čištění kurníku nebo jiných činností, které by mohly slepice rušit.
 \end{itemize}
 

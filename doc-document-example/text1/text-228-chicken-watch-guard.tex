@@ -1,4 +1,4 @@
-\section{Chicken watch guard}\label{sec:chicken-watch-guard}
+\section{Chicken Watch Guard}\label{sec:chicken-watch-guard}
 Služba Chicken Watch Guard je dalším klíčovým prvkem systému Coopmaster.
 Poskytuje data o počtu slepic v kurníku a tato data předává do systému Home Assistant.\newline
 
@@ -19,8 +19,8 @@ Dále je inicializován detekční upravený model Yolov11 a provedena detekce o
 Výsledkem je seznam objektů, které se podařilo identifikovat.
 Hlavními daty, která obsahuje jedna položka v seznamu, jsou informace o detekované kategorii a oblast v obraze, kde přesně byl objekt nalezen.
 Počet slepic v kurníku je dán počtem, kolikrát se v seznamu výskytuje kategorie slepice.
-Job končí publikováním výsledného počtu slepic na MQTT topic coopmaster/chicken/count
- a aktuální fotografie (obrázek~\ref{fig:foto_z_guarda}) na MQTT topic coopmaster/chicken/image/actual.
+Job končí publikováním výsledného počtu slepic na MQTT topic "coopmaster/chicken/count"
+ a aktuální fotografie (obrázek~\ref{fig:foto_z_guarda}) na MQTT topic "coopmaster/chicken/image/actual".
 Systém Home Assistant je MQTT subscriber zmíněných topics a reaguje na ně, jak je popsáno v sekci~\ref{sec:tvorba-gui-rozhrani}.
 
 \begin{figure}[H]
