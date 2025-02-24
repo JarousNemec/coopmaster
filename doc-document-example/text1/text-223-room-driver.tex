@@ -3,7 +3,7 @@ Room Driver zajišťuje komunikaci mezi službou Room Assistant a řídící jed
 Tato jednotka se stará o ovládání dveří, světla a poskytování dat o aktuální teplotě a vlhkosti.
 Ovládání nízkoúrovňových komponent a komunikaci s připojeným počítačem zajišťuje Arduino Nano.
 Arduino je připojeno pomocí USB sběrnice k počítači, který na základě domluvených pravidel jednoduchého komunikačního protokolu posílá znaky, na které Arduino příslušně reaguje dle programu.
-Tato služba má tedy za úkol přes sériové rozhraní posílat příkazy a načítat stavy řídící jednotky na základě requestů přijmutých na REST API.
+Tato služba má tedy za úkol přes sériové rozhraní posílat příkazy a načítat stavy řídící jednotky na základě požadavků přijatých na REST API.
 
 \subsection*{Popis algoritmu}
 Po startu služby se nejdříve vytvoří instance třídy ArduinoReader.
@@ -16,7 +16,7 @@ Toto API poskytuje endpointy pro vyslání příkazů k zavření a otevření d
 Informace o aktuálním stavu jsou dobré pro případ, kdy se budou muset služby restartovat a bude třeba načíst reálný aktuální stav.
 V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz Arduinu.
 Následně se počká na jeho odpověď, pokud je požadavek typu POST.
-Odpověď je následně převedena do \gls{json} objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON.
+Odpověď je následně převedena do \gls{json} objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON (obrázek \ref{fig:homeasistant_temperature}).
 
 \subsection*{Příkazy ovládacího protokolu}
 \begin{itemize}
@@ -25,11 +25,11 @@ Odpověď je následně převedena do \gls{json} objektů a vrácena v HTTP odpo
     \item l = rozsvítit světlo
     \item d = zhasnout světlo
     \item j = vrátí zprávu ve formátu JSON s daty o teplotě a vlhkosti
-    \item s = vrátí zprávu ve formátu SJON s daty o stavech jednotlivých ovládaných prvků (dveře, světlo)
+    \item s = vrátí zprávu ve formátu JSON s daty o stavech jednotlivých ovládaných prvků (dveře, světlo)
 \end{itemize}
 
 
-(obrázek \ref{fig:homeasistant_temperature}).
+
 
 \begin{figure}[H]
     \centering

@@ -11,22 +11,22 @@ Vytvořit takto robustní a kvalitní uživatelské rozhraní by za mě trvalo v
 \subsection{Požadavky na systém}
 
 \subsubsection*{Vzdálený přístup}
-Má Home Asistant podporu pro vzdálený přístup? Odpoveď je ano.
+Má Home Assistant podporu pro vzdálený přístup? Odpoveď je ano.
 Home Assistant umožňuje vzdálený přístup, což uživatelům dovoluje řídit a konfigurovat jejich chytrou domácnost odkudkoli.
 Pokud se provozuje system v cloudu, je to výrazně jednodušší.
-V mém případě Home Assistant běží lokálně na stroji a je přístupný pouze z lokální sítě.
-Tuto drobnost jsem vyřešíl konfigurací využijeme privátního tunelu~\cite{CloudflareTunnel}, který poskytuje například společnost Cloudflare~\cite{cloudflare}.
+V mém případě Home Assistant běží na lokálním stroji a je přístupný pouze z lokální sítě.
+Tuto drobnost jsem vyřešil využitím privátního tunelu~\cite{CloudflareTunnel}, který poskytuje například společnost Cloudflare~\cite{cloudflare}.
 
 Podrobně je výběr technologie pro vzdálený přístup popsán v sekci~\ref{sec:zpristupneni-aplikace-z-internetu}.
 
-Při své práci jsem systém Home Assistant využival již od začátku skrze webové rozhraní a mohu tedy potvdit, že práce s ním je příjemná a vyhovující.
+Při své práci jsem systém Home Assistant využíval již od začátku skrze webové rozhraní a mohu tedy potvrdit, že práce s ním je příjemná a vyhovující.
 Vzdáleným přístupem tedy systém disponuje a nemusíme ho tedy nijak složitě implementovat.
 
 \subsubsection*{Pohledy z bezpečnostních kamer}
-Zobrazování obrázků z kamer je jednou ze základních komponent, kterou HomeAssistant nabizi.
+Zobrazování obrázků z kamer je jednou ze základních komponent, kterou HomeAssistant nabízí.
 Stací si vybrat komponentu, která bude schopna zpracovat data z MQTT serveru.
 Ja jsem si vybral komponentu Picture~\cite{HomeAssistantPictureCard}.
-Použil jsem pro ni defaultní konfiguraci, jen jsem ji nastavil attribute title, abych si na dashboardu odlišil přehledová data z výbehu a kurníku.
+Použil jsem pro ni základní konfiguraci, jen jsem ji nastavil attribute title, abych si na dashboardu odlišil přehledová data z výbehu a kurníku.
 
 \subsubsection*{Dálkové ovládání a automatizaci světla a dvířek v kurníku}
 Tímto bodem rozumíme v prvé řadě ovládací komponenty/tlačítka~\cite{HomeAssistantButtonCard}, která bude využívat chovatel, aby manuálně vyslal příkaz k provedení nějaké akce.
@@ -55,7 +55,7 @@ Zde se bude opět jednat o automatizace.
 Požadavkem je, aby v případě poplachu systém poslal notifikaci chovateli a zobrazil na dashboardu aktuální fotografii, kde byl vetřelec detekován.\newline
 Abychom splnili tento bod, budeme muset nastavit automatizaci, která zareaguje na určitý stav nějaké MQTT entity a následně vytvoří notifikaci.
 Tato notifikace vyskočí i na chovatelově telefonu.
-Dále bude použita komponenta s názvem Conditional~\cite{HomeAssistantConditionalCard}, která umožnuje na základě hodnoty, měnit vizualizaci komponent na dashboardu.
+Dále bude použita komponenta s názvem Conditional~\cite{HomeAssistantConditionalCard}, která umožňuje na základě hodnoty, měnit vizualizaci komponent na dashboardu.
 Pri určitém stavu MQTT entity zobrazí v dashboardu upozornění na vetřelce ve výběhu a opačném případě nezobrazí nic.
 Což je velmi šikovné právě pro různá upozornění.
 
@@ -76,7 +76,7 @@ Používám tři typy MQTT entit.
     \item image - umožňuje přijmout obrázek z MQTT brokeru
     \item binary\_sensor - na základě nakonfigurovaných hodnot je jeho stav buď 0 nebo 1
 \end{itemize}
-Každá MQTT potřebuje nastavit jednotnačné jméno pro identifikaci v systému a topic, ze kterého bude odebírat zprávy.
+Každá MQTT potřebuje nastavit jednoznačné jméno pro identifikaci v systému a topic, ze kterého bude odebírat zprávy.
 
 \subsubsection*{Základní dashboard}
 Jakmile se nakonfigurují entity, následuje tvorba samotného dashboardu.
@@ -94,7 +94,7 @@ S těmito vědomostmi jsem opět nakonfiguroval dle návrhu potřebné automatiz
 
 \subsubsection*{Tvorba vlastní Home Assistant komponenty}
 Zde se již dostáváme k opravdovému programování.
-Inspirací jak komponentu vytvořit mi byla developerská dokumentace~\cite{homeassistant-developers,HomeAssistantCustomCards}.
+Inspirací jak komponentu vytvořit mi byla vývojářská dokumentace~\cite{homeassistant-developers,HomeAssistantCustomCards}.
 Služba Nest Watcher poskytuje data o tom zda je hnízdo obsazené a kolik je v každém hnízdě vajec.
 Tato data jsou ve formátu \gls{csv}, kdy každý prvek v poli znamená jedno hnízdo.
 Data se do komponenty dostávají z entit.
@@ -128,13 +128,9 @@ Nakonec jsem se na diskusním fóru dočetl~\cite{HAStateLimit255}, že velikost
 Byl jsem tedy donucen začít používat formát CSV a posílaná data omezit pouze na nejnutnější informaci o stavu.
 Pořád je zde problém s maximální velikostí v případě, že bych měl více než 128 hnízd, místo by mi i tak nevystačilo,
 Na kontrolu tolika hnízd, bych ale potřeboval pravděpodobně o dost celkově robustnější infrastrukturu systému Coopmaster, takže to ponechávám ve formátu CSV.
-%todo najít zdroj pro 255 bytů
-
-%\subsubsection{Pozitivní zkušenost s tvorbou komponent}
-%Práce na komponentě pro vizualizaci hnízd mi přinesla mnoho informací
 
 \subsection*{Mobilní aplikace}
-Mobilní aplikace Home Assistanta umožňuje uživatelům vzdáleně monitorovat a ovládat jejich inteligentní domácnost, poskytuje notifikace v reálném čase a nabízí přehledné uživatelské rozhraní pro snadnou správu zařízení a automatizací.
+Mobilní aplikace Home Assistant umožňuje uživatelům vzdáleně monitorovat a ovládat jejich inteligentní domácnost, poskytuje notifikace v reálném čase a nabízí přehledné uživatelské rozhraní pro snadnou správu zařízení a automatizací.
 
 \begin{figure}[H]
     \centering
