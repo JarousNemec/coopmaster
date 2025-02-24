@@ -12,7 +12,7 @@ Toto API obsahuje endpoint pro vrázení aktuální hmotnosti na váze pomocí p
 Následně je spuštěno nové vlákno, které má za úkol číst data z váhy a předávat je aplikačnímu rozhraní jako aktuálně naměřenou hmotnost na váze, jež se bude od teď poskytovat, pokud o ní někdo GET requestem požádá.
 Čtení informací z váhy se provádí v nekonečném cyklu.
 Před začátkem cyklu se do log souboru zapíše informace ohledně úspěšného spuštění nového vlákna.
-Poté proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial.
+Poté proběhne otevření komunikace s váhou přes seriový port s využitím knihovny PySerial~\cite{PySerial}.
 Po úspěšném otevření spojení se váze vždy po uplynutí časového intervalu 2 sekundy, odešle znak "w".
 Tento znak je ve firmwaru váhy veden jako příkaz, po jehož přijetí má váha vrátit aktuální naměřenou hodnotu.
 Časové zpoždění je implementováno kvůli tomu, že není třeba číst data tak často a zároveň by mohlo docházet k zahlcení váhy.

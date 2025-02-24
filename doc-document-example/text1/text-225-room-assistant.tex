@@ -25,7 +25,7 @@ Na základě přijatého obsahu zprávy se zavolá statická metoda call\_room\_
 DoorTimeChecker funguje stejně jako NestMQTTClient, ale odebírá topic coopmaster/room/door/cmnd  a reaguje pokud je obsah MQTT zprávy "open" nebo "close".\newline
 Po startu se rozběhne BackgroundScheduler, který má za úkol vždy po uplynutí 5 vteřin spustit nový běh akce pro aktualizování stavů z řídící jednotky.
 Podmínkou pro spuštění nového běhu jobu je, že předchozí běh je dokončen.
-Tuto funkci má již v sobě implementovanou scheduler z knihovny APScheduler, který využívám.
+Tuto funkci má již v sobě implementovanou scheduler z knihovny APScheduler~\cite{APScheduler}, který využívám.
 Akce pro aktualizaci obsahuje jednu metodu a to detect\_hardware\_state().
 Tato metoda nejdříve stáhne data z Room Driveru.
 Následně načte z konfigurace topic pro stav dvířek, stav světla, teplotu a vlhkost.

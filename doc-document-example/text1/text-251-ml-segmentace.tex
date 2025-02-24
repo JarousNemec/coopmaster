@@ -1,6 +1,6 @@
 \section{Segmentace objektů pomocí strojového učení}\label{sec:klasifikace-a-segmentace-objektu-pomoci-strojoveho-uceni}
 
-Image segmentation je technika v počítačovém vidění, která má za cíl rozdělit obrázek na několik segmentů nebo oblastí pro jednodušší analýzu.
+Image segmentation~\cite{segmentace} je technika v počítačovém vidění, která má za cíl rozdělit obrázek na několik segmentů nebo oblastí pro jednodušší analýzu.
 Cílem image segmentation je identifikovat a rozlišit různé objekty nebo části obrázku, což může být užitečné pro různé aplikace, jako je rozpoznávání objektů, detekce hranic, klasifikace a další analytické úlohy.
 V mém případě jsem chtěl využít tuto techniku k tomu, abych identifikoval, která slepice snesla vajíčko, abych tak získal statistiku o tom, v jaké kondici slepice jsou a jak dobře snáší.
 Existuje několik možností, jak slepici identifikovat, já jsem se rozhodl pro rozpoznání slepice z obrazu.
@@ -38,7 +38,7 @@ To je postup, který jsem zvolil já. Na obrázky jsem aplikoval řadu transform
 Následovalo trénování segmentačního modelu.
 Řešení jsem postavil na YOLO11 z oficiálního repozitáře.
 Díky knihovnám z projektu Ultralytics je volání přímočaré.
-Na vstup jsem dal cestu k obrázkovému datasetu a anotačnímu souboru v COCO formátu.
+Na vstup jsem dal cestu k obrázkovému datasetu a anotačnímu souboru v COCO formátu~\cite{COCOFormat}.
 Další parametry jsem pro výuku ponechal defaultní.
 Počet epoch jsem ponechal na 50.
 Již od 40. epochy model dosahoval přijatelné úrovně přesnosti při rozpoznávání a segmentaci slepic.

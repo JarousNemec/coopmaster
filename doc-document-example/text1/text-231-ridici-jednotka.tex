@@ -24,7 +24,7 @@ Jednotlivé moduly byly následně propojeny vodiči o průřezu 0,15 mm² dle t
 Hardwarová stránka byla tímto hotová.
 \newline
 Arduino a ostatní periferie se napájí skrze USB port Arduina, takže nebylo třeba řešit žádné přídavné napájení.
-Přídavné napájení by bylo třeba řešit například, kdybychom používali 10 relejových modulů současně, protože limit pro napájení skrze USB 2.0 je pouze 500 mA a jedna cívka spotřebuje až 70 mA.\newline
+Přídavné napájení by bylo třeba řešit například, kdybychom používali 10 relejových modulů současně, protože limit pro napájení skrze USB 2.0 je pouze 500 mA~\cite{USB20proud} a jedna cívka spotřebuje až 70 mA.\newline
 Následovala tedy poslední věc a to nahrát kód programu do samotné vývojové desky Arduino Nano.
 Zde je výborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-ide}, který celý složitý proces nahrávání vyřeší.
 
@@ -50,7 +50,7 @@ Zde je výborným pomocníkem vývojářský nástroj Arduino IDE~\cite{arduino-
 \subsection*{Popis algoritmu}
 V části programu Setup se jako první po startu programu nastaví příslušné módy na vstupní a výstupní piny.
 Následně se provede inicializace sériového připojení s rychlostí 9600 baudů.
-Poté se inicializuje připojení s čidlem DHT11 pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
+Poté se inicializuje připojení s čidlem DHT11~\cite{DHT11Datasheet} pomocí knihovny DHT.h a na závěr jsou nastaveny výstupy dle aktuálních stavů řídících neboli stavových proměnných pro dvířka a světlo.
 Dále program pokračuje do části Loop, což je metoda, která se volá pořád dokola jako nekonečný cyklus.
 Tato metoda řeší pravidelnou aktualizaci dat ze senzoru, dále čtení příkazů ze sériového připojení a posílání odpovědi na ně.
 Aktualizace senzorových dat se provádí jednou do vteřiny za pomocí metod readTemperature a readHumidity, které jsou součástí knihovny DHT.h.

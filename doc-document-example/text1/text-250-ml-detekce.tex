@@ -6,7 +6,7 @@
 
 \subsection*{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
 V posledních letech došlo k významnému pokroku v oblasti počítačového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
-Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLO11 (You Only Look Once version 11).
+Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLO11~\cite{ultralytics_yolo} (You Only Look Once version 11).
 Tato knihovna přináší rychlé a přesné metody detekce objektů a je ideální pro implementaci v reálném čase.
 V této sekci se zaměříme na to, jak využít YOLO11 ke specifickému úkolu: rozpoznávání slepic v kurníku.
 Automatizované rozpoznávání umožňuje sledování počtu slepic.
@@ -35,7 +35,6 @@ Níže jsou uvedeny hlavní aspekty, které charakterizují obrázkové datasety
 \end{enumerate}
 
 Datasety jsou klíčové pro vývoj a zlepšování modelů strojového učení, protože poskytují potřebné tréninkové a testovací údaje.
-Příklady známých obrázkových datasetů zahrnují ImageNet, \gls{coco} a MNIST (pro ručně psané číslice).  // TODO pridat zdroje
 
 V kontextu využití datasetů pro strojové učení je důležité zajistit, aby datasety byly kvalitní, rozmanité a dostatečně rozsáhlé, což pomáhá modelům převážně se zobecněním a výkonem v různorodých situacích.
 Pro specifické nasazení v babičině kurníku jsem připravil vlastní dataset, který jsem použil pro doučení již existujícího základního modelu, který poskytuje Yolo11.
@@ -91,7 +90,7 @@ Když se podařilo projít celý obrázkový dataset, mohl jsem vyexportovat „
 Jak jsem psal výše, mít kvalitní učící dataset je důležité, proto jsem exportoval pouze data, která se podařilo úspěšně označit.
 Do fotogalerie se mi dostalo i několik nejasných snímků, případně těch, kde slepice nebyla vůbec.
 Takové snímky jsem vyřadil.
-Anotace jsem exportoval ve formátu COCO  //TODO dat odkaz do slovniku
+Anotace jsem exportoval ve formátu COCO~\cite{COCOFormat}  //TODO dat odkaz do slovniku
 Formát COCO (Common Objects in Context) je standardní formát pro anotaci obrázků používaný ve strojovém učení a počítačovém vidění.
 Jeho hlavním cílem je poskytnout strukturu pro uložení informací o objektech v obrázcích, což umožňuje efektivní trénink a hodnocení modelů detekce objektů, segmentace a dalších úloh počítačového vidění.
 Obrázek~\ref{fig:create_learning_project} ukazuje, jak například může vypadat nastavení pro export COCO formátu z AML.
@@ -143,7 +142,7 @@ Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:
 
 \subsection*{Doučování modelu Yolo11}\label{subsec:doucovani-modelu-yolov11-o-novou-tridu}
 V předchozí sekci jsem si popsali, jak vytvořit zdroje dat a nyní jsme připraveni vyučit existující model.
-Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na stránkách Ultralytics.com~\cite{ultralytics} jsem to zvládnul.
+Doučovat doma existující model je relativně složité, ale díky výborné dokumentaci na stránkách Ultralytics.com~\cite{ultralytics_yolo} jsem to zvládnul.
 Základem pro úspěšné a efektivní učení je hardware.
 Hlavně GPU, protože trénování modelů hlubokého učení je výpočetně náročné.
 Vypozoroval jsem, že největší vliv na učení má velikost paměti grafické karty.

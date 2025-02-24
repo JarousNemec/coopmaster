@@ -6,11 +6,19 @@
 \setcounter{tocdepth}{4}
 
 
-
 %nastavení kapitol aby se nepsalo slovo kapitola ale číslo se psalo rovnou před název kapitoly
 \titleformat{\chapter}[display]{\normalfont\bfseries}{}{1em}{\Huge\thechapter\Huge\hspace{1em}}
 %kvůli nečíslovaným kapitolám se musí přidat toto protže vlastně rozdrbáváme daný styl který to má
 \titleformat{name=\chapter,numberless}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+
+
+\newcommand*{\captionAuthorSource}[1]{%
+    \caption[{#1}]{%
+        #1%
+            { Zdroj: [Autor]}%
+    }%
+}
+
 
 
 \titlecz{Coopmaster - systém pro řízení a automatizaci kurníku}
@@ -32,35 +40,52 @@
 
     \makethanks{
 
-    Rád bych vyjádřil svou hlubokou vděčnost svému školiteli, panu \mentorthanks{}. Jeho neúnavná podpora, cenné rady a mimořádná
-    trpělivost pro mě byly neocenitelné během celé mé práce.
+        Rád bych vyjádřil svou hlubokou vděčnost svému školiteli, panu \mentorthanks{}. Jeho neúnavná podpora, cenné rady a mimořádná
+        trpělivost pro mě byly neocenitelné během celé mé práce.
 
-    Za prvé jeho obětavá pomoc mi umožnila překonat řadu výzev, se kterými jsem se během studia setkal. Jeho schopnost najít efektivní
-    řešení i pro komplikované problémy mi ukázala nové způsoby myšlení a pomohla mi posouvat se dál.
+        Za prvé jeho obětavá pomoc mi umožnila překonat řadu výzev, se kterými jsem se během studia setkal. Jeho schopnost najít efektivní
+        řešení i pro komplikované problémy mi ukázala nové způsoby myšlení a pomohla mi posouvat se dál.
 
-    Za druhé jeho podnětné připomínky mě vždy motivovaly k tomu, abych zkoumal danou problematiku hlouběji a viděl věci z různých perspektiv.
-    Díky jeho vedení jsem se naučil kriticky hodnotit své vlastní myšlenky a přístupy.
+        Za druhé jeho podnětné připomínky mě vždy motivovaly k tomu, abych zkoumal danou problematiku hlouběji a viděl věci z různých perspektiv.
+        Díky jeho vedení jsem se naučil kriticky hodnotit své vlastní myšlenky a přístupy.
 
-    A konečně jeho trpělivost mi poskytla pocit jistoty a povzbuzení. I když jsem narazil na obtíže nebo neúspěchy, jeho klidné a podporující vedení mi pomohlo udržet si pozitivní postoj a pokračovat v práci.
+        A konečně jeho trpělivost mi poskytla pocit jistoty a povzbuzení. I když jsem narazil na obtíže nebo neúspěchy, jeho klidné a podporující vedení mi pomohlo udržet si pozitivní postoj a pokračovat v práci.
 
-    Za všechny tyto věci jsem mu nesmírně vděčný a jeho příspěvek k mému vývoji si budu pamatovat po celý život.}
+        Za všechny tyto věci jsem mu nesmírně vděčný a jeho příspěvek k mému vývoji si budu pamatovat po celý život.}
 
     \pagestyle{empty}
-%todo anotace
+
     \section*{Anotace}
-    Ve své práci jsem se zabýval návrhem a realizací kompletního řešení pro malé i střední zemědělce a hospodáře, které má pomoci plnit běžné činnosti.
-    Cílem této práce bylo vytvořit a realizovat systém pro kontrolu a automatizaci chovu hospodářských zvířat.
+
+    Tato práce se zaměřuje na návrh a realizaci pokročilého asistenčního systému Coopmaster pro automatizaci a zefektivnění chovu hospodářských zvířat, konkrétně kura domácího.
+    Využívá moderních technologií, včetně zpracování obrazu pomocí neuronových sítí, mikroservisní architektury a open source softwaru Home Assistant.
+    Díky nim zajišťuje vyšší úroveň bezpečnosti a minimalizuje nutnost fyzické přítomnosti chovatele.
+    Propojení hardwaru a softwaru tvoří komplexní řešení od vývoje funkčních dvířek a digitálních vah až po intuitivní mobilní i webovou aplikaci s podporou vzdáleného přístupu.
+    Systém v reálném čase monitoruje stav a aktivitu slepic, kontroluje hnízda a odhaluje případné vetřelce ve výběhu.
+    Díky neustálému monitorování hmotnosti hnízd systém poskytuje chovateli aktuální přehled o snůšce vajec v kurníku.
+    Součástí řešení je také rozsáhlý monitoring a tvorba statistik, které uživatelům poskytují přehled o dlouhodobých trendech, produkci vajec či stavu hejna.
+    Projekt je nasazen a používán v reálném provozu.
+    Přináší chovatelům vyšší komfort a zlepšuje blahobyt zvířat.
+    Přestože je v některých oblastech prostor pro další optimalizace a zlepšení (např. lepší noční detekce vetřelců či přesnější rozpoznávání vajec), představuje tento projekt významný krok vpřed ve vývoji moderních řídících a automatizačních systémů pro chov hospodářských zvířat.
 
     \subsection*{Klíčová slova}
-    programování, automatizace, zemědělství, neuronové sítě, Python, mikroservisní architektura
+    Programování, AI automatizace a zabezpečení, Mikroservisní architektura, Home Assistant, Vzdálený přístup, Chov hospodářských zvířat, Vlastní hardware
 
     \vspace{20mm}
 
     \section*{Annotation}
-    In my work, I have been involved in the design and implementation of a complete solution for small and medium farmers and homesteaders to help them carry out their day-to-day activities.
-    The aim of this work was to design and implement a system for control and automation of livestock farming.
+    This thesis focuses on the design and implementation of an advanced Coopmaster assistance system to automate and streamline the management of livestock, specifically domestic chickens.
+    It uses advanced technologies such as neural network image processing, microservice architecture and open source home assistant software.
+    These provide a higher level of safety and minimise the need for the farmer's physical presence.
+    The combination of hardware and software provides a comprehensive solution, from the development of functional doors and digital scales to an intuitive mobile and web application with remote access support.
+    The system monitors the status and activity of the hens in real time, checks the nests and detects potential intruders in the run.
+    By constantly monitoring the weight of the nests, the system provides the farmer with an up-to-date overview of the eggs laid in the coop.
+    The solution also includes extensive monitoring and statistics generation to provide users with an overview of long-term trends, egg production or flock status.
+    The project is being implemented and used in real operations.
+    It is bringing more convenience to breeders and improving animal welfare.
+    Although there is room for further optimisation and improvement in some areas (e.g. better night-time intruder detection or more accurate egg detection), this project represents a significant step forward in the development of modern livestock management and automation systems.
     \subsection*{Keywords}
-    programming, automation, agriculture, neural networks, Python, microservice architecture
+    Programming, AI Automation \& Security, Microservice Architecture, Home Assistant, Remote Access, Farm animals, Custom Hardware
 
     \pagestyle{plain}
 

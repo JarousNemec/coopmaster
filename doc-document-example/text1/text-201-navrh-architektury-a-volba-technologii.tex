@@ -129,7 +129,7 @@ Room Assistant je propojen se systémem Home Assistant pomocí MQTT protokolu.
 Dále potřebuji získat data z kamerového systému konkrétně z kamery v kurníku.
 Komunikaci s kamerovým systémem zajišťuje přes HTTP protokol modul Camera Driver.
 Tento modul má vystavené \gls{rest} \gls{api} a poskytuje obrázky službám v systému Coopmaster.
-O obrázky si zde říká služba Chicken Watch Guard, která za pomocí neuronové sítě, konkrétně pak metody klasifikace, počítá slepice v kurníku a výsledný počet posílá opět pomocí MQTT do Home Assistanta.
+O obrázky si zde říká služba Chicken Watch Guard, která za pomocí neuronové sítě, konkrétně pak metody klasifikace~\cite{klasifikace}, počítá slepice v kurníku a výsledný počet posílá opět pomocí MQTT do Home Assistanta.
 Chicken Watch Guard také předává co minutu do systému Home Assistant obrázek z kamery v kurníku.
 Home Assistant tedy pro tuto komponentu zajišťuje indikaci stavu dvířek, ovládací tlačítka pro dvířka, vizualizaci počtu slepic v kurníku a zobrazuje fotografii pořízenou v kurníku.
 Home Assistant je nakonfigurován tak, aby se od určitého časového okamžiku snažil zavřít dvířka pod podmínkou, že bude počet slepic, který identifikoval Chicken Watch Guard, stejný jako ten, jež jsme nastavili jako pevnou konstantu neboli aktuální počet slepic v kurníku.
@@ -145,7 +145,7 @@ Pro tento úkol bude třeba využít obrázků z kamery ve výběhu a umělé in
 Princip komunikace je graficky vysvětlen v obrázku~\ref{fig:detekce_vetrelcu}.\newline
 S kamerou ve výběhu komunikuje pomocí HTTP protokolu služba Camera Driver.
 Z REST aplikačního rozhraní služby si stahuje obrázky služba Dog Alert.
-Tato služba využívá neuronovou síť k detekci vetřelce v obraze.
+Tato služba využívá neuronovou síť~\cite{neuronovesite} k detekci vetřelce v obraze.
 Pokud je detekováno nějaké nebezpečí, služba pomocí MQTT protokolu informuje systém Home Assistant a předá mu aktuální fotografii, v níž byl vetřelec detekován jako důkaz.
 Home Assistant je nastaven tak, že při přijetí takové zprávy, odešle uživateli do aplikace v mobilním telefonu oznámení, aby ho upozornil na detekci hrozby.
 Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální snímek z kamery ve výběhu, aby měl uživatel stále přehled.
@@ -183,7 +183,7 @@ Jeden ze způsobů je zřízení veřejné IP adresy pro svůj server.
 Toto řešení je, technicky i teoreticky náročné, protože v případě, se kterým pracujeme my, běží server na lokální síti a veřejná IP adresa tedy není přímo pro náš server, ale celou síť.
 To vytváří v určitých situacích velmi vážná bezpečnostní rizika, díky čemuž je tato metoda velice náročná na hardware a implementaci.
 Navíc poskytování veřejné IP adresy je placená služba poskytovatele internetového připojení.\newline
-Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon \gls{aws}.
+Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure~\cite{aml} nebo Amazon~\cite{AWS} \gls{aws}.
 Tato metoda by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení. \newline
 Metoda, kterou využíváme v našem řešení, je snadná, jednodušší na implementaci než zřizování veřejné IP adresy a levnější než využití cloudové služby.
 Tento způsob využívá takzvané tunely neboli šifrovaná spojení.
@@ -201,9 +201,9 @@ Pro lepší znázornění komunikace mezi moduly přikládám schéma ~\ref{fig:
 \end{figure}
 
 Poslední nutností, kterou ovšem je třeba zaplatit, je pronájem vlastního doménového jména.
-Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy, Hostinger nebo například Forpsi.
+Doménu si lze pronajmout u doménových registrátorů jako jsou GoDaddy~\cite{GoDaddy}, Hostinger~\cite{Hostinger} nebo například Forpsi~\cite{forpsi}.
 Ceny domén se odvíjí na základě jejího druhu a pohybují od 20 do 1500 korun za kus.
-My v našem řešení využíváme službu Forpsi~\cite{forpsi}, protože s ní mám již předchozí zkušenost.\newline
+My v našem řešení využíváme službu Forpsi, protože s ní mám již předchozí zkušenost.\newline
 Dále je tato část rozvedena v sekci~\ref{ch:nasazeni-systemu-do-produkce}, kde je popsán konkrétní způsob nasazení do funkčního projektu.
 
 

@@ -7,19 +7,19 @@ Docker compose~\cite{kontejnerizace-docker-compose} je nástroj pro Docker, kter
 Pomáhá nám například se síťováním nebo konfigurací kontejnerů.
 
 \section{Mikroservisní architektura}\label{sec:microservice-architecture}
-Mikroservisní architektura je přístup k vývoji softwarových aplikací, kdy je celek rozdělen na malé, nezávislé služby nazývané mikroservisy.
+Mikroservisní architektura~\cite{mikroservisy} je přístup k vývoji softwarových aplikací, kdy je celek rozdělen na malé, nezávislé služby nazývané mikroservisy.
 Každá služba běží samostatně, komunikuje s ostatními službami pomocí dobře definovaného API a je zaměřena na konkrétní funkcionalitu.
 Tento model umožňuje snadnější údržbu, škálovatelnost a flexibilitu systému.
 
 \section{Jazyk Python}\label{sec:python}
-Python je vysokoúrovňový programovací jazyk známý svou jednoduchou a čitelnou syntaxí.
+Python~\cite{python} je vysokoúrovňový programovací jazyk známý svou jednoduchou a čitelnou syntaxí.
 Podporuje několik programovacích paradigmat, včetně objektově orientovaného, procedurálního a funkcionálního programování.
 Python je široce používán v různých oblastech, jako je webový vývoj, vědecké výpočty, umělá inteligence, strojové učení a datová analýza.
 Disponuje rozsáhlou standardní knihovnou a množstvím externích modulů, které usnadňují vývoj komplexních aplikací.
 Je multiplatformní, což znamená, že programy v Pythonu lze spouštět na různých operačních systémech.
 
 \section{Wire}\label{sec:wiring}
-Wiring je open source programovací jazyk a vývojové prostředí určené pro práci s mikrokontroléry.
+Wiring~\cite{wire} je open source programovací jazyk a vývojové prostředí určené pro práci s mikrokontroléry.
 Jeho cílem je usnadnit programování elektronických zařízení a interaktivních projektů, zejména pro umělce, designéry a studenty.
 Syntaxe jazyka Wire vychází z jazyka C++ a je navržena tak, aby byla snadno pochopitelná i pro začátečníky.
 Wiring poskytuje intuitivní prostředí pro psaní kódu, jeho kompilaci a nahrávání přímo do mikrokontroléru.
@@ -37,7 +37,7 @@ Tyto kroky nebo také akce, se mohou spouštět na základě různých událost�
 GitHub Workflow podporuje kontinuální integraci a nasazení (CI/CD), automatické testování, nasazení aplikací a další úlohy.
 
 \section{MQTT}\label{sec:mqtt}
-MQTT (Message Queuing Telemetry Transport) je lehký messagingový protokol pro publikování a odebírání zpráv, navržený pro komunikaci mezi zařízeními v sítích s omezenou kapacitou nebo vysokou latencí.
+MQTT (Message Queuing Telemetry Transport)~\cite{HomeAssistantMQTT} je lehký messagingový protokol pro publikování a odebírání zpráv, navržený pro komunikaci mezi zařízeními v sítích s omezenou kapacitou nebo vysokou latencí.
 Je často využíván v oblasti Internetu věcí (IoT) pro přenos dat mezi senzory, akčními členy a centrálními systémy.
 MQTT pracuje na principu architektury klient–server, kde klienti(publisheři) publikují zprávy na určité téma(topic) a broker tyto zprávy distribuuje odběratelům(subscriberům), kteří jsou na dané téma přihlášeni.
 
@@ -51,7 +51,7 @@ Díky pravidelným aktualizacím a podpoře komunity je ideálním nástrojem pr
 
 \section{Arduino}\label{sec:arduino}
 Arduino je open source platforma pro prototypování elektroniky založená na snadno použitelném hardwaru a softwaru.
-Skládá se z mikroprocesorové desky a vývojového prostředí Arduino IDE, které využívá jazyk podobný C/C++.
+Skládá se z mikroprocesorové desky a vývojového prostředí Arduino IDE~\cite{arduino-ide}, které využívá jazyk podobný C/C++.
 Arduino desky umožňují komunikaci s různými senzory a akčními členy, což usnadňuje tvorbu interaktivních projektů.
 Podporuje řadu rozšiřujících modulů, tzv. shieldů, které rozšiřují jeho funkčnost například o bezdrátovou komunikaci, ovládání motorů či připojení k internetu.
 Arduino usnadňuje rychlý vývoj a testování elektronických aplikací bez hlubokých znalostí elektroniky.
@@ -83,12 +83,12 @@ Wi-Fi extender, také známý jako repeater nebo zesilovač signálu, je zaříz
 Tailscale VPN je moderní služba pro vytváření virtuálních privátních sítí, která využívá protokol WireGuard k zajištění bezpečné komunikace mezi zařízeními. Umožňuje snadné nastavení sítě bez složitých konfiguračních procesů tradičních VPN řešení. Tailscale vytváří šifrované peer-to-peer spojení mezi zařízeními na základě jejich identity, spravované prostřednictvím cloudu. To umožňuje uživatelům bezpečně přistupovat k interním sítím a službám odkudkoli na světě. Díky automatické správě síťových konfigurací a firewallu snižuje nároky na údržbu a zvyšuje celkovou bezpečnost. Tailscale je vhodný pro jednotlivce, týmy i organizace hledající efektivní a jednoduché VPN řešení pro propojení svých zařízení.
 
 \section{Postgres 15}\label{sec:postgres-15}
-Postgres 15 je verze open-source relačního databázového systému PostgreSQL. Je navržena pro ukládání a správu strukturovaných dat a podporuje SQL (Structured Query Language) pro dotazování a manipulaci s daty.
+Postgres 15~\cite{PostgreSQL15Documentation} je verze open-source relačního databázového systému PostgreSQL. Je navržena pro ukládání a správu strukturovaných dat a podporuje SQL (Structured Query Language) pro dotazování a manipulaci s daty.
 PostgreSQL 15 nabízí různé funkce, jako jsou vylepšený výkon, podpora pro složité datové typy, pokročilé indexování, vysokou spolehlivost a rozšiřitelnost.
 Je často používán pro webové aplikace, analytiku a další databázové aplikace vyžadující robustní a efektivní datové řešení.
 
 \section{Eclipse Mosquitto}\label{sec:eclipse-mosquitto}
-Eclipse Mosquitto je open-source broker pro protokol MQTT (Message Queuing Telemetry Transport).
+Eclipse Mosquitto~\cite{EclipseMosquitto} je open-source broker pro protokol MQTT (Message Queuing Telemetry Transport).
 Slouží k zprostředkování komunikace mezi zařízeními v prostředích internetu věcí (IoT). MQTT je lehký protokol pro zprávy, navržený pro zařízení s omezenými zdroji nebo nestabilní připojení.
 Mosquitto umožňuje klientům publikovat a odebírat zprávy na konkrétních kanálech (tzv. tématech), čímž umožňuje efektivní a škálovatelnou výměnu dat mezi senzory, síťovými zařízeními a aplikacemi.
 

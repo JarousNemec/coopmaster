@@ -1,10 +1,11 @@
+//TODO zkontrolovat pravopis\newline
 V této kapitole si popíšeme, jaký je vlastně aktuální stav běžícího systému, a vysvětlíme si, co je potřeba pro přidání nového modulu
 %todo obrázek
 \section*{Verzování a nasazení}
 
-Pro verzování zdrojových kódů svých služeb jsem se rozhodl využívat GitHub, což mi umožňuje efektivně zálohovat kód.
-V rámci GitHubu používám GitHub Workflow, které automatizuje proces vytváření Docker image, což zrachluje a automatizuje proces nasezení nové verze služby.
-Jakmile je Docker image vytvořen, nahrávám jej na platformu Docker Hub.
+Pro verzování zdrojových kódů svých služeb jsem se rozhodl využívat GitHub~\cite{GitHubExplanation}, což mi umožňuje efektivně zálohovat kód.
+V rámci GitHubu používám GitHub Workflow, které automatizuje proces vytváření Docker image~\cite{GitHubActionsDocker}, což zrachluje a automatizuje proces nasezení nové verze služby.
+Jakmile je Docker image vytvořen, nahrávám jej na platformu Docker Hub~\cite{DockerHub}.
 Na tuto platformu image ukládám a následně je vzdáleně načítám při nasazení konkrétní služby.
 %todo obrázek
 \section*{Infrastrukturní přípravné práce}
@@ -19,14 +20,14 @@ Použil jsem tedy Wifi extender s ethernet výstupem a elektroniku v kurníku js
 %todo obrázek
 \section*{Výsledná fyzická infrastruktura}
 
-Doma v místnosti se stabilním prostředím, které je vhodné pro výpočetní techniku, běží Intel NUC 11.
+Doma v místnosti se stabilním prostředím, které je vhodné pro výpočetní techniku, běží Intel NUC 11~\cite{IntelNUC11Enthusiast} s operačním systémem Ubuntu 22.04 LTS.
 Tento počítač slouží jako hlavní server a zdroj výpočetního výkonu pro neuronové sítě.
 Výpočetní výkon je poskytnut díky grafické kartě NVIDIA GeForce RTX 2060.\newline
 Dále pak máme v kurníku a ve výběhu periferie periferie (dvířka, senzory a kamery), které potřebuji propojit se systémem Coopmaster.
-Všechny tyto periferie jsou do systému připojeny skrze mikropočítač Raspberry pi 5.
+Všechny tyto periferie jsou do systému připojeny skrze mikropočítač Raspberry pi 5~\cite{RaspberryPi5} s operačním systémem Ubuntu 24.04 LTS.
 Výpočetní část je takto rozdělena do dvou částí kvůli agresivnímu prostředí v kurníku (vlhkost, teplotní výkyvy).
 Raspberry PI 5 je mnohem levnější než Intel NUC 11 a v případě poškození zařízení vlivem prostředí, nevznikne tak velká škoda.
-Síťová komunikace mezi těmito dvěma počítači realizována pomocí služby Tailscale, která mezi nimi vytváří mesh VPN.
+Síťová komunikace mezi těmito dvěma počítači realizována pomocí služby Tailscale~\cite{Tailscale}, která mezi nimi vytváří mesh VPN.
 Zároveň této služby využívám já jako správce, abych měl vzdálený přístup k oběma zařízením.
 
 %todo obrázek

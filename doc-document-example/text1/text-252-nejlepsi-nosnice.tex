@@ -1,5 +1,5 @@
 \section{Koncept identifikace nejlepší nosnice}\label{sec:koncept-identifikace-nejlepsi-nosnice}
-
+//TODO zkontrolovat pravopis\newline
 Při chovu slepic by bylo velmi užitečné vědět, kolik vajec která slepice snáší, protože to umožňuje farmáři sledovat produktivitu jednotlivých slepic.
 Díky tomu může:
 \begin{itemize}
@@ -27,7 +27,7 @@ Postupuji následujícím způsobem.
 Nejprve procházím videozáznam a identifikuji oblasti, kde se slepice nacházejí.
 Tyto oblasti následně vystřihnu a uložím do samostatných souborů.
 Poté procházím tyto menší obrázky a pomocí segmentace vystřihnu plochu, kde je slepice, zatímco ostatní části zůstanou bílé.
-Takto vyříznuté obrázky převádím na tenzory.
+Takto vyříznuté obrázky převádím na tenzory~\cite{Tenzor}.
 Převod na tenzor znamená, že dvourozměrný obraz (matice pixelů) převedu do vícerozměrné datové struktury, která dokáže reprezentovat různé vlastnosti obrazu a je vhodná pro strojové učení a další matematické zpracování.
 Tímto způsobem získám numerickou reprezentaci obrazu, se kterou mohu efektivně pracovat.
 Získané tenzory porovnávám se vzorovými vektory uloženými v databázi.
@@ -68,7 +68,7 @@ Na závěr je pro každý výřez vypočítán tenzor (vektor) na jehož základ
 \end{figure}
 
 Během této části projektu, zaměřeného na třídění slepic pomocí umělé inteligence a počítačového vidění, jsem vyvinul základní procesy pro načítání a zpracování obrázků.
-Pomocí modelu ResNet50 jsem z obrázků extrahoval klíčové vlastnosti a pokusil se slepice zařadit do skupin pomocí metody K-means.
+Pomocí modelu ResNet50~\cite{ResNet50Documentation} jsem z obrázků extrahoval klíčové vlastnosti a pokusil se slepice zařadit do skupin pomocí metody K-means~\cite{scikit-learnKMeans}.
 Bohužel, výsledky zatím nesplnily očekávání.
 
 Hlavním problémem je nedostatečná přesnost klasifikace.

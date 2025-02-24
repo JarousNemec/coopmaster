@@ -4,7 +4,7 @@ Tato váha má být umístěna v každém hnízdě v kurníku, kde slepice sná�
 
 \subsection*{Popis algoritmu}
 Po připojení napájení k Arduinu, se nejdříve nastaví a připojí sériová komunikace rychlostí 9600 baudů pomocí USB.
-Následně je instancován objekt starající se o zprostředkování komunikace s převodníkem HX711 a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
+Následně je instancován objekt starající se o zprostředkování komunikace s převodníkem HX711~\cite{tenzosenzorahx711} a nastaví se jednotlivé piny dle fyzického zapojení převodníku.
 Dále je nastaven kalibrační faktor, což je konstanta používaná knihovnou HX711.h při převodu dat získaných z převodníku na gramy, s nimiž program již nadále pracuje a následně je posílá po sériovém připojení.
 Jako poslední krok v rámci přípravy programu je vynulování váhy pomocí metody tare(), která je jedna z metod HX711.h knihovny.
 Jakmile program dokončí fázi příprav, vstoupí do nekonečného cyklu.
@@ -17,7 +17,7 @@ Na základě toho se programu řekne, že aktuální hodnotu, kterou získal ze 
 
 
 \subsection*{Konstrukce váhy}
-Jako řídící jednotka váhy je použito Arduino Nano, jež je zodpovědné za komunikaci s počítačem pomocí sériového připojení a načítání dat o hmotnosti z AD převodníku HX711 přes, který je Arduino připojeno k tenzometrickému senzoru.
+Jako řídící jednotka váhy je použito Arduino Nano~\cite{ArduinoNano}, jež je zodpovědné za komunikaci s počítačem pomocí sériového připojení a načítání dat o hmotnosti z AD převodníku HX711 přes, který je Arduino připojeno k tenzometrickému~\cite{tenzosenzorahx711} senzoru.
 Hmotnost je měřena tenzometrickým senzorem se jmenovitým zatížením 20 kg.
 Toto zapojení je nutné vzhledem ke konstrukci a vlastnostem senzoru.
 Tenzometrické senzory jsou analogové a jejich výstupem jsou velmi malé změny v napětí v rozmězí 0.15 až 1 mV.
