@@ -44,7 +44,7 @@ Já jsem zvolil Azure AI - Azure Machine Learning studio~\cite{aml}.
 Pro práci je velmi intuitivní a nechá se spustit v několika krocích.
 Nejdříve jsem pomocí průvodce vytvořil nový projekt jak je znázorněno na obrázku~\ref{fig:create_learning_project}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/create_learning_project}
     \captionAuthorSource{Vytvoření nového projektu v AML}
@@ -56,7 +56,7 @@ Dále jsem vybral zdroj obrázků, které bylo potřeba klasifikovat.
 Vzhledem k tomu, že se jedná o cloudovou službu bylo třeba obrázky slepiček na Azure naimportovat.
 Na obrázku~\ref{fig:dataset_selection} je snímek obrazovky z Azure Machine Learning studia, kde se zrovna dataset importuje.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/dataset_selection}
     \captionAuthorSource{Tvorba datasetu v AML}
@@ -67,7 +67,7 @@ V dalším kroku jsem nadefinoval kategorie, které budu chtít v obraze identif
 V mém případě jsem zvolil label „slepice“.
 Definice kategorií je na obrázku~\ref{fig:category_definition}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/category_definition}
     \captionAuthorSource{Definice kategorií pro učení v AML}
@@ -79,7 +79,7 @@ Bylo třeba projít jednotlivé snímky a ručně vybrat oblasti, kde já jako �
 Oblast, kterou jsem označil se pak následně ukládá jako metadata k~obrázku.
 Tento proces je znázorněn na obrázku~\ref{fig:chicken_labeling}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/chicken_labeling}
     \captionAuthorSource{Označování slepic pomocí AML}
@@ -95,7 +95,7 @@ Formát COCO (Common Objects in Context) je standardní formát pro anotaci obr�
 Jeho hlavním cílem je poskytnout strukturu pro uložení informací o objektech v obrázcích, což umožňuje efektivní trénink a hodnocení modelů detekce objektů, segmentace a dalších úloh počítačového vidění.
 Obrázek~\ref{fig:create_learning_project} ukazuje, jak například může vypadat nastavení pro export COCO formátu z AML.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/export_coco_format}
     \captionAuthorSource{Export metadat k obrázkům z AML do COCO formátu}
@@ -133,7 +133,7 @@ Tento JSON tedy popisuje dataset obsahující obrázek s jedním označeným obj
 COCO formát umožňuje uložení komplexních a strukturovaných dat o objektech na obrázcích, což je velmi užitečné pro trénování a testování modelů strojového učení.
 Příklad tohoto formátu metadat pro strojové učení je na obrázku~\ref{fig:coco_format}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/coco_format}
     \captionAuthorSource{Ukázka COCO metadat pro učení}
@@ -153,7 +153,7 @@ Rád bych alespoň představil blokové schéma učícího procesu, který jsem 
 Pro učení jsem použil script, který jsem si připravil.
 Volání jednotlivých kroků pro učení je znázorněno na screenshotu učící metody na obrázku~\ref{fig:learn_script}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/learn_script}
     \captionAuthorSource{Kód pro učení nového modelu}
@@ -185,7 +185,7 @@ Proces zahrnuje několik iterací (epoch) přes trénovací data, během kterýc
 Na obrázku~\ref{fig:train_yolo}.
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{img/train_yolo}
     \captionAuthorSource{Proces trénování YOLO11 modelu}
@@ -217,7 +217,7 @@ Testování nám poskytuje objektivní zpětnou vazbu o tom, co za objekty model
 Důležité je předkládat pro testování snímky, které během tréninku neviděl.
 Na základě testovacích výsledků jsem pak následně prováděl úpravy učících parametrů, případně jsem dodával další data do učícího datasetu.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/loss_funkce}
     \captionAuthorSource{Graf loss funkce v závislosti na počtu etap}
@@ -227,7 +227,7 @@ Na základě testovacích výsledků jsem pak následně prováděl úpravy uč�
 Graf na obrázku~\ref{fig:loss_funkce}, který se při učení automaticky generuje, nám umožnuje sledovat, jak dobře se model učí vzhledem k časové ose tréninku.
 Tento graf typicky zobrazuje ztrátovou funkci (loss) na svislé ose (Y) a počet trénovacích epoch nebo kroků na vodorovné ose (X).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/top1_accuracy}
     \captionAuthorSource{Top-1 accuracy chart}
@@ -239,7 +239,7 @@ Graf na obrázku~\ref{fig:top1_accuracy} se zaměřuje na metriku přesnosti, ko
 
 Výsledky detekce jsou demonstrovány na obrázku~\ref{fig:detekce_slepic}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/detekce_slepic}
     \captionAuthorSource{Model detekující slepice}

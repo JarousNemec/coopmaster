@@ -102,7 +102,7 @@ Tato část je tedy důležitá pro chovatele, aby měl na dálku přehled o pod
 Dalším z požadavkům bylo dálkové ovládání a automatizace světla, čehož se tato sekce také dotýká.
 Graficky jsou použité moduly a jejich závislosti vyjádřeny v obrázku~\ref{fig:svetlo_teplo_vlhkost}.\newline
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/svetlo_teplo_vlhkost}
     \captionAuthorSource{Diagram komunikace mezi relé a sonzory}
@@ -133,7 +133,7 @@ O obrázky si zde říká služba Chicken Watch Guard, která za pomocí neurono
 Chicken Watch Guard také předává co minutu do systému Home Assistant obrázek z kamery v kurníku.
 Home Assistant tedy pro tuto komponentu zajišťuje indikaci stavu dvířek, ovládací tlačítka pro dvířka, vizualizaci počtu slepic v kurníku a zobrazuje fotografii pořízenou v kurníku.
 Home Assistant je nakonfigurován tak, aby se od určitého časového okamžiku snažil zavřít dvířka pod podmínkou, že bude počet slepic, který identifikoval Chicken Watch Guard, stejný jako ten, jež jsme nastavili jako pevnou konstantu neboli aktuální počet slepic v kurníku.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/automatizace_dvirek}
     \captionAuthorSource{Diagram bezpečného zavření dvířek}
@@ -149,7 +149,7 @@ Tato služba využívá neuronovou síť~\cite{neuronovesite} k detekci vetřelc
 Pokud je detekováno nějaké nebezpečí, služba pomocí MQTT protokolu informuje systém Home Assistant a předá mu aktuální fotografii, v níž byl vetřelec detekován jako důkaz.
 Home Assistant je nastaven tak, že při přijetí takové zprávy, odešle uživateli do aplikace v mobilním telefonu oznámení, aby ho upozornil na detekci hrozby.
 Dog Alarm dále pak každou minutu posílá do Home Assistanta aktuální snímek z kamery ve výběhu, aby měl uživatel stále přehled.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/detekce_vetrelcu}
     \captionAuthorSource{Diagram detekce vetřelců}
@@ -167,7 +167,7 @@ Tato služba ukládá v daném intervalu data z každé váhy do databáze.
 Služba po uplynutí časové konstanty analyzuje časovou řadu v databázi a vyhodnotí stav hnízda.
 Detailní popis algoritmu je v části věnované službě Nest Watcher (\ref{sec:nest-watcher}).
 Po vyhodnocení stavů jsou data předávána pomocí MQTT protokolu do systému Home Assistant, který je díky na míru dělané komponentě zobrazí uživateli.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/vizualizace_stavu_hnizd}
     \captionAuthorSource{Diagram vizualizace stavů hnízd}
