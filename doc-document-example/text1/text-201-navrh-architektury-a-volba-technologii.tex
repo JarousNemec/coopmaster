@@ -38,11 +38,11 @@ Jak je nakonfigurováno uživatelské rozhraní v Home Assistantovi, je popsáno
 \section{Komunikace mezi moduly}\label{sec:komunikace-mezi-backendem-a-frontendem}
 Je třeba zajistit komunikaci mezi systémem Home Assistant a Coopmaster službami.
 Tuto úlohu musíme přijmout velice zodpovědně a navrhnout řešení, které půjde opět snadno rozšířit a modifikovat.
-Z toho důvodu nelze použít klasický HTTP, protože bychom komunikaci vázali na doménové jméno a port nebo ip adresu a port.
+Z toho důvodu nelze použít klasický \gls{http}, protože bychom komunikaci vázali na doménové jméno a port nebo ip adresu a port.
 Toto řešení má problém v tom, že pokud bychom potřebovali změnit, buď umístění částí služeb nebo port jedné ze služeb, bylo by třeba překonfigurovat i Home Assistanta.
 Další problém nastane, když potřebujeme z některé ze služeb poslat například notifikaci do Home Assistanta, je pro to potřeba, aby jednotlivé služby věděly, kde na síti Home Assistant běží, což je věc, která se může měnit, a museli bychom naopak přenastavovat jednotlivé služby.
-Jako řešení se nabízí použít messaging konkrétně třeba technologii MQTT (část~\ref{sec:mqtt}).
-Tato technologie se běžně používá u IoT zařízení a pro naše použití je vynikajícím řešením.
+Jako řešení se nabízí použít messaging konkrétně třeba technologii \gls{mqtt} (část~\ref{sec:mqtt}).
+Tato technologie se běžně používá u \gls{iot} zařízení a pro naše použití je vynikajícím řešením.
 
 \clearpage
 \section{Hardwarová zařízení}\label{sec:hardwarova-zarizeni}
@@ -128,7 +128,7 @@ Module Room Driver zajišťuje pomocí USB sběrnice a HTTP protokolu komunikaci
 Room Assistant je propojen se systémem Home Assistant pomocí MQTT protokolu.
 Dále potřebuji získat data z kamerového systému konkrétně z kamery v kurníku.
 Komunikaci s kamerovým systémem zajišťuje přes HTTP protokol modul Camera Driver.
-Tento modul má vystavené REST API a poskytuje obrázky službám v systému Coopmaster.
+Tento modul má vystavené \gls{rest} \gls{api} a poskytuje obrázky službám v systému Coopmaster.
 O obrázky si zde říká služba Chicken Watch Guard, která za pomocí neuronové sítě, konkrétně pak metody klasifikace, počítá slepice v kurníku a výsledný počet posílá opět pomocí MQTT do Home Assistanta.
 Chicken Watch Guard také předává co minutu do systému Home Assistant obrázek z kamery v kurníku.
 Home Assistant tedy pro tuto komponentu zajišťuje indikaci stavu dvířek, ovládací tlačítka pro dvířka, vizualizaci počtu slepic v kurníku a zobrazuje fotografii pořízenou v kurníku.
@@ -177,13 +177,13 @@ Po vyhodnocení stavů jsou data předávána pomocí MQTT protokolu do systému
 \clearpage
 \section{Zpřístupnění aplikace z internetu}\label{sec:zpristupneni-aplikace-z-internetu}
 Aby systém mohl sloužit svému účelu, musí být vzdáleně přístupný.
-To znamená, že server, na kterém systém poběží, musí mít veřejnou IP adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
+To znamená, že server, na kterém systém poběží, musí mít veřejnou \gls{ip} adresu a v ideálním případě mít tuto adresu propojenou s doménovým názvem pro snadnější použití.
 Tato problematika se dá řešit několika způsoby.\newline
 Jeden ze způsobů je zřízení veřejné IP adresy pro svůj server.
 Toto řešení je, technicky i teoreticky náročné, protože v případě, se kterým pracujeme my, běží server na lokální síti a veřejná IP adresa tedy není přímo pro náš server, ale celou síť.
 To vytváří v určitých situacích velmi vážná bezpečnostní rizika, díky čemuž je tato metoda velice náročná na hardware a implementaci.
 Navíc poskytování veřejné IP adresy je placená služba poskytovatele internetového připojení.\newline
-Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon AWS.
+Další způsob je nasazení části systému do některého z cloudových řešení jako je Microsoft Azure nebo Amazon \gls{aws}.
 Tato metoda by v podstatě vyhovovala našim požadavkům, ale pokud bychom se bavili o ceně, tak to rozhodně není levné řešení. \newline
 Metoda, kterou využíváme v našem řešení, je snadná, jednodušší na implementaci než zřizování veřejné IP adresy a levnější než využití cloudové služby.
 Tento způsob využívá takzvané tunely neboli šifrovaná spojení.

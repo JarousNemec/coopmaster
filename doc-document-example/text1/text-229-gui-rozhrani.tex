@@ -106,7 +106,7 @@ S těmito vědomostmi jsem opět nakonfiguroval dle návrhu potřebné automatiz
 \subsubsection*{Tvorba vlastní Home Assistant komponenty}
 Zde se již dostáváme k opravdovému programování. Inspirací jak komponentu vytvořit mi byla developerská dokumentace~(\cite{homeassistant-developers}).
 Služba Nest Watcher poskytuje data o tom zda je hnízdo obsazené a kolik je v každém hnízdě vajec.
-Tato data jsou ve formátu CSV, kdy každý prvek v poli znamená jedno hnízdo.
+Tato data jsou ve formátu \gls{csv}, kdy každý prvek v poli znamená jedno hnízdo.
 Data se do komponenty dostávají z entit.
 Tyto entity se nastavují jako parametry během přidávání komponenty na dashboard.
 Data, která dostaneme z entity, jsou v CSV formátu, takže se pomocí funkce split rozdělí podle separátoru, kterým je v tomto případě znak středníku.

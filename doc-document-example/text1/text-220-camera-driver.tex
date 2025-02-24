@@ -6,7 +6,7 @@ Po startu služby naběhne REST API na portu 9001 vytvořené za pomoci Python f
 Toto API poskytuje endpoint pro získání aktuálního snímku z každé kamery, která je službě přiřazena v konfiguraci modulu.
 S kamerami pak služba komunikuje pomocí HTTP protokolu.
 Byla zvažována i možnost využití protokolu RTSP, ale jelikož moje řešení prozatím nemá vysoké nároky na živý přenos, ukázala se jako lepší volba využití REST API kamery, které umožnuje stační aktuálního snímku na požádaní.
-Jakmile je přijat požadavek na získání aktuálního snímku z konkrétní kamery, služba za pomocí GET requestu stáhne obraz z restového API síťové kamery a vrátí ho ve Full HD rozlišení jako odpověď na HTTP dotaz.
+Jakmile je přijat požadavek na získání aktuálního snímku z konkrétní kamery, služba za pomocí GET requestu stáhne obraz z restového API síťové kamery a vrátí ho ve \gls{fullhd} rozlišení jako odpověď na HTTP dotaz.
 Endpoint kamery ze kterého má služba obrázek stahovat, získá z konfigurace předávané pomocí systémových proměnných.
 Kamery mají vlastní zabezpečení proti neoprávněnému přístupu k datům.
 V případě ověřování HTTP komunikace se používá metoda Digest Access Authentication, pomocí které je kameře předáváno uživatelské jméno a heslo.
