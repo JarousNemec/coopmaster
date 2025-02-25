@@ -1,27 +1,27 @@
 \section{Koncept identifikace nejlepší nosnice}\label{sec:koncept-identifikace-nejlepsi-nosnice}
-//TODO zkontrolovat pravopis\newline
 Při chovu slepic by bylo velmi užitečné vědět, kolik vajec která slepice snáší, protože to umožňuje farmáři sledovat produktivitu jednotlivých slepic.
 Díky tomu může:
 \begin{itemize}
     \item Optimalizovat chov: Identifikací slepic s vysokou a nízkou snáškou může farmář rozhodnout o selekci nebo o zvláštní péči pro méně produktivní slepice.
-    \item Zlepšit zdraví slepic: Nízká snůška může být indikátorem zdravotních problémů.
+    \item Zlepšit zdraví slepic: Nízká snáška může být indikátorem zdravotních problémů.
     Včasná identifikace umožňuje podniknout kroky k léčbě nebo prevenci nemocí.
     \item Efektivněji plánovat krmení a zdroje: Sledování výkonu pomáhá v rozhodování o výživě a péči, aby byla maximalizována produkce vajec při optimálních nákladech.
-    \item Zvýšit ziskovost: Monitorováním snůšky lze zlepšit celkovou produktivitu farmy a tím i její ekonomickou efektivitu.
+    \item Zvýšit ziskovost: Monitorováním snášky lze zlepšit celkovou produktivitu farmy, a tím i její ekonomickou efektivitu.
 \end{itemize}
 
 Obecně můžeme říci, že znalost počtu snesených vajec od každé slepice pomáhá v efektivním řízení chovu a zajišťuje lepší výsledky, jak po stránce produkční, tak ekonomické.
 
 Abych toho dosáhl, potřebuji být schopen jednotlivé slepice identifikovat a tuto informaci propojit s momentem, kdy slepice snese v hnízdě vejce.
-V sekci~\ref{sec:digitalni-vaha-do-hnizda}, je popsán mechanismus, kdy pravidelnou analýzou časové řady, kterou poskytuje váha získáme informaci o časovém údaji, kdy bylo vejce sneseno.
-Pak již jen stačí identifikovat, ktera z našich slepic byla v tu dobu v hnízdě.
+V sekci~\ref{sec:digitalni-vaha-do-hnizda}, je popsán mechanismus, kdy pravidelnou analýzou časové řady, kterou poskytuje váha, získáme informaci o časovém údaji, kdy bylo vejce sneseno.
+Pak již jen stačí identifikovat, která z našich slepic byla v tu dobu v hnízdě.
 
 Existuje několik variant, jak slepice identifikovat, já jsem se rozhodl využít k identifikaci obrazovou analýzu.
 Vždycky mě zajímalo na jakém principu funguje rozpoznávání lidí na základě kamerových záznamů, které používá policie případně sledování vozidla, které projíždí nočním městem na červenou skrze několik křižovatek.
 
 Hledání zdrojů na internetu mě přivedlo ke spoustě článků, příspěvků, příkladů i vědeckých prací.
 
-Nakonec jsem nalezl článek~\cite{medium-person-reidentification}, který mě inspiroval. Z článku jsem pochopil základní princip.
+Nakonec jsem nalezl článek~\cite{medium-person-reidentification}, který mě inspiroval.
+Z článku jsem pochopil základní princip.\newline
 
 Postupuji následujícím způsobem.
 Nejprve procházím videozáznam a identifikuji oblasti, kde se slepice nacházejí.
@@ -51,7 +51,7 @@ Dále je slepice z obrázku vystřižena (segmentována) podle kontury, kterou a
     \label{fig:segmented_chicks2}
 \end{figure}
 
-Na závěr je pro každý výřez vypočítán tenzor (vektor) na jehož základě jsou slepice roztřízeny do jednotlivých skupin viz obrázek~\ref{fig:chicks_in_clusters}.
+Na závěr je pro každý výřez vypočítán tenzor (vektor), na jehož základě jsou slepice roztříděny do jednotlivých skupin viz obrázek~\ref{fig:chicks_in_clusters}.
 
 \begin{figure}[H]
     \centering
@@ -67,9 +67,9 @@ Na závěr je pro každý výřez vypočítán tenzor (vektor) na jehož základ
     \label{fig:chicks_in_clusters_2}
 \end{figure}
 
-Během této části projektu, zaměřeného na třídění slepic pomocí umělé inteligence a počítačového vidění, jsem vyvinul základní procesy pro načítání a zpracování obrázků.
+Během této části projektu zaměřeného na třídění slepic pomocí umělé inteligence a počítačového vidění, jsem vyvinul základní procesy pro načítání a zpracování obrázků.
 Pomocí modelu ResNet50~\cite{ResNet50Documentation} jsem z obrázků extrahoval klíčové vlastnosti a pokusil se slepice zařadit do skupin pomocí metody K-means~\cite{scikit-learnKMeans}.
-Bohužel, výsledky zatím nesplnily očekávání.
+Bohužel výsledky zatím nesplnily očekávání.
 
 Hlavním problémem je nedostatečná přesnost klasifikace.
 Model má potíže s rozpoznáním rozdílů mezi slepicemi, což vede k logicky nehodnotným skupinám.

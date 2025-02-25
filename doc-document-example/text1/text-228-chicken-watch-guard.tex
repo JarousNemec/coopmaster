@@ -6,7 +6,7 @@ Poskytuje data o počtu slepic v kurníku a tato data předává do systému Hom
 Podobně jako u služby Dog Alarm, Chicken Watch Guard používá kamerový systém pro získávání aktuálních záběrů z kurníku.
 Tyto záběry jsou staženy ze služby Camera Driver~\ref{sec:camera-driver}.
 Získané obrázky se analyzují modelem Yolo11, který je upravený pro přesnější detekci v našich lokálních podmínkách.
-Výsledky detekce společně s aktuální fotografií jsou pomocí protokolu MQTT odeslány do systému Home Assistant, který je využije při automatizaci dvířek a vizualizuje v uživatelském rozhraní.
+Výsledky detekce společně s aktuální fotografií jsou pomocí protokolu MQTT~\cite{MQTT} odeslány do systému Home Assistant, který je využije při automatizaci dvířek a vizualizuje v uživatelském rozhraní.
 
 \subsection*{Popis algoritmu}
 Jako první je vytvořeno API definované pomocí Flask frameworku pro komunikaci se službou Health Checker.

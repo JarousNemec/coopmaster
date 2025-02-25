@@ -18,11 +18,16 @@ Python je široce používán v různých oblastech, jako je webový vývoj, vě
 Disponuje rozsáhlou standardní knihovnou a množstvím externích modulů, které usnadňují vývoj komplexních aplikací.
 Je multiplatformní, což znamená, že programy v Pythonu lze spouštět na různých operačních systémech.
 
-\section{Wire}\label{sec:wiring}
+\section{Wiring}\label{sec:wiring}
 Wiring~\cite{wire} je open source programovací jazyk a vývojové prostředí určené pro práci s mikrokontroléry.
 Jeho cílem je usnadnit programování elektronických zařízení a interaktivních projektů, zejména pro umělce, designéry a studenty.
-Syntaxe jazyka Wire vychází z jazyka C++ a je navržena tak, aby byla snadno pochopitelná i pro začátečníky.
-Wiring poskytuje intuitivní prostředí pro psaní kódu, jeho kompilaci a nahrávání přímo do mikrokontroléru.
+Syntaxe jazyka Wiring vychází z jazyka C++ a je navržena tak, aby byla snadno pochopitelná i pro začátečníky.
+
+\section{C++}\label{sec:cpp}
+C++~\cite{cpp} je univerzální vysokoúrovňový programovací jazyk, který vychází z jazyka C a rozšiřuje jej o objektově orientované programování.
+Vyznačuje se vysokou rychlostí a efektivitou, což jej předurčuje k tvorbě výkonnostně náročných aplikací, jako jsou graficky náročné hry či systémy reálného času.
+Mezi jeho silné stránky patří mimo jiné možnost nízkoúrovňové práce s hardwarem a pamětí, což jej činí vhodným pro vestavěné systémy nebo vývoj ovladačů.
+Díky podpoře více programovacích paradigmat (procedurální, objektově orientované i generické) umožňuje psát kvalitní, udržovatelný a zároveň výkonný kód.
 
 \section{Táhlový motor}\label{sec:tahlovy-motor}
 Jedná se o linearní motor (actuator)~\cite{tahlovymotor}, jehož součástí je elektromotor a k němu je připevněn šnekový převod.
@@ -68,33 +73,58 @@ Díky své modularitě umožňuje vývojářům přidávat rozšíření a kniho
 Flask využívá šablonovací systém Jinja2 pro vytváření dynamických HTML stránek a nástroj Werkzeug pro WSGI kompatibilitu.
 
 \section{Yolo Ultralytics}\label{sec:yolo-ultralytics}
-Ultralytics YOLO je pokročilý systém pro detekci objektů v reálném čase založený na hlubokém učení. Jedná se o implementaci architektury YOLO (You Only Look Once), kterou vyvinula společnost Ultralytics. Tento model využívá konvoluční neuronové sítě k analýze obrazových dat a současné identifikaci více objektů během jediného průchodu sítí. Díky své vysoké rychlosti a přesnosti je ideální pro aplikace náročné na čas, jako je autonomní řízení, bezpečnostní systémy nebo analýza videa. Ultralytics YOLO je dostupný jako open source software, což umožňuje jeho široké využití ve výzkumu i v průmyslových aplikacích.
+Ultralytics YOLO je pokročilý systém pro detekci objektů v reálném čase založený na hlubokém učení.
+Jedná se o implementaci architektury YOLO (You Only Look Once), kterou vyvinula společnost Ultralytics.
+Tento model využívá konvoluční neuronové sítě k analýze obrazových dat a současné identifikaci více objektů během jediného průchodu sítí.
+Díky své vysoké rychlosti a přesnosti je ideální pro aplikace náročné na čas, jako je autonomní řízení, bezpečnostní systémy nebo analýza videa.
+Ultralytics YOLO je dostupný jako open source software, což umožňuje jeho široké využití ve výzkumu i v průmyslových aplikacích.
 
 \section{Tenzometrický senzor}\label{sec:tenzor}
-Tenzometrický senzor je zařízení sloužící k měření mechanického napětí nebo deformace v materiálu či konstrukci. Základním principem tenzometru je využití změny elektrického odporu vodivého materiálu při jeho mechanickém zatížení. Nejčastěji se používají tenzometry s kovovou fólií nebo drátkem, který je pevně spojen s měřeným objektem. Když je objekt zatížen silou, dojde k jeho deformaci, což způsobí prodloužení nebo zkrácení tenzometru a tím i změnu jeho elektrického odporu. Tato změna je úměrná velikosti aplikovaného napětí a může být přesně změřena pomocí elektrických obvodů, jako je Wheatstoneův můstek. Tenzometrické senzory nacházejí uplatnění v oblastech jako je strojírenství, stavebnictví, letectví či při vývoji nových materiálů, kde je důležité sledovat mechanické vlastnosti a bezpečnost konstrukcí.
+Tenzometrický senzor je zařízení sloužící k měření mechanického napětí nebo deformace v materiálu či konstrukci.
+Základním principem tenzometru je využití změny elektrického odporu vodivého materiálu při jeho mechanickém zatížení.
+Nejčastěji se používají tenzometry s kovovou fólií nebo drátkem, který je pevně spojen s měřeným objektem.
+Když je objekt zatížen silou, dojde k jeho deformaci, což způsobí prodloužení nebo zkrácení tenzometru a tím i změnu jeho elektrického odporu.
+Tato změna je úměrná velikosti aplikovaného napětí a může být přesně změřena pomocí elektrických obvodů, jako je Wheatstoneův můstek.
+Tenzometrické senzory nacházejí uplatnění v oblastech jako je strojírenství, stavebnictví, letectví či při vývoji nových materiálů, kde je důležité sledovat mechanické vlastnosti a bezpečnost konstrukcí.
 
 \section{POE}\label{sec:poe}
-\gls{poe}  je technologie umožňující přenos elektrické energie společně s daty prostřednictvím standardního ethernetového kabelu typu kroucená dvojlinka. Tato technologie umožňuje napájet síťová zařízení, jako jsou IP kamery, bezdrátové přístupové body nebo VoIP telefony, bez potřeby samostatného napájecího zdroje. PoE využívá nevyužité páry vodičů v kabelu nebo kombinuje napájení s datovými signály na stejných vodičích. Existují různé standardy PoE, jako IEEE 802.3af, 802.3at a 802.3bt, které definují maximální výkon a kompatibilitu zařízení. Použití PoE zjednodušuje instalaci, snižuje náklady na kabeláž a umožňuje flexibilnější umístění zařízení bez závislosti na elektrických zásuvkách.
+\gls{poe} je technologie umožňující přenos elektrické energie společně s daty prostřednictvím standardního Ethernetového kabelu.
+Tato technologie umožňuje napájet síťová zařízení, jako jsou IP kamery, bezdrátové přístupové body nebo VoIP telefony, bez potřeby samostatného napájecího zdroje.
+Technologie využívá nevyužité páry vodičů v kabelu nebo kombinuje napájení s datovými signály na stejných vodičích.
+Existují různé standardy PoE, jako IEEE 802.3af, 802.3at a 802.3bt, které definují maximální výkon a kompatibilitu zařízení.
+Použití PoE zjednodušuje instalaci, snižuje náklady na kabeláž a umožňuje flexibilnější umístění zařízení bez závislosti na elektrických zásuvkách.
 
 \section{Wifi extender}\label{sec:wifi-extender}
-Wi-Fi extender, také známý jako repeater nebo zesilovač signálu, je zařízení určené k rozšíření dosahu bezdrátové sítě. Přijímá existující Wi-Fi signál z routeru a znovu ho vysílá do oblastí s nedostatečným pokrytím. Tím eliminuje "mrtvé zóny" v domácnosti nebo kanceláři, kde je signál slabý nebo žádný. Instalace je obvykle jednoduchá a nevyžaduje dodatečné kabely. Wi-Fi extendery podporují různé standardy Wi-Fi, jako 802.11n nebo 802.11ac, a nabízejí přenosové rychlosti odpovídající těmto standardům. Pro efektivní rozšíření sítě je důležité umístit extender tam, kde ještě přijímá silný signál z routeru.
+Wi-Fi extender, také známý jako repeater nebo zesilovač signálu, je zařízení určené k rozšíření dosahu bezdrátové sítě.
+Přijímá existující Wi-Fi signál z routeru a znovu ho vysílá do oblastí s nedostatečným pokrytím.
+Tím eliminuje "mrtvé zóny" v domácnosti nebo kanceláři, kde je signál slabý nebo žádný.
+Instalace je obvykle jednoduchá a nevyžaduje dodatečné kabely.
+Wi-Fi extendery podporují různé standardy Wi-Fi, jako 802.11n nebo 802.11ac, a nabízejí přenosové rychlosti odpovídající těmto standardům.
+Pro správné využití je důležité umístit extender tam, kde ještě přijímá silný signál z routeru.
 
 \section{TailScale VPN}\label{sec:tailscale}
-Tailscale VPN je moderní služba pro vytváření virtuálních privátních sítí, která využívá protokol WireGuard k zajištění bezpečné komunikace mezi zařízeními. Umožňuje snadné nastavení sítě bez složitých konfiguračních procesů tradičních VPN řešení. Tailscale vytváří šifrované peer-to-peer spojení mezi zařízeními na základě jejich identity, spravované prostřednictvím cloudu. To umožňuje uživatelům bezpečně přistupovat k interním sítím a službám odkudkoli na světě. Díky automatické správě síťových konfigurací a firewallu snižuje nároky na údržbu a zvyšuje celkovou bezpečnost. Tailscale je vhodný pro jednotlivce, týmy i organizace hledající efektivní a jednoduché VPN řešení pro propojení svých zařízení.
+Tailscale VPN je moderní služba pro vytváření virtuálních privátních sítí, která využívá protokol WireGuard k zajištění bezpečné komunikace mezi zařízeními.
+Umožňuje snadné nastavení sítě bez složitých konfiguračních procesů tradičních VPN řešení.
+Služba vytváří šifrované peer-to-peer spojení mezi zařízeními na základě jejich identity, spravované prostřednictvím cloudu.
+To umožňuje uživatelům bezpečně přistupovat k interním sítím a službám odkudkoli na světě.
+Díky automatické správě síťových konfigurací a firewallu snižuje nároky na údržbu a zvyšuje celkovou bezpečnost.
+Tailscale je vhodný pro jednotlivce, týmy i organizace hledající efektivní a jednoduché VPN řešení pro propojení svých zařízení.
 
 \section{Postgres 15}\label{sec:postgres-15}
-Postgres 15~\cite{PostgreSQL15Documentation} je verze open-source relačního databázového systému PostgreSQL. Je navržena pro ukládání a správu strukturovaných dat a podporuje SQL (Structured Query Language) pro dotazování a manipulaci s daty.
-PostgreSQL 15 nabízí různé funkce, jako jsou vylepšený výkon, podpora pro složité datové typy, pokročilé indexování, vysokou spolehlivost a rozšiřitelnost.
-Je často používán pro webové aplikace, analytiku a další databázové aplikace vyžadující robustní a efektivní datové řešení.
+PostgreSQL~\cite{PostgreSQL15Documentation} je výkonný open-source relační databázový systém.
+Je navržen pro ukládání a správu strukturovaných dat a podporuje SQL (Structured Query Language) pro dotazování a manipulaci s daty.
+Často je používán pro webové aplikace, analytiku a další databázové aplikace vyžadující robustní a efektivní datové řešení.
 
 \section{Eclipse Mosquitto}\label{sec:eclipse-mosquitto}
-Eclipse Mosquitto~\cite{EclipseMosquitto} je open-source broker pro protokol MQTT (Message Queuing Telemetry Transport).
-Slouží k zprostředkování komunikace mezi zařízeními v prostředích internetu věcí (IoT). MQTT je lehký protokol pro zprávy, navržený pro zařízení s omezenými zdroji nebo nestabilní připojení.
+Eclipse Mosquitto~\cite{EclipseMosquitto} je open-source broker pro protokol MQTT.
+Slouží k zprostředkování komunikace mezi zařízeními v prostředích internetu věcí (IoT).
 Mosquitto umožňuje klientům publikovat a odebírat zprávy na konkrétních kanálech (tzv. tématech), čímž umožňuje efektivní a škálovatelnou výměnu dat mezi senzory, síťovými zařízeními a aplikacemi.
 
+%MQTT je lehký protokol pro zprávy, navržený pro zařízení s omezenými zdroji nebo nestabilní připojení.
+
 \section{Cloudflared}\label{sec:cloudflared}
-Cloudflared je nástroj command-line, který umožňuje propojení mezi vaší místní infrastrukturou a službami Cloudflare.
-Primárně se používá pro tunelování internetového provozu do vaší vlastní sítě (tzv. Cloudflare Tunnel) bez nutnosti otevření příchozích portů.
+Cloudflared je nástroj, který umožňuje propojení mezi lokální sítí a službami Cloudflare.
+Primárně se používá pro tunelování internetového provozu do lokální sítě (tzv. Cloudflare Tunnel).
 To zajišťuje bezpečné a šifrované připojení mezi Cloudflare a vaší sítí, což pomáhá chránit aplikace, servery a další zdroje před hrozbami z internetu.
 
 \section{COCO formát}\label{sec:coco_format}

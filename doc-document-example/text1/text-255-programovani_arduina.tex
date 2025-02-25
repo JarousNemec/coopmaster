@@ -1,15 +1,22 @@
-Přenos programu z kódu napsaného v Arduino IDE do mikrokontroléru na desce Arduino zahrnuje několik klíčových kroků~\cite{wire}.
-Nejprve programátor vytváří zdrojový kód v IDE, které nabízí nástroje jako zvýraznění syntaxe a automatické doplňování pro snadnější psaní.
-Po dokončení se kód uloží a ověří pomocí funkce Verify nebo Compile, což zkontroluje syntaktické chyby.
+Proces tvorby programu a jeho následného nahrání do jedné z vývojových desek Arduino zahrnuje několik kroků~\cite{DratekNahravaniProgramu}.
 
-Pokud je kód bez chyb, IDE přeloží zdrojový kód do strojového kódu srozumitelného mikrokontroléru.
-Tento proces zahrnuje zpracování direktiv a maker (preprocesing), kompilaci do objektových souborů a následné spojení všech souborů a knihoven do jednoho binárního souboru.
+Já jsem pro psaní kódu použil vývojářské prostředí Arduino IDE.
+Tento nástroj umožňuje psát programy v lehce upraveném jazyce C++ (\ref{sec:cpp}) pro desky Arduino.
+Takto upravený jazyk se dnes moderně nazývá Arduino jazyk a vychází z dřívějšího projektu Wiring~\ref{sec:wiring}.
+Arduino IDE je velmi dobré prostředí pro začátečníky.
+Disponuje základními funkcemi jako zvýraznění syntaxe nebo automatické doplňování pro snadnější psaní.
+Prostředí zároveň zaobaluje celý proces kompilace a nahrávání programu.
 
-Arduino deska se připojí k počítači přes USB kabel, který zajišťuje napájení i datový přenos.
+\section*{Postup nahrání programu do Arduino desky}
+Jakmile máme dopsaný a uložený kód, je třeba ho ověřit pomocí funkce Verify (ověřit), což zkontroluje syntaktické chyby.
+Tato funkce následně provede kompilaci programu společně s jeho knihovnami do jednoho binárního souboru.
+
+Pokud je kód bez chyb a zkompilovaný, připojíme Arduino k počítači pomocí USB kabelu, který zajišťuje napájení i datový přenos.
 Po připojení systém rozpozná zařízení a přiřadí mu sériový port.
-V IDE je třeba vybrat správný typ desky a sériový port, aby byla zajištěna správná komunikace s hardwarem.
+V \gls{ide} je třeba vybrat správný typ desky a sériový port, aby program věděl, s jakým zařízením má komunikovat.
 
-Nahrání programu se spouští tlačítkem Upload v IDE. IDE komunikuje s bootloaderem na Arduinu přes sériový port.
+Následně nahrajeme program do Arduino desky funkcí Upload (nahrát).
+Arduino IDE komunikuje s bootloaderem na Arduinu přes sériový port.
 Bootloader je malý program v paměti mikrokontroléru, který umožňuje nahrávat nový kód bez externího programátoru.
 Přijímá binární soubor a zapisuje jej do flash paměti mikrokontroléru.
 
@@ -18,7 +25,7 @@ Program běží v nekonečné smyčce, dokud není zařízení resetováno nebo 
 Pro ladění a interakci s programem v reálném čase nabízí Arduino IDE nástroj Serial Monitor, který umožňuje sledovat data z Arduina a posílat mu příkazy.
 
 Celý proces je díky funkcím IDE a vestavěnému bootloaderu uživatelsky přívětivý a nevyžaduje pokročilé znalosti programování mikrokontrolérů.
-Umožňuje tak široké škále uživatelů vytvářet a nahrávat programy na platformu Arduino snadno a efektivně.
+Umožňuje tak široké škále uživatelů snadno vytvářet programy pro platformu Arduino.
 
 
 

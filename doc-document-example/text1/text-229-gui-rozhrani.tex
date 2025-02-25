@@ -1,19 +1,17 @@
 \section{Uživatelská aplikace}\label{sec:tvorba-gui-rozhrani}
-//TODO zkontrolovat pravopis\newline
-
-Na začátku této práce jsem si v kapitole(~\ref{ch:tvorba-zadani}) identifikoval požadavky, které by měl systém Coopmaster plnit.
+Na začátku této práce jsem si v kapitole~\ref{ch:tvorba-zadani} identifikoval požadavky, které by měl systém Coopmaster plnit.
 V této části se podíváme na functionality z pohledu uživatelského rozhraní.
 
 Pro implementaci jsem, po prvních pokusech s vlastní aplikací, zvolil open source systém pro chytré domácnosti Home Assistant~(\ref{sec:home-assistant}).
 Mezi jeho hlavní výhody patří robustnost, konfigurace, integrovatelnost a široká možnost vizualizace dat.
-Vytvořit takto robustní a kvalitní uživatelské rozhraní by za mě trvalo velmi dlouho a to nepočítám čas na jeho odladění a případné opravy.
+Vytvořit takto robustní a kvalitní uživatelské rozhraní by za mě trvalo velmi dlouho, a to nepočítám čas na jeho odladění a případné opravy.
 
 \subsection{Požadavky na systém}
 
 \subsubsection*{Vzdálený přístup}
 Má Home Assistant podporu pro vzdálený přístup? Odpoveď je ano.
 Home Assistant umožňuje vzdálený přístup, což uživatelům dovoluje řídit a konfigurovat jejich chytrou domácnost odkudkoli.
-Pokud se provozuje system v cloudu, je to výrazně jednodušší.
+Pokud se provozuje systém v cloudu, je to výrazně jednodušší.
 V mém případě Home Assistant běží na lokálním stroji a je přístupný pouze z lokální sítě.
 Tuto drobnost jsem vyřešil využitím privátního tunelu~\cite{CloudflareTunnel}, který poskytuje například společnost Cloudflare~\cite{cloudflare}.
 
@@ -23,14 +21,14 @@ Při své práci jsem systém Home Assistant využíval již od začátku skrze 
 Vzdáleným přístupem tedy systém disponuje a nemusíme ho tedy nijak složitě implementovat.
 
 \subsubsection*{Pohledy z bezpečnostních kamer}
-Zobrazování obrázků z kamer je jednou ze základních komponent, kterou HomeAssistant nabízí.
-Stací si vybrat komponentu, která bude schopna zpracovat data z MQTT serveru.
-Ja jsem si vybral komponentu Picture~\cite{HomeAssistantPictureCard}.
-Použil jsem pro ni základní konfiguraci, jen jsem ji nastavil attribute title, abych si na dashboardu odlišil přehledová data z výbehu a kurníku.
+Zobrazování obrázků z kamer je jednou ze základních komponent, kterou Home Assistant nabízí.
+Stačí si vybrat komponentu, která bude schopna zpracovat data z MQTT serveru.
+Já jsem si vybral komponentu Picture~\cite{HomeAssistantPictureCard}.
+Použil jsem pro ni základní konfiguraci, jen jsem jí nastavil atribut title, abych si na dashboardu odlišil přehledová data z výběhu a kurníku.
 
-\subsubsection*{Dálkové ovládání a automatizaci světla a dvířek v kurníku}
+\subsubsection*{Dálkové ovládání a automatizace světla a dvířek v kurníku}
 Tímto bodem rozumíme v prvé řadě ovládací komponenty/tlačítka~\cite{HomeAssistantButtonCard}, která bude využívat chovatel, aby manuálně vyslal příkaz k provedení nějaké akce.
-Za druhé se zde dostáváme k dalšímu skvělému využití systému Home Assistant a to je automatizace.
+Za druhé se zde dostáváme k dalšímu skvělému využití systému Home Assistant, a to je automatizace.
 Využitím systému Home Assistant lze automatizovat právě reakce na hodnoty různých čidel a senzorů.
 Může se jednat o automatizaci od úplných základů jako je zapnutí topení, když je v bytě zima, až po celé inteligentní domácnosti ovládané hlasem.
 Takové domácnosti například na základě toho, kdo přišel domů, nastaví barvu světla, spustí jeho oblíbenou hudbu a uvaří kávu.
@@ -45,7 +43,7 @@ Pro splnění tohoto požadavku bude tedy třeba nakonfigurovat automatizaci a v
     \label{fig:homeassitant_lamp_button}
 \end{figure}
 
-\subsubsection*{Intuitivní vizualizace stavů jednotlivých hnízd(sedící slepice, v opačném případě počet vajec)}
+\subsubsection*{Intuitivní vizualizace stavů jednotlivých hnízd (sedící slepice, v opačném případě počet vajec)}
 Tento bod je ze všech nejnáročnější.
 Home Assistant totiž nedisponuje žádnou pěknou komponentou přímo pro vizualizaci hnízd v kurníku a ani žádnou jinou, která by se dala po nějakých úpravách využít.\newline
 Z tohoto důvodu bude tedy třeba vytvořit vlastní komponentu pro systém Home Assistant, která půjde snadno parametrizovat dle požadavků kurníku a bude umět zpracovat data, která přijdou ze služby Nest Watcher systému Coopmaster.
@@ -55,19 +53,19 @@ Zde se bude opět jednat o automatizace.
 Požadavkem je, aby v případě poplachu systém poslal notifikaci chovateli a zobrazil na dashboardu aktuální fotografii, kde byl vetřelec detekován.\newline
 Abychom splnili tento bod, budeme muset nastavit automatizaci, která zareaguje na určitý stav nějaké MQTT entity a následně vytvoří notifikaci.
 Tato notifikace vyskočí i na chovatelově telefonu.
-Dále bude použita komponenta s názvem Conditional~\cite{HomeAssistantConditionalCard}, která umožňuje na základě hodnoty, měnit vizualizaci komponent na dashboardu.
-Pri určitém stavu MQTT entity zobrazí v dashboardu upozornění na vetřelce ve výběhu a opačném případě nezobrazí nic.
+Dále bude použita komponenta s názvem Conditional~\cite{HomeAssistantConditionalCard}, která umožňuje na základě hodnoty měnit vizualizaci komponent na dashboardu.
+Při určitém stavu MQTT entity zobrazí v dashboardu upozornění na vetřelce ve výběhu a v opačném případě nezobrazí nic.
 Což je velmi šikovné právě pro různá upozornění.
 
 \subsubsection*{Data o teplotě a vlhkosti}
-Tyto dva požadavky nebudou, co do implementace nic složitého.
+Tyto dva požadavky nebudou co do implementace nic složitého.
 Jedná se pouze o dvě hodnoty, které navíc ze služby Room Assistant chodí ve formátu JSON, takže není problém je zpracovat.\newline
 Bude tedy třeba jen nakonfigurovat MQTT entitu, kterou následně bude načítat komponenta Entities.
 Tato komponenta zobrazuje v seznamu pod sebou entity, jejichž seznam přebírá jako parametr.
 Pro zobrazení každé entity je možno upravit ikonu a zobrazovaný název, což přesně odpovídá našim požadavkům.
 
 \subsection{Postup konfigurace systému Home Assistant}
-Po rozvržení řešení jsem se začal seznamovat se systémem Home Assistant s čímž mi hodně pomohla rozsáhlá a kvalitní dokumentace společně s diskusními fóry, která jsem hojně využíval.
+Po rozvržení řešení jsem se začal seznamovat se systémem Home Assistant, s čímž mi hodně pomohla rozsáhlá a kvalitní dokumentace společně s diskusními fóry, která jsem hojně využíval.
 \subsubsection*{MQTT entity}
 Konfiguraci jsem započal definováním všech potřebných MQTT entit~\cite{HomeAssistantMQTT, HomeAssistantEntities} v souboru configuration.yaml, do kterých systém ukládá data přijatá z MQTT brokeru a následně je můžeme využít v našem dashboardu.
 Používám tři typy MQTT entit.
@@ -94,8 +92,8 @@ S těmito vědomostmi jsem opět nakonfiguroval dle návrhu potřebné automatiz
 
 \subsubsection*{Tvorba vlastní Home Assistant komponenty}
 Zde se již dostáváme k opravdovému programování.
-Inspirací jak komponentu vytvořit mi byla vývojářská dokumentace~\cite{homeassistant-developers,HomeAssistantCustomCards}.
-Služba Nest Watcher poskytuje data o tom zda je hnízdo obsazené a kolik je v každém hnízdě vajec.
+Inspirací, jak komponentu vytvořit, mi byla vývojářská dokumentace~\cite{HomeAssistantCustomCards}.
+Služba Nest Watcher poskytuje data o tom, zda je hnízdo obsazené a kolik je v každém hnízdě vajec.
 Tato data jsou ve formátu \gls{csv}, kdy každý prvek v poli znamená jedno hnízdo.
 Data se do komponenty dostávají z entit.
 Tyto entity se nastavují jako parametry během přidávání komponenty na dashboard.
@@ -103,7 +101,7 @@ Data, která dostaneme z entity, jsou v CSV formátu, takže se pomocí funkce s
 Skript pokračuje do další části, kde dochází ke zpracování naparsovaných dat.
 Jednoduchými dvěma for cykly se zajišťuje vykreslování nastaveného počtu řádků a sloupců v kurníku.
 Jedno hnízdo se vykresluje obarvený DIV a jeho child komponenta je DIV, který slouží k vizualizaci stavů hnízda.
-Graficky jsou DIVy nastylovány tak, aby uživateli připomínali hnízdo.
+Graficky jsou DIVy nastylovány tak, aby uživateli připomínaly hnízdo.
 Do child divu se následně vykreslí vpravo dole počet vajec, pokud je větší než 0, a zároveň se ve středu vykresluje ikonka slepice, která značí, že slepice sedí v hnízdě (obrázek~\ref{fig:homeassitant_custom_component}).
 Komponenta také při každé aktualizaci dat loguje do konzole pro případ, kdy by se něco pokazilo.
 
@@ -114,15 +112,15 @@ Komponenta také při každé aktualizaci dat loguje do konzole pro případ, kd
     \label{fig:homeassitant_custom_component}
 \end{figure}
 
-\subsection*{Maximální velkost hodnoty senzoru}
+\subsection*{Maximální velikost hodnoty senzoru}
 Během tvorby komponenty pro hnízda, mě poněkud zaskočil fakt, že maximální velikost hodnoty state v entitě je 255 bytů.
 Z počátku jsem chtěl posílat data o hnízdech ve formátu JSON.
 Dlouho mi to procházelo, ale problém začal v situaci, kdy jsem serializoval celý seznam s objekty hnízd a chtěl ho poslat jako hodnotu senzoru.
 Nebylo jednoduché na to přijít, protože v tomto případě Home Assistant data prostě nenačítal a já nevěděl proč.
 Nakonec jsem se na diskusním fóru dočetl~\cite{HAStateLimit255}, že velikost hodnoty state je omezena.
 Byl jsem tedy donucen začít používat formát CSV a posílaná data omezit pouze na nejnutnější informaci o stavu.
-Pořád je zde problém s maximální velikostí v případě, že bych měl více než 128 hnízd, místo by mi i tak nevystačilo,
-Na kontrolu tolika hnízd, bych ale potřeboval pravděpodobně o dost celkově robustnější infrastrukturu systému Coopmaster, takže to ponechávám ve formátu CSV.
+Pořád je zde problém s maximální velikostí v případě, že bych měl více než 128 hnízd, místo by mi i tak nevystačilo.
+Na kontrolu tolika hnízd bych ale potřeboval pravděpodobně o dost celkově robustnější infrastrukturu systému Coopmaster, takže to ponechávám ve formátu CSV.
 
 \subsection*{Mobilní aplikace}
 Mobilní aplikace Home Assistant umožňuje uživatelům vzdáleně monitorovat a ovládat jejich inteligentní domácnost, poskytuje notifikace v reálném čase a nabízí přehledné uživatelské rozhraní pro snadnou správu zařízení a automatizací.
