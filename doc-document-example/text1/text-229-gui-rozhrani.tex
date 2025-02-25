@@ -2,11 +2,11 @@
 //TODO zkontrolovat pravopis\newline
 
 Na začátku této práce jsem si v kapitole(~\ref{ch:tvorba-zadani}) identifikoval požadavky, které by měl systém Coopmaster plnit.
-V této části se podíváme na funkctionalitu z pohledu uživatelského rozhraní.
+V této části se podíváme na functionality z pohledu uživatelského rozhraní.
 
 Pro implementaci jsem, po prvních pokusech s vlastní aplikací, zvolil open source systém pro chytré domácnosti Home Assistant~(\ref{sec:home-assistant}).
 Mezi jeho hlavní výhody patří robustnost, konfigurace, integrovatelnost a široká možnost vizualizace dat.
-Vytvořit takto robustní a kvalitní uživatelské rozhraní by za mě trvalo velmi dlouho a to nepočítám čas na jeho odladění a připadné opravy.
+Vytvořit takto robustní a kvalitní uživatelské rozhraní by za mě trvalo velmi dlouho a to nepočítám čas na jeho odladění a případné opravy.
 
 \subsection{Požadavky na systém}
 
@@ -100,7 +100,6 @@ Tato data jsou ve formátu \gls{csv}, kdy každý prvek v poli znamená jedno hn
 Data se do komponenty dostávají z entit.
 Tyto entity se nastavují jako parametry během přidávání komponenty na dashboard.
 Data, která dostaneme z entity, jsou v CSV formátu, takže se pomocí funkce split rozdělí podle separátoru, kterým je v tomto případě znak středníku.
-%todo dodat ukázky kodu
 Skript pokračuje do další části, kde dochází ke zpracování naparsovaných dat.
 Jednoduchými dvěma for cykly se zajišťuje vykreslování nastaveného počtu řádků a sloupců v kurníku.
 Jedno hnízdo se vykresluje obarvený DIV a jeho child komponenta je DIV, který slouží k vizualizaci stavů hnízda.
@@ -114,10 +113,6 @@ Komponenta také při každé aktualizaci dat loguje do konzole pro případ, kd
     \captionAuthorSource{Vlastní komponenta pro systém Home Assistant}
     \label{fig:homeassitant_custom_component}
 \end{figure}
-
-
-%\subsection*{Problémy a poznatky během konfigurace}
-%Během práce se systémem Home Assistant, jsem posbíral několik poznatků a narazil na několik problém.
 
 \subsection*{Maximální velkost hodnoty senzoru}
 Během tvorby komponenty pro hnízda, mě poněkud zaskočil fakt, že maximální velikost hodnoty state v entitě je 255 bytů.

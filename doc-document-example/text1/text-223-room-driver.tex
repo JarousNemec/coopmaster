@@ -11,12 +11,12 @@ Jedná se o vlastní třídu, při inicializaci vytvoří instanci sériového s
 Je zde implementován connection pool, který se stará o zdraví spojení po celou dobu běhu aplikace.
 Třída má jedinou metodu, a tou je run\_command.
 Tato metoda přijímá jako parametr jeden znak, který při provolání metody pošle zkrze sériové připojení do Arduina a vrátí data typu String, kterými odpoví Arduino zpět.
-Jakmile se povede provést inicializaci sériového spojení je spuštěno REST API.
+Jakmile se povede provést inicializaci sériového spojení je spuštěno REST API na portu 9005.
 Toto API poskytuje endpointy pro vyslání příkazů k zavření a otevření dvířek, zhasnutí a rozsvícení světla, informací o aktuálních stavech jednotky a informací o teplotě a vlhkosti v kurníku.
 Informace o aktuálním stavu jsou dobré pro případ, kdy se budou muset služby restartovat a bude třeba načíst reálný aktuální stav.
 V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz Arduinu.
 Následně se počká na jeho odpověď, pokud je požadavek typu POST.
-Odpověď je následně převedena do \gls{json} objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON (obrázek \ref{fig:homeasistant_temperature}).
+Odpověď je následně převedena do \gls{json} objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON (obrázek~\ref{fig:homeasistant_temperature}).
 
 \subsection*{Příkazy ovládacího protokolu}
 \begin{itemize}

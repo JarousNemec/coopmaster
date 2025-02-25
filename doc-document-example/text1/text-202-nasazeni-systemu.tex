@@ -1,13 +1,13 @@
 //TODO zkontrolovat pravopis\newline
 V této kapitole si popíšeme, jaký je vlastně aktuální stav běžícího systému, a vysvětlíme si, co je potřeba pro přidání nového modulu
-%todo obrázek
+
 \section*{Verzování a nasazení}
 
 Pro verzování zdrojových kódů svých služeb jsem se rozhodl využívat GitHub~\cite{GitHubExplanation}, což mi umožňuje efektivně zálohovat kód.
 V rámci GitHubu používám GitHub Workflow, které automatizuje proces vytváření Docker image~\cite{GitHubActionsDocker}, což zrachluje a automatizuje proces nasezení nové verze služby.
 Jakmile je Docker image vytvořen, nahrávám jej na platformu Docker Hub~\cite{DockerHub}.
 Na tuto platformu image ukládám a následně je vzdáleně načítám při nasazení konkrétní služby.
-%todo obrázek
+
 \section*{Infrastrukturní přípravné práce}
 
 Vlastní instalaci částí systému Coopmaster do kurníku a výběhu předcházely přípravné stavební práce.
@@ -17,7 +17,7 @@ Musel jsem také na příslušných místech udělat průrazy zdí, v místech k
 Samotné ethernetové připojení jsem vyřešil poněkud nestandardně.
 Nepřicházelo v úvahu abych táhl metalický kabel od domácího routeru do chléva, kvůli přílišné náročnosti na stavební úpravy.
 Použil jsem tedy Wifi extender s ethernet výstupem a elektroniku v kurníku jsem k internetu připojil přes něj.
-%todo obrázek
+
 \section*{Výsledná fyzická infrastruktura}
 
 Doma v místnosti se stabilním prostředím, které je vhodné pro výpočetní techniku, běží Intel NUC 11~\cite{IntelNUC11Enthusiast} s operačním systémem Ubuntu 22.04 LTS.
@@ -30,7 +30,6 @@ Raspberry PI 5 je mnohem levnější než Intel NUC 11 a v případě poškozen�
 Síťová komunikace mezi těmito dvěma počítači realizována pomocí služby Tailscale~\cite{Tailscale}, která mezi nimi vytváří mesh VPN.
 Zároveň této služby využívám já jako správce, abych měl vzdálený přístup k oběma zařízením.
 
-%todo obrázek
 \section*{Základní konfigurace a klíčové služby}
 
 
@@ -49,7 +48,6 @@ Základní služby, které jsou nutným minimem pro fungování systému, jsou
 \end{itemize}
 Tyto služby tvoří běhové prostředí, do kterého jsou již pouze zasazovány jednotlivé moduly systému Coopmaster.
 
-%todo obrázek
 \section*{Procedura přidání nového modulu}
 
 

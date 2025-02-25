@@ -1,13 +1,11 @@
 \section{Detekce objektů pomocí strojového učení}\label{sec:detekce-objektu-pomoci-strojoveho-uceni}
-
-%todo zapracovat
-%Tento model má již předučeno 80 kategorii, které umí v základní verzi detekovat.
-%Mezi těmito kategoriemi je také pes.
-
 \subsection*{Úvod do problematiky}\label{subsec:uvod-do-problematiky}
 V posledních letech došlo k významnému pokroku v oblasti počítačového vidění, což umožňuje efektivní a přesné rozpoznávání objektů v různých prostředích.
 Jednou z nejmodernějších knihoven, která si získala širokou popularitu, je YOLO11~\cite{ultralytics_yolo} (You Only Look Once version 11).
 Tato knihovna přináší rychlé a přesné metody detekce objektů a je ideální pro implementaci v reálném čase.
+Má také předučeno již 80 kategorií, které model umí v základní verzi detekovat.
+Tyto sekce mi můžeme využít a dodat do nich data z našeho prostředí, abychom je zpřesnili pro naše úlohy.
+Mezi těmito kategoriemi je také pes (dog) a pták (bird).
 V této sekci se zaměříme na to, jak využít YOLO11 ke specifickému úkolu: rozpoznávání slepic v kurníku.
 Automatizované rozpoznávání umožňuje sledování počtu slepic.
 Použití YOLO11 přináší následující výhody:
@@ -86,7 +84,7 @@ Tento proces je znázorněn na obrázku~\ref{fig:chicken_labeling}.
     \label{fig:chicken_labeling}
 \end{figure}
 
-Když se podařilo projít celý obrázkový dataset, mohl jsem vyexportovat „labeling“ data.
+Když se podařilo projít celý obrázkový dataset, mohl jsem vyexportovat „labeling“ data (obrázek~\ref{fig:export_coco_format}).
 Jak jsem psal výše, mít kvalitní učící dataset je důležité, proto jsem exportoval pouze data, která se podařilo úspěšně označit.
 Do fotogalerie se mi dostalo i několik nejasných snímků, případně těch, kde slepice nebyla vůbec.
 Takové snímky jsem vyřadil.
