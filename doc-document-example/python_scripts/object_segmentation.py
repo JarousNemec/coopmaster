@@ -6,9 +6,6 @@ def run():
     model = YOLO('yolov8x-seg.pt')
 
     # Initialize the video capture object
-    # cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture("c:\\siko\\reid_video\\0-02-05-0f507f37be0925ea84e7514799d66a28a767d17afc341ce9765b4bac5637a9a5_d19d85aabc216b2f.mp4")
-
     cap = cv2.VideoCapture("d:\\videaZKurniku\\19_39_43_28_09_2024.mp4")
 
 

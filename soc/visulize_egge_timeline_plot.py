@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
-image_folder = "d:\\kurnik\\b\\"
+image_folder = "H:\\kurnik\\b\\"
 
 import os
 import torch
@@ -81,7 +81,7 @@ def plot_feature_vectors(features, clusters):
     plt.show()
 
 def main():
-    output_folder = "d:\\kurnik\\out\\"
+    output_folder = "H:\\kurnik\\out\\"
     num_clusters = 4  # Number of clusters
 
     # Load and preprocess images

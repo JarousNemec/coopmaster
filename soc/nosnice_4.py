@@ -55,8 +55,8 @@ def copy_images_to_clusters(image_paths, clusters, output_folder):
 
 
 def main():
-    image_folder = "d:\\kurnik\\b\\"
-    output_folder = "d:\\kurnik\\out\\"
+    image_folder = "H:\\kurnik\\b\\"
+    output_folder = "H:\\kurnik\\out\\"
     num_clusters = 4  # Number of clusters
 
     # Load and preprocess images

@@ -146,7 +146,7 @@ services:
     restart: unless-stopped
     command: tunnel --no-autoupdate run
     environment:
-      - TUNNEL_TOKEN=eyJhIjoiZWRjZTc4MmYzN2UyYzgwN2NiNzY0M2FmNTkwYjBlNGMiLCJ0IjoiNTE4NmRjZjEtMmYyZi00ZWYwLTkzYzQtYWNlZDYwMmY4MjBiIiwicyI6IlpqaGpZbUk0TkdVdFkyWTRNaTAwTURVekxUbGtZMkl0WVRCbE56YzJOakk1TVRGaSJ9
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - tunnel
 networks:

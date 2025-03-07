@@ -75,7 +75,7 @@ class PersonClipper:
 
     def run_images(self, save_frame):
 
-        images_dir = "c:\\siko\\reid_video\\results\\8\\4k"
+        images_dir = "c:\\kurnik\\images"
 
         paths = os.listdir(images_dir)
 

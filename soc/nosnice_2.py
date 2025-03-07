@@ -1,10 +1,16 @@
+import fnmatch
 import os
 
 import cv2
 import numpy as np
 from ultralytics import YOLO
 
-from reidentification.util import list_jpg_files
+def list_jpg_files(directory):
+    jpg_files = []
+    for file in os.listdir(directory):
+        if fnmatch.fnmatch(file, '*.png'):
+            jpg_files.append(os.path.join(directory, file))
+    return jpg_files
 
 
 def apply_mask2(image, mask):
@@ -35,7 +41,7 @@ def apply_mask(image, mask):
 def segment_countour(input):
     model = YOLO('yolov8x-seg.pt')
 
-    list_of_images = list_jpg_files(input, '.jpg')
+    list_of_images = list_jpg_files(input)
 
     for image_path in list_of_images:
         image = cv2.imread(image_path)
@@ -60,4 +66,4 @@ def segment_countour(input):
 
 
 if __name__ == '__main__':
-    segment_countour("d:\\kurnik\\chicken")
+    segment_countour("./images")

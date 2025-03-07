@@ -1,7 +1,3 @@
-import matplotlib.pyplot as plt
-from PIL import Image
-import numpy as np
-
 image_folder = "d:\\kurnik\\b\\"
 
 import os
