@@ -7,8 +7,8 @@ services:
     ports:
       - 9000:9000
     environment:
-      - PORT=9000
-      - DOCKER_HOST=host.docker.internal
+      - SERVICES_LOCATIONS=${SERVICES_LOCATIONS}
+      - REPORT_INTERVAL=${REPORT_INTERVAL}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
