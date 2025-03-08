@@ -109,8 +109,8 @@ services:
     networks:
       - coopmaster
     volumes:
-      - ./postgres_backup:/storage/backup
-      - ./postgres_data:/storage/data
+      - "postgres_backup:/var/lib/postgresql/backup"
+      - "postgres_data:/var/lib/postgresql/data"
 
   mosquitto:
     container_name: mqtt
@@ -151,7 +151,13 @@ services:
       - tunnel
 networks:
   coopmaster:
-    name: coopmaster
+    name: coopmaster           
   tunnel:
     name: tunnel
     external: true
+
+volumes:
+  postgres_backup:
+    driver: local
+  postgres_data:
+    driver: local
