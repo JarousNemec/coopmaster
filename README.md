@@ -17,7 +17,7 @@ vpřed ve vývoji moderních řídících a automatizačních systémů pro chov
 
 ## Popis fungování
 Jako teoretický model pro organizaci funkcionalit, je zvolena mikroservisní architektura.
-Jako programovací jazyk pro tvorbu služeb je zvolen programovací jazyk Python.
+Programovacím jazykem pro tvorbu služeb je zvolen programovací jazyk Python.
 Pro realizaci, konfiguraci a síťování mikroservisní architektury je použit Docker Engine společně s rozšířením Docker Compose.
 Na základě předchozích rozhodnutí je systém rozdělen do jednotlivých mikroslužeb tak, aby vznikla robustní a rozšiřitelná mikroservisní architektura a byly splněny všechny uživatelské požadavky, které jsme si určili.
 Systém obsahuje 8 služeb. Tyto služby společně s hardwarovými prvky tvoří systém Coopmaster.
@@ -66,7 +66,7 @@ S kamerami pak služba komunikuje pomocí HTTP protokolu.
 Byla zvažována i možnost využití protokolu RTSP, ale jelikož moje řešení prozatím nemá vysoké nároky na živý přenos,
 ukázala se jako lepší volba využití REST API kamery, které umožnuje stační aktuálního snímku na požádaní.
 Jakmile je přijat požadavek na získání aktuálního snímku z konkrétní kamery, služba za pomocí GET requestu stáhne obraz
-z restového API síťové kamery a vrátí ho ve rozlišení jako odpověď na HTTP dotaz.
+z restového API síťové kamery a vrátí ho ve FullHD rozlišení jako odpověď na HTTP dotaz.
 Endpoint kamery ze kterého má služba obrázek stahovat, získá z konfigurace předávané pomocí systémových proměnných.
 Kamery mají vlastní zabezpečení proti neoprávněnému přístupu k datům.
 V případě ověřování HTTP komunikace se používá metoda Digest Access Authentication, pomocí které je kameře předáváno
@@ -133,7 +133,7 @@ aktuální stav.
 V případě, kdy přijde požadavek na konkrétní endpoint, jako první věc se provede odeslání příslušného znaku jako příkaz
 Arduinu.
 Následně se počká na jeho odpověď, pokud je požadavek typu POST.
-Odpověď je následně převedena do objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON.
+Odpověď je následně převedena do JSON objektů a vrácena v HTTP odpovědi s typem těla odpovědi JSON.
 
 #### Příkazy ovládacího protokolu
 
