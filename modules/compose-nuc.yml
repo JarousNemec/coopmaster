@@ -141,6 +141,16 @@ services:
       - coopmaster
       - tunnel
 
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    networks:
+      - tunnel
+
   cloudflared:
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
@@ -151,7 +161,7 @@ services:
       - tunnel
 networks:
   coopmaster:
-    name: coopmaster           
+    name: coopmaster
   tunnel:
     name: tunnel
     external: true
