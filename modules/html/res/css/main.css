@@ -127,3 +127,7 @@ video {
     top: 50%;
     transform: translateY(-50%);
 }
+
+.carousel-caption-ext {
+    display: block;
+}
